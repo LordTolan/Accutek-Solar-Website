@@ -8,23 +8,24 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                display: ['"Cabinet Grotesk"', 'system-ui', 'sans-serif'],
-                sans: ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+                display: ['Montserrat', 'system-ui', 'sans-serif'],
+                sans: ['Montserrat', 'system-ui', 'sans-serif'],
                 mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
             },
             colors: {
-                // Brand palette (from design_guidelines.json)
-                bone: '#F7F4F0',
-                bone2: '#ECE8E2',
-                ink: '#121714',
+                // Brand palette (Accutek Solar Brand Guide)
+                bone: '#FFFFFF',
+                bone2: '#F5F5F5',
+                ink: '#0F1F12',
                 ink2: '#4A5650',
-                forest: '#1B2A22',
-                pine: '#243A30',
-                amber: '#E19233',
-                amberDark: '#C87D2A',
+                forest: '#1B5E20',
+                pine: '#114718',
+                amber: '#FFA500',
+                amberDark: '#E58A00',
+                solarYellow: '#FFD700',
                 terracotta: '#C96A52',
-                sage: '#829B87',
-                line: '#D8D3CC',
+                sage: '#8FB996',
+                line: '#E2E2E2',
 
                 // shadcn semantic
                 background: 'hsl(var(--background))',

@@ -115,6 +115,8 @@ async def company_info():
         "name": "AccuTek Solar",
         "founded": 1994,
         "founder": "Keith Davis",
+        "owners": ["Seth Davis", "Quill Davis"],
+        "ownership": "Now run by Seth Davis and Quill Davis, who took over the company from their dad, Keith.",
         "phone": "(812) 878-7343",
         "phone_raw": "+18128787343",
         "email": "solarseth7@yahoo.com",

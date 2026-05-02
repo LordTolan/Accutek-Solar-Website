@@ -4,6 +4,8 @@ export const COMPANY = {
   tagline: "Solar, batteries, generators & electrical — built right since 1994.",
   founded: 1994,
   founder: "Keith Davis",
+  owners: ["Seth Davis", "Quill Davis"],
+  ownership: "Now run by Seth Davis and Quill Davis, who took over the company from their dad, Keith.",
   phone: "(812) 878-7343",
   phoneRaw: "+18128787343",
   email: "solarseth7@yahoo.com",
@@ -15,6 +17,13 @@ export const COMPANY = {
     full: "9797 S Rangeline Rd. Clinton, IN 47842",
   },
   hours: "Mon–Fri 8:00 AM – 5:00 PM EST",
+  logos: {
+    horizontal: "/brand/logo_horizontal.png",
+    icon: "/brand/logo_icon_only.png",
+    primary: "/brand/logo_primary.png",
+    onGreen: "/brand/logo_on_green.png",
+    stacked: "/brand/logo_stacked.png",
+  },
 };
 
 export const SERVICE_AREAS = {
@@ -124,7 +133,7 @@ export const FAQS = [
   },
   {
     q: "How long has AccuTek been in business?",
-    a: "AccuTek Solar was founded by Keith Davis in 1994 — over 31 years of electrical installation and solar expertise based in Clinton, Indiana. Family-owned and operated.",
+    a: "AccuTek Solar was founded by Keith Davis in 1994 — over 31 years of electrical and solar expertise based in Clinton, Indiana. Today the company is run by Keith's sons, Seth Davis and Quill Davis, who took over from their dad. Family-owned, second-generation operated.",
   },
   {
     q: "Do you offer free estimates?",

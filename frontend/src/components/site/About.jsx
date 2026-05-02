@@ -2,10 +2,10 @@ import React from "react";
 import { COMPANY } from "@/lib/site-data";
 
 const milestones = [
-  { y: "1994", t: "AccuTek founded by Keith Davis in Clinton, IN" },
+  { y: "1994", t: "Keith Davis founds AccuTek in Clinton, IN" },
   { y: "2000s", t: "Expanded into solar PV and Kohler standby generators" },
   { y: "2010s", t: "Hybrid battery systems, energy monitoring, custom backup" },
-  { y: "Today", t: "31 years strong. Family-owned. Same crew on every install." },
+  { y: "Today", t: "Run by Seth Davis & Quill Davis — Keith's sons — second-generation, family-owned." },
 ];
 
 export default function About() {
@@ -19,24 +19,25 @@ export default function About() {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-5">
             <p className="label-tag text-amberDark mb-4">— Family-owned since 1994</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-bold tracking-tighter text-ink leading-[0.95]">
+            <h2 className="font-display text-4xl lg:text-6xl font-extrabold tracking-tighter text-ink leading-[0.95]">
               31 years.
               <br />
-              <span className="italic font-light">One family.</span>
+              <span className="italic font-light">Two generations.</span>
               <br />
               Zero shortcuts.
             </h2>
             <p className="mt-6 text-base text-ink2 leading-relaxed">
               AccuTek Solar is an environmentally-conscious, family-owned
-              electrical and solar contractor founded by {COMPANY.founder} in {COMPANY.founded}.
-              We've spent three decades doing what most installers won't:
-              keeping every step of the work in-house.
+              electrical and solar contractor. Founded by {COMPANY.founder} in {COMPANY.founded},
+              the company is now run by his sons <strong className="text-ink">Seth Davis</strong> and{" "}
+              <strong className="text-ink">Quill Davis</strong> — who grew up on the
+              jobsites and took over the business from their dad.
             </p>
             <p className="mt-4 text-base text-ink2 leading-relaxed">
-              We offer free estimates, install reliable solar electric and
-              thermal systems at a cost-effective price, and pair them with
-              energy-monitoring and LED lighting upgrades that lower your bill
-              even further.
+              Three decades in, we still do what most installers won't: keep
+              every step of the work in-house. Free estimates. Reliable solar
+              electric and thermal systems at a cost-effective price. Energy
+              monitoring and LED upgrades that lower your bill even further.
             </p>
           </div>
 
@@ -50,7 +51,7 @@ export default function About() {
                 >
                   <span className="absolute -left-[7px] top-1 h-3 w-3 bg-amber rounded-full ring-4 ring-bone" />
                   <div className="font-mono text-xs text-amberDark mb-2">{m.y}</div>
-                  <p className="font-display text-xl text-ink leading-snug tracking-tight">
+                  <p className="font-display text-xl font-semibold text-ink leading-snug tracking-tight">
                     {m.t}
                   </p>
                 </li>
@@ -60,7 +61,7 @@ export default function About() {
             <div className="mt-8 grid grid-cols-2 gap-4">
               <Stat k="FREE" l="Estimates, always" />
               <Stat k="100%" l="In-house installs" />
-              <Stat k="LED" l="Lighting upgrades" />
+              <Stat k="2nd" l="Generation owners" />
               <Stat k="24/7" l="Monitoring options" />
             </div>
           </div>

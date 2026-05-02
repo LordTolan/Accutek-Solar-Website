@@ -1,6 +1,5 @@
 import React from "react";
 import { COMPANY } from "@/lib/site-data";
-import { Sun } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -11,17 +10,23 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-12 gap-6 pb-10 border-b border-bone/10">
           <div className="col-span-12 md:col-span-5">
-            <div className="flex items-center gap-2 text-bone">
-              <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber text-ink">
-                <Sun className="h-4 w-4" strokeWidth={2.5} />
-              </span>
-              <span className="font-display text-xl font-bold tracking-tight">
-                {COMPANY.name}<span className="text-amber">.</span>
-              </span>
+            <div className="flex items-center gap-3 text-bone">
+              <img
+                src={COMPANY.logos.icon}
+                alt="AccuTek Solar"
+                className="h-12 w-12 object-contain bg-bone rounded-sm p-1"
+              />
+              <div>
+                <div className="font-display text-xl font-extrabold tracking-tight">
+                  {COMPANY.name}
+                </div>
+                <div className="label-tag text-amber">Est. {COMPANY.founded}</div>
+              </div>
             </div>
             <p className="mt-4 text-sm text-bone/60 max-w-sm leading-relaxed">
               Family-owned solar PV, battery backup, Kohler generators and
-              licensed electrical work since {COMPANY.founded}.
+              licensed electrical work since {COMPANY.founded}. Now run by Seth
+              and Quill Davis — sons of founder Keith.
             </p>
           </div>
           <div className="col-span-6 md:col-span-3">

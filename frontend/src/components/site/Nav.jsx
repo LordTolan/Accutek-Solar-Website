@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { COMPANY } from "@/lib/site-data";
-import { Phone, Menu, X, Sun } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 
 const links = [
   { id: "services", label: "Services" },
@@ -34,13 +34,15 @@ export default function Nav() {
         <a
           href="#top"
           data-testid="nav-logo"
-          className="flex items-center gap-2 text-ink hover:text-amberDark transition-colors"
+          className="flex items-center gap-2 text-ink hover:opacity-80 transition-opacity"
         >
-          <span className="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber text-ink">
-            <Sun className="h-4 w-4" strokeWidth={2.5} />
-          </span>
-          <span className="font-display text-lg font-bold tracking-tight">
-            AccuTek<span className="text-amberDark">.</span>
+          <img
+            src={COMPANY.logos.icon}
+            alt="AccuTek Solar"
+            className="h-10 w-10 object-contain"
+          />
+          <span className="font-display text-lg font-extrabold tracking-tight">
+            AccuTek <span className="font-light text-forest">Solar</span>
           </span>
         </a>
 
