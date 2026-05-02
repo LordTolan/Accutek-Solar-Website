@@ -5,7 +5,7 @@ const milestones = [
   { y: "1994", t: "Keith Davis founds AccuTek in Clinton, IN" },
   { y: "2000s", t: "Expanded into solar PV and Kohler standby generators" },
   { y: "2010s", t: "Hybrid battery systems, energy monitoring, custom backup" },
-  { y: "Today", t: "Run by Seth Davis & Quill Davis — Keith's sons — second-generation, family-owned." },
+  { y: "Today", t: "Keith remains President. His sons Seth Davis & Quill Davis run day-to-day operations — second generation, same family." },
 ];
 
 export default function About() {
@@ -28,10 +28,12 @@ export default function About() {
             </h2>
             <p className="mt-6 text-base text-ink2 leading-relaxed">
               AccuTek Solar is an environmentally-conscious, family-owned
-              electrical and solar contractor. Founded by {COMPANY.founder} in {COMPANY.founded},
-              the company is now run by his sons <strong className="text-ink">Seth Davis</strong> and{" "}
-              <strong className="text-ink">Quill Davis</strong> — who grew up on the
-              jobsites and took over the business from their dad.
+              electrical and solar contractor. Founded by{" "}
+              <strong className="text-ink">{COMPANY.founder}</strong> in {COMPANY.founded} —
+              who remains <strong className="text-ink">President</strong> today. His sons{" "}
+              <strong className="text-ink">Seth Davis</strong> and{" "}
+              <strong className="text-ink">Quill Davis</strong> grew up on the
+              jobsites and now run day-to-day operations.
             </p>
             <p className="mt-4 text-base text-ink2 leading-relaxed">
               Three decades in, we still do what most installers won't: keep

@@ -25,8 +25,8 @@ export default function Footer() {
             </div>
             <p className="mt-4 text-sm text-bone/60 max-w-sm leading-relaxed">
               Family-owned solar PV, battery backup, Kohler generators and
-              licensed electrical work since {COMPANY.founded}. Now run by Seth
-              and Quill Davis — sons of founder Keith.
+              licensed electrical work since {COMPANY.founded}. Keith Davis,
+              President · Seth & Quill Davis, day-to-day operations.
             </p>
           </div>
           <div className="col-span-6 md:col-span-3">

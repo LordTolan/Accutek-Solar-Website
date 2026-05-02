@@ -123,8 +123,8 @@ export default function Contact() {
                   <span className="italic font-light">We'll be in touch.</span>
                 </h3>
                 <p className="mt-4 text-ink2">
-                  Seth, Quill or one of our crew will reach out within one
-                  business day. If it's urgent, please call us directly at {COMPANY.phone}.
+                  Keith, Seth, Quill or one of our crew will reach out within
+                  one business day. If it's urgent, please call us directly at {COMPANY.phone}.
                 </p>
                 <button
                   data-testid="contact-success-reset"
