@@ -12,9 +12,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2, ShieldCheck } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
+
+const CONSENT_TEXT =
+  "By checking this box, I consent to AccuTek Solar (and its agents) contacting me by phone call, text message (SMS), and email at the contact information I've provided — including using automated systems — about my project, quotes, scheduling, and follow-up. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. I can opt out at any time by replying STOP to texts, clicking unsubscribe in emails, or asking us directly. See our privacy practices for details.";
 
 const initial = {
   name: "",
@@ -24,6 +28,7 @@ const initial = {
   interest: "general",
   monthly_bill: "",
   message: "",
+  consent_communications: false,
 };
 
 export default function Contact() {
@@ -214,11 +219,51 @@ export default function Contact() {
                   </FormField>
                 </div>
 
+                {/* Consent block — highlighted */}
+                <div
+                  data-testid="contact-consent-block"
+                  className={`mt-6 border-2 p-5 transition-colors ${
+                    form.consent_communications
+                      ? "border-forest bg-forest/5"
+                      : "border-amber bg-amber/10"
+                  }`}
+                >
+                  <div className="flex items-start gap-3">
+                    <Checkbox
+                      id="consent-checkbox"
+                      checked={form.consent_communications}
+                      onCheckedChange={(v) => update("consent_communications", !!v)}
+                      data-testid="contact-consent-checkbox"
+                      className="mt-0.5 h-5 w-5 data-[state=checked]:bg-forest data-[state=checked]:border-forest"
+                    />
+                    <label htmlFor="consent-checkbox" className="cursor-pointer flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <ShieldCheck className="h-4 w-4 text-forest" />
+                        <span className="label-tag text-forest">
+                          Communication consent — required
+                        </span>
+                      </div>
+                      <p className="text-sm text-ink leading-relaxed">
+                        <strong>Yes, AccuTek Solar can contact me</strong> by phone
+                        call, text message (SMS), and email at the contact info
+                        I've provided — including via automated systems — about my
+                        project, quotes, scheduling and follow-up.
+                      </p>
+                      <p className="mt-2 text-xs text-ink2 leading-relaxed">
+                        Consent is <strong>not</strong> a condition of purchase.
+                        Message & data rates may apply. Message frequency varies.
+                        Opt out anytime by replying <strong className="font-mono">STOP</strong> to
+                        texts, clicking unsubscribe in emails, or just asking us.
+                      </p>
+                    </label>
+                  </div>
+                </div>
+
                 <button
                   type="submit"
-                  disabled={submitting}
+                  disabled={submitting || !form.consent_communications}
                   data-testid="contact-submit"
-                  className="mt-6 w-full md:w-auto inline-flex items-center justify-center gap-2 bg-ink text-bone px-8 py-4 hover:bg-amber hover:text-ink rounded-sm transition-colors font-medium text-sm disabled:opacity-60"
+                  className="mt-6 w-full md:w-auto inline-flex items-center justify-center gap-2 bg-ink text-bone px-8 py-4 hover:bg-amber hover:text-ink rounded-sm transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-ink disabled:hover:text-bone"
                 >
                   {submitting ? (
                     <>

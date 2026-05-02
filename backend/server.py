@@ -44,6 +44,8 @@ class LeadCreate(BaseModel):
     monthly_bill: Optional[float] = None
     calculator_results: Optional[Dict[str, Any]] = None
     source: Optional[str] = "website"
+    consent_communications: bool = False
+    consent_text: Optional[str] = None
 
 
 class Lead(BaseModel):
@@ -58,6 +60,9 @@ class Lead(BaseModel):
     monthly_bill: Optional[float] = None
     calculator_results: Optional[Dict[str, Any]] = None
     source: Optional[str] = "website"
+    consent_communications: bool = False
+    consent_text: Optional[str] = None
+    consent_timestamp: Optional[datetime] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 
@@ -89,9 +94,17 @@ async def get_status_checks():
 async def create_lead(payload: LeadCreate):
     if not payload.name.strip() or not payload.email.strip():
         raise HTTPException(status_code=400, detail="Name and email are required")
+    if not payload.consent_communications:
+        raise HTTPException(
+            status_code=400,
+            detail="Communication consent is required to submit a request",
+        )
     lead = Lead(**payload.model_dump())
+    lead.consent_timestamp = datetime.now(timezone.utc)
     doc = lead.model_dump()
     doc['created_at'] = doc['created_at'].isoformat()
+    if doc.get('consent_timestamp'):
+        doc['consent_timestamp'] = doc['consent_timestamp'].isoformat()
     await db.leads.insert_one(doc)
     return lead
 
