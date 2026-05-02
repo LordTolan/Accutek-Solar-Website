@@ -17,33 +17,35 @@ export default function Hero() {
           className="h-full w-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/40 via-transparent to-forest/80" />
+        {/* Layered overlays for legibility while keeping image visible */}
+        <div className="absolute inset-0 bg-forest/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-forest/85 via-forest/55 to-forest/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-forest/40 via-transparent to-forest/90" />
       </div>
 
       {/* Top label bar */}
-      <div className="relative z-10 border-b border-bone/15">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-end gap-6">
-          <span className="hidden sm:inline-flex label-tag text-bone/70 items-center gap-2">
+      <div className="relative z-10 pt-16">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-12 flex items-center justify-end gap-6">
+          <span className="hidden sm:inline-flex label-tag text-bone/80 items-center gap-2 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
             <span className="h-1.5 w-1.5 bg-amber animate-sun-pulse rounded-full" />
             Family-Owned · Est. 1994
           </span>
-          <span className="hidden md:inline-flex label-tag text-bone/70 items-center gap-1.5">
+          <span className="hidden md:inline-flex label-tag text-bone/80 items-center gap-1.5 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
             <MapPin className="h-3 w-3" /> Clinton, Indiana
           </span>
         </div>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-24 pb-32 lg:pt-40 lg:pb-48">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-32 lg:pt-20 lg:pb-48">
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-9">
-            <p data-testid="hero-eyebrow" className="label-tag text-amber mb-6">
+            <p data-testid="hero-eyebrow" className="label-tag text-amber mb-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
               Solar · Battery Backup · Generators · Electrical
             </p>
             <h1
               data-testid="hero-title"
-              className="font-display text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tighter"
+              className="font-display text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
             >
               Energy that
               <br />
@@ -53,7 +55,7 @@ export default function Hero() {
             </h1>
             <p
               data-testid="hero-subtitle"
-              className="mt-8 max-w-2xl text-lg lg:text-xl text-bone/80 leading-relaxed"
+              className="mt-8 max-w-2xl text-lg lg:text-xl text-bone leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.4)]"
             >
               31 years of clean, custom-engineered solar PV, custom battery
               banks and Kohler standby generators across Indiana & Illinois.

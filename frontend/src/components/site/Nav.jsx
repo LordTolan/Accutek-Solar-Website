@@ -17,32 +17,43 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const overHero = !scrolled;
+
   return (
     <header
       data-testid="site-nav"
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled ? "bg-bone/95 backdrop-blur-md border-b border-line" : "bg-transparent"
+        scrolled
+          ? "bg-bone/95 backdrop-blur-md border-b border-line"
+          : "bg-gradient-to-b from-forest/80 to-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
         <a
           href="#top"
           data-testid="nav-logo"
-          className="flex items-center gap-2 text-ink hover:opacity-80 transition-opacity"
+          className={`flex items-center gap-2 transition-colors ${
+            overHero ? "text-bone" : "text-ink"
+          } hover:opacity-80`}
         >
           <img
             src={COMPANY.logos.icon}
             alt="AccuTek Solar"
-            className="h-10 w-10 object-contain"
+            className={`h-10 w-10 object-contain ${
+              overHero ? "bg-bone rounded-sm p-0.5" : ""
+            }`}
           />
           <span className="font-display text-lg font-extrabold tracking-tight">
-            AccuTek <span className="font-light text-forest">Solar</span>
+            AccuTek{" "}
+            <span className={`font-light ${overHero ? "text-amber" : "text-forest"}`}>
+              Solar
+            </span>
           </span>
         </a>
 
@@ -52,7 +63,11 @@ export default function Nav() {
               key={l.id}
               href={`#${l.id}`}
               data-testid={`nav-link-${l.id}`}
-              className="text-sm text-ink2 hover:text-ink transition-colors"
+              className={`text-sm transition-colors ${
+                overHero
+                  ? "text-bone/85 hover:text-amber"
+                  : "text-ink2 hover:text-ink"
+              }`}
             >
               {l.label}
             </a>
@@ -63,7 +78,9 @@ export default function Nav() {
           <a
             href={`tel:${COMPANY.phoneRaw}`}
             data-testid="nav-phone"
-            className="font-mono text-xs text-ink2 hover:text-ink transition-colors flex items-center gap-1.5"
+            className={`font-mono text-xs transition-colors flex items-center gap-1.5 ${
+              overHero ? "text-bone/80 hover:text-amber" : "text-ink2 hover:text-ink"
+            }`}
           >
             <Phone className="h-3.5 w-3.5" />
             {COMPANY.phone}
@@ -71,7 +88,11 @@ export default function Nav() {
           <a
             href="#contact"
             data-testid="nav-cta-quote"
-            className="px-4 py-2 text-sm font-medium bg-ink text-bone hover:bg-amber hover:text-ink rounded-sm transition-colors"
+            className={`px-4 py-2 text-sm font-medium rounded-sm transition-colors ${
+              overHero
+                ? "bg-amber text-ink hover:bg-bone"
+                : "bg-ink text-bone hover:bg-amber hover:text-ink"
+            }`}
           >
             Free Estimate
           </a>
@@ -80,7 +101,7 @@ export default function Nav() {
         <button
           data-testid="nav-mobile-toggle"
           aria-label="Toggle menu"
-          className="lg:hidden text-ink"
+          className={`lg:hidden ${overHero ? "text-bone" : "text-ink"}`}
           onClick={() => setOpen((s) => !s)}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
