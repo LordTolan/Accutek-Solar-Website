@@ -22,7 +22,7 @@ export default function About() {
             <h2 className="font-display text-4xl lg:text-6xl font-extrabold tracking-tighter text-ink leading-[0.95]">
               31 years.
               <br />
-              <span className="italic font-light">Two generations.</span>
+              <span className="italic font-semibold">Two generations.</span>
               <br />
               Zero shortcuts.
             </h2>

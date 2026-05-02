@@ -23,7 +23,7 @@ export default function Testimonials() {
               <br />
               the people who
               <br />
-              <span className="italic font-light text-amber">flipped the switch.</span>
+              <span className="italic font-semibold text-amber">flipped the switch.</span>
             </h2>
           </div>
 

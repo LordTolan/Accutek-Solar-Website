@@ -18,7 +18,7 @@ export default function Services() {
               <br />
               installed by the
               <br />
-              <span className="italic font-light">same crew.</span>
+              <span className="italic font-semibold">same crew.</span>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-end">

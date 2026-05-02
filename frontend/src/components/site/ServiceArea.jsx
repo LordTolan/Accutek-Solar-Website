@@ -19,7 +19,7 @@ export default function ServiceArea() {
             <h2 className="font-display text-4xl lg:text-6xl font-bold tracking-tighter text-ink leading-[0.95]">
               17 counties.
               <br />
-              <span className="italic font-light">Two states.</span>
+              <span className="italic font-semibold">Two states.</span>
               <br />
               One local crew.
             </h2>

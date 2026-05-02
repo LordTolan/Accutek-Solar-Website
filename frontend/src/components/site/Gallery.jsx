@@ -15,7 +15,7 @@ export default function Gallery() {
             <h2 className="font-display text-4xl lg:text-6xl font-bold tracking-tighter text-ink leading-[0.95]">
               Built by us.
               <br />
-              <span className="italic font-light">Standing on roofs near you.</span>
+              <span className="italic font-semibold">Standing on roofs near you.</span>
             </h2>
           </div>
           <p className="font-mono text-sm text-ink2 max-w-xs">

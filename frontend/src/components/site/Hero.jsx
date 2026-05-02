@@ -47,7 +47,7 @@ export default function Hero() {
             >
               Energy that
               <br />
-              <span className="italic font-light">stays on.</span>
+              <span className="italic font-semibold">stays on.</span>
               <br />
               <span className="text-amber">Power that pays back.</span>
             </h1>

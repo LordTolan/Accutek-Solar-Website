@@ -75,7 +75,7 @@ export default function Contact() {
               <br />
               your project.
               <br />
-              <span className="italic font-light text-amber">We'll do the rest.</span>
+              <span className="italic font-semibold text-amber">We'll do the rest.</span>
             </h2>
 
             <div className="mt-12 space-y-4">
@@ -120,7 +120,7 @@ export default function Contact() {
                 <h3 className="font-display text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
                   Thank you.
                   <br />
-                  <span className="italic font-light">We'll be in touch.</span>
+                  <span className="italic font-semibold">We'll be in touch.</span>
                 </h3>
                 <p className="mt-4 text-ink2">
                   Keith, Seth, Quill or one of our crew will reach out within

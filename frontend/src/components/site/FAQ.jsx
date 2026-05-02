@@ -23,7 +23,7 @@ export default function FAQ() {
               <br />
               answers,
               <br />
-              <span className="italic font-light">no fluff.</span>
+              <span className="italic font-semibold">no fluff.</span>
             </h2>
             <p className="mt-6 text-sm text-ink2">
               Don't see what you're looking for? Call us or send a message —

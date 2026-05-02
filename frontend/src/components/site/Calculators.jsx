@@ -607,7 +607,7 @@ export default function Calculators() {
               <br />
               before we even
               <br />
-              <span className="italic font-light">walk your roof.</span>
+              <span className="italic font-semibold">walk your roof.</span>
             </h2>
           </div>
           <div className="col-span-12 lg:col-span-5 lg:col-start-8 flex items-end">
