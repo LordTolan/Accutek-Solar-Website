@@ -1,0 +1,120 @@
+{
+  "project_context": {
+    "domain": "Solar Energy & Backup Power",
+    "theme": "Light",
+    "archetype": "1 (Organic & Earthy) with Industrial Precision",
+    "emotional_tone": "Grounded, Trustworthy, Technical, Professional",
+    "target_audience": "Homeowners, Businesses in rural Indiana/Illinois"
+  },
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk",
+      "weights": ["light", "bold", "black"],
+      "usage": "Use for all H1-H4, tight letter spacing (tracking-tight or tracking-tighter), leading-none for H1."
+    },
+    "body": {
+      "family": "IBM Plex Sans",
+      "weights": ["regular", "medium", "semibold"],
+      "usage": "Use for standard paragraphs, loose line height (leading-relaxed)."
+    },
+    "data_numbers": {
+      "family": "JetBrains Mono",
+      "usage": "Use exclusively for the calculator inputs, outputs, data metrics, and ROI figures to give an engineering feel."
+    },
+    "text_sizes": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight",
+      "h3": "text-xl sm:text-2xl tracking-tight",
+      "body": "text-base",
+      "labels": "text-xs uppercase tracking-[0.2em]"
+    }
+  },
+  "colors": {
+    "background": {
+      "main": "#F7F4F0",
+      "alt": "#ECE8E2",
+      "dark_section": "#1B2A22"
+    },
+    "text": {
+      "primary": "#121714",
+      "secondary": "#4A5650",
+      "inverse": "#F7F4F0"
+    },
+    "brand": {
+      "primary": "#E19233",
+      "primary_hover": "#C87D2A",
+      "secondary": "#243A30"
+    },
+    "accent": {
+      "terracotta": "#C96A52",
+      "sage": "#829B87",
+      "border": "#D8D3CC"
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Use generous padding for marketing sections (p-12, py-24, gap-12). For calculators, use dense padding (p-4, gap-4).",
+    "grids": {
+      "marketing": "MODE A: TETRIS GRID - Asymmetrical grids (grid-cols-12), wide gaps (gap-8 to gap-12).",
+      "calculators": "MODE B: CONTROL ROOM GRID - Dense, strict data correlation grids (grid-cols-4), tight gaps (gap-4)."
+    },
+    "containers": "Sections should NOT use typical Bootstrap-style containers. Use full-width sections with max-w-7xl content wrappers."
+  },
+  "components_strategy": {
+    "marketing_sections": "Pure HTML/Tailwind. Use overlapping div layers. Hero overlay max bg-black/40.",
+    "calculators": "Shadcn/UI heavily customized. Matte finishes (no soft shadows), 1px solid borders (border-[#D8D3CC]), flat solid backgrounds.",
+    "buttons": "Square or very slightly rounded (rounded-sm), solid colors, high contrast text. Hover states must explicitly set text color and background.",
+    "cards": "For marketing: Flat background, 1px border. For data widgets: Neumorphism (clay & crisp) - soft ambient shadow with sharp 1px inner border."
+  },
+  "motion_and_interactions": {
+    "scroll": "Implement smooth scrolling (Lenis).",
+    "hover": "Slight lift (-translate-y-1) and shadow-md for cards. Fast background color transitions for buttons.",
+    "entrance": "Staggered fade-up for grid items. Use Framer Motion."
+  },
+  "media_and_images": {
+    "guidelines": "Do NOT use overlays darker than bg-black/40. No placeholder images. Use provided URLs.",
+    "urls": {
+      "hero_background": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/ecec3ab58dbaa69a3a9ca7b2822fd0cdea49b8c3d8e62b52ea771837f2ca31db.png",
+        "description": "Hero section cinematic solar home."
+      },
+      "battery_generator": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/e2a807d9f1323522467b330572f73010026cedad87d3c3c841a9dd9c2fbaec55.png",
+        "description": "Technical close-up of battery backup for the Services/Generator section."
+      },
+      "energy_map": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/a04f211dcc851f46c3b4ace30f10bace49a70af73e7e60006103d63b1d86f0ce.png",
+        "description": "Abstract topographical energy node map for the 'Service Area' or 'ROI' background."
+      },
+      "roof_panels": {
+        "url": "https://images.unsplash.com/flagged/photo-1566838616631-f2618f74a6a2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwzfHxzb2xhciUyMHBhbmVscyUyMGhvbWUlMjByb29mJTIwaW5zdGFsbGF0aW9ufGVufDB8fHx8MTc3NzcyNjQ0NHww&ixlib=rb-4.1.0&q=85",
+        "description": "Real solar roof installation for gallery or project showcase."
+      }
+    }
+  },
+  "content_and_data": {
+    "company_info": {
+      "name": "AccuTek Solar",
+      "founded": "1994 (31 years)",
+      "founder": "Keith Davis",
+      "phone": "(812) 878-7343",
+      "email": "solarseth7@yahoo.com",
+      "address": "9797 S Rangeline Rd. Clinton, IN 47842"
+    },
+    "service_areas": [
+      "Vermillion County", "Parke County", "Fountain County", "Montgomery County",
+      "Putnam County", "Clay County", "Sullivan County", "Vigo County",
+      "Hendricks County", "Warren County", "Edgar County", "Vermilion County",
+      "Clark County", "Crawford County", "Coles County", "Douglas County", "Champaign County"
+    ]
+  },
+  "testing": {
+    "attributes": "All interactive elements, buttons, inputs, tabs, and calculator results MUST include 'data-testid' attributes (e.g. data-testid='calc-submit-btn')."
+  },
+  "instructions_to_main_agent": [
+    "Build the marketing sections using standard HTML/Tailwind with large typography (Cabinet Grotesk) and organic overlaps.",
+    "Build the calculators (Solar Size, Battery Sizing, Mount Type, Generator, ROI) using Shadcn components (Inputs, Select, Tabs, Sliders) but style them with a 'Control Room' dense aesthetic.",
+    "Use JetBrains Mono for all numerical outputs in the calculators to emphasize the engineering tool feel.",
+    "Ensure the hero image uses the provided cinematic solar home URL with a max bg-black/40 overlay.",
+    "Never use generic placeholder images or text. Use the scraped company info and testimonials directly."
+  ]
+}
