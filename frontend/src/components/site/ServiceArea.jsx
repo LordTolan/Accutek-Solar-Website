@@ -46,7 +46,7 @@ export default function ServiceArea() {
                   {state}
                 </h3>
                 <span className="font-mono text-xs text-ink2">
-                  {String(counties.length).padStart(2, "0")} counties
+                  {counties.length} counties
                 </span>
               </div>
               <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
