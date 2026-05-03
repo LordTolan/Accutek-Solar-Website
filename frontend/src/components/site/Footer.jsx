@@ -24,7 +24,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="mt-4 text-sm text-bone/60 max-w-sm leading-relaxed">
-              Family-owned solar PV, battery backup, Kohler generators and
+              Family-owned solar PV, inverter systems, Kohler generators and
               licensed electrical work since {COMPANY.founded}. Keith Davis,
               President · Seth & Quill Davis, day-to-day operations.
             </p>

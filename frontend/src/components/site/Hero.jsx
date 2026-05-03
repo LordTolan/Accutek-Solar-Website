@@ -41,7 +41,7 @@ export default function Hero() {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 lg:col-span-9">
             <p data-testid="hero-eyebrow" className="label-tag text-amber mb-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              Solar · Battery Backup · Generators · Electrical
+              Solar · Inverter Systems · Generators · Electrical
             </p>
             <h1
               data-testid="hero-title"

@@ -145,7 +145,7 @@ function BatteryCalc() {
   return (
     <CalcShell
       icon={<Battery className="h-5 w-5" />}
-      title="Battery Backup Sizer"
+      title="Inverter System Sizer"
       caption="Pick what stays on, choose runtime, get the kWh you need."
       testid="calc-battery"
     >
@@ -256,7 +256,7 @@ function MountCalc() {
   return (
     <CalcShell
       icon={<MountainSnow className="h-5 w-5" />}
-      title="Roof vs. Ground Mount Recommender"
+      title="Ground Mount vs. Inverter System Recommender"
       caption="Four quick questions, one engineer-grade recommendation."
       testid="calc-mount"
     >
@@ -316,7 +316,7 @@ function MountCalc() {
       <Results>
         <Result
           label="Recommendation"
-          value={out.verdict === "roof" ? "Roof Mount" : "Ground Mount"}
+          value={out.verdict === "roof" ? "Inverter System" : "Ground Mount"}
           highlight
           full
           testid="mount-out-verdict"
@@ -326,8 +326,8 @@ function MountCalc() {
           label="Why"
           value={
             out.verdict === "roof"
-              ? "Newer roof, low shade and good roof material. Roof mount minimizes site work and cost."
-              : "Older roof, available open ground or significant shading. Ground mount maximizes production and avoids re-roofing."
+              ? "Newer roof, low shade and good roof material. An inverter system mounted at your service entrance integrates cleanly with your existing electrical and minimizes site work."
+              : "Older roof, available open ground or significant shading. A ground mount maximizes production, avoids re-roofing, and gives easier service access."
           }
           full
           testid="mount-out-why"
@@ -625,7 +625,7 @@ export default function Calculators() {
             className="bg-bone border border-line h-auto p-1 flex flex-wrap gap-1 justify-start mb-6 rounded-none"
           >
             <CalcTab value="solar" icon={<Sun className="h-3.5 w-3.5" />} label="Solar size" />
-            <CalcTab value="battery" icon={<Battery className="h-3.5 w-3.5" />} label="Battery backup" />
+            <CalcTab value="battery" icon={<Battery className="h-3.5 w-3.5" />} label="Inverter system" />
             <CalcTab value="mount" icon={<MountainSnow className="h-3.5 w-3.5" />} label="Mount type" />
             <CalcTab value="generator" icon={<Zap className="h-3.5 w-3.5" />} label="Generator" />
             <CalcTab value="roi" icon={<TrendingUp className="h-3.5 w-3.5" />} label="ROI / Payback" />

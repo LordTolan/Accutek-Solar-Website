@@ -43,9 +43,10 @@ export const SERVICES = [
     id: "solar",
     code: "01",
     title: "Solar PV Systems",
-    summary: "Grid-tied, hybrid, and off-grid photovoltaic installations engineered for your roof or yard.",
+    summary: "Grid-tied, hybrid, and off-grid photovoltaic installations engineered for your property.",
     bullets: [
-      "Roof mount & ground mount arrays",
+      "Ground mount arrays",
+      "Inverter system integration",
       "Grid-tie, hybrid, off-grid configurations",
       "Premium panels & micro-inverters",
       "Net-metering setup & utility coordination",
@@ -54,10 +55,10 @@ export const SERVICES = [
   {
     id: "battery",
     code: "02",
-    title: "Custom Battery Backup",
-    summary: "Custom-built battery banks that keep your essentials — or your whole home — running through any outage.",
+    title: "Inverter Systems",
+    summary: "Custom-built inverter systems and battery banks that keep your essentials — or your whole home — running through any outage.",
     bullets: [
-      "Custom-built battery banks",
+      "Custom-built inverter systems",
       "Whole-home & partial-home backup",
       "Hybrid inverter integration",
       "Smart load management",
