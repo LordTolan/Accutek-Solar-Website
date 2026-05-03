@@ -6,7 +6,7 @@ import HomePage from "@/pages/HomePage";
 
 function App() {
   useEffect(() => {
-    document.title = "AccuTek Solar | Family-Owned Solar & Backup Power · Indiana & Illinois";
+    document.title = "Accutek Solar | Family-Owned Solar & Backup Power · Indiana & Illinois";
   }, []);
 
   return (

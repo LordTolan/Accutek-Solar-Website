@@ -1,6 +1,6 @@
 // Centralized site content — sourced from accuteksolar.com scrape
 export const COMPANY = {
-  name: "AccuTek Solar",
+  name: "Accutek Solar",
   tagline: "Solar, batteries, generators & electrical — built right since 1994.",
   founded: 1994,
   founder: "Keith Davis",
@@ -133,8 +133,8 @@ export const FAQS = [
     a: "Net metering tracks the difference between energy you produce and energy you consume. In Indiana, the utility won't pay cash for excess production, but they credit your account — letting you bank summer surplus and use it through the winter.",
   },
   {
-    q: "How long has AccuTek been in business?",
-    a: "AccuTek Solar was founded by Keith Davis in 1994 — over 31 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His sons, Seth Davis and Quill Davis, now run day-to-day operations. Family-owned, second-generation operated.",
+    q: "How long has Accutek been in business?",
+    a: "Accutek Solar was founded by Keith Davis in 1994 — over 31 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His sons, Seth Davis and Quill Davis, now run day-to-day operations. Family-owned, second-generation operated.",
   },
   {
     q: "Do you offer free estimates?",

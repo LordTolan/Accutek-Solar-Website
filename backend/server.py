@@ -18,7 +18,7 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
-app = FastAPI(title="AccuTek Solar API")
+app = FastAPI(title="Accutek Solar API")
 api_router = APIRouter(prefix="/api")
 
 
@@ -69,7 +69,7 @@ class Lead(BaseModel):
 # ----- Routes -----
 @api_router.get("/")
 async def root():
-    return {"message": "AccuTek Solar API", "version": "1.0.0"}
+    return {"message": "Accutek Solar API", "version": "1.0.0"}
 
 
 @api_router.post("/status", response_model=StatusCheck)
@@ -125,7 +125,7 @@ async def list_leads(limit: int = 100):
 async def company_info():
     """Static company info pulled from accuteksolar.com (cached on backend)."""
     return {
-        "name": "AccuTek Solar",
+        "name": "Accutek Solar",
         "founded": 1994,
         "founder": "Keith Davis",
         "president": "Keith Davis",

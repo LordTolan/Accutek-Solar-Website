@@ -20,7 +20,7 @@ export default function Gallery() {
           </div>
           <p className="font-mono text-sm text-ink2 max-w-xs">
             Selected work from across Indiana & Illinois. Every photo is an
-            AccuTek install — no stock images.
+            Accutek install — no stock images.
           </p>
         </div>
 

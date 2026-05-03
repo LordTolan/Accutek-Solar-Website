@@ -44,13 +44,13 @@ export default function Nav() {
         >
           <img
             src={COMPANY.logos.icon}
-            alt="AccuTek Solar"
+            alt="Accutek Solar"
             className={`h-10 w-10 object-contain ${
               overHero ? "bg-bone rounded-sm p-0.5" : ""
             }`}
           />
           <span className="font-display text-lg font-extrabold tracking-tight">
-            AccuTek{" "}
+            Accutek{" "}
             <span className={`font-light ${overHero ? "text-amber" : "text-forest"}`}>
               Solar
             </span>

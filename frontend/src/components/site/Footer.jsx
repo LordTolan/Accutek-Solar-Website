@@ -13,7 +13,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 text-bone">
               <img
                 src={COMPANY.logos.icon}
-                alt="AccuTek Solar"
+                alt="Accutek Solar"
                 className="h-12 w-12 object-contain bg-bone rounded-sm p-1"
               />
               <div>

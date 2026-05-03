@@ -2,7 +2,7 @@ import React from "react";
 import { COMPANY } from "@/lib/site-data";
 
 const milestones = [
-  { y: "1994", t: "Keith Davis founds AccuTek in Clinton, IN" },
+  { y: "1994", t: "Keith Davis founds Accutek in Clinton, IN" },
   { y: "2000s", t: "Expanded into solar PV and Kohler standby generators" },
   { y: "2010s", t: "Hybrid battery systems, energy monitoring, custom backup" },
   { y: "Today", t: "Keith remains President. His sons Seth Davis & Quill Davis run day-to-day operations — second generation, same family." },
@@ -27,7 +27,7 @@ export default function About() {
               Zero shortcuts.
             </h2>
             <p className="mt-6 text-base text-ink2 leading-relaxed">
-              AccuTek Solar is an environmentally-conscious, family-owned
+              Accutek Solar is an environmentally-conscious, family-owned
               electrical and solar contractor. Founded by{" "}
               <strong className="text-ink">{COMPANY.founder}</strong> in {COMPANY.founded} —
               who remains <strong className="text-ink">President</strong> today. His sons{" "}

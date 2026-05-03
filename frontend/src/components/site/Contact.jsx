@@ -18,7 +18,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
 const CONSENT_TEXT =
-  "By checking this box, I consent to AccuTek Solar (and its agents) contacting me by phone call, text message (SMS), and email at the contact information I've provided — including using automated systems — about my project, quotes, scheduling, and follow-up. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. I can opt out at any time by replying STOP to texts, clicking unsubscribe in emails, or asking us directly. See our privacy practices for details.";
+  "By checking this box, I consent to Accutek Solar (and its agents) contacting me by phone call, text message (SMS), and email at the contact information I've provided — including using automated systems — about my project, quotes, scheduling, and follow-up. Consent is not a condition of purchase. Message and data rates may apply. Message frequency varies. I can opt out at any time by replying STOP to texts, clicking unsubscribe in emails, or asking us directly. See our privacy practices for details.";
 
 const initial = {
   name: "",
@@ -244,7 +244,7 @@ export default function Contact() {
                         </span>
                       </div>
                       <p className="text-sm text-ink leading-relaxed">
-                        <strong>Yes, AccuTek Solar can contact me</strong> by phone
+                        <strong>Yes, Accutek Solar can contact me</strong> by phone
                         call, text message (SMS), and email at the contact info
                         I've provided — including via automated systems — about my
                         project, quotes, scheduling and follow-up.
