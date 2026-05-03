@@ -1,0 +1,42 @@
+{
+  "summary": "Iteration 3 — Commercial intake (/commercial) + mobile optimization verified. Backend: 19/19 pytest tests pass (10 existing + 9 new commercial-leads tests). Endpoints validated: POST /api/commercial-leads accepts multipart/form-data with file upload, rejects empty name/email (400), rejects consent_communications=false or omitted (400), rejects >10MB file (413), rejects disallowed content-type (415); GET /api/commercial-leads sorted desc, excludes _id and site_plan.data_base64; residential POST /api/leads regression intact (200). Frontend: /commercial route loads with breadcrumb 'HOME / COMMERCIAL', value-prop cards 0–3 and discipline cards 0–3 render. Top nav now shows [Services, Commercial, Tools, Service Area, Reviews, About, Contact] — 'Home' link removed (logo still navigates). com-submit correctly disabled until com-consent-checkbox is ticked. End-to-end form flow with tiny PNG upload returns 200 and renders commercial-success panel with reset button. Mobile (390x844): no horizontal scroll on any of the 8 routes; mobile menu toggle reveals all 7 links incl. Commercial; contact-name input font-size = 16px (prevents iOS zoom); services jump nav has overflow-x-auto (scrollW 745 > clientW 390); service-area quadrant cards stack vertically (different .top values); Housecall iframe uses adaptive class h-[1400px] sm:h-[1100px] lg:h-[1000px].",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Reviews page (third-party)", "issues": ["Housecall Pro widget logs 'TypeError: Failed to fetch' from client.housecallpro.com — third-party origin, iframe still renders. Same non-blocking observation as iteration 2."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_commercial_leads.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Fix already applied by tester: server.py POST /api/commercial-leads was leaking MongoDB ObjectId in the response (insert_one mutates doc adding _id), causing 500 on every valid submission. Patched to exclude both 'site_plan' and '_id' from the response dict. Please review/keep the change.",
+    "(Optional/code-review) Migrate deprecated @app.on_event('shutdown') to FastAPI lifespan handlers.",
+    "(Optional/code-review) Validate email format with pydantic EmailStr on /api/leads payload.",
+    "(Optional/code-review) Tighten CORS allow_origins in production (currently defaults to '*').",
+    "(Optional/code-review) Spec asks for 400 on empty name/email at /api/commercial-leads, but completely-omitted form fields return 422 (FastAPI's automatic validation before our .strip() check). Acceptable, but if 400 is strictly required, declare fields as Optional[str] and validate manually."
+  ],
+  "critical_code_review_comments": [
+    "BUG (fixed by tester): /api/commercial-leads response built from `doc` after motor's insert_one which mutates doc by attaching _id (ObjectId). This caused FastAPI jsonable_encoder to throw `'ObjectId' object is not iterable` -> 500 on every valid submission. Now excluded.",
+    "/api/commercial-leads stores file as base64 in MongoDB — for files near the 10MB cap this is fine but be aware MongoDB document size limit is 16MB; consider GridFS or external object storage if larger files are ever allowed.",
+    "Empty-string handling: `Form(...)` treats truly missing fields as 422 not 400. The .strip() guard only fires when a field is present-but-empty/whitespace. Functional but inconsistent with leads endpoint (which uses pydantic JSON body)."
+  ],
+  "updated_files": [
+    "/app/backend/server.py (excluded _id from commercial-leads response)",
+    "/app/backend/tests/test_commercial_leads.py (new test file)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "N/A — no auth required",
+  "seed_data_creation": "TEST_-prefixed leads, status checks, and commercial_leads inserted via API during pytest + Playwright runs. Cleanup by TEST_ prefix.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend suite split into /app/backend/tests/backend_test.py (root, company, status, leads) and /app/backend/tests/test_commercial_leads.py (commercial-leads). Run all: `pytest /app/backend/tests/ -v`. Commercial form testids prefixed `com-` (com-name, com-email, com-phone, com-company, com-title, com-address, com-size, com-type, com-loads, com-brand, com-timeline, com-message, com-file-input, com-consent-checkbox, com-submit). com-submit disabled until consent checked — click checkbox with force=True. Upload tiny PNG via set_input_files on com-file-input. Success state testid: commercial-success and commercial-success-reset. Mobile: no horizontal scroll on all 8 routes; nav-mobile-toggle opens menu with 7 links. IMPORTANT: a backend bug leaking MongoDB _id in the commercial-leads create response was fixed in this iteration — if it regresses you'll see 500 with `ObjectId not iterable`.",
+  "rca of the issue": "MongoDB ObjectId leak / 500 on valid submission — RCA: motor's `await db.commercial_leads.insert_one(doc)` mutates the in-memory `doc` by appending `_id: ObjectId(...)`. The endpoint built `response = {k:v for k,v in doc.items() if k not in {'site_plan'}}` AFTER insert, which retained `_id`. FastAPI's jsonable_encoder cannot serialize ObjectId, raising `TypeError: 'ObjectId' object is not iterable` -> 500. Fix: also exclude `_id` from the response dict. Reproduction: any valid POST /api/commercial-leads (with or without file) before fix. Verified resolved by re-running 9 commercial pytest tests and an end-to-end Playwright form submission (POST returned 200, success panel rendered)."
+}

@@ -21,13 +21,13 @@ export default function ServicesPage() {
         data-testid="services-jump-nav"
         className="sticky top-16 z-30 bg-bone/95 backdrop-blur-md border-b border-line"
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 py-3 flex flex-wrap gap-2 justify-center sm:justify-start">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-3 flex gap-2 justify-start overflow-x-auto scrollbar-thin [-webkit-overflow-scrolling:touch]">
           {SERVICES.map((s) => (
             <a
               key={s.id}
               href={`#${s.id}`}
               data-testid={`services-jump-${s.id}`}
-              className="px-3 py-1.5 text-xs font-mono uppercase tracking-wider border border-line hover:border-forest hover:bg-forest hover:text-bone transition-colors"
+              className="shrink-0 px-3 py-1.5 text-xs font-mono uppercase tracking-wider border border-line hover:border-forest hover:bg-forest hover:text-bone transition-colors whitespace-nowrap"
             >
               {s.code} · {s.title}
             </a>

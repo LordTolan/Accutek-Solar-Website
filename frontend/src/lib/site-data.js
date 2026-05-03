@@ -228,8 +228,8 @@ export const GALLERY = [
 ];
 
 export const NAV_LINKS = [
-  { to: "/", label: "Home" },
   { to: "/services", label: "Services" },
+  { to: "/commercial", label: "Commercial" },
   { to: "/tools", label: "Tools" },
   { to: "/service-area", label: "Service Area" },
   { to: "/reviews", label: "Reviews" },

@@ -90,6 +90,26 @@ body {
     .font-mono {
         font-family: "JetBrains Mono", ui-monospace, monospace !important;
     }
+    /* Prevent iOS auto-zoom on input focus (requires ≥16px font on mobile) */
+    input, textarea, select {
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        input, textarea, select {
+            font-size: 0.875rem;
+        }
+    }
+    /* Touch-friendly minimum target on phones */
+    @media (max-width: 640px) {
+        button, a[role="button"], [data-testid$="-submit"] {
+            min-height: 44px;
+        }
+    }
+    /* Prevent horizontal overflow from decorative elements */
+    html, body {
+        overflow-x: hidden;
+        max-width: 100%;
+    }
 }
 
 @layer utilities {

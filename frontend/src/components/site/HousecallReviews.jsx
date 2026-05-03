@@ -50,8 +50,8 @@ export default function HousecallReviews() {
             src="https://client.housecallpro.com/reviews/widget/097cf23f-be1a-41ea-981b-8e6b9c7514eb"
             title="Accutek Solar — Housecall Pro Customer Reviews"
             data-testid="housecall-iframe"
-            className="block w-full bg-bone"
-            style={{ border: "none", height: "1000px" }}
+            className="block w-full bg-bone h-[1400px] sm:h-[1100px] lg:h-[1000px]"
+            style={{ border: "none" }}
             loading="lazy"
           />
         </div>

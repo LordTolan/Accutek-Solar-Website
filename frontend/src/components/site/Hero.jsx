@@ -45,7 +45,7 @@ export default function Hero() {
             </p>
             <h1
               data-testid="hero-title"
-              className="font-display text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.95] tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
+              className="font-display text-[2.7rem] leading-[0.95] sm:text-6xl lg:text-8xl font-extrabold tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
             >
               30 years of
               <br />
@@ -55,7 +55,7 @@ export default function Hero() {
             </h1>
             <p
               data-testid="hero-subtitle"
-              className="mt-8 max-w-2xl text-lg lg:text-xl text-bone leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.4)]"
+              className="mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg lg:text-xl text-bone leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.4)]"
             >
               Custom solar PV and storage, authorized standby generator
               installation, commercial facility automation and advanced
@@ -93,7 +93,7 @@ export default function Hero() {
         </div>
 
         {/* Stats strip */}
-        <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-bone/15 border border-bone/15">
+        <div className="mt-16 sm:mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-bone/15 border border-bone/15">
           {[
             { k: "30", l: "Years in business" },
             { k: "17", l: "Counties served IN+IL" },
@@ -103,9 +103,9 @@ export default function Hero() {
             <div
               key={i}
               data-testid={`hero-stat-${i}`}
-              className="bg-forest/95 px-6 py-8 backdrop-blur-sm"
+              className="bg-forest/95 px-4 sm:px-6 py-6 sm:py-8 backdrop-blur-sm"
             >
-              <div className="font-mono text-2xl lg:text-4xl font-bold text-amber tracking-tight">
+              <div className="font-mono text-xl sm:text-2xl lg:text-4xl font-bold text-amber tracking-tight break-words">
                 {s.k}
               </div>
               <div className="mt-2 label-tag text-bone/60">{s.l}</div>

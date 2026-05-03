@@ -26,7 +26,7 @@ export default function ServiceAreaMap({ compact = false }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 lg:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4">
         {/* Order: IL West, IN East, IL East, IN West so geography reads roughly left-to-right */}
         <Quadrant q={getQuad("il-west")} accent="amber" position="tl" compact={compact} />
         <Quadrant q={getQuad("in-east")} accent="forest" position="tr" compact={compact} />

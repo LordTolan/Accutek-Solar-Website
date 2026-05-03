@@ -9,6 +9,7 @@ import ServiceAreaPage from "@/pages/ServiceAreaPage";
 import ReviewsPage from "@/pages/ReviewsPage";
 import ContactPage from "@/pages/ContactPage";
 import ToolsPage from "@/pages/ToolsPage";
+import CommercialPage from "@/pages/CommercialPage";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 
@@ -28,6 +29,7 @@ function Layout() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/services" element={<ServicesPage />} />
+        <Route path="/commercial" element={<CommercialPage />} />
         <Route path="/tools" element={<ToolsPage />} />
         <Route path="/service-area" element={<ServiceAreaPage />} />
         <Route path="/reviews" element={<ReviewsPage />} />
