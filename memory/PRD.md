@@ -60,3 +60,23 @@ Take accuteksolar.com (a 30-year-old family-owned solar company in Clinton, IN �
 - Spanish translation
 - Analytics dashboard (PostHog already loaded)
 - Rate-limit /api/leads
+
+## 2025-12-03 Update — Commercial intake + mobile optimization
+- Added `/commercial` route with dedicated high-value intake form (CommercialIntake.jsx):
+  - Facility size, facility type, critical loads, existing system brand, timeline, address, notes
+  - File upload (single-line drawing / site plan) with 10 MB cap, allowed types: PDF/PNG/JPG/WEBP/TIFF/XLSX
+  - TCPA consent block (required)
+  - Submit disabled until consent ticked
+- Backend: POST/GET `/api/commercial-leads` (multipart/form-data), base64-encoded file stored in MongoDB `commercial_leads` collection
+- Fixed: MongoDB `_id` ObjectId leak in commercial-leads response (motor `insert_one` mutates input dict)
+- Nav restructure: added "Commercial", removed "Home" (logo handles home); order: Services · Commercial · Tools · Service Area · Reviews · About · Contact
+- Mobile optimization pass:
+  - iOS zoom prevention (input font-size 16px on mobile only)
+  - Global `overflow-x: hidden` on html/body
+  - Min 44px touch target for buttons on phones
+  - Hero headline sizes down to `text-[2.7rem]` on phones
+  - Stats strip shrinks padding and font on phones
+  - Housecall iframe uses adaptive heights (1400 mobile / 1100 sm / 1000 lg)
+  - Service area quadrant map stacks single column on phones
+  - Services jump-nav becomes horizontal scroll on phones (instead of wrapping)
+- Tested: 19/19 backend tests, 100% frontend verified on desktop + mobile 390×844
