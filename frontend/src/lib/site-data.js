@@ -1,8 +1,16 @@
-// Centralized site content — sourced from accuteksolar.com scrape
+// Centralized site content
+import {
+  Sun,
+  Zap,
+  Cpu,
+  Activity,
+} from "lucide-react";
+
 export const COMPANY = {
   name: "Accutek Solar",
-  tagline: "Solar, batteries, generators & electrical — built right since 1994.",
+  tagline: "30 years of electrical expertise. Solar, storage, backup power & facility automation across Indiana & Illinois.",
   founded: 1994,
+  yearsInBusiness: 30,
   founder: "Keith Davis",
   president: "Keith Davis",
   owners: ["Seth Davis", "Quill Davis"],
@@ -25,66 +33,119 @@ export const COMPANY = {
     onGreen: "/brand/logo_on_green.png",
     stacked: "/brand/logo_stacked.png",
   },
+  housecallWidgetUrl: "https://client.housecallpro.com/reviews/widget/097cf23f-be1a-41ea-981b-8e6b9c7514eb",
+  aboutShort: "Family-owned and serving Indiana and Illinois since 1994. With 30 years of electrical expertise, Accutek Solar provides technically precise energy solutions for residential and commercial clients.",
 };
 
+// Service area broken into 4 operational quadrants
+export const SERVICE_QUADRANTS = [
+  {
+    id: "in-west",
+    label: "Central Indiana — West",
+    state: "Indiana",
+    counties: ["Warren", "Fountain", "Vermillion", "Parke", "Vigo"],
+    description: "Western corridor of Indiana along the IL state line.",
+  },
+  {
+    id: "in-east",
+    label: "Central Indiana — East",
+    state: "Indiana",
+    counties: ["Montgomery", "Hendricks", "Putnam", "Clay", "Sullivan"],
+    description: "Inland Indiana counties east of our home base in Clinton.",
+  },
+  {
+    id: "il-east",
+    label: "Central Illinois — East",
+    state: "Illinois",
+    counties: ["Vermilion", "Edgar", "Clark", "Crawford"],
+    description: "Eastern Illinois counties bordering Indiana.",
+  },
+  {
+    id: "il-west",
+    label: "Central Illinois — West",
+    state: "Illinois",
+    counties: ["Champaign", "Douglas", "Coles"],
+    description: "Inland central Illinois counties.",
+  },
+];
+
+// Flattened helper for legacy uses
 export const SERVICE_AREAS = {
-  Indiana: [
-    "Vermillion", "Parke", "Fountain", "Montgomery",
-    "Putnam", "Clay", "Sullivan", "Vigo", "Hendricks", "Warren",
-  ],
-  Illinois: [
-    "Edgar", "Vermilion", "Clark", "Crawford",
-    "Coles", "Douglas", "Champaign",
-  ],
+  Indiana: ["Vermillion", "Parke", "Fountain", "Montgomery", "Putnam", "Clay", "Sullivan", "Vigo", "Hendricks", "Warren"],
+  Illinois: ["Edgar", "Vermilion", "Clark", "Crawford", "Coles", "Douglas", "Champaign"],
 };
 
 export const SERVICES = [
   {
-    id: "solar",
+    id: "solar-storage",
     code: "01",
-    title: "Solar PV Systems",
-    summary: "Grid-tied, hybrid, and off-grid photovoltaic installations engineered for your roof or yard.",
+    title: "Solar & Storage",
+    icon: Sun,
+    summary:
+      "Custom photovoltaic system design, professional installation, and multi-brand repair — including legacy systems we didn't originally install.",
+    detail:
+      "From a 5 kW residential rooftop to multi-hundred-kW commercial arrays, we engineer every system around your property, electrical service, and load profile. Our crews install, commission, and maintain solar PV with integrated battery storage — and we routinely service systems built on Enphase, SolarEdge, SMA, Outback, Sol-Ark, Schneider, and others.",
     bullets: [
-      "Roof mount & ground mount arrays",
-      "Grid-tie, hybrid, off-grid configurations",
-      "Premium panels & micro-inverters",
-      "Net-metering setup & utility coordination",
+      "Custom residential & commercial PV design",
+      "Roof-mount, ground-mount & pole-mount arrays",
+      "Battery storage (lithium & lead-acid) integration",
+      "Multi-brand inverter repair & retrofit",
+      "Net-metering and utility coordination",
+      "Long-term performance warranties",
     ],
   },
   {
-    id: "battery",
+    id: "backup-power",
     code: "02",
-    title: "Custom Battery Backup",
-    summary: "Custom-built battery banks that keep your essentials — or your whole home — running through any outage.",
+    title: "Backup Power",
+    icon: Zap,
+    summary:
+      "Authorized installer for whole-house and commercial standby generators. Turnkey installation, scheduled maintenance, and emergency service.",
+    detail:
+      "When the grid fails, your operation can't. We design, install, and maintain residential and commercial standby generators — natural gas, LP, and diesel — with automatic transfer switches sized to your facility's critical loads. Maintenance contracts keep your equipment ready before storm season.",
     bullets: [
-      "Custom-built battery banks",
-      "Whole-home & partial-home backup",
-      "Hybrid inverter integration",
-      "Smart load management",
+      "Whole-house & partial-house standby generators",
+      "Commercial standby up to 150kW+",
+      "Automatic transfer switch installation",
+      "Annual maintenance & load-bank testing",
+      "Fuel system design (NG / LP / diesel)",
+      "Emergency service for failed gensets",
     ],
   },
   {
-    id: "generator",
+    id: "facility-automation",
     code: "03",
-    title: "Kohler Generators",
-    summary: "Authorized Kohler installer for whole-home standby generators with proven reliability.",
+    title: "Facility Automation",
+    icon: Cpu,
+    summary:
+      "Specialized commercial services for facility management, decommissioning, and technical restoration of complex electrical environments.",
+    detail:
+      "Industrial sites, data closets, and aging commercial facilities require an electrical contractor that thinks beyond a single panel. We support facility managers with scheduled maintenance, controlled decommissioning of legacy systems, and technical restoration of equipment that other contractors won't touch.",
     bullets: [
-      "Whole-home & partial-home standby",
-      "Automatic transfer switches",
-      "Natural gas & LP propane",
-      "Annual maintenance plans",
+      "Commercial facility management support",
+      "Equipment & site decommissioning",
+      "Technical restoration of legacy systems",
+      "Panel upgrades & service entrance rework",
+      "Lighting & energy efficiency retrofits",
+      "Documentation & as-built drawings",
     ],
   },
   {
-    id: "electrical",
+    id: "diagnostics",
     code: "04",
-    title: "Electrical Services",
-    summary: "Licensed electrical work — panel upgrades, energy monitoring, LED lighting, and full installation/repair.",
+    title: "Diagnostics",
+    icon: Activity,
+    summary:
+      "Advanced troubleshooting for system monitoring failures, communication faults, and intermittent issues other contractors give up on.",
+    detail:
+      "When a solar array under-produces, a generator won't auto-start, or a monitoring portal goes dark — the root cause is rarely obvious. We bring 30 years of field expertise plus modern diagnostic equipment to find the actual fault, document it, and restore the system to full operation.",
     bullets: [
-      "Electrical panel replacement",
-      "Energy monitoring equipment",
-      "Energy-efficient LED lighting",
-      "Service calls & repairs",
+      "Solar PV system performance audits",
+      "Inverter & monitoring fault diagnosis",
+      "Communication & data-logging failures",
+      "Generator no-start root-cause analysis",
+      "Thermal imaging & insulation testing",
+      "Intermittent fault investigations",
     ],
   },
 ];
@@ -129,16 +190,24 @@ export const FAQS = [
     a: "Three main types. (1) Grid-tied — no batteries, panels feed the grid to offset your bill. (2) Hybrid — grid-connected with a battery bank, supports loads during outages. (3) Off-grid — fully independent, batteries plus a backup generator for low-sun stretches.",
   },
   {
+    q: "Do you service systems you didn't install?",
+    a: "Yes. We work on a wide range of inverter and battery brands and routinely take on repair and diagnostic work for systems originally installed by other contractors who are no longer available or unwilling to service their work.",
+  },
+  {
     q: "What is net metering?",
     a: "Net metering tracks the difference between energy you produce and energy you consume. In Indiana, the utility won't pay cash for excess production, but they credit your account — letting you bank summer surplus and use it through the winter.",
   },
   {
     q: "How long has Accutek been in business?",
-    a: "Accutek Solar was founded by Keith Davis in 1994 — over 31 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His sons, Seth Davis and Quill Davis, now run day-to-day operations. Family-owned, second-generation operated.",
+    a: "Accutek Solar was founded by Keith Davis in 1994 — over 30 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His sons Seth Davis and Quill Davis run day-to-day operations. Family-owned, second-generation operated.",
+  },
+  {
+    q: "Do you handle commercial work?",
+    a: "Absolutely. A meaningful portion of our work is commercial — including facility automation support, decommissioning, technical restoration projects, and standby power for businesses across Indiana and Illinois.",
   },
   {
     q: "Do you offer free estimates?",
-    a: "Yes. Every estimate is free. We'll review your bills, walk your property, and design a system that's actually right for your usage and budget — not a one-size-fits-all package.",
+    a: "Yes. Every estimate is free. We'll review your bills, walk your property or facility, and design a system that's actually right for your usage and budget.",
   },
 ];
 
@@ -149,7 +218,6 @@ export const IMAGES = {
   roofPanels: "https://images.unsplash.com/flagged/photo-1566838616631-f2618f74a6a2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwzfHxzb2xhciUyMHBhbmVscyUyMGhvbWUlMjByb29mJTIwaW5zdGFsbGF0aW9ufGVufDB8fHx8MTc3NzcyNjQ0NHww&ixlib=rb-4.1.0&q=85",
 };
 
-// Real install photos from accuteksolar.com
 export const GALLERY = [
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20170626_174551225-3.jpg?resize=750%2C422&ssl=1", alt: "Roof solar array — residential install" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20191213_171847326-1.jpg?resize=750%2C422&ssl=1", alt: "Battery backup interior install" },
@@ -157,4 +225,14 @@ export const GALLERY = [
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20170411_100922472-2.jpg?resize=750%2C422&ssl=1", alt: "Pole-mounted PV system" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20190830_120908432.jpg?resize=750%2C422&ssl=1", alt: "Commercial install" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/arial-array.jpg?resize=750%2C422&ssl=1", alt: "Aerial view of finished array" },
+];
+
+export const NAV_LINKS = [
+  { to: "/", label: "Home" },
+  { to: "/services", label: "Services" },
+  { to: "/tools", label: "Tools" },
+  { to: "/service-area", label: "Service Area" },
+  { to: "/reviews", label: "Reviews" },
+  { to: "/about", label: "About" },
+  { to: "/contact", label: "Contact" },
 ];

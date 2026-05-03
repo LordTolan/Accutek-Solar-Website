@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { COMPANY, IMAGES } from "@/lib/site-data";
-import { ArrowRight, MapPin, Sun } from "lucide-react";
+import { ArrowRight, MapPin, Calendar, Wrench } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -17,7 +18,6 @@ export default function Hero() {
           className="h-full w-full object-cover"
           loading="eager"
         />
-        {/* Layered overlays for legibility while keeping image visible */}
         <div className="absolute inset-0 bg-forest/55" />
         <div className="absolute inset-0 bg-gradient-to-r from-forest/85 via-forest/55 to-forest/30" />
         <div className="absolute inset-0 bg-gradient-to-b from-forest/40 via-transparent to-forest/90" />
@@ -37,47 +37,50 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-32 lg:pt-20 lg:pb-48">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-32 lg:pt-20 lg:pb-40">
         <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 lg:col-span-9">
+          <div className="col-span-12 lg:col-span-10">
             <p data-testid="hero-eyebrow" className="label-tag text-amber mb-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              Solar · Battery Backup · Generators · Electrical
+              Solar & Storage · Backup Power · Facility Automation · Diagnostics
             </p>
             <h1
               data-testid="hero-title"
-              className="font-display text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
+              className="font-display text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.95] tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
             >
-              Energy that
+              30 years of
               <br />
-              <span className="italic font-semibold">stays on.</span>
+              <span className="italic font-semibold">electrical expertise.</span>
               <br />
-              <span className="text-amber">Power that pays back.</span>
+              <span className="text-amber">Indiana &amp; Illinois.</span>
             </h1>
             <p
               data-testid="hero-subtitle"
               className="mt-8 max-w-2xl text-lg lg:text-xl text-bone leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.4)]"
             >
-              31 years of clean, custom-engineered solar PV, custom battery
-              banks and Kohler standby generators across Indiana & Illinois.
-              Free estimates. Real installations. No outsourced crews.
+              Custom solar PV and storage, authorized standby generator
+              installation, commercial facility automation and advanced
+              diagnostic services. Family-owned since 1994 — residential and
+              commercial clients across the IN/IL corridor.
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#calculators"
-                data-testid="hero-cta-calc"
+              <Link
+                to="/contact"
+                data-testid="hero-cta-quote"
                 className="group inline-flex items-center gap-2 bg-amber px-6 py-4 text-ink font-medium rounded-sm hover:bg-bone hover:text-ink transition-colors"
               >
-                Size your system
+                <Calendar className="h-4 w-4" />
+                Schedule a service call
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a
-                href="#contact"
-                data-testid="hero-cta-quote"
+              </Link>
+              <Link
+                to="/services"
+                data-testid="hero-cta-services"
                 className="inline-flex items-center gap-2 border border-bone/40 px-6 py-4 text-bone hover:bg-bone hover:text-ink rounded-sm transition-colors"
               >
-                Get a free quote
-              </a>
+                <Wrench className="h-4 w-4" />
+                Explore services
+              </Link>
               <a
                 href={`tel:${COMPANY.phoneRaw}`}
                 data-testid="hero-phone"
@@ -90,11 +93,11 @@ export default function Hero() {
         </div>
 
         {/* Stats strip */}
-        <div className="mt-20 lg:mt-32 grid grid-cols-2 lg:grid-cols-4 gap-px bg-bone/15 border border-bone/15">
+        <div className="mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-bone/15 border border-bone/15">
           {[
-            { k: "31", l: "Years in business" },
+            { k: "30", l: "Years in business" },
             { k: "17", l: "Counties served IN+IL" },
-            { k: "$0", l: "Cost for an estimate" },
+            { k: "Res.+Com.", l: "Residential & commercial" },
             { k: "100%", l: "In-house installs" },
           ].map((s, i) => (
             <div
@@ -102,18 +105,13 @@ export default function Hero() {
               data-testid={`hero-stat-${i}`}
               className="bg-forest/95 px-6 py-8 backdrop-blur-sm"
             >
-              <div className="font-mono text-3xl lg:text-5xl font-bold text-amber tracking-tight">
+              <div className="font-mono text-2xl lg:text-4xl font-bold text-amber tracking-tight">
                 {s.k}
               </div>
               <div className="mt-2 label-tag text-bone/60">{s.l}</div>
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Bottom corner mark */}
-      <div className="absolute bottom-6 right-6 z-10 hidden lg:flex items-center gap-2 label-tag text-bone/40">
-        <Sun className="h-3 w-3" /> 39.65°N · 87.40°W
       </div>
     </section>
   );

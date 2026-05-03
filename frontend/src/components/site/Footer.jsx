@@ -1,11 +1,12 @@
 import React from "react";
-import { COMPANY } from "@/lib/site-data";
+import { Link } from "react-router-dom";
+import { COMPANY, NAV_LINKS } from "@/lib/site-data";
 
 export default function Footer() {
   return (
     <footer
       data-testid="site-footer"
-      className="bg-ink text-bone/80 py-12"
+      className="bg-ink text-bone/80 py-12 mt-auto"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-12 gap-6 pb-10 border-b border-bone/10">
@@ -20,13 +21,18 @@ export default function Footer() {
                 <div className="font-display text-xl font-extrabold tracking-tight">
                   {COMPANY.name}
                 </div>
-                <div className="label-tag text-amber">Est. {COMPANY.founded}</div>
+                <div className="label-tag text-amber">
+                  30 Years · Est. {COMPANY.founded}
+                </div>
               </div>
             </div>
             <p className="mt-4 text-sm text-bone/60 max-w-sm leading-relaxed">
-              Family-owned solar PV, battery backup, Kohler generators and
-              licensed electrical work since {COMPANY.founded}. Keith Davis,
-              President · Seth & Quill Davis, day-to-day operations.
+              Family-owned and serving Indiana and Illinois since 1994. Solar &
+              storage, backup power, facility automation and diagnostics for
+              residential and commercial clients.
+            </p>
+            <p className="mt-3 text-xs text-bone/40 leading-relaxed">
+              Keith Davis, President · Seth & Quill Davis, day-to-day operations.
             </p>
           </div>
           <div className="col-span-6 md:col-span-3">
@@ -36,6 +42,7 @@ export default function Footer() {
               <br />
               {COMPANY.address.city}, {COMPANY.address.state} {COMPANY.address.zip}
             </p>
+            <p className="text-xs font-mono text-bone/50 mt-3">{COMPANY.hours}</p>
           </div>
           <div className="col-span-6 md:col-span-2">
             <div className="label-tag text-bone/40 mb-4">Contact</div>
@@ -57,10 +64,17 @@ export default function Footer() {
           <div className="col-span-12 md:col-span-2">
             <div className="label-tag text-bone/40 mb-4">Site</div>
             <ul className="space-y-1.5 text-sm">
-              <li><a href="#services" className="hover:text-amber transition-colors">Services</a></li>
-              <li><a href="#calculators" className="hover:text-amber transition-colors">Calculators</a></li>
-              <li><a href="#service-area" className="hover:text-amber transition-colors">Service area</a></li>
-              <li><a href="#contact" className="hover:text-amber transition-colors">Free estimate</a></li>
+              {NAV_LINKS.filter((l) => l.to !== "/").map((l) => (
+                <li key={l.to}>
+                  <Link
+                    to={l.to}
+                    className="hover:text-amber transition-colors"
+                    data-testid={`footer-link-${l.to.replace(/\//g, "")}`}
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

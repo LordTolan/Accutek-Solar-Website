@@ -596,29 +596,9 @@ export default function Calculators() {
     <section
       id="calculators"
       data-testid="calculators-section"
-      className="relative bg-bone2 py-24 lg:py-32 grid-lines"
+      className="relative bg-bone2 py-16 lg:py-20 grid-lines"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative">
-        <div className="grid grid-cols-12 gap-6 mb-12">
-          <div className="col-span-12 lg:col-span-7">
-            <p className="label-tag text-amberDark mb-4">— Interactive tools</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-bold tracking-tighter text-ink leading-[0.95]">
-              Run the numbers
-              <br />
-              before we even
-              <br />
-              <span className="italic font-semibold">walk your roof.</span>
-            </h2>
-          </div>
-          <div className="col-span-12 lg:col-span-5 lg:col-start-8 flex items-end">
-            <p className="text-base text-ink2 leading-relaxed">
-              Five engineering-grade calculators for solar sizing, battery
-              backup, mount type, generator load and lifetime ROI. Numbers
-              are estimates — your free consultation is the real deal.
-            </p>
-          </div>
-        </div>
-
         <Tabs defaultValue="solar" className="w-full">
           <TabsList
             data-testid="calc-tabs"
@@ -644,7 +624,7 @@ export default function Calculators() {
             site visit.
           </p>
           <a
-            href="#contact"
+            href="/contact"
             data-testid="calc-cta-quote"
             className="group inline-flex items-center gap-2 bg-ink text-bone px-6 py-3 rounded-sm hover:bg-amber hover:text-ink transition-colors text-sm font-medium"
           >
