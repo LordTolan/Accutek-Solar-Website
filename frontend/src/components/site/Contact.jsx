@@ -190,7 +190,7 @@ export default function Contact() {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="solar">Solar PV</SelectItem>
-                        <SelectItem value="battery">Inverter system</SelectItem>
+                        <SelectItem value="battery">Battery backup</SelectItem>
                         <SelectItem value="generator">Kohler generator</SelectItem>
                         <SelectItem value="electrical">Electrical / panel</SelectItem>
                         <SelectItem value="general">General / multi-system</SelectItem>
