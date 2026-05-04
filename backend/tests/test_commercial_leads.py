@@ -144,7 +144,20 @@ class TestCommercialList:
         }
         requests.post(f"{API}/commercial-leads", data=data, files=files, timeout=20)
 
-        r = requests.get(f"{API}/commercial-leads", timeout=20)
+        # As of iter 4, GET /api/commercial-leads requires admin Bearer.
+        login = requests.post(
+            f"{API}/auth/login",
+            json={"email": "admin@accuteksolar.com",
+                  "password": "naA3T6l9fpmyqc2tuE1pnA2c"},
+            timeout=15,
+        )
+        if login.status_code == 429:
+            import pytest as _pytest
+            _pytest.skip("Admin locked out")
+        assert login.status_code == 200
+        token = login.json()["access_token"]
+        r = requests.get(f"{API}/commercial-leads",
+                         headers={"Authorization": f"Bearer {token}"}, timeout=20)
         assert r.status_code == 200
         rows = r.json()
         assert isinstance(rows, list)

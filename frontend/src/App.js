@@ -10,8 +10,12 @@ import ReviewsPage from "@/pages/ReviewsPage";
 import ContactPage from "@/pages/ContactPage";
 import ToolsPage from "@/pages/ToolsPage";
 import CommercialPage from "@/pages/CommercialPage";
+import AdminLoginPage from "@/pages/AdminLoginPage";
+import AdminLeadsPage from "@/pages/AdminLeadsPage";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
+import ProtectedRoute from "@/components/site/ProtectedRoute";
+import { AuthProvider } from "@/lib/auth-context";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -21,23 +25,55 @@ function ScrollToTop() {
   return null;
 }
 
-function Layout() {
+function PublicLayout({ children }) {
+  return (
+    <>
+      <Nav />
+      {children}
+      <Footer />
+    </>
+  );
+}
+
+function AdminLayout({ children }) {
+  // No public nav / footer on admin pages
+  return <>{children}</>;
+}
+
+function AppRoutes() {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith("/admin");
+  const Layout = isAdmin ? AdminLayout : PublicLayout;
+
   return (
     <>
       <ScrollToTop />
-      <Nav />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/commercial" element={<CommercialPage />} />
-        <Route path="/tools" element={<ToolsPage />} />
-        <Route path="/service-area" element={<ServiceAreaPage />} />
-        <Route path="/reviews" element={<ReviewsPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="*" element={<HomePage />} />
-      </Routes>
-      <Footer />
+      <Layout>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/commercial" element={<CommercialPage />} />
+          <Route path="/tools" element={<ToolsPage />} />
+          <Route path="/service-area" element={<ServiceAreaPage />} />
+          <Route path="/reviews" element={<ReviewsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+
+          {/* Admin */}
+          <Route path="/admin" element={<AdminLoginPage />} />
+          <Route
+            path="/admin/leads"
+            element={
+              <ProtectedRoute>
+                <AdminLeadsPage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path="*" element={<HomePage />} />
+        </Routes>
+      </Layout>
     </>
   );
 }
@@ -51,7 +87,9 @@ function App() {
   return (
     <div className="App font-sans antialiased min-h-screen flex flex-col">
       <BrowserRouter>
-        <Layout />
+        <AuthProvider>
+          <AppRoutes />
+        </AuthProvider>
       </BrowserRouter>
       <Toaster
         position="top-center"

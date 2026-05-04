@@ -145,7 +145,7 @@ class TestLeads:
         assert r.status_code in (400, 422)
 
     def test_list_leads_sorted_no_id_leak(self):
-        # Create two leads sequentially
+        # As of iteration 4, GET /api/leads requires admin Bearer.
         for i in range(2):
             requests.post(
                 f"{API}/leads",
@@ -157,7 +157,22 @@ class TestLeads:
                 },
                 timeout=15,
             )
-        r = requests.get(f"{API}/leads", timeout=15)
+        # Unauth -> 401
+        unauth = requests.get(f"{API}/leads", timeout=15)
+        assert unauth.status_code == 401
+        # Authed
+        login = requests.post(
+            f"{API}/auth/login",
+            json={"email": "admin@accuteksolar.com",
+                  "password": "naA3T6l9fpmyqc2tuE1pnA2c"},
+            timeout=15,
+        )
+        if login.status_code == 429:
+            pytest.skip("Admin locked out")
+        assert login.status_code == 200
+        token = login.json()["access_token"]
+        r = requests.get(f"{API}/leads",
+                         headers={"Authorization": f"Bearer {token}"}, timeout=15)
         assert r.status_code == 200
         rows = r.json()
         assert isinstance(rows, list)

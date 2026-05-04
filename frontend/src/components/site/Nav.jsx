@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { COMPANY, NAV_LINKS } from "@/lib/site-data";
-import { Phone, Menu, X } from "lucide-react";
+import { COMPANY, NAV_LINKS, CUSTOMER_PORTAL } from "@/lib/site-data";
+import { Phone, Menu, X, LogIn } from "lucide-react";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -71,16 +71,33 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
           <a
             href={`tel:${COMPANY.phoneRaw}`}
             data-testid="nav-phone"
-            className={`font-mono text-xs transition-colors flex items-center gap-1.5 ${
+            className={`font-mono text-xs transition-colors flex items-center gap-1.5 pr-2 ${
               overHero ? "text-bone/80 hover:text-amber" : "text-ink2 hover:text-ink"
             }`}
           >
             <Phone className="h-3.5 w-3.5" />
             {COMPANY.phone}
+          </a>
+          <a
+            href={CUSTOMER_PORTAL.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="nav-portal-link"
+            data-token={CUSTOMER_PORTAL.token}
+            data-orgname="Accutek-Solar"
+            title="Existing customers: view jobs, invoices & estimates"
+            className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-full border transition-colors ${
+              overHero
+                ? "border-amber text-amber hover:bg-amber hover:text-ink"
+                : "border-forest text-forest hover:bg-forest hover:text-bone"
+            }`}
+          >
+            <LogIn className="h-3 w-3" />
+            Portal
           </a>
           <Link
             to="/contact"
@@ -130,6 +147,18 @@ export default function Nav() {
               className="py-2 font-mono text-xs text-ink2"
             >
               {COMPANY.phone}
+            </a>
+            <a
+              href={CUSTOMER_PORTAL.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              data-testid="nav-mobile-portal"
+              data-token={CUSTOMER_PORTAL.token}
+              className="mt-2 inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-semibold border border-forest text-forest rounded-full hover:bg-forest hover:text-bone transition-colors"
+            >
+              <LogIn className="h-4 w-4" />
+              Log in to Portal
             </a>
             <Link
               to="/contact"

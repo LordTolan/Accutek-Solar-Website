@@ -236,3 +236,10 @@ export const NAV_LINKS = [
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ];
+
+// Housecall Pro customer portal (for existing customers to view jobs, invoices, etc)
+export const CUSTOMER_PORTAL = {
+  label: "Log in to Portal",
+  token: "d2cca52d5dc74361b2c484f1306b70df",
+  url: "https://client.housecallpro.com/customer_portal/request-link?token=d2cca52d5dc74361b2c484f1306b70df",
+};

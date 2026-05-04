@@ -1,0 +1,47 @@
+{
+  "summary": "Iteration 4 — Admin auth (JWT/bcrypt) + admin dashboard + Housecall customer portal links verified end-to-end. Backend: 45/45 pytest tests pass (existing 19 regression + 26 new auth/admin). Validated: POST /api/auth/login (200 with access_token+token_type=bearer+expires_in=28800+user, no password_hash leak), wrong creds 401, brute-force lockout fires (took ~10 attempts because two ingress proxy IPs split the count — see code review note), GET /api/auth/me 200 with token / 401 without / 401 garbage, POST /api/auth/logout 200/401, GET /api/admin/leads + /api/admin/commercial-leads + /api/admin/stats + /api/admin/commercial-leads/{id}/site-plan all 401 without Bearer / 200 with admin Bearer, sorted desc by created_at, no _id leakage, site_plan.data_base64 excluded from list responses but filename/content_type/size_bytes present, download returns correct bytes + Content-Disposition + Content-Type, 404 when lead has no attachment. Legacy GET /api/leads + /api/commercial-leads now require auth (401 without). Public endpoints unchanged (root, /company, POST /status, POST /leads, POST /commercial-leads). bcrypt hash starts with $2b$ (len=60); admin_users has unique indexes on email and id; admin user idempotently re-seeded on startup. Frontend: /admin renders admin-login-page; wrong password shows 'Invalid email or password' in admin-login-error; valid login redirects to /admin/leads; unauth visit to /admin/leads redirects to /admin?from=%2Fadmin%2Fleads; dashboard shows 3 stat cards (Residential 19, Commercial 15, With Attachment 10), 2 tabs (admin-tab-commercial active by default with 15 rows, admin-tab-residential with 19 rows), search filter works (3 rows for 'TEST_CommercialJane'), refresh works, download triggers file download (filename=plan.png), logout clears localStorage token (accutek_admin_token) and redirects out of protected area. Customer Portal: nav-portal-link, footer-portal-link, and nav-mobile-portal all carry data-token=d2cca52d5dc74361b2c484f1306b70df, data-orgname=Accutek-Solar, target=_blank, rel=noopener noreferrer, href=https://client.housecallpro.com/customer_portal/request-link?token=d2cca52d5dc74361b2c484f1306b70df. Footer 'CUSTOMER TOOLS' section heading rendered. Logo is bulb-only (no wordmark in SVG; brand text rendered separately in nav).",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "/api/auth/login", "issue": "Brute-force lockout is keyed by request.client.host, which behind the K8s ingress is the proxy pod IP, not the real client IP. As a result (a) attempts from a single browser are fragmented across multiple proxy IPs (saw 10.208.133.77 and 10.208.133.78), reducing effectiveness of per-IP throttling; and (b) all real users behind the same proxy share an identifier and could collectively trigger or be locked out. Should use X-Forwarded-For / X-Real-IP from a trusted proxy header."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Admin dashboard", "issues": ["Stat cards (Residential / Commercial / With Attachment) and download buttons render correctly but the 3 stat cards have no individual data-testid. Spec referenced testids 'tab-commercial' / 'tab-residential' but actual implementation uses 'admin-tab-commercial' / 'admin-tab-residential' — functional but worth aligning with spec wording."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/test_commercial_leads.py",
+    "/app/backend/tests/test_admin_auth.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Security/code-review) Use X-Forwarded-For (or starlette/uvicorn ProxyHeadersMiddleware behind --forwarded-allow-ips) so login_attempts identifier reflects the real client IP rather than ingress proxy IP. Today's two-IP fan-out lets an attacker silently get up to 2x the threshold before any one identifier locks, and could also lock out legitimate users sharing the proxy.",
+    "(Optional) Add data-testid to the 3 stat cards (e.g., admin-stat-residential, admin-stat-commercial, admin-stat-with-attachment) to align with the test plan.",
+    "(Optional) Migrate deprecated @app.on_event('startup'/'shutdown') to FastAPI lifespan handlers (DeprecationWarning visible at startup).",
+    "(Optional) /api/auth/logout is stateless — consider adding token revocation list / DB blocklist if true server-side logout is required."
+  ],
+  "critical_code_review_comments": [
+    "Brute-force protection limited by ingress: request.client.host returns proxy pod IP. Two pods seen during testing meant the lockout threshold effectively doubles per attacker (saw 9 401s before the 10th got 429). Recommended: trust X-Forwarded-For from configured ingress and use the leftmost public IP.",
+    "JWT secret loaded lazily in get_jwt_secret() — fine, but a missing JWT_SECRET only manifests at request time as 500. Consider failing fast at startup if not set.",
+    "POST /api/auth/logout is dependent on get_current_admin so an expired/missing token returns 401 instead of an idempotent 200. Acceptable but worth documenting (clients should treat 401 on logout as already-logged-out).",
+    "Email comparison lower-cases input but admin seed uses .lower() too — good. login_attempts uses raw email passed by user (already lower-cased) — consistent.",
+    "Legacy endpoints GET /api/leads and GET /api/commercial-leads now require Bearer — silent breaking change for any external integration; consider keeping them and returning 410 Gone or documenting in CHANGELOG."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_admin_auth.py (new — 26 auth/admin tests)",
+    "/app/backend/tests/backend_test.py (updated test_list_leads_sorted_no_id_leak to use Bearer now that endpoint is protected)",
+    "/app/backend/tests/test_commercial_leads.py (updated TestCommercialList to use Bearer for GET /api/commercial-leads)"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "100%"},
+  "test_credentials": "admin@accuteksolar.com / naA3T6l9fpmyqc2tuE1pnA2c (read from /app/memory/test_credentials.md)",
+  "seed_data_creation": "TEST_-prefixed leads/commercial leads/status checks created during pytest. Cleaned up bf_test_*/bf_lock_* entries from db.login_attempts after brute-force test. Admin login_attempts collection contains 0 rows for admin@accuteksolar.com (verified post-test).",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Run all backend tests: `pytest /app/backend/tests/ -v --tb=short`. 45 tests across 3 files. /app/backend/tests/test_admin_auth.py has fixtures admin_token + auth_headers (module scope). Brute-force lockout test was deliberately NOT added to the suite because triggering it requires ~10 sequential bad logins which takes ~10s and creates noise in DB. To test manually, hit POST /api/auth/login with bad password ~10 times — expect 9-10 of 401 then 429. The two-ingress-IP issue is documented above. Frontend testids: admin-login-page, admin-login-email, admin-login-password, admin-login-submit, admin-login-error, admin-leads-page, admin-search, admin-refresh, admin-logout, admin-tabs, admin-tab-commercial, admin-tab-residential, admin-table, admin-row-{i}, admin-download-{i}. nav-portal-link, footer-portal-link, nav-mobile-portal all have data-token + data-orgname. After logout, ProtectedRoute pushes to /admin?from=%2Fadmin%2Fleads — the logout function navigates and ProtectedRoute kicks in.",
+  "rca of the issue": "No new bugs found. Primary concern is brute-force lockout effectiveness behind K8s ingress. Reproduction: POST /api/auth/login with bad creds ~10 times in a row from the public URL; observe two distinct ingress IPs in backend logs (10.208.133.77, 10.208.133.78) and 9 x 401 before the first 429. Mitigation: read trusted proxy header (X-Forwarded-For) when computing identifier in /api/auth/login (server.py L279-281), or run uvicorn with --proxy-headers and starlette.middleware.proxy_headers.ProxyHeadersMiddleware so request.client.host reflects the real client."
+}
