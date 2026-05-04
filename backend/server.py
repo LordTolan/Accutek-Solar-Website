@@ -276,7 +276,13 @@ async def create_commercial_lead(
 async def auth_login(payload: LoginRequest, request: Request):
     email = payload.email.strip().lower()
     password = payload.password
-    ip = request.client.host if request.client else "unknown"
+    # Behind a reverse proxy (K8s ingress), request.client.host is the proxy pod IP.
+    # Use X-Forwarded-For (leftmost public IP) or X-Real-IP when available.
+    xff = request.headers.get("x-forwarded-for")
+    if xff:
+        ip = xff.split(",")[0].strip()
+    else:
+        ip = request.headers.get("x-real-ip") or (request.client.host if request.client else "unknown")
     identifier = f"{ip}:{email}"
     now = datetime.now(timezone.utc)
 

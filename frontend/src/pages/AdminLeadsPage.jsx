@@ -155,17 +155,20 @@ export default function AdminLeadsPage() {
         {stats && (
           <div className="grid grid-cols-3 gap-3 mb-6">
             <StatCard
+              testid="admin-stat-residential"
               label="Residential"
               value={stats.residential_leads}
               icon={<Home className="h-4 w-4" />}
             />
             <StatCard
+              testid="admin-stat-commercial"
               label="Commercial"
               value={stats.commercial_leads}
               icon={<Building2 className="h-4 w-4" />}
               highlight
             />
             <StatCard
+              testid="admin-stat-with-attachment"
               label="With attachment"
               value={stats.commercial_with_attachment}
               icon={<FileText className="h-4 w-4" />}
@@ -357,9 +360,10 @@ function Td({ children }) {
   return <td className="px-4 py-4 align-top">{children}</td>;
 }
 
-function StatCard({ label, value, icon, highlight }) {
+function StatCard({ label, value, icon, highlight, testid }) {
   return (
     <div
+      data-testid={testid}
       className={`border p-4 ${
         highlight ? "bg-forest text-bone border-forest" : "bg-bone border-line text-ink"
       }`}

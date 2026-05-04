@@ -80,3 +80,21 @@ Take accuteksolar.com (a 30-year-old family-owned solar company in Clinton, IN �
   - Service area quadrant map stacks single column on phones
   - Services jump-nav becomes horizontal scroll on phones (instead of wrapping)
 - Tested: 19/19 backend tests, 100% frontend verified on desktop + mobile 390×844
+
+## 2025-12-04 Update — Admin dashboard + Housecall customer portal + logo refinement
+- New icon-only "Two-Leaf Lightbulb" logo (wordmark programmatically cropped from source, 256×256 primary at 40KB)
+- Admin auth system (bcrypt + PyJWT, 8h Bearer token, bruteforce lockout with real-IP via X-Forwarded-For)
+  - `POST /api/auth/login`, `GET /api/auth/me`, `POST /api/auth/logout`
+  - Admin user seeded idempotently from ADMIN_EMAIL + ADMIN_PASSWORD env vars on startup
+- Admin dashboard at `/admin` (login) + `/admin/leads` (protected):
+  - 3 stat cards (residential / commercial / with-attachment)
+  - Searchable tabbed table (Commercial / Residential)
+  - Per-row site-plan download streamed from base64 store
+  - Logout clears localStorage token
+  - Protected routes redirect unauthenticated users to login with `?from=` for post-login return
+- Housecall Pro Customer Portal button in:
+  - Main nav (desktop + mobile), styled as amber/forest pill
+  - Footer "Customer Tools" section (with Calculators + Schedule service)
+- Legacy GET /api/leads and GET /api/commercial-leads now require Bearer auth (were previously public)
+- Tested: 45/45 backend + 100% frontend pass
+- Credentials in `/app/memory/test_credentials.md`
