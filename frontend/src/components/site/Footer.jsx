@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { COMPANY, NAV_LINKS, CUSTOMER_PORTAL } from "@/lib/site-data";
 import { LogIn, Calculator, CalendarClock } from "lucide-react";
+import BookOnlineButton from "@/components/site/BookOnlineButton";
 
 export default function Footer() {
   return (

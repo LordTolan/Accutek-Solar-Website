@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { COMPANY, IMAGES } from "@/lib/site-data";
 import { ArrowRight, MapPin, Calendar, Wrench } from "lucide-react";
+import BookOnlineButton from "@/components/site/BookOnlineButton";
 
 export default function Hero() {
   return (
@@ -64,10 +65,16 @@ export default function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
+              <BookOnlineButton
+                size="lg"
+                variant="primary"
+                testid="hero-cta-book"
+                label="Book online"
+              />
               <Link
                 to="/contact"
                 data-testid="hero-cta-quote"
-                className="group inline-flex items-center gap-2 bg-amber px-6 py-4 text-ink font-medium rounded-sm hover:bg-bone hover:text-ink transition-colors"
+                className="group inline-flex items-center gap-2 border border-bone/40 px-6 py-4 text-bone hover:bg-bone hover:text-ink rounded-sm transition-colors text-sm font-medium"
               >
                 <Calendar className="h-4 w-4" />
                 Schedule a service call
@@ -76,7 +83,7 @@ export default function Hero() {
               <Link
                 to="/services"
                 data-testid="hero-cta-services"
-                className="inline-flex items-center gap-2 border border-bone/40 px-6 py-4 text-bone hover:bg-bone hover:text-ink rounded-sm transition-colors"
+                className="inline-flex items-center gap-2 px-2 py-4 text-bone/80 hover:text-amber transition-colors text-sm"
               >
                 <Wrench className="h-4 w-4" />
                 Explore services

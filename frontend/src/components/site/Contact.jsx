@@ -44,11 +44,16 @@ export default function Contact() {
       toast.error("Please add your name and email so we can reach you.");
       return;
     }
+    if (!form.consent_communications) {
+      toast.error("Please review and accept the communication consent before submitting.");
+      return;
+    }
     setSubmitting(true);
     try {
       const payload = {
         ...form,
         monthly_bill: form.monthly_bill ? Number(form.monthly_bill) : null,
+        consent_text: CONSENT_TEXT,
         source: "website-contact",
       };
       await axios.post(`${API}/leads`, payload);
@@ -56,9 +61,14 @@ export default function Contact() {
       setForm(initial);
       toast.success("Got it. We'll reach out within one business day.");
     } catch (err) {
-      toast.error("Couldn't submit — please call us directly.");
+      const detail = err?.response?.data?.detail;
+      const msg =
+        typeof detail === "string"
+          ? detail
+          : "Couldn't submit — please call us directly.";
+      toast.error(msg);
       // eslint-disable-next-line no-console
-      console.error(err);
+      console.error("Contact form error:", err);
     } finally {
       setSubmitting(false);
     }
