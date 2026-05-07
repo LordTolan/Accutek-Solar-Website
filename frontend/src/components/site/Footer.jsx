@@ -88,6 +88,14 @@ export default function Footer() {
             <div className="label-tag text-bone/40 mb-4">Customer Tools</div>
             <ul className="space-y-3 text-sm">
               <li>
+                <BookOnlineButton
+                  variant="primary"
+                  size="sm"
+                  testid="footer-book-online"
+                  label="Book online"
+                />
+              </li>
+              <li>
                 <a
                   href={CUSTOMER_PORTAL.url}
                   target="_blank"
