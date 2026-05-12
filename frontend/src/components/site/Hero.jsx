@@ -9,115 +9,108 @@ export default function Hero() {
     <section
       id="top"
       data-testid="hero-section"
-      className="relative min-h-[100svh] w-full overflow-hidden bg-forest text-bone"
+      className="relative min-h-[100svh] w-full overflow-hidden bg-[#0F1F12] text-[#F7F4F0]"
     >
       {/* Background image */}
       <div className="absolute inset-0">
         <img
           src={IMAGES.hero}
-          alt="Solar home installation at golden hour"
+          alt="Solar home installation at golden hour - Accutek Solar"
           className="h-full w-full object-cover"
           loading="eager"
         />
-        <div className="absolute inset-0 bg-forest/55" />
-        <div className="absolute inset-0 bg-gradient-to-r from-forest/85 via-forest/55 to-forest/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-forest/40 via-transparent to-forest/90" />
+        <div className="absolute inset-0 bg-[#0F1F12]/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0F1F12]/80 via-[#0F1F12]/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-[#0F1F12]/90" />
       </div>
 
-      {/* Top label bar */}
+      {/* Top label bar - Yellow Light inspired trust bar */}
       <div className="relative z-10 pt-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-12 flex items-center justify-end gap-6">
-          <span className="hidden sm:inline-flex label-tag text-bone/80 items-center gap-2 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-            <span className="h-1.5 w-1.5 bg-amber animate-sun-pulse rounded-full" />
-            Family-Owned · Est. 1994
-          </span>
-          <span className="hidden md:inline-flex label-tag text-bone/80 items-center gap-1.5 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-            <MapPin className="h-3 w-3" /> Clinton, Indiana
-          </span>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-12 pb-32 lg:pt-20 lg:pb-40">
-        <div className="grid grid-cols-12 gap-6">
-          <div className="col-span-12 lg:col-span-10">
-            <p data-testid="hero-eyebrow" className="label-tag text-amber mb-6 [text-shadow:_0_1px_8px_rgba(0,0,0,0.5)]">
-              Solar & Storage · Backup Power · Facility Automation · Diagnostics
-            </p>
-            <h1
-              data-testid="hero-title"
-              className="font-display text-[2.7rem] leading-[0.95] sm:text-6xl lg:text-8xl font-extrabold tracking-tighter [text-shadow:_0_2px_24px_rgba(0,0,0,0.35)]"
-            >
-              30 years of
-              <br />
-              <span className="italic font-semibold">electrical expertise.</span>
-              <br />
-              <span className="text-amber">Indiana &amp; Illinois.</span>
-            </h1>
-            <p
-              data-testid="hero-subtitle"
-              className="mt-6 sm:mt-8 max-w-2xl text-base sm:text-lg lg:text-xl text-bone leading-relaxed [text-shadow:_0_1px_12px_rgba(0,0,0,0.4)]"
-            >
-              Custom solar PV and storage, authorized standby generator
-              installation, commercial facility automation and advanced
-              diagnostic services. Family-owned since 1994 — residential and
-              commercial clients across the IN/IL corridor.
-            </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <BookOnlineButton
-                size="lg"
-                variant="primary"
-                testid="hero-cta-book"
-                label="Book online"
-              />
-              <Link
-                to="/contact"
-                data-testid="hero-cta-quote"
-                className="group inline-flex items-center gap-2 border border-bone/40 px-6 py-4 text-bone hover:bg-bone hover:text-ink rounded-sm transition-colors text-sm font-medium"
-              >
-                <Calendar className="h-4 w-4" />
-                Schedule a service call
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/services"
-                data-testid="hero-cta-services"
-                className="inline-flex items-center gap-2 px-2 py-4 text-bone/80 hover:text-amber transition-colors text-sm"
-              >
-                <Wrench className="h-4 w-4" />
-                Explore services
-              </Link>
-              <a
-                href={`tel:${COMPANY.phoneRaw}`}
-                data-testid="hero-phone"
-                className="inline-flex items-center gap-2 px-2 py-4 font-mono text-sm text-bone/80 hover:text-amber transition-colors"
-              >
-                or call {COMPANY.phone}
-              </a>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10 h-12 flex items-center justify-between gap-6">
+          <div className="hidden sm:flex items-center gap-3">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs tracking-[0.15em] text-[#F7F4F0]/90">
+              <span className="h-1.5 w-1.5 bg-[#E19233] animate-sun-pulse rounded-full" />
+              FAMILY-OWNED SINCE 1994
+            </span>
+          </div>
+          <div className="hidden md:flex items-center gap-2 text-xs text-[#F7F4F0]/80">
+            <MapPin className="h-3.5 w-3.5" /> Serving Indiana & Illinois
           </div>
         </div>
+      </div>
 
-        {/* Stats strip */}
-        <div className="mt-16 sm:mt-20 lg:mt-28 grid grid-cols-2 lg:grid-cols-4 gap-px bg-bone/15 border border-bone/15">
-          {[
-            { k: "30", l: "Years in business" },
-            { k: "17", l: "Counties served IN+IL" },
-            { k: "Res.+Com.", l: "Residential & commercial" },
-            { k: "100%", l: "In-house installs" },
-          ].map((s, i) => (
-            <div
-              key={i}
-              data-testid={`hero-stat-${i}`}
-              className="bg-forest/95 px-4 sm:px-6 py-6 sm:py-8 backdrop-blur-sm"
+      {/* Main content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 pt-10 pb-28 lg:pt-16 lg:pb-36">
+        <div className="max-w-4xl">
+          <p className="uppercase tracking-[0.2em] text-[#E19233] text-sm mb-4 font-medium">
+            SOLAR • STORAGE • BACKUP POWER • AUTOMATION
+          </p>
+
+          <h1 className="font-display text-[2.85rem] leading-[0.92] sm:text-6xl lg:text-[5.25rem] font-extrabold tracking-[-0.025em] mb-6">
+            Reliable solar.<br />
+            Real savings.<br />
+            <span className="text-[#E19233]">Energy independence.</span>
+          </h1>
+
+          <p className="max-w-2xl text-lg sm:text-xl text-[#F7F4F0]/90 leading-relaxed mb-8">
+            Family-owned for over 30 years. Custom solar PV, battery storage, and standby generator systems for homes and businesses across Indiana and Illinois. Quality workmanship you can trust for decades.
+          </p>
+
+          {/* Yellow Light style guarantee line */}
+          <div className="inline-flex items-center gap-2 mb-10 px-4 py-2 rounded-full bg-white/10 text-sm text-[#F7F4F0]/90">
+            <span className="font-medium text-[#E19233]">We stand behind our work.</span> 
+            Quality installs • Long-term performance • Local support
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <BookOnlineButton
+              size="lg"
+              variant="primary"
+              testid="hero-cta-book"
+              label="Book a free consultation"
+            />
+            <Link
+              to="/contact"
+              data-testid="hero-cta-quote"
+              className="group inline-flex items-center justify-center gap-2 border border-white/40 hover:bg-white hover:text-[#0F1F12] px-8 py-4 rounded-sm text-sm font-medium transition-all active:scale-[0.985]"
             >
-              <div className="font-mono text-xl sm:text-2xl lg:text-4xl font-bold text-amber tracking-tight break-words">
-                {s.k}
+              Get a custom quote
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition" />
+            </Link>
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 px-4 py-4 text-[#F7F4F0]/80 hover:text-[#E19233] text-sm font-medium transition-colors"
+            >
+              See our services
+            </Link>
+          </div>
+
+          <div className="mt-4 text-xs text-[#F7F4F0]/70">
+            or call <a href={`tel:${COMPANY.phoneRaw}`} className="font-mono hover:text-[#E19233] underline-offset-2 hover:underline">{COMPANY.phone}</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Trust / Stats strip - YellowLite inspired */}
+      <div className="relative z-10 border-t border-white/10 bg-[#0F1F12]/80 backdrop-blur">
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px divide-x divide-white/10">
+            {[ 
+              { number: "30+", label: "Years of expertise" },
+              { number: "17", label: "Counties served" },
+              { number: "100%", label: "In-house installs" },
+              { number: "Family", label: "Owned & operated" },
+            ].map((stat, index) => (
+              <div key={index} className="py-6 sm:py-8 text-center">
+                <div className="font-mono text-3xl sm:text-4xl font-semibold text-[#E19233] tracking-tighter">
+                  {stat.number}
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-[0.15em] text-[#F7F4F0]/70">
+                  {stat.label}
+                </div>
               </div>
-              <div className="mt-2 label-tag text-bone/60">{s.l}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
