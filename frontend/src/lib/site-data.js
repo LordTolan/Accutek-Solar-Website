@@ -26,6 +26,8 @@ export const COMPANY = {
     full: "9797 S Rangeline Rd. Clinton, IN 47842",
   },
   hours: "Mon–Fri 8:00 AM – 5:00 PM EST",
+  website: "www.AccutekSolar.com",
+  websiteUrl: "https://www.accuteksolar.com",
   logos: {
     horizontal: "/brand/logo_horizontal.png",
     icon: "/brand/logo_icon_only.png",

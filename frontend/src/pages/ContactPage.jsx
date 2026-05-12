@@ -76,7 +76,7 @@ export default function ContactPage() {
           <Info icon={MapPin} label="Visit" value={COMPANY.address.full} />
           <Info icon={Clock} label="Hours" value={COMPANY.hours} />
           <Info icon={Phone} label="Phone" value={COMPANY.phone} />
-          <Info icon={Mail} label="Email" value={COMPANY.email} />
+          <Info icon={Mail} label="Web" value={COMPANY.website} />
         </div>
       </section>
 

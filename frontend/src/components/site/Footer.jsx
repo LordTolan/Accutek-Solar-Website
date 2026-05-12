@@ -46,6 +46,15 @@ export default function Footer() {
               {COMPANY.address.city}, {COMPANY.address.state} {COMPANY.address.zip}
             </p>
             <p className="text-xs font-mono text-bone/50 mt-3">{COMPANY.hours}</p>
+            <a
+              href={COMPANY.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="footer-website"
+              className="block mt-3 font-mono text-xs text-amber hover:text-bone transition-colors break-all"
+            >
+              {COMPANY.website}
+            </a>
           </div>
 
           <div className="col-span-6 md:col-span-2">

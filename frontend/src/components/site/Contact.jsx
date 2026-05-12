@@ -25,10 +25,16 @@ const initial = {
   email: "",
   phone: "",
   address: "",
-  interest: "general",
+  interest: "bill_savings",
   monthly_bill: "",
   message: "",
   consent_communications: false,
+  // Qualification fields (per Accutek ops manual)
+  owns_home_5yr_plus: false,
+  services_solar_panels: false,
+  services_battery_backup: false,
+  services_electrical_panel: false,
+  timeline: "",
 };
 
 export default function Contact() {
