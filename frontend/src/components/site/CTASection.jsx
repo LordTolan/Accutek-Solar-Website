@@ -4,71 +4,55 @@ import { COMPANY } from "@/lib/site-data";
 import { ArrowRight, Phone, CalendarClock } from "lucide-react";
 
 /**
- * Reusable conversion-focused CTA band.
+ * Conversion CTA - YellowLite inspired clean and trustworthy.
  */
 export default function CTASection({
-  eyebrow = "— Ready when you are",
-  title = "Schedule a service call.",
-  subtitle = "Free residential estimates. Commercial site visits by appointment. We respond within one business day across Indiana and Illinois.",
-  primaryLabel = "Schedule Service",
+  eyebrow = "LET'S GET STARTED",
+  title = "Ready to own your energy?",
+  subtitle = "Free consultations. Custom proposals. Local family-owned support across Indiana and Illinois.",
+  primaryLabel = "Get a free consultation",
   primaryTo = "/contact",
-  variant = "forest",
+  variant = "dark",
   testid = "cta-section",
 }) {
-  const isForest = variant === "forest";
+  const isDark = variant === "dark";
   return (
     <section
       data-testid={testid}
-      className={`relative py-20 lg:py-28 ${
-        isForest ? "bg-forest text-bone" : "bg-bone2 text-ink"
-      }`}
+      className={`py-20 lg:py-24 ${isDark ? "bg-[#0F1F12] text-[#F7F4F0]" : "bg-[#F7F4F0] text-[#0F1F12]"}`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 items-end">
-          <div className="col-span-12 lg:col-span-7">
-            <p
-              className={`label-tag mb-4 ${
-                isForest ? "text-amber" : "text-amberDark"
-              }`}
-            >
-              {eyebrow}
-            </p>
-            <h2 className="font-display text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[1.05]">
-              {title}
-            </h2>
-            <p
-              className={`mt-4 max-w-2xl text-base lg:text-lg leading-relaxed ${
-                isForest ? "text-bone/80" : "text-ink2"
-              }`}
-            >
-              {subtitle}
-            </p>
-          </div>
-          <div className="col-span-12 lg:col-span-5 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 lg:items-end">
+        <div className="max-w-3xl">
+          <p className={`uppercase tracking-[0.2em] text-sm mb-4 font-medium ${isDark ? "text-[#E19233]" : "text-[#E19233]"}`}>
+            {eyebrow}
+          </p>
+          <h2 className="font-display text-4xl lg:text-5xl font-extrabold tracking-tighter leading-none mb-6">
+            {title}
+          </h2>
+          <p className={`text-lg max-w-2xl leading-relaxed mb-10 ${isDark ? "text-[#F7F4F0]/85" : "text-[#4A5650]"}`}>
+            {subtitle}
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link
               to={primaryTo}
-              data-testid={`${testid}-primary`}
-              className={`group inline-flex items-center justify-center gap-2 px-6 py-4 rounded-sm font-medium text-sm transition-colors ${
-                isForest
-                  ? "bg-amber text-ink hover:bg-bone"
-                  : "bg-forest text-bone hover:bg-amber hover:text-ink"
-              }`}
+              className={`group inline-flex items-center justify-center gap-3 px-8 py-4 rounded-sm font-medium text-sm transition-all active:scale-[0.985] ${isDark 
+                ? "bg-[#E19233] text-[#0F1F12] hover:bg-white" 
+                : "bg-[#0F1F12] text-white hover:bg-[#E19233] hover:text-[#0F1F12]"}`}
             >
               <CalendarClock className="h-4 w-4" />
               {primaryLabel}
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
             </Link>
+
             <a
               href={`tel:${COMPANY.phoneRaw}`}
-              data-testid={`${testid}-phone`}
-              className={`inline-flex items-center justify-center gap-2 px-6 py-4 rounded-sm font-mono text-sm transition-colors border ${
-                isForest
-                  ? "border-bone/30 text-bone hover:bg-bone hover:text-ink"
-                  : "border-line text-ink hover:bg-ink hover:text-bone"
-              }`}
+              className={`inline-flex items-center justify-center gap-3 px-8 py-4 rounded-sm font-mono text-sm border transition-all ${isDark 
+                ? "border-white/30 text-[#F7F4F0] hover:bg-white hover:text-[#0F1F12]" 
+                : "border-[#0F1F12] text-[#0F1F12] hover:bg-[#0F1F12] hover:text-white"}`}
             >
               <Phone className="h-4 w-4" />
-              {COMPANY.phone}
+              Call {COMPANY.phone}
             </a>
           </div>
         </div>
