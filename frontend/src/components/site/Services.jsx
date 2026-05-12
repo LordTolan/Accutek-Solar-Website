@@ -4,101 +4,77 @@ import { SERVICES, IMAGES } from "@/lib/site-data";
 import { Check, ArrowRight } from "lucide-react";
 
 /**
- * Compact services preview (used on Home).
- * Full breakdown lives on /services.
+ * Services preview - YellowLite inspired clean cards with clear benefits.
  */
 export default function Services({ compact = false }) {
   return (
     <section
       id="services"
       data-testid="services-section"
-      className="relative bg-bone py-24 lg:py-32"
+      className="relative bg-white py-20 lg:py-28"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid grid-cols-12 gap-6 mb-12">
-          <div className="col-span-12 lg:col-span-6">
-            <p className="label-tag text-amberDark mb-4">— What we do</p>
-            <h2 className="font-display text-4xl lg:text-6xl font-extrabold tracking-tighter text-ink leading-[0.95]">
-              Four disciplines.
-              <br />
-              <span className="italic font-semibold">One contractor.</span>
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+          <div>
+            <p className="uppercase tracking-[0.2em] text-[#E19233] text-sm mb-3 font-medium">WHAT WE DELIVER</p>
+            <h2 className="font-display text-4xl lg:text-5xl font-extrabold tracking-tighter text-[#0F1F12] leading-none">
+              Solar. Storage.<br />Backup power.<br />Done right.
             </h2>
           </div>
-          <div className="col-span-12 lg:col-span-5 lg:col-start-8 flex items-end">
-            <p className="text-lg text-ink2 leading-relaxed">
-              Solar &amp; storage, backup power, facility automation and
-              advanced diagnostics — engineered, installed, and maintained by
-              the same in-house crew. Every project, residential or commercial.
-            </p>
-          </div>
+          <p className="max-w-md text-lg text-[#4A5650]">
+            One family-owned team. Every project engineered, installed, and supported in-house across Indiana and Illinois.
+          </p>
         </div>
 
-        <div className="grid grid-cols-12 gap-6">
-          {SERVICES.map((s) => {
-            const Icon = s.icon;
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
             return (
               <Link
-                to={`/services#${s.id}`}
-                key={s.id}
-                data-testid={`service-card-${s.id}`}
-                className="relative col-span-12 md:col-span-6 lg:col-span-3 bg-bone2 border border-line p-8 hover:-translate-y-1 hover:border-amber transition-all duration-300 group"
+                to={`/services#${service.id}`}
+                key={service.id}
+                data-testid={`service-card-${service.id}`}
+                className="group flex flex-col bg-[#F7F4F0] border border-[#D8D3CC] p-8 hover:border-[#E19233] hover:-translate-y-0.5 transition-all duration-200 rounded-sm"
               >
-                <div className="flex items-baseline justify-between mb-6">
-                  <span className="font-mono text-xs text-ink2/60">{s.code}</span>
-                  <Icon className="h-5 w-5 text-amberDark group-hover:text-forest transition-colors" />
+                <div className="flex items-center justify-between mb-6">
+                  <div className="font-mono text-xs tracking-[0.15em] text-[#4A5650]/70">{service.code}</div>
+                  <Icon className="h-6 w-6 text-[#E19233] group-hover:scale-110 transition-transform" />
                 </div>
-                <h3 className="font-display text-xl lg:text-2xl font-extrabold text-ink mb-3 tracking-tight leading-tight">
-                  {s.title}
+
+                <h3 className="font-display text-2xl font-extrabold tracking-tight text-[#0F1F12] mb-4">
+                  {service.title}
                 </h3>
-                <p className="text-sm text-ink2 leading-relaxed mb-6">
-                  {s.summary}
+
+                <p className="text-[#4A5650] leading-relaxed mb-6 flex-1">
+                  {service.summary}
                 </p>
-                {!compact && (
-                  <ul className="space-y-2 border-t border-line pt-6">
-                    {s.bullets.slice(0, 3).map((b, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-ink">
-                        <Check className="h-3.5 w-3.5 mt-1 text-amberDark shrink-0" />
-                        <span>{b}</span>
+
+                {!compact && service.bullets && (
+                  <ul className="space-y-2.5 mb-8 text-sm text-[#0F1F12]">
+                    {service.bullets.slice(0, 3).map((bullet, idx) => (
+                      <li key={idx} className="flex items-start gap-2.5">
+                        <Check className="h-4 w-4 mt-0.5 text-[#E19233] shrink-0" />
+                        <span>{bullet}</span>
                       </li>
                     ))}
                   </ul>
                 )}
-                <div className="mt-6 inline-flex items-center gap-2 text-xs font-mono text-amberDark group-hover:text-forest transition-colors">
-                  Learn more
-                  <ArrowRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
+
+                <div className="mt-auto inline-flex items-center text-sm font-medium text-[#E19233] group-hover:gap-2 transition-all">
+                  Learn more <ArrowRight className="h-4 w-4 ml-1.5 group-hover:translate-x-1 transition" />
                 </div>
               </Link>
             );
           })}
         </div>
 
-        {!compact && (
-          <div className="mt-16 grid grid-cols-12 gap-6">
-            <div className="col-span-12 md:col-span-7 relative aspect-[16/10] overflow-hidden border border-line">
-              <img
-                src={IMAGES.roofPanels}
-                alt="Roof solar panel installation"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-            <div className="col-span-12 md:col-span-5 relative aspect-[16/10] overflow-hidden border border-line bg-forest">
-              <img
-                src={IMAGES.battery}
-                alt="Battery backup detail"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            </div>
-          </div>
-        )}
-
-        <div className="mt-12 flex justify-center">
+        <div className="mt-14 flex justify-center">
           <Link
             to="/services"
-            data-testid="services-view-all"
-            className="group inline-flex items-center gap-2 border border-forest text-forest px-6 py-3 text-sm font-medium hover:bg-forest hover:text-bone transition-colors rounded-sm"
+            className="inline-flex items-center gap-2 border border-[#0F1F12] px-8 py-3.5 text-sm font-medium rounded-sm hover:bg-[#0F1F12] hover:text-white transition-colors"
           >
-            View full services
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            Explore all services & solutions
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
