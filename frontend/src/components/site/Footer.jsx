@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { COMPANY, NAV_LINKS, CUSTOMER_PORTAL } from "@/lib/site-data";
 import { LogIn, Calculator, CalendarClock } from "lucide-react";
 import BookOnlineButton from "@/components/site/BookOnlineButton";
+import BulbLogo from "@/components/site/BulbLogo";
 
 export default function Footer() {
   return (
@@ -14,10 +15,9 @@ export default function Footer() {
         <div className="grid grid-cols-12 gap-6 pb-10 border-b border-bone/10">
           <div className="col-span-12 md:col-span-4">
             <div className="flex items-center gap-3 text-bone">
-              <img
-                src={COMPANY.logos.icon}
-                alt="Accutek Solar"
-                className="h-12 w-12 object-contain bg-bone rounded-sm p-1"
+              <BulbLogo
+                className="h-12 w-12 bg-bone rounded-sm p-1"
+                variant="color"
               />
               <div>
                 <div className="font-display text-xl font-extrabold tracking-tight">

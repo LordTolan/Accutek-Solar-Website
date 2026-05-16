@@ -162,3 +162,29 @@ body {
         gap: inherit;
     }
 }
+
+/* ─────────── Accutek bulb logo animation ─────────── */
+@keyframes accutek-leaf-sway-right {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-3deg); }
+}
+@keyframes accutek-leaf-sway-left {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(3deg); }
+}
+@keyframes accutek-bulb-glow {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50%      { opacity: 1;    transform: scale(1.06); }
+}
+.accutek-bulb-animate .leaf-right { animation: accutek-leaf-sway-right 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
+.accutek-bulb-animate .leaf-left  { animation: accutek-leaf-sway-left  5.2s ease-in-out infinite; transform-box: fill-box; transform-origin: bottom center; }
+.accutek-bulb-animate .bulb-glow  { animation: accutek-bulb-glow 3.6s ease-in-out infinite; transform-origin: 100px 92px; transform-box: view-box; }
+.accutek-bulb-animate:hover .leaf-right { animation-duration: 1.6s; }
+.accutek-bulb-animate:hover .leaf-left  { animation-duration: 1.6s; }
+.accutek-bulb-animate:hover .bulb-glow  { animation-duration: 1.4s; }
+@media (prefers-reduced-motion: reduce) {
+    .accutek-bulb-animate .leaf-right,
+    .accutek-bulb-animate .leaf-left,
+    .accutek-bulb-animate .bulb-glow { animation: none; }
+}
+

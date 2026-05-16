@@ -1,4 +1,6 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 import {
   Tabs,
   TabsList,
@@ -23,7 +25,9 @@ import {
   Zap,
   TrendingUp,
   ArrowRight,
+  Paperclip,
 } from "lucide-react";
+import { saveCalcResult } from "@/lib/calc-store";
 
 /* ─────────────── 1. Solar Panel Sizing ─────────────── */
 function SolarCalc() {
@@ -107,6 +111,13 @@ function SolarCalc() {
           full
         />
       </Results>
+      <AttachToContact
+        toolId="solar"
+        label="Solar Panel Sizing"
+        summary={`${out.systemKw.toFixed(2)} kW system, ${out.panels} panels — est. $${out.lowCost.toLocaleString(undefined,{maximumFractionDigits:0})}–$${out.highCost.toLocaleString(undefined,{maximumFractionDigits:0})}`}
+        raw={{ monthly_bill: bill, rate, sun_hours: sunHours, efficiency, ...out }}
+        testid="solar-attach"
+      />
     </CalcShell>
   );
 }
@@ -218,6 +229,13 @@ function BatteryCalc() {
           testid="battery-out-compare"
         />
       </Results>
+      <AttachToContact
+        toolId="battery"
+        label="Battery Backup Sizing"
+        summary={`${out.totalKwh.toFixed(1)} kWh battery (${out.usableKwh.toFixed(2)} kWh usable, ${hours}h runtime)`}
+        raw={{ appliances: Object.keys(selected).filter((k) => selected[k]), hours, reserve, ...out }}
+        testid="battery-attach"
+      />
     </CalcShell>
   );
 }
@@ -333,6 +351,13 @@ function MountCalc() {
           testid="mount-out-why"
         />
       </Results>
+      <AttachToContact
+        toolId="mount"
+        label="Mount Type Recommendation"
+        summary={`${out.verdict === "roof" ? "Roof Mount" : "Ground Mount"} (${out.confidence}% confidence)`}
+        raw={{ roof_age: roofAge, roof_shade: roofShade, roof_type: roofType, yard_space: yardSpace, ...out }}
+        testid="mount-attach"
+      />
     </CalcShell>
   );
 }
@@ -407,6 +432,13 @@ function GeneratorCalc() {
         <Result label="Calculated load" value={`${out.kw.toFixed(0)} kW`} testid="gen-out-kw" />
         <Result label="Installed price range" value={out.range} full testid="gen-out-price" />
       </Results>
+      <AttachToContact
+        toolId="generator"
+        label="Kohler Generator Sizing"
+        summary={`${out.tier} Kohler tier (~${out.kw.toFixed(0)} kW load) — ${out.range}`}
+        raw={{ coverage, sqft, has_ac: hasAC, has_well: hasWell, has_ev: hasEV, ...out }}
+        testid="generator-attach"
+      />
     </CalcShell>
   );
 }
@@ -502,7 +534,38 @@ function ROICalc() {
           testid="roi-out-lifetime"
         />
       </Results>
+      <AttachToContact
+        toolId="roi"
+        label="ROI & Payback"
+        summary={`Payback ${out.payback ? out.payback.toFixed(1) + " yrs" : ">25 yrs"}, 25-yr savings $${out.savings25.toLocaleString(undefined,{maximumFractionDigits:0})}, lifetime net $${out.lifetimeNet.toLocaleString(undefined,{maximumFractionDigits:0})}`}
+        raw={{ system_cost: systemCost, monthly_bill: monthlyBill, escalation, tax_credit: taxCredit, ...out }}
+        testid="roi-attach"
+      />
     </CalcShell>
+  );
+}
+
+/* ─────────────── Attach-to-contact CTA ─────────────── */
+function AttachToContact({ toolId, label, summary, raw, testid }) {
+  const navigate = useNavigate();
+  const handle = () => {
+    saveCalcResult(toolId, label, summary, raw);
+    toast.success("Estimate attached. We'll include it with your request.");
+    navigate("/contact");
+  };
+  return (
+    <div className="mt-5 flex items-center justify-end">
+      <button
+        type="button"
+        onClick={handle}
+        data-testid={testid}
+        className="group inline-flex items-center gap-2 bg-forest text-bone px-5 py-2.5 rounded-sm hover:bg-amber hover:text-ink transition-colors text-xs font-mono uppercase tracking-wider"
+      >
+        <Paperclip className="h-3.5 w-3.5" />
+        Attach &amp; request estimate
+        <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
+      </button>
+    </div>
   );
 }
 

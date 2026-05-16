@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { COMPANY, NAV_LINKS, CUSTOMER_PORTAL } from "@/lib/site-data";
 import { Phone, Menu, X, LogIn } from "lucide-react";
+import BulbLogo from "@/components/site/BulbLogo";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -36,12 +37,9 @@ export default function Nav() {
             overHero ? "text-bone" : "text-ink"
           } hover:opacity-80`}
         >
-          <img
-            src={COMPANY.logos.icon}
-            alt="Accutek Solar"
-            className={`h-10 w-10 object-contain ${
-              overHero ? "bg-bone rounded-sm p-0.5" : ""
-            }`}
+          <BulbLogo
+            className={`h-10 w-10 ${overHero ? "bg-bone/95 rounded-sm p-1" : ""}`}
+            variant="color"
           />
           <span className="font-display text-lg font-extrabold tracking-tight">
             Accutek{" "}

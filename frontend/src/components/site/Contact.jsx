@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { COMPANY } from "@/lib/site-data";
+import { readAll, clearAll, removeOne } from "@/lib/calc-store";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2, ShieldCheck } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2, ShieldCheck, Paperclip, X as XIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
@@ -41,6 +42,18 @@ export default function Contact() {
   const [form, setForm] = useState(initial);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [calcResults, setCalcResults] = useState({});
+
+  useEffect(() => {
+    const sync = () => setCalcResults(readAll());
+    sync();
+    window.addEventListener("accutek-calc-updated", sync);
+    window.addEventListener("storage", sync);
+    return () => {
+      window.removeEventListener("accutek-calc-updated", sync);
+      window.removeEventListener("storage", sync);
+    };
+  }, []);
 
   const update = (k, v) => setForm((s) => ({ ...s, [k]: v }));
 
@@ -56,15 +69,18 @@ export default function Contact() {
     }
     setSubmitting(true);
     try {
+      const calcResultsList = Object.values(calcResults);
       const payload = {
         ...form,
         monthly_bill: form.monthly_bill ? Number(form.monthly_bill) : null,
         consent_text: CONSENT_TEXT,
         source: "website-contact",
+        calculator_results: calcResultsList.length > 0 ? calcResultsList : null,
       };
       await axios.post(`${API}/leads`, payload);
       setSuccess(true);
       setForm(initial);
+      clearAll();
       toast.success("Got it. We'll reach out within one business day.");
     } catch (err) {
       const detail = err?.response?.data?.detail;
@@ -323,6 +339,58 @@ export default function Contact() {
                     </div>
                   </div>
                 </div>
+
+                {/* Attached calculator results (from /tools) */}
+                {Object.keys(calcResults).length > 0 && (
+                  <div
+                    data-testid="contact-calc-results"
+                    className="mt-6 border border-forest/30 bg-forest/5 p-5"
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <Paperclip className="h-4 w-4 text-forest" />
+                        <span className="label-tag text-forest">
+                          — Calculator estimates attached ({Object.keys(calcResults).length})
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => clearAll()}
+                        data-testid="contact-calc-clear-all"
+                        className="text-xs font-mono uppercase tracking-wider text-ink2 hover:text-amberDark transition-colors underline-offset-4 hover:underline"
+                      >
+                        Clear all
+                      </button>
+                    </div>
+                    <ul className="space-y-2">
+                      {Object.values(calcResults).map((r) => (
+                        <li
+                          key={r.tool}
+                          data-testid={`contact-calc-row-${r.tool}`}
+                          className="flex items-start justify-between gap-3 bg-bone border border-line px-3 py-2"
+                        >
+                          <div className="min-w-0">
+                            <div className="text-xs font-mono uppercase tracking-wider text-amberDark">
+                              {r.label}
+                            </div>
+                            <div className="text-sm text-ink mt-0.5 leading-snug">
+                              {r.summary}
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => removeOne(r.tool)}
+                            data-testid={`contact-calc-remove-${r.tool}`}
+                            aria-label={`Remove ${r.label}`}
+                            className="shrink-0 inline-flex items-center justify-center h-7 w-7 text-ink2 hover:text-amberDark hover:bg-amber/10 rounded-sm transition-colors"
+                          >
+                            <XIcon className="h-3.5 w-3.5" />
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* Consent block — highlighted */}
                 <div

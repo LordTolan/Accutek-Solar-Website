@@ -109,7 +109,7 @@ class LeadCreate(BaseModel):
     interest: str = "general"
     message: Optional[str] = None
     monthly_bill: Optional[float] = None
-    calculator_results: Optional[Dict[str, Any]] = None
+    calculator_results: Optional[Any] = None
     source: Optional[str] = "website"
     consent_communications: bool = False
     consent_text: Optional[str] = None
@@ -131,7 +131,7 @@ class Lead(BaseModel):
     interest: str = "general"
     message: Optional[str] = None
     monthly_bill: Optional[float] = None
-    calculator_results: Optional[Dict[str, Any]] = None
+    calculator_results: Optional[Any] = None
     source: Optional[str] = "website"
     consent_communications: bool = False
     consent_text: Optional[str] = None

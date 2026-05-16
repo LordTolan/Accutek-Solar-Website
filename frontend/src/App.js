@@ -12,6 +12,7 @@ import ToolsPage from "@/pages/ToolsPage";
 import CommercialPage from "@/pages/CommercialPage";
 import AdminLoginPage from "@/pages/AdminLoginPage";
 import AdminLeadsPage from "@/pages/AdminLeadsPage";
+import NotFoundPage from "@/pages/NotFoundPage";
 import Nav from "@/components/site/Nav";
 import Footer from "@/components/site/Footer";
 import ProtectedRoute from "@/components/site/ProtectedRoute";
@@ -71,7 +72,7 @@ function AppRoutes() {
             }
           />
 
-          <Route path="*" element={<HomePage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
     </>
