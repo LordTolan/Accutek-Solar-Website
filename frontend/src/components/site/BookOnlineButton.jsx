@@ -1,10 +1,18 @@
 import React from "react";
 import { CalendarCheck } from "lucide-react";
 
+const HCP_TOKEN = "a610e2efa0494a03ae59009369f2a058";
+const HCP_ORG = "Accutek-Solar";
+// Standalone booking page (works in a top-level tab). The
+// `online-booking.housecallpro.com/?token=...` URL is iframe-only and returns
+// AccessDenied if you navigate to it directly — don't use it as a fallback.
+const HCP_STANDALONE_URL = `https://book.housecallpro.com/book/${HCP_ORG}/${HCP_TOKEN}?v2=true`;
+
 /**
  * Housecall Pro online booking trigger.
  * Calls window.HCPWidget.openModal() — the script is loaded once in /public/index.html.
- * Falls back to opening the booking page directly if the script isn't ready yet.
+ * If the async script hasn't loaded yet, briefly waits for it; if it still
+ * isn't there, opens the standalone booking page in a new tab.
  */
 export default function BookOnlineButton({
   variant = "primary", // primary | outline-light | outline-dark | pill
@@ -15,16 +23,26 @@ export default function BookOnlineButton({
 }) {
   const handleClick = (e) => {
     e.preventDefault();
-    if (typeof window !== "undefined" && window.HCPWidget?.openModal) {
+    if (typeof window === "undefined") return;
+
+    if (window.HCPWidget?.openModal) {
       window.HCPWidget.openModal();
-    } else {
-      // Fallback while the async script is still loading
-      window.open(
-        "https://online-booking.housecallpro.com/?token=a610e2efa0494a03ae59009369f2a058&orgName=Accutek-Solar",
-        "_blank",
-        "noopener,noreferrer"
-      );
+      return;
     }
+
+    // Async script not loaded yet — poll briefly (up to ~1.5s), then fall back
+    let tries = 0;
+    const maxTries = 15;
+    const interval = setInterval(() => {
+      tries += 1;
+      if (window.HCPWidget?.openModal) {
+        clearInterval(interval);
+        window.HCPWidget.openModal();
+      } else if (tries >= maxTries) {
+        clearInterval(interval);
+        window.open(HCP_STANDALONE_URL, "_blank", "noopener,noreferrer");
+      }
+    }, 100);
   };
 
   const variants = {
@@ -48,8 +66,8 @@ export default function BookOnlineButton({
       type="button"
       onClick={handleClick}
       data-testid={testid}
-      data-token="a610e2efa0494a03ae59009369f2a058"
-      data-orgname="Accutek-Solar"
+      data-token={HCP_TOKEN}
+      data-orgname={HCP_ORG}
       className={`hcp-button group inline-flex items-center justify-center gap-2 font-medium rounded-sm transition-colors ${
         variant === "pill" ? "" : ""
       } ${variants[variant]} ${sizes[size]} ${className}`}
