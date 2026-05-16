@@ -113,6 +113,12 @@ class LeadCreate(BaseModel):
     source: Optional[str] = "website"
     consent_communications: bool = False
     consent_text: Optional[str] = None
+    # Lead qualification fields
+    owns_home_5yr_plus: Optional[bool] = False
+    services_solar_panels: Optional[bool] = False
+    services_battery_backup: Optional[bool] = False
+    services_electrical_panel: Optional[bool] = False
+    timeline: Optional[str] = None
 
 
 class Lead(BaseModel):
@@ -131,6 +137,12 @@ class Lead(BaseModel):
     consent_text: Optional[str] = None
     consent_timestamp: Optional[datetime] = None
     created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    # Lead qualification fields
+    owns_home_5yr_plus: Optional[bool] = False
+    services_solar_panels: Optional[bool] = False
+    services_battery_backup: Optional[bool] = False
+    services_electrical_panel: Optional[bool] = False
+    timeline: Optional[str] = None
 
 
 class LoginRequest(BaseModel):

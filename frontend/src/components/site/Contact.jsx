@@ -25,11 +25,11 @@ const initial = {
   email: "",
   phone: "",
   address: "",
-  interest: "bill_savings",
+  interest: "solar",
   monthly_bill: "",
   message: "",
   consent_communications: false,
-  // Qualification fields (per Accutek ops manual)
+  // Lead qualification fields
   owns_home_5yr_plus: false,
   services_solar_panels: false,
   services_battery_backup: false,
@@ -199,21 +199,23 @@ export default function Contact() {
                       className="rounded-sm"
                     />
                   </FormField>
-                  <FormField className="col-span-12 md:col-span-6" label="Interested in">
+                  <FormField className="col-span-12 md:col-span-6" label="Primary interest">
                     <Select value={form.interest} onValueChange={(v) => update("interest", v)}>
                       <SelectTrigger data-testid="contact-interest" className="rounded-sm font-mono">
-                        <SelectValue />
+                        <SelectValue placeholder="What brought you to us?" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="solar">Solar PV</SelectItem>
-                        <SelectItem value="battery">Battery backup</SelectItem>
-                        <SelectItem value="generator">Kohler generator</SelectItem>
-                        <SelectItem value="electrical">Electrical / panel</SelectItem>
-                        <SelectItem value="general">General / multi-system</SelectItem>
+                        <SelectItem value="bill_savings">Lower my electric bill</SelectItem>
+                        <SelectItem value="solar">Solar panels (rooftop or ground)</SelectItem>
+                        <SelectItem value="battery">Battery backup / energy storage</SelectItem>
+                        <SelectItem value="generator">Kohler standby generator</SelectItem>
+                        <SelectItem value="electrical">Electrical / panel upgrade</SelectItem>
+                        <SelectItem value="diagnostic">Diagnose / repair existing system</SelectItem>
+                        <SelectItem value="general">Not sure yet — just exploring</SelectItem>
                       </SelectContent>
                     </Select>
                   </FormField>
-                  <FormField className="col-span-12 md:col-span-6" label="Avg. monthly bill ($)">
+                  <FormField className="col-span-12 md:col-span-6" label="Avg. monthly electric bill ($)">
                     <Input
                       type="number"
                       value={form.monthly_bill}
@@ -223,16 +225,103 @@ export default function Contact() {
                       className="rounded-sm font-mono"
                     />
                   </FormField>
+                  <FormField className="col-span-12 md:col-span-6" label="Timeline">
+                    <Select value={form.timeline} onValueChange={(v) => update("timeline", v)}>
+                      <SelectTrigger data-testid="contact-timeline" className="rounded-sm font-mono">
+                        <SelectValue placeholder="When are you looking to start?" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="asap">As soon as possible (0–30 days)</SelectItem>
+                        <SelectItem value="1-3_months">Within 1–3 months</SelectItem>
+                        <SelectItem value="3-6_months">3–6 months out</SelectItem>
+                        <SelectItem value="6-12_months">6–12 months out</SelectItem>
+                        <SelectItem value="exploring">Just researching for now</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormField>
                   <FormField className="col-span-12" label="Anything we should know?">
                     <Textarea
                       rows={4}
                       value={form.message}
                       onChange={(e) => update("message", e.target.value)}
-                      placeholder="Roof age, shade, timeline, questions…"
+                      placeholder="Roof age, shade, panel/breaker concerns, questions…"
                       data-testid="contact-message"
                       className="rounded-sm"
                     />
                   </FormField>
+                </div>
+
+                {/* Qualification block */}
+                <div
+                  data-testid="contact-qualification-block"
+                  className="mt-6 border border-line p-5 bg-bone"
+                >
+                  <p className="label-tag text-ink2 mb-4">— A few quick questions</p>
+
+                  <div className="space-y-4">
+                    <label
+                      htmlFor="qual-ownership"
+                      className="flex items-start gap-3 cursor-pointer"
+                    >
+                      <Checkbox
+                        id="qual-ownership"
+                        checked={form.owns_home_5yr_plus}
+                        onCheckedChange={(v) => update("owns_home_5yr_plus", !!v)}
+                        data-testid="contact-qual-ownership"
+                        className="mt-0.5 h-5 w-5 data-[state=checked]:bg-forest data-[state=checked]:border-forest"
+                      />
+                      <span className="text-sm text-ink leading-relaxed">
+                        I own my home and plan to stay here at least 5 more years.
+                      </span>
+                    </label>
+
+                    <div>
+                      <p className="text-sm text-ink mb-2">
+                        Which services are you interested in? <span className="text-ink2">(check all that apply)</span>
+                      </p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label
+                          htmlFor="svc-solar"
+                          className="flex items-start gap-3 cursor-pointer"
+                        >
+                          <Checkbox
+                            id="svc-solar"
+                            checked={form.services_solar_panels}
+                            onCheckedChange={(v) => update("services_solar_panels", !!v)}
+                            data-testid="contact-svc-solar"
+                            className="mt-0.5 h-5 w-5 data-[state=checked]:bg-forest data-[state=checked]:border-forest"
+                          />
+                          <span className="text-sm text-ink leading-relaxed">Solar panels</span>
+                        </label>
+                        <label
+                          htmlFor="svc-battery"
+                          className="flex items-start gap-3 cursor-pointer"
+                        >
+                          <Checkbox
+                            id="svc-battery"
+                            checked={form.services_battery_backup}
+                            onCheckedChange={(v) => update("services_battery_backup", !!v)}
+                            data-testid="contact-svc-battery"
+                            className="mt-0.5 h-5 w-5 data-[state=checked]:bg-forest data-[state=checked]:border-forest"
+                          />
+                          <span className="text-sm text-ink leading-relaxed">Battery backup</span>
+                        </label>
+                        <label
+                          htmlFor="svc-electrical"
+                          className="flex items-start gap-3 cursor-pointer"
+                        >
+                          <Checkbox
+                            id="svc-electrical"
+                            checked={form.services_electrical_panel}
+                            onCheckedChange={(v) => update("services_electrical_panel", !!v)}
+                            data-testid="contact-svc-electrical"
+                            className="mt-0.5 h-5 w-5 data-[state=checked]:bg-forest data-[state=checked]:border-forest"
+                          />
+                          <span className="text-sm text-ink leading-relaxed">Electrical / panel upgrade</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Consent block — highlighted */}
