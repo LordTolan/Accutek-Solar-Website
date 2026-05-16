@@ -81,6 +81,12 @@ Take accuteksolar.com (a 30-year-old family-owned solar company in Clinton, IN �
   - Services jump-nav becomes horizontal scroll on phones (instead of wrapping)
 - Tested: 19/19 backend tests, 100% frontend verified on desktop + mobile 390×844
 
+## 2026-02-16 Update — Lead qualification + white-label
+- Added 5 lead qualification inputs to `/contact` form UI: Primary Interest (expanded dropdown — 7 options), Avg. monthly electric bill, Timeline (5 options), Home Ownership 5yr+ checkbox, and 3 service checkboxes (solar / battery / electrical). Inputs sit in a new `[data-testid=contact-qualification-block]` panel above the consent block.
+- Backend `LeadCreate` + `Lead` Pydantic models updated to accept and persist: `owns_home_5yr_plus`, `services_solar_panels`, `services_battery_backup`, `services_electrical_panel`, `timeline`. Optional with sensible defaults — fully backwards compatible with existing payloads.
+- White-label: removed `Made with Emergent` floating badge, `https://assets.emergent.sh/scripts/emergent-main.js` script, and updated meta description in `/app/frontend/public/index.html`.
+- Tested: 9/9 backend pytest pass + Playwright e2e on contact form (submit→success→admin readback) + branding removal verified in DOM + Home/Commercial/Admin regression pass. iteration_5.json.
+
 ## 2025-12-04 Update — Admin dashboard + Housecall customer portal + logo refinement
 - New icon-only "Two-Leaf Lightbulb" logo (wordmark programmatically cropped from source, 256×256 primary at 40KB)
 - Admin auth system (bcrypt + PyJWT, 8h Bearer token, bruteforce lockout with real-IP via X-Forwarded-For)
