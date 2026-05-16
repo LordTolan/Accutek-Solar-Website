@@ -81,6 +81,15 @@ Take accuteksolar.com (a 30-year-old family-owned solar company in Clinton, IN �
   - Services jump-nav becomes horizontal scroll on phones (instead of wrapping)
 - Tested: 19/19 backend tests, 100% frontend verified on desktop + mobile 390×844
 
+## 2026-02-16 (b) Update — Final logo + lead notification recipients
+- New "Accutek Solar Final Logo" PDF received from Clinton, extracted to PNG (vector→raster 600dpi, auto-trimmed, transparency preserved). New bulb has a green-gradient outline + two-leaf design + stylized horizontal lockup wordmark.
+- `/app/frontend/public/brand/` PNGs replaced: `logo_icon_only.png` (512×512 bulb-only), `logo_horizontal.png`, `logo_primary.png`, `logo_stacked.png` (full horizontal lockup), `logo_on_green.png` (wordmark recolored white for dark backgrounds).
+- New env vars staged in `backend/.env` for SendGrid lead notifications (still inactive until API key provided):
+  - `LEAD_NOTIFY_TO` = solarseth7@yahoo.com
+  - `LEAD_NOTIFY_BCC` = lenover.clint@accuteksolar.com (Clinton Lenover — site creator, silent BCC on every lead)
+  - `LEAD_NOTIFY_FROM` = leads@accuteksolar.com
+  - `SENDGRID_API_KEY` = empty placeholder
+
 ## 2026-02-16 Update — Lead qualification + white-label
 - Added 5 lead qualification inputs to `/contact` form UI: Primary Interest (expanded dropdown — 7 options), Avg. monthly electric bill, Timeline (5 options), Home Ownership 5yr+ checkbox, and 3 service checkboxes (solar / battery / electrical). Inputs sit in a new `[data-testid=contact-qualification-block]` panel above the consent block.
 - Backend `LeadCreate` + `Lead` Pydantic models updated to accept and persist: `owns_home_5yr_plus`, `services_solar_panels`, `services_battery_backup`, `services_electrical_panel`, `timeline`. Optional with sensible defaults — fully backwards compatible with existing payloads.
