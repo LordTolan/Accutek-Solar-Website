@@ -1,0 +1,51 @@
+@import url("https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,400,900,700&f[]=satoshi@400,500,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 45 29% 97%;
+    --foreground: 153 25% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 153 25% 15%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 153 25% 15%;
+    --primary: 35 95% 53%;
+    --primary-foreground: 153 25% 15%;
+    --secondary: 153 18% 28%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 45 15% 90%;
+    --muted-foreground: 153 10% 35%;
+    --accent: 35 95% 53%;
+    --accent-foreground: 153 25% 15%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 45 15% 85%;
+    --input: 45 15% 85%;
+    --ring: 35 95% 53%;
+    --radius: 0.75rem;
+    --font-heading: "Cabinet Grotesk", system-ui, sans-serif;
+    --font-body: "Satoshi", system-ui, sans-serif;
+  }
+
+  * { border-color: hsl(var(--border)); }
+  html, body { background: hsl(var(--background)); color: hsl(var(--foreground)); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+  h1,h2,h3,h4,h5 { font-family: var(--font-heading); letter-spacing: -0.02em; font-weight: 800; }
+  ::selection { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
+}
+
+@layer utilities {
+  .container-px { @apply px-6 md:px-10 lg:px-16; }
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute; inset: 0; pointer-events: none; opacity: 0.06; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .text-balance { text-wrap: balance; }
+  .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background; }
+}

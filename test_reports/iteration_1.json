@@ -1,0 +1,43 @@
+{
+  "summary": "First end-to-end test iteration for Accutek Solar. Backend: 23/23 pytest cases passed covering public endpoints (company-info, service-area incl. 17 counties 10IN+7IL, county slug 200/404, testimonials=4, faq=7), lead qualify (hot/nurture tiers + estimate fields), lead submit (TCPA enforced 400, success returns lead_id+score+tier), auth (login success+me, wrong pw 401, refresh, logout, brute-force lockout 5x401 then 429), and admin (list/filter/patch/sync-hcp mocked/stats). Frontend: home page renders hero, counters (1,247+, $24M+, 98%, 32), all 6 services, FAQ, service area teaser; quote wizard 3 steps work with validation, sliders/pills, 25-yr savings ($47,277), TCPA gating, success toast and thank-you state; /tools/calculator slider + residential/commercial toggle work; /service-area lists 10 IN + 7 IL counties; /service-area/vermillion-county-in detail page loads; admin/login -> /admin dashboard shows stats cards + leads table; drawer opens on row click with Mark Contacted (status updated to CONTACTED), Sync to HCP (mock-synced toast + HCP id mock_xxx displayed), Mark Won, Mark Lost buttons; logout works. Mocked items (HCP sync + hot-lead email) behave per spec.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [
+      {"flow": "Admin logout", "issue": "After clicking Logout, page stays on /admin (URL unchanged) instead of redirecting to /admin/login. Cookies cleared on backend, but if the user reloads they will be re-redirected. UX could be improved with explicit router.push('/admin/login').", "affected_selectors": ["admin-logout"]}
+    ],
+    "design_issues": [
+      {"screen": "/admin/login", "issues": ["Public marketing site header (Home/Services/Service Area/Calculator/About + Get Free Quote CTA) is rendered above the admin login card. Per spec, header/sticky CTA should be hidden on /admin routes. /admin (dashboard) correctly omits the public header, but /admin/login still includes it."]}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Optional: redirect to /admin/login after logout click in admin dashboard for better UX (currently the URL stays at /admin).",
+    "Optional: hide the public marketing Site Header on /admin/* routes (including /admin/login) — currently /admin/login renders both the public header and the admin login form."
+  ],
+  "critical_code_review_comments": [
+    "server.py is 647 lines — borderline acceptable but could be split into routers (auth, leads, public, admin) for maintainability.",
+    "@app.on_event('startup'/'shutdown') is deprecated in newer FastAPI; consider migrating to lifespan handlers.",
+    "Brute-force lockout uses MongoDB updates — acceptable but Redis would be faster at scale.",
+    "ObjectId is correctly excluded from all responses via {'_id': 0} projections — good.",
+    "verify_password catches all exceptions broadly; consider narrower exception handling.",
+    "stat testid 'stat-won-%' contains an unusual '%' character — works but consider 'stat-won-pct' for cleanliness."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/__init__.py"
+  ],
+  "success_rate": {"backend": "100% (23/23)", "frontend": "~95% (one minor UX nit on admin logout + admin/login layout)"},
+  "test_credentials": "admin@accuteksolar.com / admin123 (works, seeded as expected)",
+  "seed_data_creation": "Created several TEST_ prefixed leads via /api/leads/submit during testing (visible in admin dashboard). Safe to clean up if desired.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend is solid and stable; all 23 pytest cases in /app/backend/tests/backend_test.py pass. Re-run via: pytest /app/backend/tests/backend_test.py -v. Note that the brute_force test uses a unique email each run so it won't lock out the admin. The only follow-up items are two minor frontend UX issues (logout redirect, hide public header on /admin/login) — neither is blocking. Mocked features (Housecall Pro sync, hot-lead email) are confirmed working as mocked per spec.",
+  "rca of the issue": "N/A — no failing tests in this iteration."
+}
