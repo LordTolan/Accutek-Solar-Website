@@ -1,0 +1,105 @@
+{
+  "theme": "Light Theme",
+  "archetype": "Archetype 1 (Organic & Earthy)",
+  "vibe": "Trustworthy, grounded, energetic, and premium. A blend of Mid-Western heritage (32 years) and modern clean-energy tech.",
+  "business_info": {
+    "company": "Accutek Solar",
+    "tagline": "The future of energy",
+    "phone": "(812) 878-7343",
+    "email": "solarseth7@yahoo.com",
+    "address": "9797 S Rangeline Rd., Clinton, IN 47842",
+    "services": ["Solar PV", "Solar thermal", "Kohler backup generators", "Electrical install/repair", "LED & energy monitoring", "FREE estimates"],
+    "trust_signals": ["32 years in business", "family-owned", "NABCEP", "BBB A+", "Google 5-star", "Indiana Solar Coalition", "Licensed & Insured"]
+  },
+  "typography": {
+    "headings": {
+      "family": "Cabinet Grotesk",
+      "weights": ["400", "700", "800", "900"],
+      "description": "Premium, slightly industrial but very approachable. Great for large numbers, punchy headlines, and conveying solid authority.",
+      "import_url": "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,400,900,700&display=swap"
+    },
+    "body": {
+      "family": "Satoshi",
+      "weights": ["400", "500", "700"],
+      "description": "Clean, highly legible geometric sans that pairs perfectly with Cabinet Grotesk.",
+      "import_url": "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
+    }
+  },
+  "colors": {
+    "css_variables": {
+      "--background": "45 29% 97%",
+      "--foreground": "153 25% 15%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "153 25% 15%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "153 25% 15%",
+      "--primary": "35 95% 53%",
+      "--primary-foreground": "153 25% 15%",
+      "--secondary": "153 18% 28%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "45 15% 90%",
+      "--muted-foreground": "153 10% 45%",
+      "--accent": "35 95% 53%",
+      "--accent-foreground": "153 25% 15%",
+      "--destructive": "0 84% 60%",
+      "--destructive-foreground": "0 0% 100%",
+      "--border": "45 15% 85%",
+      "--input": "45 15% 85%",
+      "--ring": "35 95% 53%",
+      "--radius": "0.75rem"
+    },
+    "description": "Warm earthy base (Warm Sand) representing the rural/Midwest connection, with Deep Forest text (trust, growth, longevity) and Solar Gold (energy, action). Avoids sterile corporate blues entirely."
+  },
+  "spacing_and_layout": {
+    "philosophy": "Generous spacing (p-12 to p-24) to let the content breathe. Emphasize asymmetry in marketing pages using Bento grids.",
+    "corners": "rounded-xl to rounded-2xl for an approachable yet professional feel.",
+    "borders": "Use 1px borders with border-border/60 to define structure without relying on heavy drop shadows.",
+    "shadows": "Diffuse, soft ambient shadows. Use shadow-[0_8px_30px_rgba(29,48,37,0.08)]."
+  },
+  "component_instructions": {
+    "hero": "Full bleed or large container image with max bg-black/40 overlay to preserve image clarity. Large heading (Cabinet Grotesk text-5xl to text-7xl) left-aligned. Add a subtle grain texture overlay. Include trust badges row below the CTA.",
+    "animated_counters": "Use Framer Motion 'useInView' to count up (1247 homes, $2.4M+, 98%, 32 yrs). Render large Cabinet Grotesk text in Solar Gold within a 4-col bento grid.",
+    "lead_form": "Multi-step form in a card. Step 1: Basic info. Step 2: Qualification (Homeowner? Roof age? Bill amount). Step 3: Result & TCPA consent. Show a real-time 'Lead Score' or 'Qualification Status'. Use Shadcn Progress component.",
+    "savings_calculator": "Mobile-first. Use Shadcn Slider for 'Average Monthly Bill'. Real-time calculation showing '25-Year Savings'. Large, highly legible numbers. Muted background surface.",
+    "service_area_map": "Interactive SVG or map representation of IN/IL counties. Hovering highlights the county. Click links to /service-area/[slug].",
+    "admin_dashboard": "Cardless, dense layout. Sticky top nav or sidebar. Lead table with Score Badges (Hot: Red/Gold, Warm: Yellow, Cold: Gray). Include 'Sync to HCP' button with loading state.",
+    "testimonial_carousel": "Use Embla Carousel (Shadcn). Display real initials/locations (A.F. Dana IN, etc.). Add a 5-star Lucide icon array.",
+    "before_after_gallery": "Masonry layout using CSS columns or React-Photo-Album. Image hover reveals 'Before' / 'After' labels. Click opens a Lightbox.",
+    "sticky_mobile_cta": "Fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border flex gap-4 z-50. 'Call Now' (ghost/outline) and 'Get Quote' (primary solid).",
+    "county_pages": "Dynamic /service-area/[slug]. Feature a local hero image, county-specific incentive copy, and a lead form optimized for local conversion."
+  },
+  "motion_and_interactions": {
+    "hover": "Buttons lift slightly (-translate-y-0.5) and shadow increases. Cards have a subtle border color shift on hover.",
+    "scroll": "Use Lenis for smooth scrolling on marketing pages. Sections fade-in-up via Framer Motion.",
+    "page_transition": "Simple opacity fade between routes."
+  },
+  "images": [
+    {
+      "category": "Hero Background",
+      "url": "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxzb2xhciUyMHBhbmVsJTIwcm9vZnRvcCUyMHN1bnNldHxlbnwwfHx8fDE3NzkwNTM4MTZ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Golden hour solar panels on a rooftop, perfect for the main homepage hero."
+    },
+    {
+      "category": "Technicians / Trust",
+      "url": "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwxfHxzb2xhciUyMGluc3RhbGxlciUyMHdvcmtpbmd8ZW58MHx8fHwxNzc5MDUzODE0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Solar installer working, use for 'About' or 'Services' to show real people working."
+    },
+    {
+      "category": "Rural / Service Area",
+      "url": "https://images.unsplash.com/photo-1621431735623-95fcba6b89ae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxydXJhbCUyMGluZGlhbmElMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzc5MDUzODE0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Indiana rural landscape, use for the Service Area / Counties section background."
+    },
+    {
+      "category": "General Residential Solar",
+      "url": "https://images.unsplash.com/photo-1583345237708-add35a664d77?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxzb2xhciUyMHBhbmVsJTIwcm9vZnRvcCUyMHN1bnNldHxlbnwwfHx8fDE3NzkwNTM4MTZ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Concrete house with solar panels for case studies or services."
+    }
+  ],
+  "accessibility": {
+    "focus_states": "All interactive elements must have a highly visible focus ring: focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2.",
+    "contrast": "Ensure Deep Forest text on Warm Sand background meets WCAG AAA standards. Primary buttons (Gold) must have dark text (Deep Forest) for readability."
+  },
+  "testing": {
+    "data_testid": "MANDATORY: Add role-based data-testid attributes to all buttons, links, form inputs, and interactive widgets (e.g., data-testid='hero-get-quote-button')."
+  }
+}
