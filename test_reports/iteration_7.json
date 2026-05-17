@@ -1,0 +1,35 @@
+{
+  "summary": "Backend regression for SendGrid lead-notification wiring. All 15 tests in /app/backend/tests/test_email_sendgrid.py passed (26.4s). Verified: (1) POST /api/leads happy path returns 200 in <2s and backend log shows 'SendGrid accepted lead email (status=202, subject=...TEST_EmailRegression FullRes...)' within ~5s — BackgroundTasks is non-blocking. (2) POST /api/commercial-leads with a real PDF returns 200 in <3s with correct site_plan metadata (filename/content_type/size_bytes), NO _id leak, NO data_base64 in response, and log shows 'status=202, subject=New COMMERCIAL intake: ...TEST_EmailRegression Commercial'. (3) Backwards-compat minimal residential POST (name+email+consent only) returns 200 and emails send cleanly — no email_service exception. (4) Residential regressions still enforce: 400 without consent, 400 with empty name, 400 with empty email; the new BackgroundTasks param did NOT break Pydantic DI. (5) Commercial regressions still enforce: 400 without consent, 413 for >10MB, 415 for disallowed mime; BackgroundTasks did NOT break Form/File DI. (6) Admin: GET /api/admin/leads requires Bearer (401 without), returns the new leads with calculator_results round-trip preserved (list-shape, all fields intact), no _id leak. GET /api/admin/commercial-leads excludes site_plan.data_base64 — bytes never leak. (7) SendGrid disabled fallback: temporarily blanked SENDGRID_API_KEY in /app/backend/.env and restarted backend; POST /api/leads still returned 200 and log emitted 'SendGrid not fully configured (api_key=missing, ...) — skipping email'. Env was restored cleanly afterwards. Total real SendGrid sends used by this regression: 5 (well under daily quota).",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_email_sendgrid.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "email_service.notify_new_commercial_lead reads lead.get('existing_brand') and lead.get('notes'), but the server doc stores 'existing_system_brand' and 'message'. So those two rows will silently render as empty in the commercial email even when the customer filled them in. Recommend renaming the .get() keys to 'existing_system_brand' and 'message' (or aliasing in server.py before scheduling the background task).",
+    "SENDGRID_API_KEY is committed in /app/backend/.env in plaintext to the repo workspace. Even though .env is gitignored, please confirm it is not in version control and rotate the key if it was ever committed. Long-term: load via secret manager rather than a checked-in .env.",
+    "server.py is 497 lines combining models + routes + auth + startup + email scheduling. Carryover from prior iterations — split into routers/ (leads.py, commercial.py, admin.py, auth.py) before next feature.",
+    "Server already exceeds 10MB body size check by reading the whole file into memory (await site_plan.read()) before checking size. For a 10MB+1 upload we still buffer the entire body. Consider streaming with a max-size guard, or rejecting at the Starlette layer with a Content-Length precheck.",
+    "background_tasks.add_task captures lead.model_dump() by value — good. But notify_new_commercial_lead is scheduled with `{k: v for k, v in doc.items() if k != 'site_plan'}`, which strips site_plan entirely; the attachment is passed separately as the 2nd arg — correct. However if doc ever grows large fields, consider passing only the keys the email actually uses.",
+    "No retry/back-off on SendGrid send. If SendGrid is rate-limited or returns 5xx, the lead is created but the email is silently lost (only logged). Consider queuing failed sends or storing email_status on the lead doc so admin can resend."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_email_sendgrid.py"
+  ],
+  "success_rate": {"backend": "100%", "frontend": "not tested (backend-only request)"},
+  "test_credentials": "admin@accuteksolar.com / naA3T6l9fpmyqc2tuE1pnA2c (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Inserted residential leads: TEST_EmailRegression FullRes, TEST_EmailRegression Minimal, TEST_DICheck, TEST_SendGridDisabled. Commercial leads: TEST_EmailRegression Commercial (with site_plan_TEST.pdf), TEST_ComDICheck. All prefixed TEST_ for easy cleanup by name.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "New regression file /app/backend/tests/test_email_sendgrid.py (15 tests). It performs 5 real SendGrid sends per run (3 happy paths + 2 DI-validity probes) — keep an eye on the free-tier 100/day budget. The TestSendGridDisabledFallback class WRITES /app/backend/.env to blank the key and `sudo supervisorctl restart backend`, then restores. If it crashes mid-test, restore manually: SENDGRID_API_KEY value lives in /app/backend/.env.backup_test_email if present. Backend log location: /var/log/supervisor/backend.err.log — uvicorn writes structured 'SendGrid accepted' INFO / 'SendGrid not fully configured' WARNING / 'SendGrid send failed' EXCEPTION lines from email_service. Code-review nit worth flagging: notify_new_commercial_lead reads keys 'existing_brand' and 'notes' that the server never sends (server uses 'existing_system_brand' and 'message') — emails currently drop those two rows.",
+  "rca of the issue": "N/A — no failures observed in this iteration. Single latent bug surfaced via code review: commercial email body silently skips existing_system_brand and message fields because email_service uses the wrong dict keys. Cosmetic, not blocking, but should be fixed."
+}

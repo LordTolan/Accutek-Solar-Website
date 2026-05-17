@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Form, Depends, Request
+from fastapi import FastAPI, APIRouter, HTTPException, UploadFile, File, Form, Depends, Request, BackgroundTasks
 from fastapi.responses import Response
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
@@ -14,6 +14,8 @@ import uuid
 import bcrypt
 import jwt
 from datetime import datetime, timezone, timedelta
+
+from email_service import notify_new_residential_lead, notify_new_commercial_lead
 
 
 ROOT_DIR = Path(__file__).parent
@@ -177,7 +179,7 @@ async def get_status_checks():
 
 
 @api_router.post("/leads", response_model=Lead)
-async def create_lead(payload: LeadCreate):
+async def create_lead(payload: LeadCreate, background_tasks: BackgroundTasks):
     if not payload.name.strip() or not payload.email.strip():
         raise HTTPException(status_code=400, detail="Name and email are required")
     if not payload.consent_communications:
@@ -189,6 +191,8 @@ async def create_lead(payload: LeadCreate):
     if doc.get('consent_timestamp'):
         doc['consent_timestamp'] = doc['consent_timestamp'].isoformat()
     await db.leads.insert_one(doc)
+    # Fire-and-forget notification — never blocks the response
+    background_tasks.add_task(notify_new_residential_lead, lead.model_dump())
     return lead
 
 
@@ -222,6 +226,7 @@ ALLOWED_UPLOAD_TYPES = {
 
 @api_router.post("/commercial-leads")
 async def create_commercial_lead(
+    background_tasks: BackgroundTasks,
     name: str = Form(...),
     email: str = Form(...),
     phone: Optional[str] = Form(None),
@@ -278,6 +283,20 @@ async def create_commercial_lead(
             "content_type": file_meta["content_type"],
             "size_bytes": file_meta["size_bytes"],
         }
+
+    # Fire-and-forget email notification (carries the site-plan attachment if any)
+    email_attachment = None
+    if file_meta:
+        email_attachment = {
+            "filename": file_meta["filename"],
+            "content_type": file_meta.get("content_type") or "application/octet-stream",
+            "content_b64": file_meta["data_base64"],
+        }
+    background_tasks.add_task(
+        notify_new_commercial_lead,
+        {k: v for k, v in doc.items() if k != "site_plan"},
+        email_attachment,
+    )
     return response
 
 
