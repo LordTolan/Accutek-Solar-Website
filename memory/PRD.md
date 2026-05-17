@@ -24,21 +24,28 @@ Build the Accutek Solar website as a Next.js 15 (App Router, TypeScript) + FastA
 - Admin dashboard with stats, filters, search, status updates, HCP sync
 
 ## What's Been Implemented (2026-05-17)
-- ✅ FastAPI modular backend with auth, leads, public, admin endpoints
-- ✅ Lead scoring algorithm + 25-yr savings estimator
-- ✅ Admin seeding + bcrypt password hashing + brute-force lockout
-- ✅ MongoDB indexes on users, leads, login_attempts
-- ✅ Mocked Housecall Pro stub (ready for HCP_API_KEY)
-- ✅ Seeded 17 counties (10 IN, 7 IL) + 4 testimonials + 7 FAQs
-- ✅ Next.js 15 (App Router, TypeScript) frontend with earthy "Light Theme, Organic & Earthy" design system (Cabinet Grotesk + Satoshi)
-- ✅ Home page: hero, animated counters, services bento, service-area teaser, testimonials carousel, FAQ, final CTA
-- ✅ /quote — 3-step lead form with real-time scoring + 25-yr estimate + TCPA
-- ✅ /tools/calculator — interactive sliders
-- ✅ /service-area — county directory + /service-area/[slug] dynamic pages (SSG with revalidate)
-- ✅ /services and /about pages
-- ✅ /admin/login + /admin (leads table, filters, search, stats cards, drawer, HCP sync button, status updates)
-- ✅ Sticky mobile CTA, header, footer
-- ✅ data-testid coverage on all interactive elements
+
+### Iteration 2 (Donna brief — dark/industrial rebrand)
+- ✅ **Dark/Industrial palette**: Matte Black (#1A1A1A) + Forest Green (#1B5E20) + Electric Green (#00E676) per master brief
+- ✅ **Cinematic hero**: `HeroVideo.tsx` autoplay/muted/loop/playsinline, ready for `/media/hero.mp4`. Falls back to dark Unsplash poster if Solar Wizard mp4 isn't uploaded yet
+- ✅ **6-question Accutek Operations Manual qualifier** (replaces old 4-q): interest source, monthly bill, homeowner 5-7y, interest areas (multi), aware credit ended (expectation-setter with educational tooltip), timeline
+- ✅ Rescored lead scoring algorithm to weight the 6 new questions (0-100, hot/warm/nurture)
+- ✅ Federal tax-credit notice strip + FAQ entry + updated county incentive copy (credit ended)
+- ✅ **HCP Book Online**: `/book` page + `HCPBookOnline` component + header & footer + hero CTAs. Mount point `#hcp-book-widget` ready for the HCP `<script>` (paste into layout.tsx <head>)
+- ✅ Industrial typography: Cabinet Grotesk + Satoshi + JetBrains Mono for accents (`// SECTION`, `STEP 1 / 3`, etc.)
+- ✅ Electric green glow on primary CTAs, scanline + grain overlay on hero
+- ✅ Capitalization: **Accutek Solar** (capital A, capital S, no 'c' before 'k') correct everywhere; URL **www.AccutekSolar.com** in metadataBase + footer
+- ✅ Emergent branding scrubbed — no user-facing references
+
+### Iteration 1
+- FastAPI modular backend with auth, leads, public, admin endpoints
+- Lead scoring + 25-yr savings estimator
+- Admin seeding + bcrypt + brute-force lockout
+- MongoDB indexes
+- 17 counties (10 IN + 7 IL) + testimonials + FAQs
+- Mocked Housecall Pro sync stub
+- Next.js 15 (App Router, TypeScript) frontend
+- Home / Quote / Calculator / Service-area / County / About / Services / Admin (login + dashboard) pages
 
 ## Prioritized Backlog (P0 → P2)
 - P1: Before/After project gallery page (/projects)

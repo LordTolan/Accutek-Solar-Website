@@ -121,10 +121,22 @@ class LoginRequest(BaseModel):
 
 
 class QualifyAnswers(BaseModel):
-    monthly_bill: float = Field(ge=0, le=10000)  # USD
-    homeowner: bool
-    roof_age: Literal["new", "good", "old", "unsure"] = "good"
-    timeline: Literal["asap", "3-6m", "6-12m", "browsing"] = "browsing"
+    """Lead qualification per Accutek Operations Manual (6 questions)."""
+    # Q1
+    interest_source: Literal[
+        "bill_savings", "backup_power", "electrical_upgrade", "ev_charger", "other"
+    ] = "bill_savings"
+    # Q2
+    monthly_bill: float = Field(ge=0, le=10000)
+    # Q3
+    homeowner_5_7y: bool = True  # Owns home & plans to stay 5-7 years
+    # Q4 (multi-select)
+    interest_areas: List[Literal["solar", "battery", "electrical", "combo"]] = Field(default_factory=list)
+    # Q5 — expectation-setter (federal tax credit ended)
+    aware_credit_ended: bool = False
+    # Q6
+    timeline: Literal["ready_1_3m", "exploring", "gathering_info"] = "exploring"
+    # Optional residential/commercial split (still useful for routing)
     service_type: Literal["residential", "commercial"] = "residential"
 
 
@@ -154,46 +166,45 @@ class LeadUpdate(BaseModel):
 
 def score_lead(a: QualifyAnswers) -> dict:
     score = 0
-    # Bill / usage points (0-30)
-    if a.monthly_bill >= 300:
-        score += 30
-    elif a.monthly_bill >= 200:
-        score += 22
-    elif a.monthly_bill >= 120:
-        score += 14
-    elif a.monthly_bill >= 60:
-        score += 6
+    # Q2 — Monthly bill (0-25)
+    if a.monthly_bill >= 300: score += 25
+    elif a.monthly_bill >= 200: score += 20
+    elif a.monthly_bill >= 120: score += 14
+    elif a.monthly_bill >= 60: score += 7
 
-    # Timeline (0-25)
-    score += {"asap": 25, "3-6m": 18, "6-12m": 10, "browsing": 3}[a.timeline]
+    # Q6 — Timeline (0-25)
+    score += {"ready_1_3m": 25, "exploring": 12, "gathering_info": 5}[a.timeline]
 
-    # Ownership (0-15)
-    if a.homeowner:
-        score += 15
+    # Q3 — Homeowner staying 5-7y (0-20)
+    if a.homeowner_5_7y: score += 20
 
-    # Service type (0-10) — commercial is higher value
-    score += 10 if a.service_type == "commercial" else 7
+    # Q1 — Interest reason (0-10)
+    score += {"bill_savings": 10, "backup_power": 9, "ev_charger": 7, "electrical_upgrade": 6, "other": 4}[a.interest_source]
 
-    # Roof age (0-10) — better roof = easier install
-    score += {"new": 10, "good": 8, "old": 3, "unsure": 5}[a.roof_age]
+    # Q4 — Interest areas (0-12) — wider scope = higher value
+    n_areas = len(a.interest_areas)
+    if "combo" in a.interest_areas: score += 12
+    elif n_areas >= 2: score += 10
+    elif n_areas == 1: score += 7
 
-    # Engagement floor
-    score += 5
+    # Service type (0-5) — commercial slightly higher
+    score += 5 if a.service_type == "commercial" else 3
+
+    # Q5 — Already aware credit ended (+5 if yes, they're informed)
+    if a.aware_credit_ended: score += 5
+
     score = max(0, min(score, 100))
+    if score >= 75: tier = "hot"
+    elif score >= 50: tier = "warm"
+    else: tier = "nurture"
 
-    if score >= 75:
-        tier = "hot"
-    elif score >= 50:
-        tier = "warm"
-    else:
-        tier = "nurture"
-
-    # Estimated annual savings: rough = monthly_bill * 12 * 0.85 offset for residential, 0.7 for commercial
-    offset = 0.85 if a.service_type == "residential" else 0.70
+    # Estimate (no longer applies federal 30% credit — credit ended).
+    # Annual = bill * 12 * offset; offset ~ 75% residential, 65% commercial in this region.
+    offset = 0.75 if a.service_type == "residential" else 0.65
     annual_savings = round(a.monthly_bill * 12 * offset, 2)
-    twenty_five_year = round(annual_savings * 25 * 1.03, 2)  # tiny escalator
+    twenty_five_year = round(annual_savings * 25 * 1.03, 2)
     system_size_kw = round(max(2.0, a.monthly_bill / 25.0), 1)
-    payback_years = round(max(4.0, (system_size_kw * 2800) / max(annual_savings, 1)), 1)
+    payback_years = round(max(6.0, (system_size_kw * 2800) / max(annual_savings, 1)), 1)
 
     return {
         "score": score,
@@ -231,56 +242,56 @@ COUNTIES = [
     # Indiana
     {"slug": "vermillion-county-in", "name": "Vermillion County", "state": "IN", "seat": "Newport",
      "blurb": "Home turf for Accutek Solar since 1994 — Vermillion County homeowners save thousands with right-sized solar arrays.",
-     "incentive": "Indiana net metering credits + 30% federal tax credit available."},
+     "incentive": "Indiana net metering + state incentives (federal solar tax credit ended for new systems this year)."},
     {"slug": "parke-county-in", "name": "Parke County", "state": "IN", "seat": "Rockville",
      "blurb": "Rural Parke County properties benefit massively from off-grid and hybrid systems with Kohler backup.",
      "incentive": "Eligible for USDA REAP grants for ag and rural businesses."},
     {"slug": "fountain-county-in", "name": "Fountain County", "state": "IN", "seat": "Covington",
      "blurb": "Custom PV designs for Fountain County homes — financing options available.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "montgomery-county-in", "name": "Montgomery County", "state": "IN", "seat": "Crawfordsville",
      "blurb": "Crawfordsville and Montgomery County families trust Accutek for grid-tied solar and standby generators.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "putnam-county-in", "name": "Putnam County", "state": "IN", "seat": "Greencastle",
      "blurb": "Solar arrays sized for Putnam County's sun hours — typical payback in 6-9 years.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "clay-county-in", "name": "Clay County", "state": "IN", "seat": "Brazil",
      "blurb": "Brazil and surrounding Clay County homes — we install reliable, monitored PV systems.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "sullivan-county-in", "name": "Sullivan County", "state": "IN", "seat": "Sullivan",
      "blurb": "Sullivan County farms and homes — solar plus Kohler generators for true energy independence.",
-     "incentive": "USDA REAP + federal solar tax credit."},
+     "incentive": "USDA REAP grants available for ag & rural businesses (federal solar credit ended for new systems)."},
     {"slug": "vigo-county-in", "name": "Vigo County", "state": "IN", "seat": "Terre Haute",
      "blurb": "Terre Haute homeowners — see our work at Ivy Tech and trust our 32-year track record.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "hendricks-county-in", "name": "Hendricks County", "state": "IN", "seat": "Danville",
      "blurb": "Hendricks County residents — premium installs with attention to detail.",
-     "incentive": "Indiana net metering + 30% federal solar tax credit."},
+     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
     {"slug": "warren-county-in", "name": "Warren County", "state": "IN", "seat": "Williamsport",
      "blurb": "Warren County rural properties — off-grid and hybrid systems our specialty.",
-     "incentive": "USDA REAP + federal solar tax credit."},
+     "incentive": "USDA REAP grants available for ag & rural businesses (federal solar credit ended for new systems)."},
     # Illinois
     {"slug": "edgar-county-il", "name": "Edgar County", "state": "IL", "seat": "Paris",
      "blurb": "Edgar County, IL — Illinois Shines program + federal tax credit make solar incredibly affordable.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "vermilion-county-il", "name": "Vermilion County", "state": "IL", "seat": "Danville",
      "blurb": "Danville and Vermilion County homes — Accutek serves Illinois with the same rigor as Indiana.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "clark-county-il", "name": "Clark County", "state": "IL", "seat": "Marshall",
      "blurb": "Clark County residents — full-service solar from design to monitoring.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "crawford-county-il", "name": "Crawford County", "state": "IL", "seat": "Robinson",
      "blurb": "Crawford County — we handle every detail of your solar install.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "coles-county-il", "name": "Coles County", "state": "IL", "seat": "Charleston",
      "blurb": "Charleston, Mattoon and Coles County families — start saving with solar.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "douglas-county-il", "name": "Douglas County", "state": "IL", "seat": "Tuscola",
      "blurb": "Douglas County homes and farms — solar PV and Kohler generators.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
     {"slug": "champaign-county-il", "name": "Champaign County", "state": "IL", "seat": "Urbana",
      "blurb": "Champaign-Urbana — premium residential and commercial solar with monitoring.",
-     "incentive": "Illinois Shines SREC + 30% federal tax credit."},
+     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
 ]
 
 TESTIMONIALS = [
@@ -305,6 +316,8 @@ FAQS = [
      "a": "Net metering credits you for excess power you produce. In Indiana, the utility doesn't pay cash but credits your account — perfect for using summer overproduction to offset winter use."},
     {"q": "How long has Accutek Solar been in business?",
      "a": "Accutek Solar was founded in 1994 by Keith Davis. We are a family-owned company with over 32 years of electrical and solar installation experience."},
+    {"q": "Is the federal solar tax credit still available?",
+     "a": "The big federal solar tax credit for new systems ended this year. The good news: state-level programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants for ag/rural businesses, and utility incentives are still in play — and equipment pricing has come down. Talk to us about today's real-world payback math."},
     {"q": "Do you install backup generators?",
      "a": "Yes — we are authorized Kohler generator installers. Kohler has a proven track record for emergency power that's ready when you need it."},
     {"q": "Do you offer free estimates?",

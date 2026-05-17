@@ -37,18 +37,19 @@ export default async function CountyPage({ params }: { params: Promise<{ slug: s
 
   return (
     <>
-      <section className="relative overflow-hidden border-b border-border/60" data-testid="county-hero">
+      <section className="relative overflow-hidden border-b border-border" data-testid="county-hero">
         <div className="absolute inset-0">
           <Image src={COUNTY_IMG} alt="Rural midwest landscape" fill className="object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-secondary/85 to-secondary/30" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
+          <div className="absolute inset-0 mix-blend-overlay" style={{ background: "radial-gradient(60% 60% at 30% 50%, hsl(123 55% 24% / 0.5), transparent 70%)" }} />
         </div>
         <div className="relative container mx-auto container-px py-20 md:py-28 max-w-5xl">
-          <Link href="/service-area" className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.18em] text-secondary-foreground/70 mb-5 hover:text-primary"><MapPin className="w-3.5 h-3.5" /> Service area</Link>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-secondary-foreground text-balance">Solar in <span className="text-primary">{c.name}</span>, {c.state}</h1>
-          <p className="mt-5 text-lg text-secondary-foreground/80 max-w-2xl">{c.blurb}</p>
+          <Link href="/service-area" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-5 hover:text-foreground transition"><MapPin className="w-3.5 h-3.5" /> // SERVICE AREA</Link>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-foreground text-balance">Solar in <span className="text-primary text-glow">{c.name}</span>, {c.state}</h1>
+          <p className="mt-5 text-lg text-foreground/75 max-w-2xl">{c.blurb}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link href="/quote" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-bold focus-ring" data-testid="county-cta-quote">Get my free estimate <ArrowRight className="w-4 h-4" /></Link>
-            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 text-secondary-foreground px-6 py-3 font-bold focus-ring"><Phone className="w-4 h-4" /> (812) 878-7343</a>
+            <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="county-cta-quote">Get my free estimate <ArrowRight className="w-4 h-4" /></Link>
+            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 text-foreground px-6 py-3 font-bold focus-ring hover:border-primary transition"><Phone className="w-4 h-4" /> (812) 878-7343</a>
           </div>
         </div>
       </section>

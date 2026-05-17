@@ -22,19 +22,18 @@ module.exports = {
       fontFamily: {
         heading: ["var(--font-heading)", "ui-sans-serif", "system-ui"],
         body: ["var(--font-body)", "ui-sans-serif", "system-ui"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        ambient: "0 8px 30px rgba(29,48,37,0.08)",
-        "ambient-lg": "0 20px 60px rgba(29,48,37,0.12)",
+        ambient: "0 10px 40px rgba(0,0,0,0.4)",
+        "ambient-lg": "0 30px 80px rgba(0,0,0,0.55)",
+        "green-glow": "0 0 40px -8px hsl(142 100% 45% / 0.6)",
       },
       keyframes: {
-        "fade-up": { "0%": { opacity: 0, transform: "translateY(12px)" }, "100%": { opacity: 1, transform: "translateY(0)" } },
-        shimmer: { "100%": { transform: "translateX(100%)" } },
+        "fade-up": { "0%": { opacity: 0, transform: "translateY(14px)" }, "100%": { opacity: 1, transform: "translateY(0)" } },
+        pulse: { "0%, 100%": { opacity: 1 }, "50%": { opacity: 0.6 } },
       },
-      animation: {
-        "fade-up": "fade-up 0.6s ease-out both",
-        shimmer: "shimmer 2s infinite",
-      },
+      animation: { "fade-up": "fade-up 0.7s ease-out both" },
     },
   },
   plugins: [require("tailwindcss-animate")],

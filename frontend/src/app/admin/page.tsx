@@ -8,9 +8,9 @@ import { Loader2, LogOut, RefreshCcw, Filter, Search, Send, CheckCircle2, X } fr
 import { toast } from "sonner";
 
 const TIER_STYLES: Record<string, string> = {
-  hot: "bg-primary text-primary-foreground",
-  warm: "bg-yellow-300 text-foreground",
-  nurture: "bg-muted text-foreground",
+  hot: "bg-primary text-primary-foreground shadow-green-glow",
+  warm: "bg-secondary text-secondary-foreground",
+  nurture: "bg-muted text-foreground border border-border",
 };
 
 export default function AdminDashboard() {
