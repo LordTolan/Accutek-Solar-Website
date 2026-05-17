@@ -41,7 +41,11 @@ export default function AdminDashboard() {
   useEffect(() => { refresh(); }, []);
   useEffect(() => { if (user) refresh(); }, [filterTier, filterStatus]);
 
-  async function logout() { await api.logout(); router.push("/admin/login"); }
+  async function logout() {
+    try { await api.logout(); } catch {}
+    setUser(null);
+    router.replace("/admin/login");
+  }
 
   async function setStatus(id: string, status: string) {
     try {

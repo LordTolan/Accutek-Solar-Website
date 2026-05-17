@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -15,6 +16,8 @@ const NAV = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) return null;
   return (
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/85 border-b border-border/60" data-testid="site-header">
       <div className="container mx-auto container-px h-16 md:h-20 flex items-center justify-between">
