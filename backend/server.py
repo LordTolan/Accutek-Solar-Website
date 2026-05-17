@@ -391,6 +391,7 @@ async def admin_download_site_plan(lead_id: str, _=Depends(get_current_admin)):
     if not doc or not doc.get("site_plan"):
         raise HTTPException(status_code=404, detail="No site plan on file")
     sp = doc["site_plan"]
+    data: bytes
     try:
         data = base64.b64decode(sp["data_base64"])
     except Exception as exc:

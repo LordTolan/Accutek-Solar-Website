@@ -53,7 +53,7 @@ export default function ContactPage() {
               const Icon = a.icon;
               return (
                 <a
-                  key={i}
+                  key={a.href}
                   href={a.href}
                   data-testid={`contact-quick-${i}`}
                   className="col-span-12 md:col-span-4 bg-bone2 border border-line p-6 lg:p-8 hover:border-forest hover:bg-forest hover:text-bone group transition-colors"

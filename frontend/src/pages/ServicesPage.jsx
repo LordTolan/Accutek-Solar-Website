@@ -92,8 +92,8 @@ export default function ServicesPage() {
                   <div className="bg-bone border border-line p-6 lg:p-8">
                     <div className="label-tag text-amberDark mb-4">Capabilities</div>
                     <ul className="space-y-3">
-                      {s.bullets.map((b, j) => (
-                        <li key={j} className="flex items-start gap-3 text-sm text-ink">
+                      {s.bullets.map((b) => (
+                        <li key={`${s.id}-${b}`} className="flex items-start gap-3 text-sm text-ink">
                           <Check className="h-4 w-4 mt-0.5 text-forest shrink-0" />
                           <span>{b}</span>
                         </li>

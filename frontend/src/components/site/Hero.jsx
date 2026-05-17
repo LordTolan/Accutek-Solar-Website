@@ -108,7 +108,7 @@ export default function Hero() {
             { k: "100%", l: "In-house installs" },
           ].map((s, i) => (
             <div
-              key={i}
+              key={s.l}
               data-testid={`hero-stat-${i}`}
               className="bg-forest/95 px-4 sm:px-6 py-6 sm:py-8 backdrop-blur-sm"
             >

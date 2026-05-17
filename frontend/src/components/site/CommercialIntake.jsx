@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "sonner";
 import { COMPANY } from "@/lib/site-data";
+import { logger } from "@/lib/logger";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -108,7 +109,7 @@ export default function CommercialIntake() {
       const msg = err?.response?.data?.detail || "Couldn't submit — please call us directly.";
       toast.error(msg);
       // eslint-disable-next-line no-console
-      console.error(err);
+      logger.error(err);
     } finally {
       setSubmitting(false);
     }

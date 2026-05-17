@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { useNavigate } from "react-router-dom";
 import { COMPANY } from "@/lib/site-data";
 import { toast } from "sonner";
+import { logger } from "@/lib/logger";
 import {
   Loader2,
   LogOut,
@@ -47,7 +48,7 @@ export default function AdminLeadsPage() {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const [r, c, s] = await Promise.all([
@@ -60,17 +61,15 @@ export default function AdminLeadsPage() {
       setStats(s.data || null);
     } catch (err) {
       toast.error("Failed to load leads — your session may have expired.");
-      // eslint-disable-next-line no-console
-      console.error(err);
+      logger.error(err);
     } finally {
       setLoading(false);
     }
-  };
+  }, [adminFetch]);
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [load]);
 
   const handleLogout = async () => {
     await logout();

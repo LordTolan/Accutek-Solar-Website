@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import axios from "axios";
+import { logger } from "@/lib/logger";
 
 const AuthContext = createContext(null);
 const STORAGE_KEY = "accutek_admin_token";
@@ -71,8 +72,7 @@ export function AuthProvider({ children }) {
       await axios.post(`${API}/auth/logout`, {}, { headers: authHeaders(token) });
     } catch (err) {
       // Server-side logout is best-effort (token is stateless JWT) — log and continue.
-      // eslint-disable-next-line no-console
-      console.warn("auth: server-side logout failed; clearing local session anyway", err);
+      logger.warn("auth: server-side logout failed; clearing local session anyway", err);
     }
     persistToken(null);
     setUser(null);

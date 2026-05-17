@@ -40,7 +40,7 @@ export default function Gallery() {
                 : "col-span-12 md:col-span-12 aspect-[21/9]";
             return (
               <figure
-                key={i}
+                key={g.src}
                 data-testid={`gallery-item-${i}`}
                 className={`relative overflow-hidden bg-bone2 border border-line group ${span}`}
               >

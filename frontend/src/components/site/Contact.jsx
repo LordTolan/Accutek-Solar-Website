@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Mail, Phone, MapPin, Clock, ArrowRight, Loader2, ShieldCheck, Paperclip, X as XIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { logger } from "@/lib/logger";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -90,7 +91,7 @@ export default function Contact() {
           : "Couldn't submit — please call us directly.";
       toast.error(msg);
       // eslint-disable-next-line no-console
-      console.error("Contact form error:", err);
+      logger.error("Contact form error:", err);
     } finally {
       setSubmitting(false);
     }

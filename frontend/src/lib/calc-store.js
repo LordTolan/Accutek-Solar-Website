@@ -1,5 +1,7 @@
 // Tiny localStorage-backed store for calculator results,
 // so /tools → /contact can hand off numbers without a backend hop.
+import { logger } from "@/lib/logger";
+
 const KEY = "accutek_calc_results";
 
 export function saveCalcResult(toolId, label, summary, raw) {
@@ -15,10 +17,7 @@ export function saveCalcResult(toolId, label, summary, raw) {
     localStorage.setItem(KEY, JSON.stringify(all));
     window.dispatchEvent(new Event("accutek-calc-updated"));
   } catch (err) {
-    // localStorage may be disabled, full, or in a private context.
-    // Surface it for diagnostics but don't break the UI.
-    // eslint-disable-next-line no-console
-    console.warn("calc-store: saveCalcResult failed", err);
+    logger.warn("calc-store: saveCalcResult failed", err);
   }
 }
 
@@ -26,8 +25,7 @@ export function readAll() {
   try {
     return JSON.parse(localStorage.getItem(KEY) || "{}");
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn("calc-store: readAll parse failed", err);
+    logger.warn("calc-store: readAll parse failed", err);
     return {};
   }
 }
@@ -37,8 +35,7 @@ export function clearAll() {
     localStorage.removeItem(KEY);
     window.dispatchEvent(new Event("accutek-calc-updated"));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn("calc-store: clearAll failed", err);
+    logger.warn("calc-store: clearAll failed", err);
   }
 }
 
@@ -49,7 +46,6 @@ export function removeOne(toolId) {
     localStorage.setItem(KEY, JSON.stringify(all));
     window.dispatchEvent(new Event("accutek-calc-updated"));
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.warn("calc-store: removeOne failed", err);
+    logger.warn("calc-store: removeOne failed", err);
   }
 }
