@@ -88,7 +88,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="col-span-12 lg:col-span-6 lg:col-start-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Person name="Keith Davis" role="Founder &amp; President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience. Still hands-on." />
+              <Person name="Keith Davis" role="Founder & President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience. Still hands-on." />
               <Person name="Seth Davis" role="Operations" body="Day-to-day operations, project management and field crews across Indiana and Illinois." />
               <Person name="Quill Davis" role="Operations" body="Day-to-day operations, technical lead on diagnostics and commercial automation work." />
               <Person name="In-house crew" role="Installation team" body="No subcontracted labor. Every install is performed by Accutek employees from start to finish." />
@@ -112,7 +112,7 @@ export default function AboutPage() {
 function Person({ name, role, body }) {
   return (
     <div className="bg-pine/40 border border-bone/15 p-5">
-      <div className="label-tag text-amber mb-1" dangerouslySetInnerHTML={{ __html: role }} />
+      <div className="label-tag text-amber mb-1">{role}</div>
       <div className="font-display text-lg font-bold text-bone tracking-tight">{name}</div>
       <p className="mt-2 text-sm text-bone/70 leading-relaxed">{body}</p>
     </div>

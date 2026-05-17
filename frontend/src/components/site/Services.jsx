@@ -55,8 +55,8 @@ export default function Services({ compact = false }) {
                 </p>
                 {!compact && (
                   <ul className="space-y-2 border-t border-line pt-6">
-                    {s.bullets.slice(0, 3).map((b, j) => (
-                      <li key={j} className="flex items-start gap-2 text-sm text-ink">
+                    {s.bullets.slice(0, 3).map((b) => (
+                      <li key={`${s.id}-${b}`} className="flex items-start gap-2 text-sm text-ink">
                         <Check className="h-3.5 w-3.5 mt-1 text-amberDark shrink-0" />
                         <span>{b}</span>
                       </li>

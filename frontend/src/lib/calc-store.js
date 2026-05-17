@@ -14,15 +14,20 @@ export function saveCalcResult(toolId, label, summary, raw) {
     };
     localStorage.setItem(KEY, JSON.stringify(all));
     window.dispatchEvent(new Event("accutek-calc-updated"));
-  } catch {
-    // localStorage disabled / quota — silently fail
+  } catch (err) {
+    // localStorage may be disabled, full, or in a private context.
+    // Surface it for diagnostics but don't break the UI.
+    // eslint-disable-next-line no-console
+    console.warn("calc-store: saveCalcResult failed", err);
   }
 }
 
 export function readAll() {
   try {
     return JSON.parse(localStorage.getItem(KEY) || "{}");
-  } catch {
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn("calc-store: readAll parse failed", err);
     return {};
   }
 }
@@ -31,8 +36,9 @@ export function clearAll() {
   try {
     localStorage.removeItem(KEY);
     window.dispatchEvent(new Event("accutek-calc-updated"));
-  } catch {
-    /* noop */
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn("calc-store: clearAll failed", err);
   }
 }
 
@@ -42,7 +48,8 @@ export function removeOne(toolId) {
     delete all[toolId];
     localStorage.setItem(KEY, JSON.stringify(all));
     window.dispatchEvent(new Event("accutek-calc-updated"));
-  } catch {
-    /* noop */
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.warn("calc-store: removeOne failed", err);
   }
 }

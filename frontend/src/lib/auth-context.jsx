@@ -3,6 +3,7 @@ import React, {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
 } from "react";
 import axios from "axios";
@@ -68,8 +69,10 @@ export function AuthProvider({ children }) {
   const logout = useCallback(async () => {
     try {
       await axios.post(`${API}/auth/logout`, {}, { headers: authHeaders(token) });
-    } catch {
-      /* ignore */
+    } catch (err) {
+      // Server-side logout is best-effort (token is stateless JWT) — log and continue.
+      // eslint-disable-next-line no-console
+      console.warn("auth: server-side logout failed; clearing local session anyway", err);
     }
     persistToken(null);
     setUser(null);
@@ -94,12 +97,13 @@ export function AuthProvider({ children }) {
     [persistToken, token]
   );
 
+  const value = useMemo(
+    () => ({ status, user, token, login, logout, adminFetch }),
+    [status, user, token, login, logout, adminFetch]
+  );
+
   return (
-    <AuthContext.Provider
-      value={{ status, user, token, login, logout, adminFetch }}
-    >
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
   );
 }
 

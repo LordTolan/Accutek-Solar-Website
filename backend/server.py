@@ -393,8 +393,8 @@ async def admin_download_site_plan(lead_id: str, _=Depends(get_current_admin)):
     sp = doc["site_plan"]
     try:
         data = base64.b64decode(sp["data_base64"])
-    except Exception:
-        raise HTTPException(status_code=500, detail="Unable to decode stored file")
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail="Unable to decode stored file") from exc
     return Response(
         content=data,
         media_type=sp.get("content_type") or "application/octet-stream",
