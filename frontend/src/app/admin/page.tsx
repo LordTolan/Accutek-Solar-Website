@@ -169,9 +169,11 @@ export default function AdminDashboard() {
               <Row label="ZIP / State" value={`${selected.zip_code}${selected.state ? " · " + selected.state : ""}`} />
               <Row label="Type" value={selected.answers?.service_type} />
               <Row label="Monthly bill" value={formatCurrency(selected.answers?.monthly_bill)} />
-              <Row label="Homeowner" value={selected.answers?.homeowner ? "Yes" : "No"} />
-              <Row label="Roof age" value={selected.answers?.roof_age} />
-              <Row label="Timeline" value={selected.answers?.timeline} />
+              <Row label="Interest source" value={(selected.answers?.interest_source || "").replace(/_/g, " ")} />
+              <Row label="Interest areas" value={(selected.answers?.interest_areas || []).join(", ") || "—"} />
+              <Row label="Homeowner 5–7y" value={selected.answers?.homeowner_5_7y ? "Yes" : "No"} />
+              <Row label="Aware credit ended" value={selected.answers?.aware_credit_ended ? "Yes" : "No"} />
+              <Row label="Timeline" value={(selected.answers?.timeline || "").replace(/_/g, " ")} />
 
               <div className="bg-muted/40 rounded-xl p-4 space-y-1">
                 <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Estimate</div>

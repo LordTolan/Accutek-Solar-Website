@@ -1,8 +1,7 @@
 {
   "/page": "app/page.js",
   "/quote/page": "app/quote/page.js",
-  "/book/page": "app/book/page.js",
-  "/admin/page": "app/admin/page.js",
   "/service-area/page": "app/service-area/page.js",
-  "/admin/login/page": "app/admin/login/page.js"
+  "/admin/login/page": "app/admin/login/page.js",
+  "/admin/page": "app/admin/page.js"
 }
