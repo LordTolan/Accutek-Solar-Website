@@ -1,15 +1,18 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, Home, Wrench, MessageCircle } from "lucide-react";
 import BulbLogo from "@/components/site/BulbLogo";
 import { COMPANY } from "@/lib/site-data";
+import useSEO from "@/lib/use-seo";
 
 export default function NotFoundPage() {
   const { pathname } = useLocation();
 
-  useEffect(() => {
-    document.title = "Page not found · Accutek Solar";
-  }, []);
+  useSEO({
+    title: "Page not found",
+    description: "The page you were looking for has moved or doesn't exist. Find your way back to Accutek Solar.",
+    path: pathname,
+  });
 
   return (
     <main

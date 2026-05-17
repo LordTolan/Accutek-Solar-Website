@@ -4,8 +4,15 @@ import PageHero from "@/components/site/PageHero";
 import CTASection from "@/components/site/CTASection";
 import { SERVICES, IMAGES } from "@/lib/site-data";
 import { Check, ArrowRight } from "lucide-react";
+import useSEO from "@/lib/use-seo";
 
 export default function ServicesPage() {
+  useSEO({
+    title: "Services — Solar, Battery Backup, Generators & Electrical",
+    description:
+      "Four disciplines, one in-house crew: solar & storage, backup power, facility automation and advanced diagnostics across Indiana and Illinois since 1994.",
+    path: "/services",
+  });
   return (
     <main data-testid="services-page" className="bg-bone">
       <PageHero

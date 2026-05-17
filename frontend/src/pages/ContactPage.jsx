@@ -3,6 +3,7 @@ import PageHero from "@/components/site/PageHero";
 import Contact from "@/components/site/Contact";
 import { COMPANY } from "@/lib/site-data";
 import { Phone, Mail, MapPin, Clock, CalendarClock } from "lucide-react";
+import useSEO from "@/lib/use-seo";
 
 const QUICK_ACTIONS = [
   {
@@ -28,6 +29,12 @@ const QUICK_ACTIONS = [
 ];
 
 export default function ContactPage() {
+  useSEO({
+    title: "Contact — Schedule a Service Call | (812) 878-7343",
+    description:
+      "Free residential estimates. Commercial site visits by appointment. We respond within one business day across Indiana and Illinois. Call (812) 878-7343.",
+    path: "/contact",
+  });
   return (
     <main data-testid="contact-page" className="bg-bone">
       <PageHero

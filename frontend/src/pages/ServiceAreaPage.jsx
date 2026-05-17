@@ -4,8 +4,15 @@ import ServiceAreaMap from "@/components/site/ServiceAreaMap";
 import CTASection from "@/components/site/CTASection";
 import { SERVICE_QUADRANTS, COMPANY, IMAGES } from "@/lib/site-data";
 import { MapPin, Clock, Truck } from "lucide-react";
+import useSEO from "@/lib/use-seo";
 
 export default function ServiceAreaPage() {
+  useSEO({
+    title: "Service Area — 17 Counties Across Indiana & Illinois",
+    description:
+      "10 Indiana + 7 Illinois counties served daily from our Clinton, IN home base. Vigo, Parke, Vermillion, Putnam, Champaign, Vermilion and more.",
+    path: "/service-area",
+  });
   return (
     <main data-testid="service-area-page" className="bg-bone">
       <PageHero

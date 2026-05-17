@@ -1,6 +1,6 @@
-import { useEffect } from "react";
 import "@/App.css";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import HomePage from "@/pages/HomePage";
 import ServicesPage from "@/pages/ServicesPage";
@@ -80,11 +80,6 @@ function AppRoutes() {
 }
 
 function App() {
-  useEffect(() => {
-    document.title =
-      "Accutek Solar | 30 Years of Electrical Expertise · Indiana & Illinois";
-  }, []);
-
   return (
     <div className="App font-sans antialiased min-h-screen flex flex-col">
       <BrowserRouter>

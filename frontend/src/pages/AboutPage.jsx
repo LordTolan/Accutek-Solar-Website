@@ -5,6 +5,7 @@ import Gallery from "@/components/site/Gallery";
 import CTASection from "@/components/site/CTASection";
 import { COMPANY } from "@/lib/site-data";
 import { Wrench, Building2, Users, ShieldCheck } from "lucide-react";
+import useSEO from "@/lib/use-seo";
 
 const PRINCIPLES = [
   {
@@ -30,6 +31,12 @@ const PRINCIPLES = [
 ];
 
 export default function AboutPage() {
+  useSEO({
+    title: "About — Family-Owned Since 1994 | Keith, Seth & Quill Davis",
+    description:
+      "Two generations of the Davis family. Founded by Keith Davis in 1994 and run today by Keith, Seth and Quill — with an in-house crew that installs and services every job.",
+    path: "/about",
+  });
   return (
     <main data-testid="about-page" className="bg-bone">
       <PageHero

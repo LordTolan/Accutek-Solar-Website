@@ -3,8 +3,15 @@ import PageHero from "@/components/site/PageHero";
 import Calculators from "@/components/site/Calculators";
 import FAQ from "@/components/site/FAQ";
 import CTASection from "@/components/site/CTASection";
+import useSEO from "@/lib/use-seo";
 
 export default function ToolsPage() {
+  useSEO({
+    title: "Solar & Battery Calculators — Sizing, ROI & Payback",
+    description:
+      "Five free interactive calculators: solar panel sizing, battery backup, roof vs. ground mount, Kohler generator load, and lifetime ROI. Estimate before your free site visit.",
+    path: "/tools",
+  });
   return (
     <main data-testid="tools-page" className="bg-bone">
       <PageHero

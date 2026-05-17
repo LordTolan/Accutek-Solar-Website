@@ -13,6 +13,7 @@ import {
   Cpu,
   Activity,
 } from "lucide-react";
+import useSEO from "@/lib/use-seo";
 
 const VALUE_PROPS = [
   {
@@ -61,6 +62,12 @@ const DISCIPLINES = [
 ];
 
 export default function CommercialPage() {
+  useSEO({
+    title: "Commercial & Industrial — Pre-Qualified Project Intake",
+    description:
+      "Commercial PV up to multi-hundred kW, standby generators, facility automation, and multi-brand diagnostics. Pre-qualified site visits — no wasted trips.",
+    path: "/commercial",
+  });
   return (
     <main data-testid="commercial-page" className="bg-bone">
       <PageHero
