@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+// import Script from "next/script"; // uncomment when HCP <Script /> snippet is pasted below
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -28,19 +29,38 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        {/*
-          Housecall Pro 'Book Online' widget mount hook.
-          Paste the <script> snippet from HCP (Settings → Online Booking → Embed) below
-          to enable the live widget on /book. The widget mounts inside #hcp-book-widget.
-        */}
-      </head>
       <body className="min-h-screen flex flex-col bg-background text-foreground">
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
         <StickyMobileCTA />
         <Toaster position="top-right" theme="dark" richColors />
+
+        {/* ─────────────────────────────────────────────────────────────────────
+            HOUSECALL PRO — Book Online widget script
+            ─────────────────────────────────────────────────────────────────────
+            HCP gives you a snippet that looks like:
+              <script src="https://book.housecallpro.com/book/Accutek-Solar/XXXXX"
+                      async></script>
+            1. Get the snippet:  HCP → Settings → Online Booking → Embed code
+            2. Paste it BELOW this comment (uncomment + replace YOUR_HCP_BOOK_URL).
+            3. The widget will auto-mount inside <div id="hcp-book-widget"> on /book.
+
+            <Script
+              id="hcp-book-online"
+              src="YOUR_HCP_BOOK_URL"
+              strategy="afterInteractive"
+            />
+        */}
+
+        {/* ─────────────────────────────────────────────────────────────────────
+            HOUSECALL PRO — Reviews widget + Chat bubble (optional)
+            ─────────────────────────────────────────────────────────────────────
+            Add these <Script /> tags here when you have the snippets.
+
+            <Script id="hcp-reviews" src="YOUR_HCP_REVIEWS_URL" strategy="afterInteractive" />
+            <Script id="hcp-chat"    src="YOUR_HCP_CHAT_URL"    strategy="afterInteractive" />
+        */}
       </body>
     </html>
   );
