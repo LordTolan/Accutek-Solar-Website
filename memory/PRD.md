@@ -28,7 +28,7 @@ Take accuteksolar.com (a 30-year-old family-owned solar company in Clinton, IN �
 
 ## Backend Endpoints
 - GET /api/ — health
-- GET /api/company — returns Accutek Solar, president Keith Davis, owners [Seth Davis, Quill Davis], 17 counties (10 IN + 7 IL)
+- GET /api/company — returns Accutek Solar, president Clint Lenover, owners [Seth Lenover, Colt Lenover, Quill Lenover], 17 counties (10 IN + 7 IL)
 - POST /api/leads — TCPA consent required (consent_communications=true, stores consent_text + consent_timestamp); 400 if missing
 - GET /api/leads — list desc, no _id leakage
 - GET/POST /api/status — status check (regression)

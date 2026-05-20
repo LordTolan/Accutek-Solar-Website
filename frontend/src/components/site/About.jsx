@@ -4,11 +4,11 @@ import { COMPANY } from "@/lib/site-data";
 import { ArrowRight } from "lucide-react";
 
 const milestones = [
-  { y: "1994", t: "Keith Davis founds Accutek in Clinton, IN" },
+  { y: "1994", t: "Clint Lenover founds Accutek in Clinton, IN" },
   { y: "2000s", t: "Expansion into solar PV and Kohler standby generators" },
   { y: "2010s", t: "Hybrid storage, energy monitoring, custom backup" },
   { y: "2020s", t: "Commercial facility automation, multi-brand diagnostics, decommissioning" },
-  { y: "Today", t: "Keith remains President. Sons Seth & Quill Davis run day-to-day operations." },
+  { y: "Today", t: "Clint remains President. Sons Seth, Colt & Quill Lenover run day-to-day operations." },
 ];
 
 export default function About({ compact = false }) {
@@ -36,8 +36,9 @@ export default function About({ compact = false }) {
               <p className="mt-4 text-base text-ink2 leading-relaxed">
                 Founded by <strong className="text-ink">{COMPANY.founder}</strong> in {COMPANY.founded} —
                 who remains <strong className="text-ink">President</strong> today. His sons{" "}
-                <strong className="text-ink">Seth Davis</strong> and{" "}
-                <strong className="text-ink">Quill Davis</strong> run day-to-day operations,
+                <strong className="text-ink">Seth</strong>,{" "}
+                <strong className="text-ink">Colt</strong> and{" "}
+                <strong className="text-ink">Quill Lenover</strong> run day-to-day operations,
                 serving residential and commercial clients with the same in-house crew that's
                 done every install since the start.
               </p>

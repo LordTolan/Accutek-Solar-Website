@@ -27,9 +27,10 @@ class TestCompany:
         assert r.status_code == 200
         data = r.json()
         assert data["name"] == "Accutek Solar"
-        assert data["president"] == "Keith Davis"
-        assert "Seth Davis" in data["owners"]
-        assert "Quill Davis" in data["owners"]
+        assert data["president"] == "Clint Lenover"
+        assert "Seth Lenover" in data["owners"]
+        assert "Colt Lenover" in data["owners"]
+        assert "Quill Lenover" in data["owners"]
         assert data["phone"] == "(812) 878-7343"
         assert data["founded"] == 1994
         assert "service_areas" in data

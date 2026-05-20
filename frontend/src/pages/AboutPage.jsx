@@ -32,9 +32,9 @@ const PRINCIPLES = [
 
 export default function AboutPage() {
   useSEO({
-    title: "About — Family-Owned Since 1994 | Keith, Seth & Quill Davis",
+    title: "About — Family-Owned Since 1994 | Clint, Seth, Colt & Quill Lenover",
     description:
-      "Two generations of the Davis family. Founded by Keith Davis in 1994 and run today by Keith, Seth and Quill — with an in-house crew that installs and services every job.",
+      "Two generations of the Lenover family. Founded by Clint Lenover in 1994 and run today by Clint, Seth, Colt and Quill — with an in-house crew that installs and services every job.",
     path: "/about",
   });
   return (
@@ -95,10 +95,10 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="col-span-12 lg:col-span-6 lg:col-start-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Person name="Keith Davis" role="Founder & President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience. Still hands-on." />
-              <Person name="Seth Davis" role="Operations" body="Day-to-day operations, project management and field crews across Indiana and Illinois." />
-              <Person name="Quill Davis" role="Operations" body="Day-to-day operations, technical lead on diagnostics and commercial automation work." />
-              <Person name="In-house crew" role="Installation team" body="No subcontracted labor. Every install is performed by Accutek employees from start to finish." />
+              <Person name="Clint Lenover" role="Founder & President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience. Still hands-on." />
+              <Person name="Seth Lenover" role="Operations" body="Day-to-day operations, project management and field crews across Indiana and Illinois." />
+              <Person name="Colt Lenover" role="Operations" body="Day-to-day operations, field work and hands-on project execution." />
+              <Person name="Quill Lenover" role="Operations" body="Day-to-day operations, technical lead on diagnostics and commercial automation work." />
             </div>
           </div>
         </div>
@@ -116,9 +116,17 @@ export default function AboutPage() {
   );
 }
 
-function Person({ name, role, body }) {
+function Person({ name, role, body, photo }) {
+  const initials = name.split(" ").map((w) => w[0]).join("");
   return (
     <div className="bg-pine/40 border border-bone/15 p-5">
+      {photo ? (
+        <img src={photo} alt={name} className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-amber/40" />
+      ) : (
+        <div className="w-16 h-16 rounded-full bg-amber/20 flex items-center justify-center mb-3 border-2 border-amber/40">
+          <span className="font-display text-lg font-bold text-amber">{initials}</span>
+        </div>
+      )}
       <div className="label-tag text-amber mb-1">{role}</div>
       <div className="font-display text-lg font-bold text-bone tracking-tight">{name}</div>
       <p className="mt-2 text-sm text-bone/70 leading-relaxed">{body}</p>

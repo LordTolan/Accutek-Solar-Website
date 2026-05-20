@@ -11,10 +11,10 @@ export const COMPANY = {
   tagline: "30 years of electrical expertise. Solar, storage, backup power & facility automation across Indiana & Illinois.",
   founded: 1994,
   yearsInBusiness: 30,
-  founder: "Keith Davis",
-  president: "Keith Davis",
-  owners: ["Seth Davis", "Quill Davis"],
-  ownership: "Founded by Keith Davis in 1994 — still President today. His sons Seth Davis and Quill Davis run day-to-day operations.",
+  founder: "Clint Lenover",
+  president: "Clint Lenover",
+  owners: ["Seth Lenover", "Colt Lenover", "Quill Lenover"],
+  ownership: "Founded by Clint Lenover in 1994 — still President today. His sons Seth, Colt, and Quill Lenover run day-to-day operations.",
   phone: "(812) 878-7343",
   phoneRaw: "+18128787343",
   email: "solarseth7@yahoo.com",
@@ -201,7 +201,7 @@ export const FAQS = [
   },
   {
     q: "How long has Accutek been in business?",
-    a: "Accutek Solar was founded by Keith Davis in 1994 — over 30 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His sons Seth Davis and Quill Davis run day-to-day operations. Family-owned, second-generation operated.",
+    a: "Accutek Solar was founded by Clint Lenover in 1994 — over 30 years of electrical and solar expertise based in Clinton, Indiana. Clint remains President. His sons Seth, Colt, and Quill Lenover run day-to-day operations. Family-owned, second-generation operated.",
   },
   {
     q: "Do you handle commercial work?",

@@ -34,7 +34,7 @@ export default function Footer() {
               residential and commercial clients.
             </p>
             <p className="mt-3 text-xs text-bone/40 leading-relaxed">
-              Keith Davis, President · Seth & Quill Davis, day-to-day operations.
+              Clint Lenover, President · Seth, Colt & Quill Lenover, day-to-day operations.
             </p>
           </div>
 

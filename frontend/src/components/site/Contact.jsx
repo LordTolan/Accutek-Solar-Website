@@ -161,7 +161,7 @@ export default function Contact() {
                   <span className="italic font-semibold">We'll be in touch.</span>
                 </h3>
                 <p className="mt-4 text-ink2">
-                  Keith, Seth, Quill or one of our crew will reach out within
+                  Clint, Seth, Colt, Quill or one of our crew will reach out within
                   one business day. If it's urgent, please call us directly at {COMPANY.phone}.
                 </p>
                 <button
