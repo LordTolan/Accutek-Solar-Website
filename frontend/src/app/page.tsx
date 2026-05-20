@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, AlertCircle, CheckCircle2 } from "lucide-react";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
-import RotatingTagline from "@/components/RotatingTagline";
+import RotatingHeadline from "@/components/RotatingHeadline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
@@ -38,13 +38,7 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-primary bg-primary/8 border border-primary/30 px-3 py-1.5 rounded-md mb-7 animate-fade-up" data-testid="hero-eyebrow">
               <Cpu className="w-3 h-3" /> FAMILY-OWNED · SINCE 1994
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-black leading-[1.02] text-balance animate-fade-up" data-testid="hero-title">
-              The future of energy<br/>
-              is already on your <span className="text-primary">roof</span>
-              <span className="text-foreground/60"> — or in your </span>
-              <span className="text-primary">field.</span>
-            </h1>
-            <RotatingTagline />
+            <RotatingHeadline />
             <p className="mt-6 md:mt-8 text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "0.1s" }}>
               32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across Indiana and Illinois — engineered for your site, your bill, your budget.
             </p>
