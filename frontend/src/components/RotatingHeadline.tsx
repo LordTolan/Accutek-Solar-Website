@@ -30,12 +30,12 @@ const TAGLINES = [
   "Dependable solar solutions for Indiana and Illinois property owners.",
 ];
 
-const ROTATE_MS = 4200; // slower at headline size — more cinematic
+const ROTATE_MS = 4200; // matches .rh-line animation duration in globals.css
 
 /**
- * Split each tagline into a "dark head + green tail" pair so the headline
- * matches the original two-tone (foreground + primary) treatment seen in the
- * screenshot. Falls back to all-primary if there's no natural split point.
+ * Split each tagline into a "dark head + green tail" pair to match the
+ * two-tone (foreground + primary) treatment of the original screenshot.
+ * Falls back to all-primary when there's no natural split point.
  */
 function splitHeadline(line: string): [string, string] {
   const dashIdx = line.indexOf(" — ");
@@ -46,57 +46,57 @@ function splitHeadline(line: string): [string, string] {
   return ["", line];
 }
 
+function pickRandom(prev: number, len: number): number {
+  if (len <= 1) return 0;
+  let next = Math.floor(Math.random() * len);
+  if (next === prev) next = (next + 1) % len; // avoid immediate repeat
+  return next;
+}
+
 export default function RotatingHeadline() {
+  // Deterministic SSR start (index 0) — avoids hydration mismatch.
   const [i, setI] = useState(0);
+  // `cycle` always increments — guarantees React remounts the span and
+  // re-triggers the CSS animation even if random picks the same index twice.
+  const [cycle, setCycle] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setI((n) => (n + 1) % TAGLINES.length), ROTATE_MS);
+    // Kick off with a random first pick on the client side
+    setI((prev) => pickRandom(prev, TAGLINES.length));
+    setCycle((n) => n + 1);
+
+    const t = setInterval(() => {
+      setI((prev) => pickRandom(prev, TAGLINES.length));
+      setCycle((n) => n + 1);
+    }, ROTATE_MS);
     return () => clearInterval(t);
   }, []);
 
   const [head, tail] = splitHeadline(TAGLINES[i]);
 
   return (
-    <>
-      <style jsx>{`
-        @keyframes rh-in {
-          0%   { opacity: 0; transform: translateY(36px); filter: blur(6px); }
-          16%  { opacity: 1; transform: translateY(0);    filter: blur(0); }
-          84%  { opacity: 1; transform: translateY(0);    filter: blur(0); }
-          100% { opacity: 0; transform: translateY(-28px); filter: blur(5px); }
-        }
-        .rh-line {
-          animation: rh-in ${ROTATE_MS}ms cubic-bezier(0.22, 1, 0.36, 1) both;
-          will-change: transform, opacity, filter;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .rh-line { animation: none; opacity: 1; filter: none; transform: none; }
-        }
-      `}</style>
+    <h1 data-testid="hero-title" className="relative">
+      {/* SEO + screen-reader stable headline */}
+      <span className="sr-only">
+        Accutek Solar — local solar, ground-mount and electrical contractor
+        serving Indiana and Illinois since 1994.
+      </span>
 
-      <h1 data-testid="hero-title" className="relative">
-        {/* Stable, screen-reader & SEO friendly headline */}
-        <span className="sr-only">
-          Accutek Solar — local solar, ground-mount and electrical contractor
-          serving Indiana and Illinois since 1994.
-        </span>
-
-        {/* Visual rotating slot — fixed minimum height = no layout shift */}
+      {/* Visual rotating slot — fixed minimum height = no layout shift */}
+      <span
+        aria-hidden="true"
+        className="relative block min-h-[16rem] sm:min-h-[15rem] md:min-h-[17rem] lg:min-h-[20rem] overflow-hidden"
+      >
         <span
-          aria-hidden="true"
-          className="relative block min-h-[16rem] sm:min-h-[15rem] md:min-h-[17rem] lg:min-h-[20rem] overflow-hidden"
+          key={cycle}
+          className="rh-line absolute top-0 left-0 right-0 block font-heading font-black tracking-tight leading-[1.04] text-balance text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl"
+          data-testid={`hero-title-line-${i}`}
         >
-          <span
-            key={i}
-            className="rh-line absolute top-0 left-0 right-0 block font-heading font-black tracking-tight leading-[1.04] text-balance text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl"
-            data-testid={`hero-title-line-${i}`}
-          >
-            {head && <span className="text-foreground">{head}</span>}
-            {head && " "}
-            <span className="text-primary">{tail}</span>
-          </span>
+          {head && <span className="text-foreground">{head}</span>}
+          {head && " "}
+          <span className="text-primary">{tail}</span>
         </span>
-      </h1>
-    </>
+      </span>
+    </h1>
   );
 }

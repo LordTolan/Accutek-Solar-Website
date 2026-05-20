@@ -140,10 +140,8 @@ __turbopack_context__.s({
     "default": (()=>RotatingHeadline)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.js [app-ssr] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
 "use client";
-;
 ;
 ;
 const TAGLINES = [
@@ -173,11 +171,11 @@ const TAGLINES = [
     "Turn sunlight into savings across Indiana and Illinois.",
     "Dependable solar solutions for Indiana and Illinois property owners."
 ];
-const ROTATE_MS = 4200; // slower at headline size — more cinematic
+const ROTATE_MS = 4200; // matches .rh-line animation duration in globals.css
 /**
- * Split each tagline into a "dark head + green tail" pair so the headline
- * matches the original two-tone (foreground + primary) treatment seen in the
- * screenshot. Falls back to all-primary if there's no natural split point.
+ * Split each tagline into a "dark head + green tail" pair to match the
+ * two-tone (foreground + primary) treatment of the original screenshot.
+ * Falls back to all-primary when there's no natural split point.
  */ function splitHeadline(line) {
     const dashIdx = line.indexOf(" — ");
     if (dashIdx > 0) return [
@@ -195,119 +193,82 @@ const ROTATE_MS = 4200; // slower at headline size — more cinematic
         line
     ];
 }
+function pickRandom(prev, len) {
+    if (len <= 1) return 0;
+    let next = Math.floor(Math.random() * len);
+    if (next === prev) next = (next + 1) % len; // avoid immediate repeat
+    return next;
+}
 function RotatingHeadline() {
+    // Deterministic SSR start (index 0) — avoids hydration mismatch.
     const [i, setI] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    // `cycle` always increments — guarantees React remounts the span and
+    // re-triggers the CSS animation even if random picks the same index twice.
+    const [cycle, setCycle] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        const t = setInterval(()=>setI((n)=>(n + 1) % TAGLINES.length), ROTATE_MS);
+        // Kick off with a random first pick on the client side
+        setI((prev)=>pickRandom(prev, TAGLINES.length));
+        setCycle((n)=>n + 1);
+        const t = setInterval(()=>{
+            setI((prev)=>pickRandom(prev, TAGLINES.length));
+            setCycle((n)=>n + 1);
+        }, ROTATE_MS);
         return ()=>clearInterval(t);
     }, []);
     const [head, tail] = splitHeadline(TAGLINES[i]);
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+        "data-testid": "hero-title",
+        className: "relative",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                id: "ee101ba69dc3a3ff",
-                dynamic: [
-                    ROTATE_MS
-                ],
-                children: `@keyframes rh-in{0%{opacity:0;filter:blur(6px);transform:translateY(36px)}16%{opacity:1;filter:blur();transform:translateY(0)}84%{opacity:1;filter:blur();transform:translateY(0)}to{opacity:0;filter:blur(5px);transform:translateY(-28px)}}.rh-line.__jsx-style-dynamic-selector{will-change:transform,opacity,filter;animation:cubic-bezier(.22,1,.36,1) both rh-in ${ROTATE_MS}ms}@media (prefers-reduced-motion:reduce){.rh-line.__jsx-style-dynamic-selector{opacity:1;filter:none;animation:none;transform:none}}`
-            }, void 0, false, void 0, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                "data-testid": "hero-title",
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                    [
-                        "ee101ba69dc3a3ff",
-                        [
-                            ROTATE_MS
-                        ]
-                    ]
-                ]) + " " + "relative",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                            [
-                                "ee101ba69dc3a3ff",
-                                [
-                                    ROTATE_MS
-                                ]
-                            ]
-                        ]) + " " + "sr-only",
-                        children: "Accutek Solar — local solar, ground-mount and electrical contractor serving Indiana and Illinois since 1994."
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/RotatingHeadline.tsx",
-                        lineNumber: 79,
-                        columnNumber: 9
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                        "aria-hidden": "true",
-                        className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                            [
-                                "ee101ba69dc3a3ff",
-                                [
-                                    ROTATE_MS
-                                ]
-                            ]
-                        ]) + " " + "relative block min-h-[16rem] sm:min-h-[15rem] md:min-h-[17rem] lg:min-h-[20rem] overflow-hidden",
-                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            "data-testid": `hero-title-line-${i}`,
-                            className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                                [
-                                    "ee101ba69dc3a3ff",
-                                    [
-                                        ROTATE_MS
-                                    ]
-                                ]
-                            ]) + " " + "rh-line absolute top-0 left-0 right-0 block font-heading font-black tracking-tight leading-[1.04] text-balance text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl",
-                            children: [
-                                head && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                                        [
-                                            "ee101ba69dc3a3ff",
-                                            [
-                                                ROTATE_MS
-                                            ]
-                                        ]
-                                    ]) + " " + "text-foreground",
-                                    children: head
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/RotatingHeadline.tsx",
-                                    lineNumber: 94,
-                                    columnNumber: 22
-                                }, this),
-                                head && " ",
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                    className: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"].dynamic([
-                                        [
-                                            "ee101ba69dc3a3ff",
-                                            [
-                                                ROTATE_MS
-                                            ]
-                                        ]
-                                    ]) + " " + "text-primary",
-                                    children: tail
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/RotatingHeadline.tsx",
-                                    lineNumber: 96,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, i, true, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                className: "sr-only",
+                children: "Accutek Solar — local solar, ground-mount and electrical contractor serving Indiana and Illinois since 1994."
+            }, void 0, false, {
+                fileName: "[project]/src/components/RotatingHeadline.tsx",
+                lineNumber: 80,
+                columnNumber: 7
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                "aria-hidden": "true",
+                className: "relative block min-h-[16rem] sm:min-h-[15rem] md:min-h-[17rem] lg:min-h-[20rem] overflow-hidden",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                    className: "rh-line absolute top-0 left-0 right-0 block font-heading font-black tracking-tight leading-[1.04] text-balance text-[2.75rem] sm:text-5xl md:text-6xl lg:text-7xl",
+                    "data-testid": `hero-title-line-${i}`,
+                    children: [
+                        head && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-foreground",
+                            children: head
+                        }, void 0, false, {
                             fileName: "[project]/src/components/RotatingHeadline.tsx",
-                            lineNumber: 89,
+                            lineNumber: 95,
+                            columnNumber: 20
+                        }, this),
+                        head && " ",
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                            className: "text-primary",
+                            children: tail
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/RotatingHeadline.tsx",
+                            lineNumber: 97,
                             columnNumber: 11
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/RotatingHeadline.tsx",
-                        lineNumber: 85,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
+                    ]
+                }, cycle, true, {
+                    fileName: "[project]/src/components/RotatingHeadline.tsx",
+                    lineNumber: 90,
+                    columnNumber: 9
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/src/components/RotatingHeadline.tsx",
-                lineNumber: 77,
+                lineNumber: 86,
                 columnNumber: 7
             }, this)
         ]
-    }, void 0, true);
+    }, void 0, true, {
+        fileName: "[project]/src/components/RotatingHeadline.tsx",
+        lineNumber: 78,
+        columnNumber: 5
+    }, this);
 }
 }}),
 "[project]/src/lib/api.ts [app-ssr] (ecmascript)": ((__turbopack_context__) => {
