@@ -1,4 +1,6 @@
 import QuoteWizard from "@/components/QuoteWizard";
+import HCPLeadCapture from "@/components/HCPLeadCapture";
+import { Sparkles, FileText } from "lucide-react";
 
 export const metadata = { title: "Get Your Free Solar Estimate" };
 
@@ -11,10 +13,29 @@ export default function QuotePage() {
           Let's design a system that fits your site, <span className="text-primary">your bill, your budget.</span>
         </h1>
         <p className="mt-4 text-foreground/70 text-lg max-w-2xl">
-          Six quick questions from our Accutek Operations playbook — roof or ground mount — then an instant 25-year savings estimate. A real human follows up, usually same day.
+          Choose the path that suits you — instant 25-year savings estimate, or the official Accutek lead form. Both reach the same human at our shop.
         </p>
-        <div className="mt-10">
+
+        {/* Path 1: Instant estimate wizard */}
+        <div className="mt-12">
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
+            <Sparkles className="w-3 h-3" /> // OPTION A · INSTANT ESTIMATE
+          </div>
           <QuoteWizard />
+        </div>
+
+        {/* Path 2: Official HCP Lead Capture */}
+        <div className="my-14 flex items-center gap-4">
+          <div className="flex-1 h-px bg-border" />
+          <span className="text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground">// OR</span>
+          <div className="flex-1 h-px bg-border" />
+        </div>
+
+        <div>
+          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
+            <FileText className="w-3 h-3" /> // OPTION B · OFFICIAL LEAD FORM
+          </div>
+          <HCPLeadCapture />
         </div>
       </div>
     </section>
