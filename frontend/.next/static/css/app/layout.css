@@ -877,6 +877,9 @@ h1,h2,h3,h4,h5 { font-family: var(--font-heading); letter-spacing: -0.025em; fon
 .w-full{
   width: 100%;
 }
+.w-auto{
+  width: auto;
+}
 .min-w-0{
   min-width: 0px;
 }
@@ -1325,6 +1328,10 @@ h1,h2,h3,h4,h5 { font-family: var(--font-heading); letter-spacing: -0.025em; fon
 }
 .fill-primary{
   fill: hsl(var(--primary));
+}
+.object-contain{
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .object-cover{
   -o-object-fit: cover;
@@ -1910,6 +1917,14 @@ h1,h2,h3,h4,h5 { font-family: var(--font-heading); letter-spacing: -0.025em; fon
 
   .md\:h-\[360px\]{
     height: 360px;
+  }
+
+  .md\:h-11{
+    height: 2.75rem;
+  }
+
+  .md\:h-14{
+    height: 3.5rem;
   }
 
   .md\:min-h-\[17rem\]{

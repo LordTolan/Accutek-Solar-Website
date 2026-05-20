@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, Zap, CalendarClock } from "lucide-react";
+import { Menu, X, Phone, CalendarClock } from "lucide-react";
 import { cn, HCP_BOOK_URL } from "@/lib/utils";
 
 const NAV = [
@@ -21,14 +22,17 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border" data-testid="site-header">
       <div className="container mx-auto container-px h-16 md:h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5 group" data-testid="logo-link">
-          <span className="grid place-items-center w-9 h-9 rounded-md bg-primary text-primary-foreground shadow-green-glow">
-            <Zap className="w-5 h-5" strokeWidth={2.5} fill="currentColor" />
-          </span>
-          <div className="leading-tight">
-            <div className="font-heading text-lg md:text-xl font-extrabold tracking-tight">Accutek Solar</div>
-            <div className="text-[9px] md:text-[10px] uppercase tracking-[0.22em] font-mono text-primary">SINCE 1994 · IN &amp; IL</div>
-          </div>
+        <Link href="/" className="flex items-center group focus-ring rounded-md" data-testid="logo-link" aria-label="Accutek Solar — home">
+          <Image
+            src="/logo.png"
+            alt="Accutek Solar"
+            width={458}
+            height={192}
+            priority
+            sizes="(max-width: 768px) 130px, 180px"
+            className="h-9 md:h-11 w-auto object-contain"
+            data-testid="site-logo"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-7" data-testid="primary-nav">

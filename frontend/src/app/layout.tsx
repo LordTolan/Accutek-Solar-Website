@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 // import Script from "next/script"; // uncomment when HCP <Script /> snippet is pasted below
 import "./globals.css";
 import Header from "@/components/Header";
@@ -12,8 +12,8 @@ export const metadata: Metadata = {
     default: "Accutek Solar — The Future of Energy | Solar Installer Indiana & Illinois",
     template: "%s | Accutek Solar",
   },
-  description: "Family-owned solar installer serving Indiana & Illinois since 1994. Solar PV, Kohler generators, electrical. Free estimates — (812) 878-7343.",
-  keywords: ["Accutek Solar", "solar installer Indiana", "solar Illinois", "Kohler generator installer", "Clinton IN solar", "Terre Haute solar"],
+  description: "Family-owned solar installer serving Indiana & Illinois since 1994. Solar PV, ground-mount arrays, Kohler generators, electrical. Free estimates — (812) 878-7343.",
+  keywords: ["Accutek Solar", "solar installer Indiana", "solar Illinois", "ground-mount solar", "Kohler generator installer", "Clinton IN solar", "Terre Haute solar"],
   authors: [{ name: "Accutek Solar" }],
   openGraph: {
     type: "website",
@@ -21,9 +21,22 @@ export const metadata: Metadata = {
     description: "Family-owned solar & electrical contractor, 32 years strong. Indiana & Illinois.",
     siteName: "Accutek Solar",
     url: "https://www.accuteksolar.com",
+    images: [{ url: "/logo.png", width: 1852, height: 776, alt: "Accutek Solar" }],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192.png", type: "image/png", sizes: "192x192" },
+      { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  manifest: "/site.webmanifest",
   robots: { index: true, follow: true },
-  themeColor: "#1A1A1A",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#F4F6F8",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
