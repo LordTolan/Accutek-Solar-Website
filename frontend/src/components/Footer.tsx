@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin, Zap, CalendarClock } from "lucide-react";
+import { HCP_BOOK_URL } from "@/lib/utils";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -33,7 +34,7 @@ export default function Footer() {
             <li><Link href="/tools/calculator" className="hover:text-primary transition">Savings Calculator</Link></li>
             <li><Link href="/about" className="hover:text-primary transition">About</Link></li>
             <li><Link href="/quote" className="hover:text-primary transition">Free Quote</Link></li>
-            <li><Link href="/book" className="hover:text-primary transition">Book Online</Link></li>
+            <li><a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition">Book Online</a></li>
           </ul>
         </div>
 
@@ -52,9 +53,9 @@ export default function Footer() {
           <Link href="/quote" className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-5 py-3 text-xs font-bold uppercase tracking-wider hover:shadow-green-glow transition" data-testid="footer-cta">
             Start My Quote
           </Link>
-          <Link href="/book" className="mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 text-xs font-bold uppercase tracking-wider hover:border-primary transition w-full" data-testid="footer-book">
+          <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 text-xs font-bold uppercase tracking-wider hover:border-primary transition w-full" data-testid="footer-book">
             <CalendarClock className="w-4 h-4" /> Book Online
-          </Link>
+          </a>
         </div>
       </div>
       <div className="border-t border-border">

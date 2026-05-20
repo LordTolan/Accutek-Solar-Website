@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Phone, Zap, CalendarClock } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, HCP_BOOK_URL } from "@/lib/utils";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -43,9 +43,9 @@ export default function Header() {
           <a href="tel:+18128787343" className="text-sm font-medium text-foreground/80 flex items-center gap-2 hover:text-primary focus-ring" data-testid="header-phone">
             <Phone className="w-4 h-4" /> (812) 878-7343
           </a>
-          <Link href="/book" className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 text-foreground px-4 py-2.5 text-sm font-bold hover:border-primary transition focus-ring" data-testid="header-book">
+          <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 text-foreground px-4 py-2.5 text-sm font-bold hover:border-primary transition focus-ring" data-testid="header-book">
             <CalendarClock className="w-4 h-4" /> Book Online
-          </Link>
+          </a>
           <Link href="/quote" className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow transition focus-ring" data-testid="header-cta">
             Get Quote
           </Link>
@@ -63,9 +63,9 @@ export default function Header() {
               {n.label}
             </Link>
           ))}
-          <Link href="/book" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 font-bold" data-testid="mobile-book">
+          <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 font-bold" data-testid="mobile-book">
             <CalendarClock className="w-4 h-4" /> Book Online
-          </Link>
+          </a>
           <Link href="/quote" onClick={() => setOpen(false)} className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-5 py-3 font-bold uppercase tracking-wider" data-testid="mobile-cta">
             Get Quote
           </Link>

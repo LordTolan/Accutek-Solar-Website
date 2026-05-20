@@ -25,9 +25,9 @@ module.exports = {
         mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       boxShadow: {
-        ambient: "0 10px 40px rgba(0,0,0,0.4)",
-        "ambient-lg": "0 30px 80px rgba(0,0,0,0.55)",
-        "green-glow": "0 0 40px -8px hsl(142 100% 45% / 0.6)",
+        ambient: "0 8px 32px -8px rgba(15,23,42,0.10)",
+        "ambient-lg": "0 24px 60px -12px rgba(15,23,42,0.18)",
+        "green-glow": "0 0 30px -8px hsl(142 71% 32% / 0.45)",
       },
       keyframes: {
         "fade-up": { "0%": { opacity: 0, transform: "translateY(14px)" }, "100%": { opacity: 1, transform: "translateY(0)" } },

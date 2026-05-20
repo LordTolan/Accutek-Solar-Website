@@ -12,6 +12,9 @@ export const BACKEND_URL =
 
 export const API = `${BACKEND_URL}/api`;
 
+// Housecall Pro direct online-booking URL (provided by Donna)
+export const HCP_BOOK_URL = "https://book.housecallpro.com/book/Accutek-Solar/a610e2efa0494a03ae59009369f2a058?v2=true";
+
 export function formatCurrency(n: number) {
   return n.toLocaleString("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 }

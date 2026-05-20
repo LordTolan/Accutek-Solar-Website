@@ -308,8 +308,8 @@ TESTIMONIALS = [
 FAQS = [
     {"q": "Do we have enough sun in our area for solar to make sense?",
      "a": "Yes — we have more solar energy available here than in Germany, and Germany produces more solar energy per capita than any other country."},
-    {"q": "What is the difference between solar thermal and PV?",
-     "a": "Solar thermal uses the sun's heat to warm an antifreeze solution that heats water through a heat exchanger. PV (photovoltaic) panels generate DC electricity that is stored in batteries or converted to AC via an inverter."},
+    {"q": "What is the difference between roof-mount and ground-mount solar?",
+     "a": "Roof-mount arrays use your existing roof structure — fast install, no extra footprint. Ground-mount arrays sit in your yard or field on a steel rack — they let us pick the perfect tilt and orientation, avoid roof shading, and are easier to service. Roughly half of our installs are ground mounts. Pole mounts (with sun tracking) are a third option for premium output on rural lots."},
     {"q": "What are the different types of PV systems?",
      "a": "1) Grid-tied (no batteries, reduces or eliminates your electric bill). 2) Hybrid (grid-tied with batteries for outage backup). 3) Off-grid (fully independent with batteries and a backup generator)."},
     {"q": "What is net metering?",
@@ -337,9 +337,9 @@ COMPANY = {
     "address_short": "Clinton, IN",
     "stats": {"homes_powered": 1247, "money_saved": 2400000, "satisfaction": 98, "years_experience": datetime.now(timezone.utc).year - 1994},
     "services": [
-        {"slug": "residential-solar", "name": "Residential Solar PV", "desc": "Grid-tied, hybrid and off-grid systems for homeowners."},
-        {"slug": "commercial-solar", "name": "Commercial Solar", "desc": "Custom designs for farms, businesses and ag operations."},
-        {"slug": "solar-thermal", "name": "Solar Thermal", "desc": "Sun-heated water systems that slash hot water bills."},
+        {"slug": "residential-solar", "name": "Residential Solar PV", "desc": "Grid-tied, hybrid and off-grid systems — roof, ground or pole mount."},
+        {"slug": "ground-mount", "name": "Ground-Mount Arrays", "desc": "Field, yard and ag-site arrays sized for higher output and easier service."},
+        {"slug": "commercial-solar", "name": "Commercial & Ag Solar", "desc": "Custom designs for farms, businesses and ag operations — REAP-eligible."},
         {"slug": "backup-generators", "name": "Kohler Backup Generators", "desc": "Authorized Kohler installers for true energy resilience."},
         {"slug": "electrical", "name": "Electrical Install & Repair", "desc": "32 years of electrical service from a licensed team."},
         {"slug": "led-monitoring", "name": "LED & Energy Monitoring", "desc": "Lower your usage with smart lighting and live monitoring."},
@@ -657,3 +657,4 @@ async def shutdown():
 
 
 app.include_router(api)
+
