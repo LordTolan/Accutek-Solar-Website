@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, AlertCircle, CheckCircle2 } from "lucide-react";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
+import RotatingTagline from "@/components/RotatingTagline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
@@ -43,6 +44,7 @@ export default function HomePage() {
               <span className="text-foreground/60"> — or in your </span>
               <span className="text-primary">field.</span>
             </h1>
+            <RotatingTagline />
             <p className="mt-6 md:mt-8 text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "0.1s" }}>
               32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across Indiana and Illinois — engineered for your site, your bill, your budget.
             </p>
