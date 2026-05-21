@@ -85,7 +85,7 @@ export default function AboutPage() {
       {/* Leadership */}
       <section className="bg-forest text-bone py-20 lg:py-28">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-12 gap-6">
+          <div className="grid grid-cols-12 gap-6 mb-10">
             <div className="col-span-12 lg:col-span-5">
               <p className="label-tag text-amber mb-4">— Leadership</p>
               <h2 className="font-display text-3xl lg:text-5xl font-extrabold tracking-tighter leading-[1.05]">
@@ -94,11 +94,23 @@ export default function AboutPage() {
                 <span className="italic font-semibold">Same family.</span>
               </h2>
             </div>
-            <div className="col-span-12 lg:col-span-6 lg:col-start-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Person name="Keith Davis" role="Founder & President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience. Still hands-on." />
-              <Person name="Seth Davis" role="Operations" body="Day-to-day operations, project management and field crews across Indiana and Illinois." />
-              <Person name="Quill Davis" role="Operations" body="Day-to-day operations, technical lead on diagnostics and commercial automation work." />
-              <Person name="In-house crew" role="Installation team" body="No subcontracted labor. Every install is performed by Accutek employees from start to finish." />
+            <div className="col-span-12 lg:col-span-6 lg:col-start-7 flex items-center">
+              <Person name="Keith Davis" role="Founder & President" body="Founded Accutek in 1994. 30+ years of electrical and solar field experience." />
+            </div>
+          </div>
+
+          {/* Field crew — the people who show up to your job site */}
+          <div className="border-t border-bone/15 pt-10">
+            <p className="label-tag text-amber mb-6">— Meet your crew</p>
+            <p className="text-bone/70 text-sm mb-8 max-w-xl leading-relaxed">
+              No subcontractors. No call centers. These are the Accutek team members who show up to your property, do the work, and stand behind it.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <Person name="Seth Davis" role="Owner / Operator" body="Day-to-day operations, project management and field crews across Indiana and Illinois." />
+              <Person name="Quill Davis" role="Owner / Operator" body="Day-to-day operations, technical lead on diagnostics and commercial automation work." />
+              <Person name="Colt" role="Lead Solar Technician" body="Lead installer on residential and commercial solar PV, ground-mount and roof-mount systems." />
+              <Person name="AJ" role="Solar Technician" body="Installation and service work across solar PV, battery storage and backup power systems." />
+              <Person name="Clint" role="Solar Technician" body="Installation and service work across solar PV, battery storage and backup power systems." />
             </div>
           </div>
         </div>
@@ -116,11 +128,30 @@ export default function AboutPage() {
   );
 }
 
-function Person({ name, role, body }) {
+function Person({ name, role, body, photo }) {
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .join("");
   return (
     <div className="bg-pine/40 border border-bone/15 p-5">
+      {photo ? (
+        <img
+          src={photo}
+          alt={name}
+          className="w-16 h-16 rounded-full object-cover mb-3 border-2 border-amber/40"
+        />
+      ) : (
+        <div className="w-16 h-16 rounded-full bg-amber/20 flex items-center justify-center mb-3 border-2 border-amber/40">
+          <span className="font-display text-lg font-bold text-amber">
+            {initials}
+          </span>
+        </div>
+      )}
       <div className="label-tag text-amber mb-1">{role}</div>
-      <div className="font-display text-lg font-bold text-bone tracking-tight">{name}</div>
+      <div className="font-display text-lg font-bold text-bone tracking-tight">
+        {name}
+      </div>
       <p className="mt-2 text-sm text-bone/70 leading-relaxed">{body}</p>
     </div>
   );
