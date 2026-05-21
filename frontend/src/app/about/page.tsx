@@ -32,6 +32,12 @@ const TEAM = [
     slug: "quill",
     bio: "Handles installs, service calls and the electrical side of every job. Loves a clean wire pull.",
   },
+  {
+    name: "AJ (\"Scruff\")",
+    role: "Tech / Installer",
+    slug: "aj",
+    bio: "On the truck, on the roof, in the field — wherever the work is. Goes by Scruff around the shop.",
+  },
 ];
 
 const VALUES = [
@@ -125,7 +131,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-7" data-testid="team-grid">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-5" data-testid="team-grid">
             {TEAM.map((m, i) => (
               <TeamMemberCard key={m.slug} index={i} {...m} />
             ))}

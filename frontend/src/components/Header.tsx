@@ -12,7 +12,7 @@ const NAV = [
   { href: "/services", label: "Services" },
   { href: "/service-area", label: "Service Area" },
   { href: "/tools/calculator", label: "Calculator" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About · Team" },
 ];
 
 export default function Header() {

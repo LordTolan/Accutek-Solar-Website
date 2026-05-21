@@ -38,7 +38,7 @@ export default function Footer() {
             <li><Link href="/services" className="text-foreground/80 hover:text-primary transition">Services</Link></li>
             <li><Link href="/service-area" className="text-foreground/80 hover:text-primary transition">Service Area</Link></li>
             <li><Link href="/tools/calculator" className="text-foreground/80 hover:text-primary transition">Savings Calculator</Link></li>
-            <li><Link href="/about" className="text-foreground/80 hover:text-primary transition">About</Link></li>
+            <li><Link href="/about" className="text-foreground/80 hover:text-primary transition">About · Meet the Team</Link></li>
             <li><Link href="/quote" className="text-foreground/80 hover:text-primary transition">Free Quote</Link></li>
             <li><a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition">Book Online</a></li>
           </ul>
