@@ -28,11 +28,10 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.9"
 
-  # ── Frontend (React static site) ──────────────────────────────────────────
+  # ── Frontend (React static site — served from global CDN, no region needed)
   - type: web
     name: accutek-solar-web
     runtime: static
-    region: ohio
     plan: free
     rootDir: frontend
     buildCommand: yarn install && yarn build
