@@ -11,7 +11,7 @@ services:
   - type: web
     name: accutek-solar-api
     runtime: python
-    region: ohio  # closest to Indiana
+#   region: ohio  # closest to Indiana
     plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
