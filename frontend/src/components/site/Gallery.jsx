@@ -1,6 +1,32 @@
 import React from "react";
 import { GALLERY } from "@/lib/site-data";
 
+/**
+ * Assigns a responsive grid span to each gallery item based on its index
+ * within a repeating 6-item layout cycle. The first item in each cycle gets
+ * a wide hero treatment; the panoramic flag overrides to full-width.
+ */
+function spanForIndex(item, i) {
+  if (item.wide) {
+    return "col-span-12 aspect-[21/9]";
+  }
+  const pos = i % 6;
+  switch (pos) {
+    case 0:
+      return "col-span-12 md:col-span-8 aspect-[16/9]";
+    case 1:
+      return "col-span-12 md:col-span-4 aspect-[4/3]";
+    case 2:
+    case 3:
+    case 4:
+      return "col-span-6 md:col-span-4 aspect-[4/3]";
+    case 5:
+      return "col-span-12 md:col-span-6 aspect-[16/9]";
+    default:
+      return "col-span-6 md:col-span-4 aspect-[4/3]";
+  }
+}
+
 export default function Gallery() {
   return (
     <section
@@ -19,43 +45,32 @@ export default function Gallery() {
             </h2>
           </div>
           <p className="font-mono text-sm text-ink2 max-w-xs">
-            Selected work from across Indiana & Illinois. Every photo is an
+            Selected work from across Indiana &amp; Illinois. Every photo is an
             Accutek install — no stock images.
           </p>
         </div>
 
         <div className="grid grid-cols-12 gap-3 lg:gap-4">
-          {GALLERY.map((g, i) => {
-            const span =
-              i === 0
-                ? "col-span-12 md:col-span-8 aspect-[16/9]"
-                : i === 1
-                ? "col-span-12 md:col-span-4 aspect-[4/3]"
-                : i === 2
-                ? "col-span-6 md:col-span-4 aspect-[4/3]"
-                : i === 3
-                ? "col-span-6 md:col-span-4 aspect-[4/3]"
-                : i === 4
-                ? "col-span-6 md:col-span-4 aspect-[4/3]"
-                : "col-span-12 md:col-span-12 aspect-[21/9]";
-            return (
-              <figure
-                key={g.src}
-                data-testid={`gallery-item-${i}`}
-                className={`relative overflow-hidden bg-bone2 border border-line group ${span}`}
-              >
-                <img
-                  src={g.src}
-                  alt={g.alt}
-                  loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-forest/90 to-transparent text-bone label-tag">
-                  {g.alt}
-                </figcaption>
-              </figure>
-            );
-          })}
+          {GALLERY.map((g, i) => (
+            <figure
+              key={g.src}
+              data-testid={`gallery-item-${i}`}
+              className={`relative overflow-hidden bg-bone2 border border-line group ${spanForIndex(g, i)}`}
+            >
+              <img
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <figcaption className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-forest/90 to-transparent text-bone label-tag">
+                {g.alt}
+                {g.location && (
+                  <span className="block text-bone/70 text-xs mt-0.5">{g.location}</span>
+                )}
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
