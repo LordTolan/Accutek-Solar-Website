@@ -221,6 +221,21 @@ export const IMAGES = {
 };
 
 export const GALLERY = [
+  // ─── Clinton, IN — Ground-mount solar + battery storage (2026) ───
+  { src: "/gallery/clinton-in/ground-mount-array.jpg", alt: "Ground-mount solar array", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/three-sol-ark-inverters.jpg", alt: "Triple Sol-Ark hybrid inverters", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/exterior-panels.jpg", alt: "Exterior disconnects & metering", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/lithium-battery-closeup.jpg", alt: "Lithium battery bank detail", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/battery-bank-and-inverter.jpg", alt: "Battery bank & Sol-Ark inverter", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/sol-ark-inverters-front.jpg", alt: "Sol-Ark inverter wall — front view", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/subpanels-and-inverter.jpg", alt: "Sub-panels & inverter install", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/battery-rack-detail.jpg", alt: "Battery rack close-up", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/equipment-room-panoramic.jpg", alt: "Full equipment room — BOS installation", location: "Clinton, IN", wide: true },
+  { src: "/gallery/clinton-in/exterior-disconnects.jpg", alt: "Exterior disconnects & utility metering", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/array-closeup-front.jpg", alt: "Ground-mount array — front view", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/array-closeup-rear.jpg", alt: "Ground-mount array — rear view", location: "Clinton, IN" },
+  { src: "/gallery/clinton-in/kohler-standby-generator.jpg", alt: "Kohler standby generator", location: "Clinton, IN" },
+  // ─── Legacy installs ───
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20170626_174551225-3.jpg?resize=750%2C422&ssl=1", alt: "Roof solar array — residential install" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20191213_171847326-1.jpg?resize=750%2C422&ssl=1", alt: "Battery backup interior install" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20190704_142623874-3.jpg?resize=750%2C422&ssl=1", alt: "Ground mount array" },
