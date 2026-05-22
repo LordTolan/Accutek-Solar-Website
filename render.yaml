@@ -11,28 +11,28 @@ services:
   - type: web
     name: accutek-solar-api
     runtime: python
-#   region: ohio  # closest to Indiana
+    region: ohio
     plan: free
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn server:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: MONGO_URL
-        sync: false  # you'll enter this manually
+        sync: false
       - key: DB_NAME
         value: accutek_solar
       - key: JWT_SECRET
-        generateValue: true  # Render auto-generates a secure random string
+        generateValue: true
       - key: CORS_ORIGINS
-        value: "*"  # tighten this after deploy — set to your frontend URL
+        value: "*"
       - key: PYTHON_VERSION
         value: "3.11.9"
 
-  # ── Frontend (React static site — served globally via CDN, no region needed)
+  # ── Frontend (React static site) ──────────────────────────────────────────
+  # Static sites on Render use global CDN — no region or plan fields allowed.
   - type: web
     name: accutek-solar-web
     runtime: static
-    plan: free
     rootDir: frontend
     buildCommand: yarn install && yarn build
     staticPublishPath: build
@@ -42,4 +42,4 @@ services:
         destination: /index.html
     envVars:
       - key: REACT_APP_BACKEND_URL
-        sync: false  # set to your backend URL after deploying (e.g. https://accutek-solar-api.onrender.com)
+        sync: false
