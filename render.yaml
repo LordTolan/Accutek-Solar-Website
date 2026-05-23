@@ -28,18 +28,17 @@ services:
       - key: PYTHON_VERSION
         value: "3.11.9"
 
-  # ── Frontend (React static site) ──────────────────────────────────────────
-  # Static sites on Render use global CDN — no region or plan fields allowed.
+  # ── Frontend (Next.js) ────────────────────────────────────────────────────
   - type: web
     name: accutek-solar-web
-    runtime: static
+    runtime: node
+    region: ohio
+    plan: free
     rootDir: frontend
-    buildCommand: yarn install && yarn build
-    staticPublishPath: build
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
+    buildCommand: npm install && npm run build
+    startCommand: npx next start -H 0.0.0.0 -p $PORT
     envVars:
       - key: REACT_APP_BACKEND_URL
         sync: false
+      - key: NODE_VERSION
+        value: "20.11.0"

@@ -1,192 +1,297 @@
-"""AccuTek Solar backend API tests."""
+"""Accutek Solar backend tests — public, leads (NEW 6-Q schema), auth, admin."""
 import os
+import uuid
 import pytest
 import requests
-from datetime import datetime
 
-BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://solar-intake-hub.preview.emergentagent.com").rstrip("/")
+BASE_URL = os.environ["REACT_APP_BACKEND_URL"].rstrip("/") if os.environ.get("REACT_APP_BACKEND_URL") else None
+if not BASE_URL:
+    with open("/app/frontend/.env") as f:
+        for line in f:
+            if line.startswith("REACT_APP_BACKEND_URL"):
+                BASE_URL = line.split("=", 1)[1].strip().strip('"').rstrip("/")
+
 API = f"{BASE_URL}/api"
+ADMIN_EMAIL = "admin@accuteksolar.com"
+ADMIN_PASSWORD = "admin123"
 
 
-# ---------- Root ----------
-class TestRoot:
-    def test_root_ok(self):
-        r = requests.get(f"{API}/", timeout=15)
+@pytest.fixture(scope="module")
+def session():
+    s = requests.Session()
+    s.headers.update({"Content-Type": "application/json"})
+    return s
+
+
+@pytest.fixture(scope="module")
+def admin_session():
+    s = requests.Session()
+    s.headers.update({"Content-Type": "application/json"})
+    r = s.post(f"{API}/auth/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD})
+    if r.status_code == 429:
+        pytest.skip("Admin locked out")
+    assert r.status_code == 200, f"Admin login failed: {r.status_code} {r.text}"
+    data = r.json()
+    if data.get("access_token"):
+        s.headers.update({"Authorization": f"Bearer {data['access_token']}"})
+    return s
+
+
+# ---------- Public endpoints ----------
+class TestPublic:
+    def test_company_info(self, session):
+        r = session.get(f"{API}/public/company-info")
         assert r.status_code == 200
-        data = r.json()
-        assert "message" in data or "name" in data
-        # spec: returns name and version - message contains name, version present
-        assert "version" in data
-        assert data["version"]
+        d = r.json()
+        assert d["name"] == "Accutek Solar"
+        assert len(d["services"]) == 6
 
-
-# ---------- Company ----------
-class TestCompany:
-    def test_company_info(self):
-        r = requests.get(f"{API}/company", timeout=15)
+    def test_service_area_counties(self, session):
+        r = session.get(f"{API}/public/service-area")
         assert r.status_code == 200
-        data = r.json()
-        assert data["name"] == "Accutek Solar"
-        assert data["president"] == "Keith Davis"
-        assert "Seth Davis" in data["owners"]
-        assert "Quill Davis" in data["owners"]
-        assert data["phone"] == "(812) 878-7343"
-        assert data["founded"] == 1994
-        assert "service_areas" in data
-        indiana = data["service_areas"].get("Indiana", [])
-        illinois = data["service_areas"].get("Illinois", [])
-        assert len(indiana) == 10, f"Expected 10 IN counties, got {len(indiana)}"
-        assert len(illinois) == 7, f"Expected 7 IL counties, got {len(illinois)}"
-        assert len(indiana) + len(illinois) == 17
+        counties = r.json()["counties"]
+        assert len(counties) == 17
 
-
-# ---------- Status (regression) ----------
-class TestStatus:
-    def test_create_and_get_status(self):
-        payload = {"client_name": "TEST_regression_client"}
-        r = requests.post(f"{API}/status", json=payload, timeout=15)
+    def test_county_slug_credit_ended(self, session):
+        # NEW: incentive copy should mention credit ended, not "30% federal tax credit available"
+        r = session.get(f"{API}/public/service-area/vermillion-county-in")
         assert r.status_code == 200
-        data = r.json()
-        assert data["client_name"] == "TEST_regression_client"
-        assert "id" in data and data["id"]
-        assert "timestamp" in data
+        c = r.json()
+        assert c["slug"] == "vermillion-county-in"
+        incentive = c.get("incentive", "")
+        assert "30%" not in incentive
+        assert "ended" in incentive.lower()
 
-        r2 = requests.get(f"{API}/status", timeout=15)
-        assert r2.status_code == 200
-        rows = r2.json()
-        assert isinstance(rows, list)
-        assert any(x.get("client_name") == "TEST_regression_client" for x in rows)
-        # no _id leakage
-        for x in rows:
-            assert "_id" not in x
+    def test_service_area_not_found(self, session):
+        r = session.get(f"{API}/public/service-area/nonexistent")
+        assert r.status_code == 404
+
+    def test_testimonials(self, session):
+        r = session.get(f"{API}/public/testimonials")
+        assert r.status_code == 200
+        assert len(r.json()["testimonials"]) == 4
+
+    def test_faq_includes_tax_credit_ended(self, session):
+        # NEW: FAQ must contain a tax-credit FAQ mentioning the credit ended
+        r = session.get(f"{API}/public/faq")
+        assert r.status_code == 200
+        faqs = r.json()["faqs"]
+        assert len(faqs) >= 7
+        joined = " ".join(f["q"] + " " + f["a"] for f in faqs).lower()
+        assert "tax credit" in joined
+        assert "ended" in joined
 
 
-# ---------- Leads ----------
-class TestLeads:
-    def test_create_lead_valid(self):
+# ---------- Lead qualification (NEW 6-Q schema) ----------
+class TestLeadQualify:
+    def test_hot_lead_full_engagement(self, session):
         payload = {
-            "name": "TEST_Jane Smith",
-            "email": "test_jane@example.com",
-            "phone": "(812) 555-0000",
-            "address": "Vigo County, IN",
-            "interest": "solar",
-            "monthly_bill": 180.0,
-            "message": "Interested in roof solar",
-            "calculator_results": {"solar_kw": 8.2},
-            "source": "website-contact",
-            "consent_communications": True,
-            "consent_text": "I agree to be contacted by Accutek Solar.",
+            "interest_source": "bill_savings",
+            "monthly_bill": 250,
+            "homeowner_5_7y": True,
+            "interest_areas": ["solar", "battery"],
+            "aware_credit_ended": True,
+            "timeline": "ready_1_3m",
+            "service_type": "residential",
         }
-        r = requests.post(f"{API}/leads", json=payload, timeout=15)
+        r = session.post(f"{API}/leads/qualify", json=payload)
         assert r.status_code == 200, r.text
-        data = r.json()
-        assert data["id"]
-        assert data["name"] == payload["name"]
-        assert data["email"] == payload["email"]
-        assert data["interest"] == "solar"
-        # ISO timestamp check
-        assert "created_at" in data
-        # pydantic serializes datetime - should be string-ish that parses
-        ts = data["created_at"]
-        if isinstance(ts, str):
-            # remove Z if present
-            datetime.fromisoformat(ts.replace("Z", "+00:00"))
+        d = r.json()
+        assert d["score"] >= 75
+        assert d["tier"] == "hot"
+        for k in ["annual_savings", "twenty_five_year_savings", "system_size_kw", "payback_years"]:
+            assert k in d
+            assert isinstance(d[k], (int, float))
 
-    def test_create_lead_missing_name(self):
-        r = requests.post(
-            f"{API}/leads",
-            json={"name": "", "email": "x@y.com", "consent_communications": True},
-            timeout=15,
-        )
-        assert r.status_code == 400
+    def test_low_engagement_lead(self, session):
+        payload = {
+            "interest_source": "other",
+            "monthly_bill": 50,
+            "homeowner_5_7y": False,
+            "interest_areas": [],
+            "aware_credit_ended": False,
+            "timeline": "gathering_info",
+            "service_type": "residential",
+        }
+        r = session.post(f"{API}/leads/qualify", json=payload)
+        # Accept either 4xx OR a low-score nurture response
+        if r.status_code == 200:
+            d = r.json()
+            assert d["tier"] == "nurture"
+            assert d["score"] < 50
+        else:
+            assert 400 <= r.status_code < 500
 
-    def test_create_lead_missing_email(self):
-        r = requests.post(
-            f"{API}/leads",
-            json={"name": "TEST_nobody", "email": "", "consent_communications": True},
-            timeout=15,
-        )
-        assert r.status_code == 400
+    def test_invalid_timeline_rejected(self, session):
+        payload = {
+            "interest_source": "bill_savings",
+            "monthly_bill": 200,
+            "homeowner_5_7y": True,
+            "interest_areas": ["solar"],
+            "aware_credit_ended": True,
+            "timeline": "asap",  # old value, now invalid
+            "service_type": "residential",
+        }
+        r = session.post(f"{API}/leads/qualify", json=payload)
+        assert r.status_code == 422
 
-    def test_create_lead_missing_consent(self):
-        # TCPA: consent_communications not set -> 400
-        r = requests.post(
-            f"{API}/leads",
-            json={
-                "name": "TEST_no_consent",
-                "email": "test_noconsent@example.com",
-                "interest": "general",
+
+# ---------- Lead submit ----------
+class TestLeadSubmit:
+    def _payload(self, tcpa=True, email=None):
+        return {
+            "name": "TEST Hot Lead",
+            "email": email or f"TEST_hot_{uuid.uuid4().hex[:6]}@example.com",
+            "phone": "8125559999",
+            "zip_code": "47842",
+            "county": "Vermillion County",
+            "state": "IN",
+            "answers": {
+                "interest_source": "bill_savings",
+                "monthly_bill": 250,
+                "homeowner_5_7y": True,
+                "interest_areas": ["solar", "battery"],
+                "aware_credit_ended": True,
+                "timeline": "ready_1_3m",
+                "service_type": "residential",
             },
-            timeout=15,
-        )
-        assert r.status_code == 400, r.text
-        data = r.json()
-        assert "consent" in (data.get("detail") or "").lower()
+            "tcpa_consent": tcpa,
+        }
 
-    def test_create_lead_consent_false(self):
-        r = requests.post(
-            f"{API}/leads",
-            json={
-                "name": "TEST_consent_false",
-                "email": "test_consent_false@example.com",
-                "consent_communications": False,
-            },
-            timeout=15,
-        )
+    def test_submit_without_tcpa(self, session):
+        r = session.post(f"{API}/leads/submit", json=self._payload(tcpa=False))
         assert r.status_code == 400
 
-    def test_create_lead_missing_email_field(self):
-        # Completely missing required field -> pydantic 422
-        r = requests.post(
-            f"{API}/leads",
-            json={"name": "TEST_no_email"},
-            timeout=15,
-        )
-        assert r.status_code in (400, 422)
+    def test_submit_success(self, session):
+        r = session.post(f"{API}/leads/submit", json=self._payload())
+        assert r.status_code == 200, r.text
+        d = r.json()
+        assert "lead_id" in d
+        assert d["tier"] == "hot"
+        assert d["score"] >= 75
 
-    def test_list_leads_sorted_no_id_leak(self):
-        # As of iteration 4, GET /api/leads requires admin Bearer.
-        for i in range(2):
-            requests.post(
-                f"{API}/leads",
-                json={
-                    "name": f"TEST_order_{i}",
-                    "email": f"test_order_{i}@example.com",
-                    "interest": "general",
-                    "consent_communications": True,
-                },
-                timeout=15,
-            )
-        # Unauth -> 401
-        unauth = requests.get(f"{API}/leads", timeout=15)
-        assert unauth.status_code == 401
-        # Authed
-        login = requests.post(
-            f"{API}/auth/login",
-            json={"email": "admin@accuteksolar.com",
-                  "password": "naA3T6l9fpmyqc2tuE1pnA2c"},
-            timeout=15,
-        )
-        if login.status_code == 429:
-            pytest.skip("Admin locked out")
-        assert login.status_code == 200
-        token = login.json()["access_token"]
-        r = requests.get(f"{API}/leads",
-                         headers={"Authorization": f"Bearer {token}"}, timeout=15)
+
+# ---------- Auth ----------
+class TestAuth:
+    def test_login_wrong_password(self, session):
+        bad = f"badauth_{uuid.uuid4().hex[:6]}@example.com"
+        r = session.post(f"{API}/auth/login", json={"email": bad, "password": "wrong"})
+        assert r.status_code in (401, 429)
+
+    def test_login_success_and_me(self):
+        s = requests.Session()
+        r = s.post(f"{API}/auth/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD})
+        if r.status_code == 429:
+            pytest.skip("Locked out")
         assert r.status_code == 200
-        rows = r.json()
-        assert isinstance(rows, list)
-        assert len(rows) >= 2
-        # no _id leakage
-        for row in rows:
-            assert "_id" not in row
-            assert "id" in row
-        # sorted desc by created_at
-        timestamps = []
-        for row in rows:
-            ts = row.get("created_at")
-            if isinstance(ts, str):
-                timestamps.append(datetime.fromisoformat(ts.replace("Z", "+00:00")))
-        # check descending
-        for a, b in zip(timestamps, timestamps[1:]):
-            assert a >= b, "Leads not sorted descending by created_at"
+        data = r.json()
+        assert data["email"] == ADMIN_EMAIL
+        assert data["role"] == "admin"
+        headers = {"Authorization": f"Bearer {data['access_token']}"} if data.get("access_token") else {}
+        r2 = s.get(f"{API}/auth/me", headers=headers)
+        assert r2.status_code == 200
+        assert r2.json()["email"] == ADMIN_EMAIL
+
+    def test_me_without_auth(self):
+        s = requests.Session()
+        r = s.get(f"{API}/auth/me")
+        assert r.status_code == 401
+
+    def test_refresh(self):
+        s = requests.Session()
+        r = s.post(f"{API}/auth/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD})
+        if r.status_code == 429:
+            pytest.skip("Locked out")
+        r2 = s.post(f"{API}/auth/refresh")
+        assert r2.status_code == 200
+        assert "access_token" in r2.json()
+
+    def test_logout(self):
+        s = requests.Session()
+        s.post(f"{API}/auth/login", json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD})
+        r = s.post(f"{API}/auth/logout")
+        assert r.status_code == 200
+
+    def test_brute_force_lockout(self):
+        # NOTE: ingress load-balances across pods (alternating source IPs),
+        # which means the per-(ip+email) lockout key may need >5 raw attempts
+        # to accumulate 5 hits on a single IP. We send up to 15 attempts and
+        # expect SOME 401s followed by at least one 429 within the burst.
+        bad_email = f"locktest_{uuid.uuid4().hex[:6]}@example.com"
+        s = requests.Session()
+        statuses = []
+        for _ in range(15):
+            r = s.post(f"{API}/auth/login", json={"email": bad_email, "password": "wrong"})
+            statuses.append(r.status_code)
+            if r.status_code == 429:
+                break
+        assert 401 in statuses, f"Expected at least one 401, got {statuses}"
+        assert 429 in statuses, f"Expected lockout (429) within burst, got {statuses}"
+
+
+# ---------- Admin protected endpoints ----------
+class TestAdminLeads:
+    def _new_lead(self, session, email_prefix="TEST_admin"):
+        payload = {
+            "name": "TEST Admin",
+            "email": f"{email_prefix}_{uuid.uuid4().hex[:6]}@example.com",
+            "phone": "8125551111",
+            "zip_code": "47842",
+            "answers": {
+                "interest_source": "bill_savings",
+                "monthly_bill": 250,
+                "homeowner_5_7y": True,
+                "interest_areas": ["solar", "battery"],
+                "aware_credit_ended": True,
+                "timeline": "ready_1_3m",
+                "service_type": "residential",
+            },
+            "tcpa_consent": True,
+        }
+        r = session.post(f"{API}/leads/submit", json=payload)
+        assert r.status_code == 200, r.text
+        return r.json()["lead_id"]
+
+    def test_list_leads_unauthorized(self):
+        s = requests.Session()
+        r = s.get(f"{API}/leads")
+        assert r.status_code == 401
+
+    def test_list_leads_authorized(self, admin_session):
+        r = admin_session.get(f"{API}/leads")
+        assert r.status_code == 200
+        d = r.json()
+        assert isinstance(d["leads"], list)
+
+    def test_filter_by_tier(self, admin_session):
+        r = admin_session.get(f"{API}/leads?tier=hot")
+        assert r.status_code == 200
+        for lead in r.json()["leads"]:
+            assert lead["tier"] == "hot"
+
+    def test_patch_lead_status(self, admin_session, session):
+        lead_id = self._new_lead(session, "TEST_patch")
+        r2 = admin_session.patch(f"{API}/leads/{lead_id}", json={"status": "contacted"})
+        assert r2.status_code == 200
+        assert r2.json()["status"] == "contacted"
+        r3 = admin_session.get(f"{API}/leads/{lead_id}")
+        assert r3.json()["status"] == "contacted"
+        # verify new answer schema persisted
+        assert "interest_source" in r3.json()["answers"]
+        assert "interest_areas" in r3.json()["answers"]
+
+    def test_sync_hcp(self, admin_session, session):
+        lead_id = self._new_lead(session, "TEST_hcp")
+        r2 = admin_session.post(f"{API}/leads/{lead_id}/sync-hcp")
+        assert r2.status_code == 200
+        updated = r2.json()
+        assert updated["hcp_sync"] is not None
+        assert updated["hcp_sync"]["mocked"] is True
+        assert "hcp_id" in updated["hcp_sync"]
+
+    def test_admin_stats(self, admin_session):
+        r = admin_session.get(f"{API}/admin/stats")
+        assert r.status_code == 200
+        d = r.json()
+        for k in ["total", "hot", "warm", "nurture", "today", "conversion_rate"]:
+            assert k in d
