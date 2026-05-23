@@ -1,120 +1,105 @@
 {
-  "project_context": {
-    "domain": "Solar Energy & Backup Power",
-    "theme": "Light",
-    "archetype": "1 (Organic & Earthy) with Industrial Precision",
-    "emotional_tone": "Grounded, Trustworthy, Technical, Professional",
-    "target_audience": "Homeowners, Businesses in rural Indiana/Illinois"
+  "theme": "Light Theme",
+  "archetype": "Archetype 1 (Organic & Earthy)",
+  "vibe": "Trustworthy, grounded, energetic, and premium. A blend of Mid-Western heritage (32 years) and modern clean-energy tech.",
+  "business_info": {
+    "company": "Accutek Solar",
+    "tagline": "The future of energy",
+    "phone": "(812) 878-7343",
+    "email": "solarseth7@yahoo.com",
+    "address": "9797 S Rangeline Rd., Clinton, IN 47842",
+    "services": ["Solar PV", "Solar thermal", "Kohler backup generators", "Electrical install/repair", "LED & energy monitoring", "FREE estimates"],
+    "trust_signals": ["32 years in business", "family-owned", "NABCEP", "BBB A+", "Google 5-star", "Indiana Solar Coalition", "Licensed & Insured"]
   },
   "typography": {
     "headings": {
       "family": "Cabinet Grotesk",
-      "weights": ["light", "bold", "black"],
-      "usage": "Use for all H1-H4, tight letter spacing (tracking-tight or tracking-tighter), leading-none for H1."
+      "weights": ["400", "700", "800", "900"],
+      "description": "Premium, slightly industrial but very approachable. Great for large numbers, punchy headlines, and conveying solid authority.",
+      "import_url": "https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,400,900,700&display=swap"
     },
     "body": {
-      "family": "IBM Plex Sans",
-      "weights": ["regular", "medium", "semibold"],
-      "usage": "Use for standard paragraphs, loose line height (leading-relaxed)."
-    },
-    "data_numbers": {
-      "family": "JetBrains Mono",
-      "usage": "Use exclusively for the calculator inputs, outputs, data metrics, and ROI figures to give an engineering feel."
-    },
-    "text_sizes": {
-      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter",
-      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight",
-      "h3": "text-xl sm:text-2xl tracking-tight",
-      "body": "text-base",
-      "labels": "text-xs uppercase tracking-[0.2em]"
+      "family": "Satoshi",
+      "weights": ["400", "500", "700"],
+      "description": "Clean, highly legible geometric sans that pairs perfectly with Cabinet Grotesk.",
+      "import_url": "https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap"
     }
   },
   "colors": {
-    "background": {
-      "main": "#F7F4F0",
-      "alt": "#ECE8E2",
-      "dark_section": "#1B2A22"
+    "css_variables": {
+      "--background": "45 29% 97%",
+      "--foreground": "153 25% 15%",
+      "--card": "0 0% 100%",
+      "--card-foreground": "153 25% 15%",
+      "--popover": "0 0% 100%",
+      "--popover-foreground": "153 25% 15%",
+      "--primary": "35 95% 53%",
+      "--primary-foreground": "153 25% 15%",
+      "--secondary": "153 18% 28%",
+      "--secondary-foreground": "0 0% 100%",
+      "--muted": "45 15% 90%",
+      "--muted-foreground": "153 10% 45%",
+      "--accent": "35 95% 53%",
+      "--accent-foreground": "153 25% 15%",
+      "--destructive": "0 84% 60%",
+      "--destructive-foreground": "0 0% 100%",
+      "--border": "45 15% 85%",
+      "--input": "45 15% 85%",
+      "--ring": "35 95% 53%",
+      "--radius": "0.75rem"
     },
-    "text": {
-      "primary": "#121714",
-      "secondary": "#4A5650",
-      "inverse": "#F7F4F0"
-    },
-    "brand": {
-      "primary": "#E19233",
-      "primary_hover": "#C87D2A",
-      "secondary": "#243A30"
-    },
-    "accent": {
-      "terracotta": "#C96A52",
-      "sage": "#829B87",
-      "border": "#D8D3CC"
-    }
+    "description": "Warm earthy base (Warm Sand) representing the rural/Midwest connection, with Deep Forest text (trust, growth, longevity) and Solar Gold (energy, action). Avoids sterile corporate blues entirely."
   },
-  "layout_and_spacing": {
-    "spacing_scale": "Use generous padding for marketing sections (p-12, py-24, gap-12). For calculators, use dense padding (p-4, gap-4).",
-    "grids": {
-      "marketing": "MODE A: TETRIS GRID - Asymmetrical grids (grid-cols-12), wide gaps (gap-8 to gap-12).",
-      "calculators": "MODE B: CONTROL ROOM GRID - Dense, strict data correlation grids (grid-cols-4), tight gaps (gap-4)."
-    },
-    "containers": "Sections should NOT use typical Bootstrap-style containers. Use full-width sections with max-w-7xl content wrappers."
+  "spacing_and_layout": {
+    "philosophy": "Generous spacing (p-12 to p-24) to let the content breathe. Emphasize asymmetry in marketing pages using Bento grids.",
+    "corners": "rounded-xl to rounded-2xl for an approachable yet professional feel.",
+    "borders": "Use 1px borders with border-border/60 to define structure without relying on heavy drop shadows.",
+    "shadows": "Diffuse, soft ambient shadows. Use shadow-[0_8px_30px_rgba(29,48,37,0.08)]."
   },
-  "components_strategy": {
-    "marketing_sections": "Pure HTML/Tailwind. Use overlapping div layers. Hero overlay max bg-black/40.",
-    "calculators": "Shadcn/UI heavily customized. Matte finishes (no soft shadows), 1px solid borders (border-[#D8D3CC]), flat solid backgrounds.",
-    "buttons": "Square or very slightly rounded (rounded-sm), solid colors, high contrast text. Hover states must explicitly set text color and background.",
-    "cards": "For marketing: Flat background, 1px border. For data widgets: Neumorphism (clay & crisp) - soft ambient shadow with sharp 1px inner border."
+  "component_instructions": {
+    "hero": "Full bleed or large container image with max bg-black/40 overlay to preserve image clarity. Large heading (Cabinet Grotesk text-5xl to text-7xl) left-aligned. Add a subtle grain texture overlay. Include trust badges row below the CTA.",
+    "animated_counters": "Use Framer Motion 'useInView' to count up (1247 homes, $2.4M+, 98%, 32 yrs). Render large Cabinet Grotesk text in Solar Gold within a 4-col bento grid.",
+    "lead_form": "Multi-step form in a card. Step 1: Basic info. Step 2: Qualification (Homeowner? Roof age? Bill amount). Step 3: Result & TCPA consent. Show a real-time 'Lead Score' or 'Qualification Status'. Use Shadcn Progress component.",
+    "savings_calculator": "Mobile-first. Use Shadcn Slider for 'Average Monthly Bill'. Real-time calculation showing '25-Year Savings'. Large, highly legible numbers. Muted background surface.",
+    "service_area_map": "Interactive SVG or map representation of IN/IL counties. Hovering highlights the county. Click links to /service-area/[slug].",
+    "admin_dashboard": "Cardless, dense layout. Sticky top nav or sidebar. Lead table with Score Badges (Hot: Red/Gold, Warm: Yellow, Cold: Gray). Include 'Sync to HCP' button with loading state.",
+    "testimonial_carousel": "Use Embla Carousel (Shadcn). Display real initials/locations (A.F. Dana IN, etc.). Add a 5-star Lucide icon array.",
+    "before_after_gallery": "Masonry layout using CSS columns or React-Photo-Album. Image hover reveals 'Before' / 'After' labels. Click opens a Lightbox.",
+    "sticky_mobile_cta": "Fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-xl border-t border-border flex gap-4 z-50. 'Call Now' (ghost/outline) and 'Get Quote' (primary solid).",
+    "county_pages": "Dynamic /service-area/[slug]. Feature a local hero image, county-specific incentive copy, and a lead form optimized for local conversion."
   },
   "motion_and_interactions": {
-    "scroll": "Implement smooth scrolling (Lenis).",
-    "hover": "Slight lift (-translate-y-1) and shadow-md for cards. Fast background color transitions for buttons.",
-    "entrance": "Staggered fade-up for grid items. Use Framer Motion."
+    "hover": "Buttons lift slightly (-translate-y-0.5) and shadow increases. Cards have a subtle border color shift on hover.",
+    "scroll": "Use Lenis for smooth scrolling on marketing pages. Sections fade-in-up via Framer Motion.",
+    "page_transition": "Simple opacity fade between routes."
   },
-  "media_and_images": {
-    "guidelines": "Do NOT use overlays darker than bg-black/40. No placeholder images. Use provided URLs.",
-    "urls": {
-      "hero_background": {
-        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/ecec3ab58dbaa69a3a9ca7b2822fd0cdea49b8c3d8e62b52ea771837f2ca31db.png",
-        "description": "Hero section cinematic solar home."
-      },
-      "battery_generator": {
-        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/e2a807d9f1323522467b330572f73010026cedad87d3c3c841a9dd9c2fbaec55.png",
-        "description": "Technical close-up of battery backup for the Services/Generator section."
-      },
-      "energy_map": {
-        "url": "https://static.prod-images.emergentagent.com/jobs/39c7357a-42d6-4cca-9deb-dcdef3c85a2c/images/a04f211dcc851f46c3b4ace30f10bace49a70af73e7e60006103d63b1d86f0ce.png",
-        "description": "Abstract topographical energy node map for the 'Service Area' or 'ROI' background."
-      },
-      "roof_panels": {
-        "url": "https://images.unsplash.com/flagged/photo-1566838616631-f2618f74a6a2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzV8MHwxfHNlYXJjaHwzfHxzb2xhciUyMHBhbmVscyUyMGhvbWUlMjByb29mJTIwaW5zdGFsbGF0aW9ufGVufDB8fHx8MTc3NzcyNjQ0NHww&ixlib=rb-4.1.0&q=85",
-        "description": "Real solar roof installation for gallery or project showcase."
-      }
-    }
-  },
-  "content_and_data": {
-    "company_info": {
-      "name": "AccuTek Solar",
-      "founded": "1994 (31 years)",
-      "founder": "Keith Davis",
-      "phone": "(812) 878-7343",
-      "email": "solarseth7@yahoo.com",
-      "address": "9797 S Rangeline Rd. Clinton, IN 47842"
+  "images": [
+    {
+      "category": "Hero Background",
+      "url": "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwzfHxzb2xhciUyMHBhbmVsJTIwcm9vZnRvcCUyMHN1bnNldHxlbnwwfHx8fDE3NzkwNTM4MTZ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Golden hour solar panels on a rooftop, perfect for the main homepage hero."
     },
-    "service_areas": [
-      "Vermillion County", "Parke County", "Fountain County", "Montgomery County",
-      "Putnam County", "Clay County", "Sullivan County", "Vigo County",
-      "Hendricks County", "Warren County", "Edgar County", "Vermilion County",
-      "Clark County", "Crawford County", "Coles County", "Douglas County", "Champaign County"
-    ]
+    {
+      "category": "Technicians / Trust",
+      "url": "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAxODF8MHwxfHNlYXJjaHwxfHxzb2xhciUyMGluc3RhbGxlciUyMHdvcmtpbmd8ZW58MHx8fHwxNzc5MDUzODE0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Solar installer working, use for 'About' or 'Services' to show real people working."
+    },
+    {
+      "category": "Rural / Service Area",
+      "url": "https://images.unsplash.com/photo-1621431735623-95fcba6b89ae?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxydXJhbCUyMGluZGlhbmElMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzc5MDUzODE0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Indiana rural landscape, use for the Service Area / Counties section background."
+    },
+    {
+      "category": "General Residential Solar",
+      "url": "https://images.unsplash.com/photo-1583345237708-add35a664d77?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwyfHxzb2xhciUyMHBhbmVsJTIwcm9vZnRvcCUyMHN1bnNldHxlbnwwfHx8fDE3NzkwNTM4MTZ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Concrete house with solar panels for case studies or services."
+    }
+  ],
+  "accessibility": {
+    "focus_states": "All interactive elements must have a highly visible focus ring: focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2.",
+    "contrast": "Ensure Deep Forest text on Warm Sand background meets WCAG AAA standards. Primary buttons (Gold) must have dark text (Deep Forest) for readability."
   },
   "testing": {
-    "attributes": "All interactive elements, buttons, inputs, tabs, and calculator results MUST include 'data-testid' attributes (e.g. data-testid='calc-submit-btn')."
-  },
-  "instructions_to_main_agent": [
-    "Build the marketing sections using standard HTML/Tailwind with large typography (Cabinet Grotesk) and organic overlaps.",
-    "Build the calculators (Solar Size, Battery Sizing, Mount Type, Generator, ROI) using Shadcn components (Inputs, Select, Tabs, Sliders) but style them with a 'Control Room' dense aesthetic.",
-    "Use JetBrains Mono for all numerical outputs in the calculators to emphasize the engineering tool feel.",
-    "Ensure the hero image uses the provided cinematic solar home URL with a max bg-black/40 overlay.",
-    "Never use generic placeholder images or text. Use the scraped company info and testimonials directly."
-  ]
+    "data_testid": "MANDATORY: Add role-based data-testid attributes to all buttons, links, form inputs, and interactive widgets (e.g., data-testid='hero-get-quote-button')."
+  }
 }

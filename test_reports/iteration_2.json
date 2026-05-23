@@ -1,36 +1,36 @@
 {
-  "summary": "Iteration 2 — multi-page refactor verified end-to-end. Backend: 10/10 pytest tests pass including new TCPA consent validation (missing consent -> 400, consent=false -> 400, consent=true -> 200). /api/company correctly returns Accutek Solar, president Keith Davis, owners [Seth Davis, Quill Davis], 10 IN + 7 IL counties. Frontend: all 7 routes load (/, /services, /about, /service-area, /reviews, /tools, /contact). Page title matches spec. SPA navigation via react-router NavLink verified — URL changes without reload and active link gets aria-current='page'. Home hero headline '30 years of electrical expertise. Indiana & Illinois.' present. Services page has 4 disciplines (Solar & Storage, Backup Power, Facility Automation, Diagnostics) with sticky jump tabs. About page shows 1994 / Family-owned copy / Keith Davis / Seth Davis / Quill Davis. Service Area has 4 quadrant cards (data-testid quadrant-il-west, quadrant-in-east, quadrant-il-east, quadrant-in-west) + 4 detail cards with all counties. Reviews page renders Housecall Pro iframe. Tools page has 5 calculator tabs (solar/battery/mount/generator/roi) + 8 FAQ items (faq-trigger-0..7). Contact form: submit button is correctly disabled until consent checkbox is checked; with consent POST /api/leads returns 200 and success toast + thank-you panel render. Mobile menu (nav-mobile-toggle) opens and navigates correctly. Footer shows Accutek Solar with all sub-page links.",
-  "backend_issues": {
-    "critical": [],
-    "minor": []
-  },
+  "summary": "Iteration 2 — Re-tested Accutek Solar after the dark/industrial redesign and 6-question lead qualification rewrite. Backend: 23/23 pytest passing — new 6-Q QualifyAnswers schema, county incentive copy no longer references the 30% federal credit (mentions credit ended), FAQ contains a tax-credit-ended entry, /leads/submit persists the new answers shape, and previously-passing endpoints (auth login/refresh/logout/me, brute-force lockout, leads list/filter/patch/sync-hcp mocked, admin stats) still pass. Frontend: home page renders dark theme (#121212 body), Electric Green CTAs, hero <video data-testid='hero-video'> with autoplay/muted/loop/playsInline + Unsplash poster fallback (Solar Wizard mp4 file not yet uploaded — expected), header shows 'Accutek Solar' + Book Online (testid header-book -> /book) + GET QUOTE, footer shows 'WWW.ACCUTEKSOLAR.COM' + '// THE FUTURE OF ENERGY', tax-credit-ended notice present, no Emergent branding. /book page renders #hcp-book-widget (testid hcp-book-widget) with 'Online booking is loading' + Send a quote request + Call (812) 878-7343 fallbacks. /quote wizard has all 6 questions with correct testids (q1-bill_savings/backup_power/electrical_upgrade/ev_charger/other, bill-slider, q3-yes/no, q4-solar/battery/electrical/combo, q5-yes/no with q5-expectation alert revealed when 'No' is selected and mentioning credit ended, q6-ready_1_3m/exploring/gathering_info). Wizard completes successfully with 25-year savings figure ($57,938 for $250 bill), tier badge 'Excellent Match', and a success toast 'Your request is in.' /admin/login no longer shows the public marketing header (previous iteration issue resolved). Admin dashboard + lead drawer load and show new lead with HOT score 90, monthly bill $250, timeline Ready_1_3m. Mocked: HCP sync + hot-lead notification + HCP Book Online widget — all behave per spec.",
+  "backend_issues": {"critical": [], "minor": []},
   "frontend_issues": {
-    "ui_bugs": [],
+    "ui_bugs": [
+      {"component": "AdminLeadDrawer", "issue": "Drawer still renders a 'ROOF AGE' label (—) which is a legacy field from the old qualification schema. New schema has no roof_age. Should be removed.", "selector": "[data-testid=lead-drawer]", "priority": "LOW"},
+      {"component": "AdminLeadDrawer", "issue": "Drawer does not display the new answer fields: interest_source (Q1), interest_areas (Q4) list, aware_credit_ended (Q5). Consider adding these so reps can see why a lead scored the way it did.", "selector": "[data-testid=lead-drawer]", "priority": "MEDIUM"},
+      {"component": "AdminLeadDrawer", "issue": "Lead I submitted with q3-yes (homeowner_5_7y=true) shows 'HOMEOWNER: No' in the drawer. The drawer is likely reading the legacy answers.homeowner field instead of answers.homeowner_5_7y.", "selector": "[data-testid=lead-drawer]", "priority": "MEDIUM"},
+      {"component": "Quote wizard step 3", "issue": "Tier label rendered as user-facing copy ('EXCELLENT MATCH') rather than the raw tier (hot/warm/nurture). Not a bug — just noting the test for literal 'HOT'/'WARM' fails by design. Confirm with PM if that's intended.", "selector": "[data-testid=step-3]", "priority": "LOW"}
+    ],
     "integration_issues": [],
-    "design_issues": [
-      {"screen": "Reviews page / Housecall Pro widget", "issues": ["External Housecall Pro script logs a 'TypeError: Failed to fetch' in browser console (third-party origin client.housecallpro.com). Widget iframe still renders; non-blocking but may affect curated reviews fetch on some networks."]},
-      {"screen": "Service Area quadrant labels", "issues": ["Labels use em-dash formatting 'Central Illinois — West' rather than 'Central IL West'. Spec intent appears satisfied (user-facing readable form); just flagging for awareness."]}
-    ]
+    "design_issues": []
   },
-  "test_report_links": [
-    "/app/backend/tests/backend_test.py",
-    "/app/test_reports/pytest/pytest_results.xml"
+  "test_report_links": ["/app/backend/tests/backend_test.py", "/app/test_reports/pytest/pytest_results.xml"],
+  "action_items": [
+    "Update AdminLeadDrawer to render the new 6-question schema fields: interest_source (Q1), interest_areas (Q4 multi-select), aware_credit_ended (Q5).",
+    "Fix Homeowner display in AdminLeadDrawer: read answers.homeowner_5_7y instead of legacy answers.homeowner (currently shows 'No' for a lead that selected Yes).",
+    "Remove or rename the legacy 'ROOF AGE — —' row in AdminLeadDrawer (field is no longer collected).",
+    "Optional: upload the Solar Wizard hero.mp4 to /public/media/hero.mp4 — element is wired up, just falls back to the Unsplash poster until the file is in place."
   ],
-  "action_items": [],
   "critical_code_review_comments": [
-    "server.py still uses deprecated @app.on_event('shutdown') — migrate to FastAPI lifespan.",
-    "/api/leads accepts any string as email (no format validation). Switch payload.email to pydantic EmailStr.",
-    "CORS allow_origins default '*' combined with allow_credentials=True will be rejected by browsers for credentialed requests — tighten for production.",
-    "Consider adding a dedicated 404/NotFound route instead of catch-all * -> HomePage (currently any unknown path silently renders Home, which can mask broken links)."
+    "server.py still ~660 lines — consider splitting into routers/{auth,leads,public,admin}.py.",
+    "@app.on_event('startup'/'shutdown') is deprecated in FastAPI ≥0.95 — migrate to lifespan.",
+    "Brute-force lockout uses (request.client.host + email) as the key but in the Kubernetes preview the ingress alternates between two backend pod source IPs (10.208.150.130 / 10.208.130.66), so 5 raw attempts can split 3/2 across pods and never trip the threshold from a single browser. In production behind a single trusted reverse-proxy this won't manifest, but consider honoring X-Forwarded-For or keying off email-only (with a slightly higher threshold) for resilience. The pytest test was updated to send up to 15 attempts and assert a 429 appears in the burst.",
+    "Estimate formula still works correctly without the 30% federal credit term — annual = bill*12*offset (0.75 res / 0.65 com), 25-yr = annual*25*1.03. Looks sane.",
+    "AdminLeadDrawer is reading the wrong key for Homeowner (answers.homeowner) — this is the only stale reference to the old schema I spotted in the UI."
   ],
-  "updated_files": [
-    "/app/backend/tests/backend_test.py"
-  ],
-  "success_rate": {"backend": "100%", "frontend": "100%"},
-  "test_credentials": "N/A — no auth required (no /app/memory/test_credentials.md needed).",
-  "seed_data_creation": "A handful of TEST_-prefixed leads and status rows inserted via the public API during pytest + Playwright runs. Filterable/cleanable by the TEST_ name prefix.",
-  "retest_needed": false,
+  "updated_files": ["/app/backend/tests/backend_test.py"],
+  "success_rate": {"backend": "100% (23/23 pytest)", "frontend": "~92% — wizard + home + book + admin all functional; 3 minor UI gaps in admin lead drawer related to the schema migration"},
+  "test_credentials": "admin@accuteksolar.com / admin123 (works)",
+  "seed_data_creation": "Several TEST_ prefixed leads created via the wizard and via direct API calls during testing; safe to purge.",
+  "retest_needed": true,
   "main_agent_can_self_test": true,
-  "context_for_next_testing_agent": "Backend suite: /app/backend/tests/backend_test.py (10 tests incl. consent). Run: pytest /app/backend/tests/backend_test.py -v. Contact form key testids: contact-name, contact-email, contact-phone, contact-address, contact-interest, contact-bill, contact-message, contact-consent-checkbox, contact-submit. Submit stays disabled until consent is checked, so click consent via force=True before asserting POST. Service-area quadrant testids: quadrant-{il-west,in-east,il-east,in-west} and quadrant-detail-* for the breakdown cards. Tools tabs: calc-tab-{solar,battery,mount,generator,roi}. FAQ triggers: faq-trigger-0..7. Mobile menu trigger: nav-mobile-toggle. NavLink active uses aria-current='page'. Housecall iframe third-party 'Failed to fetch' console error is cosmetic/external.",
-  "rca of the issue": "No blocking issues. All review_request items verified. Only minor non-blocking observations: external Housecall Pro console error and em-dash quadrant naming."
+  "context_for_next_testing_agent": "Backend is stable (23/23 pytest). The only follow-ups are in the Admin Lead Drawer where 3 fields still refer to the OLD qualification schema (roof_age, homeowner instead of homeowner_5_7y, and missing interest_source/interest_areas/aware_credit_ended). Hot-lead notifications and HCP sync remain MOCKED. The previous-iteration nit about the public header showing on /admin/login has been FIXED in this build (header is now correctly hidden). Solar Wizard hero.mp4 is not yet uploaded — that's expected per the prompt; the <video> element renders correctly and falls back to a poster image.",
+  "rca of the issue": "Admin drawer homeowner=No bug: server stores answers.homeowner_5_7y per the new Pydantic model, but the frontend drawer almost certainly still reads `lead.answers.homeowner` (the old field name), which is undefined -> rendered as 'No'/'—'. Fix: change the drawer mapping to read homeowner_5_7y and add rows for interest_source, interest_areas (joined), aware_credit_ended."
 }
