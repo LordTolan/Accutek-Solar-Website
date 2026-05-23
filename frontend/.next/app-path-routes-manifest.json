@@ -4,11 +4,11 @@
   "/admin/login/page": "/admin/login",
   "/admin/page": "/admin",
   "/page": "/",
-  "/quote/page": "/quote",
   "/book/page": "/book",
-  "/about/page": "/about",
-  "/services/page": "/services",
+  "/quote/page": "/quote",
   "/service-area/page": "/service-area",
+  "/services/page": "/services",
   "/tools/calculator/page": "/tools/calculator",
+  "/about/page": "/about",
   "/service-area/[slug]/page": "/service-area/[slug]"
 }

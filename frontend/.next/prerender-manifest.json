@@ -1,12 +1,7 @@
 {
   "version": 4,
   "routes": {
-    "/favicon.ico": {
-      "initialHeaders": {
-        "cache-control": "public, max-age=0, must-revalidate",
-        "content-type": "image/x-icon",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"
-      },
+    "/admin/login": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -19,56 +14,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/favicon.ico",
-      "dataRoute": null,
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/",
-      "dataRoute": "/index.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/tools/calculator": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/tools/calculator",
-      "dataRoute": "/tools/calculator.rsc",
+      "srcRoute": "/admin/login",
+      "dataRoute": "/admin/login.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -103,7 +50,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/admin": {
+    "/tools/calculator": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -116,8 +63,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/admin",
-      "dataRoute": "/admin.rsc",
+      "srcRoute": "/tools/calculator",
+      "dataRoute": "/tools/calculator.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -151,7 +98,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/admin/login": {
+    "/book": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -164,8 +111,32 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/admin/login",
-      "dataRoute": "/admin/login.rsc",
+      "srcRoute": "/book",
+      "dataRoute": "/book.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/",
+      "dataRoute": "/index.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -223,7 +194,12 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/book": {
+    "/favicon.ico": {
+      "initialHeaders": {
+        "cache-control": "public, max-age=0, must-revalidate",
+        "content-type": "image/x-icon",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/favicon.ico/layout,_N_T_/favicon.ico/route,_N_T_/favicon.ico"
+      },
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -236,8 +212,32 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/book",
-      "dataRoute": "/book.rsc",
+      "srcRoute": "/favicon.ico",
+      "dataRoute": null,
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/admin": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/admin",
+      "dataRoute": "/admin.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -702,8 +702,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "f6c200e40cd37a17428f13301f9afff0",
-    "previewModeSigningKey": "a4ef7d529587871e83e238e30215b2dfa05145e9f029b00cd0bcde2d5ca70e1d",
-    "previewModeEncryptionKey": "5b417fe6fdabf901711395875ac49141946439ed01ed13ac958a3c91e2724011"
+    "previewModeId": "7d81340d4f65c3c73bb22d66fdc3c86c",
+    "previewModeSigningKey": "226ecf91ff70cd598b3aab4a4f4b72840176a695e87f33c092919262e0529fdb",
+    "previewModeEncryptionKey": "229e7d68f3ab26758df3087a431f833c7f22bacb73d9a3643066bbc9f5eb74fa"
   }
 }
