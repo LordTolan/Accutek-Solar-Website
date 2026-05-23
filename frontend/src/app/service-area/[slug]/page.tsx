@@ -1,39 +1,50 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import { API } from "@/lib/utils";
 import { ArrowRight, CheckCircle2, MapPin, Phone } from "lucide-react";
 
 const COUNTY_IMG = "https://images.unsplash.com/photo-1621431735623-95fcba6b89ae?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
 
-export const revalidate = 3600;
-
-export async function generateStaticParams() {
-  try {
-    const r = await fetch(`${API}/public/service-area`);
-    const { counties } = await r.json();
-    return counties.map((c: any) => ({ slug: c.slug }));
-  } catch { return []; }
+interface CountyData {
+  name: string;
+  state: string;
+  blurb: string;
+  incentive: string;
+  slug: string;
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  try {
-    const r = await fetch(`${API}/public/service-area/${slug}`);
-    if (!r.ok) return { title: "Service Area" };
-    const c = await r.json();
-    return {
-      title: `Solar Installer in ${c.name}, ${c.state}`,
-      description: `${c.name}, ${c.state} solar installation by Accutek Solar — 32 years of experience. ${c.incentive}`,
-    };
-  } catch { return { title: "Service Area" }; }
-}
+export default function CountyPage() {
+  const params = useParams();
+  const slug = params?.slug as string;
+  const [county, setCounty] = useState<CountyData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
-export default async function CountyPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const r = await fetch(`${API}/public/service-area/${slug}`);
-  if (!r.ok) notFound();
-  const c = await r.json();
+  useEffect(() => {
+    if (!slug) return;
+    async function load() {
+      try {
+        const r = await fetch(`${API}/public/service-area/${slug}`);
+        if (!r.ok) { setNotFound(true); return; }
+        const data = await r.json();
+        setCounty(data);
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, [slug]);
+
+  if (loading) return <div className="py-24 text-center text-muted-foreground">Loading...</div>;
+  if (notFound || !county) return <div className="py-24 text-center"><h1 className="text-2xl font-bold">County not found</h1><Link href="/service-area" className="text-primary mt-4 inline-block">← Back to service areas</Link></div>;
+
+  const c = county;
 
   return (
     <>
