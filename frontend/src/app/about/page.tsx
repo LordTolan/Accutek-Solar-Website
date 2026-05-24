@@ -138,7 +138,7 @@ export default function AboutPage() {
           </div>
 
           <p className="mt-10 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground text-center">
-            // HEADSHOTS ARE PLACEHOLDERS · DROP REAL PHOTOS AT /public/team/{`{slug}`}.jpg TO SWAP
+            // THE CREW THAT SHOWS UP TO YOUR JOB SITE
           </p>
         </div>
       </section>
