@@ -7,6 +7,7 @@ import RotatingHeadline from "@/components/RotatingHeadline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import BlogTeaser from "@/components/BlogTeaser";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array — primary hero imagery (Seth's note: balance roof + ground)
@@ -206,6 +207,7 @@ export default function HomePage() {
       <ServiceAreaTeaser />
       <Testimonials />
       <FAQ />
+      <BlogTeaser />
 
       {/* Final CTA */}
       <section className="py-20 md:py-28 relative overflow-hidden" data-testid="final-cta-section">
