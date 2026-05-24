@@ -10,6 +10,7 @@ import { cn, HCP_BOOK_URL } from "@/lib/utils";
 const NAV = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/service-area", label: "Service Area" },
   { href: "/tools/calculator", label: "Calculator" },
   { href: "/about", label: "About · Team" },
