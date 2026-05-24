@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, AlertCircle, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, CheckCircle2 } from "lucide-react";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
 import RotatingHeadline from "@/components/RotatingHeadline";
@@ -117,16 +117,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Tax-credit notice strip */}
-      <section className="py-5 bg-secondary/8 border-b border-border" data-testid="credit-notice">
-        <div className="container mx-auto container-px flex items-start md:items-center gap-3 text-sm">
-          <AlertCircle className="w-4 h-4 text-primary mt-0.5 md:mt-0 shrink-0" />
-          <span className="text-foreground/85">
-            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary mr-2">// HEADS UP</span>
-            The 30% federal solar tax credit ended this year for new systems. Indiana net metering, Illinois Shines SREC, USDA REAP grants and utility rebates are still active — and equipment pricing is down. We'll walk you through today's real numbers.
-          </span>
-        </div>
-      </section>
+
 
       {/* Roof vs Ground feature strip */}
       <section className="py-20 md:py-28" data-testid="roof-ground-section">
