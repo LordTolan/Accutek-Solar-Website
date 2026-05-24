@@ -36,5 +36,5 @@ module.exports = {
       animation: { "fade-up": "fade-up 0.7s ease-out both" },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 };
