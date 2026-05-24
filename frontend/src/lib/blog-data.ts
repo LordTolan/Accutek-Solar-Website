@@ -23,6 +23,79 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "illinois-solar-incentives-2026-the-prairie-state-is-a-solar-goldmine",
+    title: "Illinois Solar Incentives in 2026: The Prairie State Is a Solar Goldmine",
+    subtitle: "SRECs, net metering, tax breaks — Illinois basically pays you to go solar",
+    excerpt:
+      "Illinois has one of the most generous solar incentive stacks in the Midwest. From the Illinois Shines program to full-retail net metering and property tax exemptions, here's everything homeowners in eastern Illinois need to know.",
+    author: "Accutek Solar",
+    date: "2026-05-25",
+    readTime: "7 min read",
+    category: "Solar Policy",
+    tags: ["Illinois", "incentives", "Illinois Shines", "net metering", "SREC", "policy"],
+    heroImage:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Golden sunlight over Illinois farmland",
+    content: `
+<p>If Indiana's solar incentives are a solid handshake, Illinois's are a bear hug with a gift card tucked inside. The Prairie State has quietly built one of the most aggressive solar incentive programs in the country — and if you're a homeowner in Vermilion, Edgar, Champaign, Clark, Crawford, Coles, or Douglas County, you're sitting in the sweet spot. Here's the full breakdown for 2026.</p>
+
+<h2>Illinois Shines: Getting Paid for the Sun You Harvest</h2>
+<p>The crown jewel of Illinois solar incentives is the <strong>Illinois Shines</strong> program, formally known as the Adjustable Block Program (ABP). Here's the short version: when you install solar, your system earns <strong>Solar Renewable Energy Credits (SRECs)</strong> based on how much electricity it's expected to produce over 15 years. Illinois Shines buys those credits upfront or in annual payments — effectively paying you a bonus on top of your electricity savings.</p>
+<p>For a typical 8 kW residential system in 2026, the Illinois Shines incentive works out to roughly <strong>$3,000–$5,000</strong> depending on your utility territory and whether you take the lump sum or annual payments. That's money in your pocket just for generating clean energy. Indiana doesn't have anything like this.</p>
+<p>The program was created by the Future Energy Jobs Act (FEJA) in 2016 and then supercharged by the <strong>Climate and Equitable Jobs Act (CEJA)</strong> in 2021, which dramatically expanded funding. As of 2026, blocks are still open for residential systems — but they fill up, and incentive rates step down as each block closes. Translation: earlier is better.</p>
+
+<h2>Net Metering: Illinois Does It Right</h2>
+<p>Illinois offers <strong>full 1:1 retail-rate net metering</strong> for residential systems up to 25 kW. That means every kilowatt-hour your panels send to the grid earns you a credit at the same rate you'd pay to buy that electricity. No discounts, no wholesale rate haircut — full retail.</p>
+<p>Credits roll over month to month, and at the end of your annual billing cycle, any remaining credits are paid out (at a slightly lower rate, but the monthly rollover is where the real value lives). For a household that sizes their system to match annual usage, net metering alone can reduce your electric bill to the minimum monthly charge — typically $10–$15.</p>
+<p>Compare that to Indiana, where post-2022 systems get credits at roughly 125% of wholesale (significantly less than retail), and you start to see why Illinois homeowners have a structural advantage.</p>
+
+<h2>Property Tax Exemption: Your Home Value Goes Up, Your Taxes Don't</h2>
+<p>Here's a detail that often gets overlooked: Illinois law exempts solar energy systems from property tax assessments for the first 30 years. Solar panels reliably increase home value — studies show an average bump of 3–4% — but in Illinois, that added value <strong>won't increase your property tax bill</strong>.</p>
+<p>In practical terms: you get a more valuable home that costs less to power, and the county assessor doesn't touch it. That's a triple win — equity, savings, and tax protection.</p>
+
+<h2>CEJA and the 100% Clean Energy Mandate</h2>
+<p>The Climate and Equitable Jobs Act didn't just expand Illinois Shines — it committed the state to <strong>50% renewable energy by 2040</strong> and <strong>100% clean energy by 2045</strong>. That's not aspirational language in a press release. It's codified in state law with funding mechanisms and compliance requirements.</p>
+<p>What does this mean for homeowners? It means the state is structurally invested in keeping solar incentives alive and expanding them. Illinois <em>needs</em> distributed solar to hit its targets, and that need translates into sustained policy support. You're not betting on a program that might disappear — you're riding a wave that the state legally has to keep building.</p>
+
+<h2>Stacking the Incentives: What the Math Actually Looks Like</h2>
+<p>Let's run a real-world scenario for an eastern Illinois homeowner installing an 8 kW ground-mount system:</p>
+<ul>
+  <li><strong>System cost:</strong> ~$26,000 (installed, before incentives)</li>
+  <li><strong>Illinois Shines SREC payment:</strong> ~$4,000 (upfront, varies by block)</li>
+  <li><strong>Net cost after SRECs:</strong> ~$22,000</li>
+  <li><strong>Annual electricity savings:</strong> ~$1,800–$2,200 (via net metering)</li>
+  <li><strong>Payback period:</strong> ~10–12 years</li>
+  <li><strong>Panel lifespan:</strong> 25–30+ years</li>
+  <li><strong>Property tax impact:</strong> $0 (exempt for 30 years)</li>
+</ul>
+<p>After payback, you're looking at 15–20 years of near-free electricity. And because Illinois net metering credits at full retail, the annual savings are meaningful — not just symbolic.</p>
+
+<h2>Why Eastern Illinois Is the Sweet Spot</h2>
+<p>Accutek Solar serves seven Illinois counties: Vermilion, Edgar, Clark, Crawford, Coles, Douglas, and Champaign. This part of the state has a few things working in its favor:</p>
+<ul>
+  <li><strong>Rural acreage:</strong> Plenty of unshaded, south-facing land for ground-mount systems — our specialty.</li>
+  <li><strong>Ameren Illinois territory:</strong> Ameren has been a cooperative utility for net metering and Illinois Shines interconnection. The process is well-established.</li>
+  <li><strong>Agricultural properties:</strong> Farms and rural properties may also qualify for <strong>USDA REAP grants</strong> (Rural Energy for America Program), which can cover up to 50% of project costs for eligible agricultural producers and rural small businesses.</li>
+  <li><strong>Lower cost of living:</strong> System installation costs in central/eastern Illinois tend to run lower than the Chicago metro, so your incentive dollars stretch further.</li>
+</ul>
+
+<h2>Illinois vs. Indiana: The Honest Comparison</h2>
+<p>We install on both sides of the state line, and we'll be straight with you: Illinois has the better incentive package right now. Between Illinois Shines, full-retail net metering, and the property tax exemption, an identical system installed in Vermilion County, IL will have a shorter payback period than the same system in Vermillion County, IN. (Yes, they spell it differently. No, we don't know why.)</p>
+<p>That doesn't mean Indiana is bad for solar — it's still a strong investment. But if you're an Illinois homeowner who's been assuming the incentives are the same as your Indiana neighbors', you're leaving money on the table.</p>
+
+<h2>The Bottom Line</h2>
+<p>Illinois has built one of the best solar incentive stacks in the Midwest — arguably the best between the coasts. SRECs pay you upfront. Net metering credits at full retail. Property taxes stay flat. And the state's clean energy law ensures these programs have legs. If you're in our eastern Illinois service area and you've been thinking about solar, 2026 is the year to stop thinking and start harvesting. The sun's already doing its part — let the incentives do theirs.</p>
+`,
+    sources: [
+      "Illinois Power Agency — Illinois Shines / Adjustable Block Program (illinoisabp.com)",
+      "Climate and Equitable Jobs Act (CEJA), Public Act 102-0662 — Illinois General Assembly",
+      "Illinois Compiled Statutes 35 ILCS 200/10-720 — Solar energy property tax exemption",
+      "DSIRE — Illinois Net Metering (dsireusa.org)",
+      "USDA — Rural Energy for America Program (rd.usda.gov)",
+      "Illinois Commerce Commission — Net metering rules and tariffs",
+    ],
+  },
+  {
     slug: "indiana-net-metering-2026-what-homeowners-need-to-know",
     title: "Indiana Net Metering in 2026: What Homeowners Need to Know",
     subtitle: "Your meter can spin backward — here's how to make the most of it",
