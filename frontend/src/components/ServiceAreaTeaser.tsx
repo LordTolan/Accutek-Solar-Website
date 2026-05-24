@@ -1,16 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
-import { api } from "@/lib/api";
+
+const COUNTIES = [
+  { name: "Vermillion County", state: "IN" },
+  { name: "Parke County", state: "IN" },
+  { name: "Fountain County", state: "IN" },
+  { name: "Montgomery County", state: "IN" },
+  { name: "Putnam County", state: "IN" },
+  { name: "Clay County", state: "IN" },
+  { name: "Sullivan County", state: "IN" },
+  { name: "Vigo County", state: "IN" },
+  { name: "Hendricks County", state: "IN" },
+  { name: "Warren County", state: "IN" },
+  { name: "Edgar County", state: "IL" },
+  { name: "Vermilion County", state: "IL" },
+  { name: "Clark County", state: "IL" },
+  { name: "Crawford County", state: "IL" },
+  { name: "Coles County", state: "IL" },
+  { name: "Douglas County", state: "IL" },
+  { name: "Champaign County", state: "IL" },
+];
 
 export default function ServiceAreaTeaser() {
-  const [counties, setCounties] = useState<any[]>([]);
-  useEffect(() => { api.getServiceArea().then((d) => setCounties(d.counties)).catch(() => {}); }, []);
-
-  const indiana = counties.filter((c) => c.state === "IN");
-  const illinois = counties.filter((c) => c.state === "IL");
+  const indiana = COUNTIES.filter((c) => c.state === "IN");
+  const illinois = COUNTIES.filter((c) => c.state === "IL");
 
   return (
     <section className="py-20 md:py-28" data-testid="service-area-section">
@@ -26,7 +41,7 @@ export default function ServiceAreaTeaser() {
               for homes, farms and businesses across Central Indiana and Western Illinois.
             </p>
             <Link href="/service-area" className="mt-8 inline-flex items-center rounded-full bg-secondary text-secondary-foreground px-6 py-3 font-bold text-sm hover:-translate-y-0.5 transition focus-ring" data-testid="view-all-counties">
-              View All Counties →
+              View All Counties \u2192
             </Link>
           </div>
 
@@ -34,14 +49,12 @@ export default function ServiceAreaTeaser() {
             <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="counties-indiana">
               <div className="flex items-center justify-between mb-4">
                 <div className="font-heading text-lg font-bold">Indiana</div>
-                <span className="text-xs px-2 py-1 rounded-full bg-primary/15 text-foreground font-semibold">{indiana.length}</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-mono">{indiana.length}</span>
               </div>
-              <ul className="space-y-1.5">
+              <ul className="space-y-2">
                 {indiana.map((c) => (
-                  <li key={c.slug}>
-                    <Link href={`/service-area/${c.slug}`} className="flex items-center gap-2 text-sm py-1 hover:text-primary transition">
-                      <MapPin className="w-3.5 h-3.5 text-muted-foreground" /> {c.name}
-                    </Link>
+                  <li key={c.name} className="flex items-center gap-2 text-foreground/70 text-sm">
+                    <MapPin className="w-3.5 h-3.5 text-primary/60 shrink-0" /> {c.name}
                   </li>
                 ))}
               </ul>
@@ -49,14 +62,12 @@ export default function ServiceAreaTeaser() {
             <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="counties-illinois">
               <div className="flex items-center justify-between mb-4">
                 <div className="font-heading text-lg font-bold">Illinois</div>
-                <span className="text-xs px-2 py-1 rounded-full bg-primary/15 text-foreground font-semibold">{illinois.length}</span>
+                <span className="text-xs bg-primary/10 text-primary px-2 py-1 rounded-full font-mono">{illinois.length}</span>
               </div>
-              <ul className="space-y-1.5">
+              <ul className="space-y-2">
                 {illinois.map((c) => (
-                  <li key={c.slug}>
-                    <Link href={`/service-area/${c.slug}`} className="flex items-center gap-2 text-sm py-1 hover:text-primary transition">
-                      <MapPin className="w-3.5 h-3.5 text-muted-foreground" /> {c.name}
-                    </Link>
+                  <li key={c.name} className="flex items-center gap-2 text-foreground/70 text-sm">
+                    <MapPin className="w-3.5 h-3.5 text-primary/60 shrink-0" /> {c.name}
                   </li>
                 ))}
               </ul>
