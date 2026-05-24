@@ -1,377 +1,264 @@
 /**
- * Blog Data — Accutek Solar
+ * Blog post data — embedded for static export.
  *
- * AI-generated, fact-checked solar blog content.
- * New posts are added weekly via automated content pipeline.
- *
- * Categories:
- *   solar-tips      — Homeowner and business tips
- *   industry-news   — Policy, market, and tech updates
- *   local-spotlight  — Indiana & Illinois specific content
- *   tech-deep-dive  — Technical explainers
+ * New posts are added here via automated PRs (weekly AI-generated content).
+ * Each post is fact-checked before merge.
  */
-
-export type BlogCategory =
-  | "solar-tips"
-  | "industry-news"
-  | "local-spotlight"
-  | "tech-deep-dive";
 
 export interface BlogPost {
   slug: string;
   title: string;
-  subtitle?: string;
-  date: string; // ISO date string
-  category: BlogCategory;
-  author: string;
-  authorRole?: string;
-  readTime: number; // minutes
+  subtitle: string;
   excerpt: string;
+  author: string;
+  date: string;            // ISO date string (YYYY-MM-DD)
+  readTime: string;        // e.g. "5 min read"
+  category: string;
+  tags: string[];
   heroImage: string;
   heroAlt: string;
-  tags: string[];
-  content: string; // HTML content
-  sources?: { label: string; url: string }[];
+  content: string;         // HTML content
+  sources?: string[];      // fact-check sources
 }
-
-export const CATEGORY_META: Record<
-  BlogCategory,
-  { label: string; description: string; emoji: string }
-> = {
-  "solar-tips": {
-    label: "Solar Tips",
-    description: "Practical advice for homeowners and businesses going solar",
-    emoji: "💡",
-  },
-  "industry-news": {
-    label: "Industry News",
-    description: "The latest in solar policy, markets, and technology",
-    emoji: "📰",
-  },
-  "local-spotlight": {
-    label: "Local Spotlight",
-    description: "Solar stories from Indiana & Illinois",
-    emoji: "📍",
-  },
-  "tech-deep-dive": {
-    label: "Tech Deep Dive",
-    description: "Under-the-hood looks at solar technology",
-    emoji: "🔬",
-  },
-};
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    slug: "watts-new-solar-panels-hit-25-percent-efficiency",
-    title: "Watts New: Commercial Solar Panels Crack 25% Efficiency",
-    subtitle: "Why the efficiency race matters for your roof — and your wallet",
-    date: "2026-05-24",
-    category: "tech-deep-dive",
-    author: "Accutek Solar",
-    authorRole: "Engineering Team",
-    readTime: 6,
-    excerpt:
-      "The solar industry just hit a milestone: mainstream commercial panels now exceed 25% efficiency. Here's what that means for Indiana and Illinois homeowners considering a system in 2026.",
-    heroImage:
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Close-up of modern high-efficiency solar panels in sunlight",
-    tags: ["solar panels", "efficiency", "technology", "2026"],
-    sources: [
-      {
-        label: "NREL Best Research-Cell Efficiency Chart",
-        url: "https://www.nrel.gov/pv/cell-efficiency.html",
-      },
-      {
-        label: "LONGi Green Energy — HJT Record",
-        url: "https://www.longi.com/en/news/record-breaking/",
-      },
-      {
-        label: "EnergySage Solar Panel Efficiency Guide",
-        url: "https://www.energysage.com/solar/solar-panel-efficiency/",
-      },
-    ],
-    content: `
-      <p>If you've been watching the solar world, you might've heard the buzz: commercial solar panels — the kind we install on your roof or in your field — have officially crossed the <strong>25% efficiency threshold</strong>. That's not a lab curiosity. That's panels you can buy today.</p>
-
-      <h2>What Does "25% Efficiency" Actually Mean?</h2>
-      <p>Solar panel efficiency measures how much of the sunlight hitting a panel gets converted into usable electricity. At 25%, a standard 400-watt panel produces roughly <strong>20% more power</strong> than a typical 20%-efficient panel of the same physical size.</p>
-      <p>For a real-world Indiana home with a 6 kW system, that efficiency bump can translate to <strong>1,200–1,500 additional kilowatt-hours per year</strong> — enough to run your central A/C for most of the summer.</p>
-
-      <h2>The Technology Behind the Jump</h2>
-      <p>Two key technologies are driving this leap:</p>
-      <ul>
-        <li><strong>N-type TOPCon cells</strong> — These use a tunneling oxide layer to reduce electron recombination at the surface. Translation: less energy lost as heat, more converted to electricity. Manufacturers like LONGi, JinkoSolar, and Trina have scaled production of TOPCon panels to the point where pricing is competitive with older PERC technology.</li>
-        <li><strong>Heterojunction (HJT) cells</strong> — HJT layers amorphous silicon on crystalline silicon, creating a cell that performs exceptionally well in <em>low light and high temperatures</em>. LONGi set a world record of 27.30% for an HJT cell in late 2024, and commercial HJT panels are now shipping above 23%.</li>
-      </ul>
-
-      <h2>Why This Matters in Indiana &amp; Illinois</h2>
-      <p>We don't live in Arizona. Our peak sun hours average <strong>4.2–4.7 hours per day annually</strong> (per NREL data for the Wabash Valley region). Higher-efficiency panels squeeze more energy from every hour of sunlight — which is especially valuable during our shorter winter days and overcast stretches.</p>
-      <p>Practically speaking:</p>
-      <ul>
-        <li><strong>Smaller system footprint</strong> — Fewer panels needed to hit your target production, which helps if your roof space is limited or your ground-mount area is constrained.</li>
-        <li><strong>Better return on investment</strong> — More kilowatt-hours per dollar spent means a faster payback period. At current Indiana electricity rates (~$0.14/kWh), a 25%-efficient 8 kW system can save roughly <strong>$1,600–$1,900 per year</strong>.</li>
-        <li><strong>Future-proofing</strong> — Higher-efficiency panels degrade more slowly. NREL data shows N-type panels typically degrade at 0.3–0.4% per year vs. 0.5–0.7% for older PERC panels.</li>
-      </ul>
-
-      <h2>The Bottom Line</h2>
-      <p>The efficiency race isn't just a spec-sheet bragging contest. For a family in Terre Haute or a farm operation in Edgar County, it means <strong>more power, less space, and better long-term economics</strong>. If you got a quote two or three years ago, it's worth getting a fresh one — the panels available today are meaningfully better.</p>
-      <p>Want to see what a modern high-efficiency system looks like for your property? <strong>We'll run the numbers for free.</strong></p>
-    `,
-  },
-  {
     slug: "indiana-net-metering-2026-what-homeowners-need-to-know",
     title: "Indiana Net Metering in 2026: What Homeowners Need to Know",
-    subtitle:
-      "The rules have changed — but solar still pencils out. Here's why.",
-    date: "2026-05-20",
-    category: "local-spotlight",
-    author: "Accutek Solar",
-    authorRole: "Policy & Incentives",
-    readTime: 7,
+    subtitle: "Your meter can spin backward — here's how to make the most of it",
     excerpt:
-      "Indiana's net metering landscape has shifted since SEA 309. We break down the current rules, what credits you actually get, and why going solar in 2026 still makes financial sense.",
+      "Indiana's net metering policy lets solar homeowners bank excess energy as credits. Here's exactly how it works, what the current rules are, and why acting sooner is smarter than later.",
+    author: "Accutek Solar",
+    date: "2026-05-24",
+    readTime: "6 min read",
+    category: "Solar Policy",
+    tags: ["net metering", "Indiana", "policy", "savings"],
     heroImage:
-      "https://images.unsplash.com/photo-1621431735623-95fcba6b89ae?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Rural Indiana farmland with clear sky — solar potential",
-    tags: [
-      "net metering",
-      "indiana",
-      "policy",
-      "incentives",
-      "SEA 309",
-      "2026",
-    ],
-    sources: [
-      {
-        label: "Indiana SEA 309 — Net Metering Phase-Down",
-        url: "https://iga.in.gov/legislative/2017/bills/senate/309",
-      },
-      {
-        label: "Indiana Utility Regulatory Commission (IURC)",
-        url: "https://www.in.gov/iurc/",
-      },
-      {
-        label: "DSIRE — Indiana Solar Incentives",
-        url: "https://www.dsireusa.org/",
-      },
-    ],
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Solar panels on a sunny Indiana field",
     content: `
-      <p>If you've looked into solar in Indiana any time in the last few years, you've probably heard the phrase "net metering is going away." Let's set the record straight on where things <em>actually</em> stand in 2026.</p>
+<p>If you've ever watched your electric meter and wished it could run backward, solar net metering is basically that dream — with paperwork. Indiana's net metering rules allow residential solar owners to send excess electricity back to the grid and receive bill credits in return. It's one of the strongest financial reasons to go solar in the Hoosier State, and in 2026, the rules are still on your side — for now.</p>
 
-      <h2>A Quick History: SEA 309</h2>
-      <p>In 2017, Indiana passed <strong>Senate Enrolled Act 309</strong>, which began phasing down the state's original 1:1 net metering policy. Under the old rules, every kilowatt-hour (kWh) you sent back to the grid earned you a full retail credit — the same rate you'd pay to buy it.</p>
-      <p>SEA 309 set a timeline:</p>
-      <ul>
-        <li><strong>Systems installed before July 1, 2022</strong> — Grandfathered at 1:1 retail net metering until 2032.</li>
-        <li><strong>Systems installed after July 1, 2022</strong> — Utilities were allowed to file new "distributed generation" rate structures with the Indiana Utility Regulatory Commission (IURC).</li>
-      </ul>
-      <p>As of 2026, most Indiana investor-owned utilities (Duke Energy Indiana, Indiana Michigan Power, Indianapolis Power & Light) now offer <strong>excess distributed generation (EDG) credits</strong> rather than full 1:1 net metering for new installations.</p>
+<h2>How Net Metering Actually Works</h2>
+<p>When your solar panels produce more electricity than your home uses — say, on a bright July afternoon when you're at work — that surplus flows into the utility grid. Your meter literally tracks the energy going out, and your utility credits you for it. Those credits offset the electricity you pull from the grid at night or on cloudy days.</p>
+<p>Think of it like a savings account for sunshine. You deposit kilowatt-hours during the day and withdraw them when the sun's off the clock.</p>
 
-      <h2>What Does That Mean for Your Bill?</h2>
-      <p>Under EDG, the credit you receive for excess solar sent to the grid is typically set at or near the utility's <strong>avoided cost rate</strong> — which is lower than the full retail rate. Depending on your utility, you might see credits ranging from <strong>$0.03–$0.05 per kWh</strong> for excess generation, compared to a retail rate of $0.12–$0.16/kWh.</p>
-      <p><strong>But here's the key nuance:</strong> you still offset your own consumption first at the full retail rate. Solar you use directly — powering your A/C, fridge, lights, EV charger — saves you the full retail cost. Only the <em>surplus</em> you export gets the lower credit.</p>
+<h2>Indiana's Current Net Metering Rules</h2>
+<p>Under Indiana's SEA 309 (signed into law in 2017), the state's net metering landscape has been transitioning. Here's where things stand in 2026:</p>
+<ul>
+  <li><strong>Existing systems installed before July 1, 2022</strong> are grandfathered into full 1:1 retail-rate net metering for 30 years from their interconnection date.</li>
+  <li><strong>Systems installed after July 1, 2022</strong> receive credits at approximately 125% of the average wholesale rate — still a meaningful credit, but less than full retail.</li>
+  <li><strong>System size cap:</strong> Net metering is available for systems up to 1 MW for residential and commercial customers.</li>
+  <li><strong>Monthly excess:</strong> Credits roll over month to month, which is great for banking summer overproduction against winter usage.</li>
+</ul>
 
-      <h2>Why Solar Still Makes Sense</h2>
-      <p>A well-sized system — one that matches your household's actual consumption pattern — will <strong>self-consume 60–80%</strong> of the energy it produces. That energy is offsetting power you'd otherwise buy at full price. The math still works:</p>
-      <ul>
-        <li><strong>Self-consumption savings</strong> — At $0.14/kWh, a 7 kW system producing ~9,000 kWh/year with 70% self-consumption saves roughly <strong>$880/year</strong> on self-consumed energy alone.</li>
-        <li><strong>Export credits</strong> — The remaining 30% (~2,700 kWh) exported at $0.04/kWh adds ~<strong>$108/year</strong>.</li>
-        <li><strong>Total first-year savings</strong> — Approximately <strong>$990/year</strong>, with a typical payback period of 9–12 years before accounting for any remaining incentives.</li>
-      </ul>
+<h2>Why "Sooner" Beats "Later"</h2>
+<p>Indiana's net metering compensation structure could change again. Utilities continue to lobby for lower credit rates, arguing that solar customers shift grid maintenance costs to non-solar neighbors. Whether you agree with that framing or not, the trend nationwide has been toward reduced net metering compensation over time.</p>
+<p>The takeaway? If you're considering solar, locking in today's rate structure is a hedge against future policy changes. Every year you wait is a year of credits you don't earn.</p>
 
-      <h2>Battery Storage Changes the Equation</h2>
-      <p>Here's where it gets interesting. If the export rate is low, the smart move is to <strong>store your surplus and use it later</strong> rather than send it to the grid for pennies. Battery storage (lithium iron phosphate systems like the Enphase IQ Battery or Sol-Ark + battery combos) lets you:</p>
-      <ul>
-        <li>Shift solar production to evening peak hours when you use the most power</li>
-        <li>Provide backup during outages (Indiana averages 2–3 significant outages per year per utility territory)</li>
-        <li>Maximize self-consumption to 85–95%, dramatically improving ROI</li>
-      </ul>
+<h2>Pair Net Metering With the Right System Design</h2>
+<p>Net metering works best when your system is sized to roughly match your annual electricity consumption. Oversizing means you produce credits you might not fully use (Indiana utilities don't write you a check for annual excess). Undersizing means you're still buying more grid power than necessary.</p>
+<p>At Accutek Solar, we pull your last 12 months of utility data and design a system that hits the sweet spot — maximum offset, minimum waste. Ground-mount, roof-mount, or pole-mount — we engineer the layout for your site and your usage pattern.</p>
 
-      <h2>Illinois Neighbors: You've Got It Better</h2>
-      <p>If you're across the state line in Illinois, the picture is brighter. Illinois still offers <strong>full 1:1 net metering</strong> for systems up to 25 kW, and the <strong>Illinois Shines program</strong> provides Solar Renewable Energy Credits (SRECs) that can add $1,000–$3,000+ in value over the first 5 years of your system's life.</p>
-
-      <h2>The Takeaway</h2>
-      <p>Indiana's net metering rules have changed, but solar hasn't stopped making financial sense — especially when your system is properly sized for your consumption. <strong>The biggest mistake we see is oversizing a system for export rather than self-consumption.</strong> That's why we spend time analyzing your actual usage data before designing anything.</p>
-      <p>Curious about the numbers for your specific utility and usage? <strong>Reach out for a free, no-pressure estimate.</strong></p>
-    `,
+<h2>The Bottom Line</h2>
+<p>Indiana net metering remains one of the best financial tools for solar homeowners in 2026. The credits are real, the math works, and the policy — while evolving — still rewards early adopters. If you've been on the fence, this is the year your electric bill starts working for you instead of against you.</p>
+`,
+    sources: [
+      "Indiana SEA 309 (2017) — Indiana General Assembly",
+      "Indiana Utility Regulatory Commission (IURC) net metering orders",
+      "DSIRE — Database of State Incentives for Renewables & Efficiency (dsireusa.org)",
+    ],
   },
   {
-    slug: "ground-mount-vs-roof-mount-solar-which-is-right-for-you",
-    title: "Ground Mount vs. Roof Mount: The Great Solar Showdown",
-    subtitle:
-      "Spoiler: there's no wrong answer — but there IS a better one for your property",
+    slug: "ground-mount-vs-roof-mount-solar-which-is-right-for-your-property",
+    title: "Ground-Mount vs. Roof-Mount Solar: Which Is Right for Your Property?",
+    subtitle: "Spoiler: it depends on your yard, your roof, and your tolerance for ladders",
+    excerpt:
+      "Choosing between ground-mount and roof-mount solar isn't just about aesthetics — it's about energy output, maintenance access, and long-term ROI. Here's a no-nonsense comparison.",
+    author: "Accutek Solar",
     date: "2026-05-17",
-    category: "solar-tips",
-    author: "Accutek Solar",
-    authorRole: "Installation Team",
-    readTime: 5,
-    excerpt:
-      "About half of our installs are ground mounts. Here's a no-nonsense comparison of ground-mount vs. roof-mount solar to help you decide what fits your property, budget, and goals.",
+    readTime: "7 min read",
+    category: "Solar 101",
+    tags: ["ground mount", "roof mount", "installation", "comparison"],
     heroImage:
-      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt:
-      "Ground-mounted solar array in a green field with blue sky",
-    tags: [
-      "ground mount",
-      "roof mount",
-      "installation",
-      "solar tips",
-      "comparison",
-    ],
-    sources: [
-      {
-        label: "EnergySage — Ground-Mounted Solar Panels",
-        url: "https://www.energysage.com/solar/ground-mounted-solar-panels/",
-      },
-      {
-        label: "NREL — PV System Costs Benchmark",
-        url: "https://www.nrel.gov/solar/market-research-analysis/solar-installed-system-cost.html",
-      },
-    ],
+      "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Roof-mounted solar panel array on a residential home",
     content: `
-      <p>One of the first questions we get from homeowners is: <em>"Should I put panels on my roof or in my yard?"</em> The honest answer is that it depends on your property — but here's a straightforward breakdown so you can make an informed call.</p>
+<p>When folks call us about going solar, one of the first questions is: "Does it go on the roof or in the yard?" The honest answer is "yes" — and which one's right for you depends on a few key factors. After 32 years of installing both, here's our no-spin breakdown.</p>
 
-      <h2>Roof Mount: The Space-Saver</h2>
-      <p><strong>Best for:</strong> Homeowners with a newer roof (10 years old or less), good southern exposure, and limited yard space.</p>
-      <ul>
-        <li><strong>Lower upfront cost</strong> — No racking structure or concrete footings needed. Your roof IS the structure. A typical residential roof-mount system costs <strong>10–15% less</strong> than an equivalent ground-mount.</li>
-        <li><strong>No yard impact</strong> — Your lawn, garden, and play areas stay untouched.</li>
-        <li><strong>Faster installation</strong> — Most residential roof mounts take 1–2 days to install.</li>
-      </ul>
-      <p><strong>The trade-offs:</strong></p>
-      <ul>
-        <li><strong>You're locked to your roof's orientation and pitch</strong> — If your roof faces east-west, you'll produce less than an optimally angled south-facing system.</li>
-        <li><strong>Shading from trees or chimneys</strong> can eat into production. Microinverters or optimizers help, but shade is shade.</li>
-        <li><strong>Maintenance access</strong> — Climbing on a roof to clean panels or check connections is harder than walking up to a ground array.</li>
-        <li><strong>Roof condition matters</strong> — If your shingles are 15+ years old, we'll recommend re-roofing first. Nobody wants to remove a solar array to replace a roof five years later.</li>
-      </ul>
+<h2>Roof-Mount: The Classic Choice</h2>
+<p>Roof-mounted solar is what most people picture when they think "solar panels." Panels go on your existing roof structure, using racking systems that attach to your rafters. It's the most common residential installation type in the U.S.</p>
+<h3>Pros</h3>
+<ul>
+  <li><strong>Lower installation cost:</strong> No foundation work — your roof is the structure. Typically 10–20% cheaper than ground-mount for the same system size.</li>
+  <li><strong>No yard space needed:</strong> Perfect for suburban lots where every square foot of lawn counts.</li>
+  <li><strong>Out of the way:</strong> Panels are up high and unobtrusive (your HOA may still have opinions, though Indiana law limits HOA solar restrictions).</li>
+</ul>
+<h3>Cons</h3>
+<ul>
+  <li><strong>Roof condition matters:</strong> If your roof needs replacing in the next 10 years, you'll want to do that first — or plan to remove and reinstall panels later.</li>
+  <li><strong>Orientation is fixed:</strong> You're stuck with whatever direction your roof faces. South-facing is ideal; east/west is workable; north-facing is a dealbreaker.</li>
+  <li><strong>Maintenance access:</strong> Cleaning panels or troubleshooting means getting on the roof. It's not dangerous with proper equipment, but it's less convenient.</li>
+  <li><strong>Shading:</strong> Trees, chimneys, and neighboring structures can reduce output on specific roof sections.</li>
+</ul>
 
-      <h2>Ground Mount: The Performance King</h2>
-      <p><strong>Best for:</strong> Rural properties with acreage, older roofs, shaded roof areas, or homeowners who want maximum production and easy maintenance.</p>
-      <ul>
-        <li><strong>Optimal angle and orientation</strong> — We set the tilt and azimuth to the ideal for your latitude (roughly 38–40° in our service area). This alone can boost annual production <strong>10–25%</strong> compared to a suboptimal roof.</li>
-        <li><strong>Easy maintenance</strong> — Walk up, wipe off, inspect. No ladders, no safety harnesses.</li>
-        <li><strong>Scalability</strong> — Got 2 acres? You can build a much larger system than your roof could support.</li>
-        <li><strong>No roof penetrations</strong> — Zero risk of leaks. Your roof stays untouched.</li>
-      </ul>
-      <p><strong>The trade-offs:</strong></p>
-      <ul>
-        <li><strong>Higher upfront cost</strong> — The steel racking, concrete piers, and trenching for wiring add cost. Budget roughly <strong>$0.20–$0.50 more per watt</strong> than roof mount.</li>
-        <li><strong>Uses yard space</strong> — A 6 kW ground-mount system typically occupies a footprint of about 350–400 square feet.</li>
-        <li><strong>Permitting</strong> — Some municipalities have setback requirements for ground-mounted structures. We handle the permit paperwork, but it can add 1–2 weeks to the timeline.</li>
-      </ul>
+<h2>Ground-Mount: The Premium Play</h2>
+<p>Ground-mount arrays sit on steel or aluminum racks anchored into the ground — either with concrete piers, driven posts, or helical piles. They're common on rural properties, farms, and larger lots.</p>
+<h3>Pros</h3>
+<ul>
+  <li><strong>Optimal orientation and tilt:</strong> We set the exact angle and direction for maximum energy harvest. No compromising with roof geometry.</li>
+  <li><strong>Easy maintenance:</strong> Everything is at waist-to-shoulder height. Cleaning, inspections, and repairs are straightforward.</li>
+  <li><strong>No roof dependency:</strong> Your roof age, condition, and material don't matter.</li>
+  <li><strong>Scalability:</strong> Easier to expand if your energy needs grow — just extend the racking.</li>
+</ul>
+<h3>Cons</h3>
+<ul>
+  <li><strong>Higher upfront cost:</strong> Foundation, racking, and trenching for buried conduit add 10–20% compared to roof-mount.</li>
+  <li><strong>Uses yard space:</strong> A typical 8 kW residential system needs roughly 400–500 sq ft of ground area.</li>
+  <li><strong>Permitting:</strong> Some counties require setback compliance and additional permits for ground structures.</li>
+</ul>
 
-      <h2>The Pole Mount Wild Card</h2>
-      <p>There's a third option that many people overlook: the <strong>pole mount</strong> (also called a top-of-pole or tracker mount). A single steel pole supports an array that can even include single-axis tracking to follow the sun. Pole mounts are popular on rural Indiana and Illinois lots where you want ground-mount flexibility with a smaller footprint.</p>
+<h2>The Third Option: Pole-Mount</h2>
+<p>Pole-mount systems sit on a single steel pole with a top-of-pole rack. Some include single-axis or dual-axis sun trackers that follow the sun across the sky, boosting output by 15–25% compared to fixed arrays. They're ideal for rural properties with open acreage.</p>
 
-      <h2>Our Recommendation</h2>
-      <p>About <strong>half of our installations</strong> are ground mounts — that's how common they are in our service area. Rural properties with acreage almost always benefit from a ground array. In-town homes with newer south-facing roofs often do great with roof mount.</p>
-      <p>The real answer is: <strong>let us look at your property.</strong> We use satellite imagery, site visits, and shade analysis to recommend the right approach. No guessing, no one-size-fits-all.</p>
-      <p><strong>Ready to find out which option is right for your place?</strong> Get a free estimate — we'll show you both options side by side.</p>
-    `,
+<h2>How We Help You Decide</h2>
+<p>At Accutek Solar, roughly half of our residential installs are ground-mount — which is unusually high for the industry and reflects our rural Indiana and Illinois service area. We don't push one type over another. During your free site visit, we evaluate your roof condition, yard space, shading, soil type, and electrical panel location. Then we design whichever option delivers the best long-term ROI for your specific property.</p>
+
+<h2>The Verdict</h2>
+<p>There's no universal "better" — there's only what's better for <em>your</em> site. Tight suburban lot with a south-facing roof in good shape? Roof-mount. Rural property with open acreage and a 30-year-old roof? Ground-mount all day. Either way, the sun doesn't care where the panels are — it just keeps showing up.</p>
+`,
+    sources: [
+      "EnergySage — Ground-Mounted Solar Panels: Costs, Pros & Cons (energysage.com)",
+      "SEIA — Solar Installation Types (seia.org)",
+      "Indiana Code IC 32-21-14 — Solar easements and HOA restrictions",
+    ],
   },
   {
-    slug: "solar-battery-backup-vs-generator-which-keeps-the-lights-on",
-    title:
-      "Solar Battery vs. Generator: Which Keeps the Lights On?",
-    subtitle: "The backup power cage match — with a surprise winner",
-    date: "2026-05-12",
-    category: "solar-tips",
-    author: "Accutek Solar",
-    authorRole: "Engineering Team",
-    readTime: 6,
+    slug: "battery-storage-101-is-a-home-battery-worth-it-in-2026",
+    title: "Battery Storage 101: Is a Home Battery Worth It in 2026?",
+    subtitle: "Blackout insurance, bill optimizer, or expensive paperweight? Let's do the math.",
     excerpt:
-      "When the grid goes down, you need a plan. We compare solar battery backup systems with standby generators — cost, reliability, run time, and when it makes sense to have both.",
+      "Home batteries are getting cheaper and smarter, but are they worth the investment for Indiana and Illinois homeowners? We break down the costs, use cases, and when they actually make sense.",
+    author: "Accutek Solar",
+    date: "2026-05-10",
+    readTime: "8 min read",
+    category: "Technology",
+    tags: ["battery storage", "backup power", "technology", "ROI"],
     heroImage:
       "https://images.unsplash.com/photo-1558449028-b53a39d100fc?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Home battery storage system mounted on a garage wall",
-    tags: [
-      "battery storage",
-      "generators",
-      "backup power",
-      "Kohler",
-      "comparison",
-    ],
-    sources: [
-      {
-        label: "EIA — Average U.S. Electricity Outage Duration",
-        url: "https://www.eia.gov/electricity/data/eia861/",
-      },
-      {
-        label: "EnergySage — Solar Battery Cost Guide",
-        url: "https://www.energysage.com/solar/solar-energy-storage/what-do-solar-batteries-cost/",
-      },
-      {
-        label: "Kohler — Home Generators",
-        url: "https://www.kohlerpower.com/en/residential/generators",
-      },
-    ],
+    heroAlt: "Modern home battery storage system mounted on a garage wall",
     content: `
-      <p>Indiana isn't exactly Tornado Alley, but between summer storms, ice events, and the occasional grid hiccup, the average Hoosier experiences <strong>2–4 power outages per year</strong> (EIA data). If you're tired of resetting clocks and losing a freezer full of venison, you've got two main options: <strong>battery backup</strong> or a <strong>standby generator</strong>.</p>
-      <p>We install both. Here's the honest comparison.</p>
+<p>Home batteries have gone from Silicon Valley novelty to mainstream conversation in about five years. Tesla Powerwalls, Enphase IQ Batteries, Franklin WH — the options are multiplying and the prices are dropping. But the question we get most from Indiana and Illinois homeowners isn't "which battery?" It's "do I even need one?" Fair question. Let's dig in.</p>
 
-      <h2>Solar Battery Backup</h2>
-      <p><strong>What it is:</strong> A lithium battery (usually lithium iron phosphate / LFP) paired with your solar array that stores excess energy and powers your home during an outage.</p>
-      <p><strong>Popular options:</strong> Enphase IQ Battery 5P, Tesla Powerwall 3, Sol-Ark + battery rack.</p>
-      <table>
-        <thead><tr><th>Pro</th><th>Con</th></tr></thead>
-        <tbody>
-          <tr><td>Silent operation — no exhaust, no noise</td><td>Limited capacity: a single 10 kWh battery runs essential loads for 8–12 hours</td></tr>
-          <tr><td>Recharges from solar daily (unlimited fuel if sun shines)</td><td>Higher upfront cost: $10,000–$15,000 installed for a single battery</td></tr>
-          <tr><td>Zero maintenance</td><td>Can't power whole-house heavy loads (A/C, well pump, dryer) for long</td></tr>
-          <tr><td>Daily value: time-of-use shifting, self-consumption optimization</td><td>Performance drops in extreme cold without thermal management</td></tr>
-        </tbody>
-      </table>
+<h2>What a Home Battery Actually Does</h2>
+<p>A home battery stores electricity — either from your solar panels or from the grid — and releases it when you need it. That's it. The magic is in <em>when</em> it stores and releases, which creates three main use cases:</p>
+<ol>
+  <li><strong>Backup power during outages:</strong> When the grid goes down, your battery kicks in to keep critical loads running — lights, fridge, internet, medical equipment. Most batteries can power essential circuits for 8–12 hours.</li>
+  <li><strong>Solar self-consumption:</strong> Instead of sending excess solar to the grid for net metering credits, you store it and use it yourself at night. This is most valuable in states where net metering credits are less than retail rate.</li>
+  <li><strong>Time-of-use arbitrage:</strong> In areas with time-of-use (TOU) electricity pricing, you charge the battery when rates are cheap and discharge when rates are expensive. Indiana doesn't widely use TOU rates yet, so this is more relevant in Illinois.</li>
+</ol>
 
-      <h2>Standby Generator</h2>
-      <p><strong>What it is:</strong> A permanently installed natural gas or propane generator with an automatic transfer switch (ATS) that kicks on seconds after the grid drops.</p>
-      <p><strong>Our go-to:</strong> Kohler home generators — we're an authorized dealer and installer.</p>
-      <table>
-        <thead><tr><th>Pro</th><th>Con</th></tr></thead>
-        <tbody>
-          <tr><td>Powers your ENTIRE home — A/C, well pump, everything</td><td>Requires fuel (natural gas or LP tank)</td></tr>
-          <tr><td>Runs indefinitely as long as fuel supply lasts</td><td>Noise: 65–70 dB during operation</td></tr>
-          <tr><td>Lower upfront cost: $6,000–$12,000 installed for 14–24 kW</td><td>Annual maintenance required (oil, filters, exercise runs)</td></tr>
-          <tr><td>Proven reliability in extended multi-day outages</td><td>No daily energy savings — only valuable during outages</td></tr>
-        </tbody>
-      </table>
+<h2>The Real Costs in 2026</h2>
+<p>Battery prices have dropped significantly, but they're still a meaningful investment:</p>
+<ul>
+  <li><strong>Installed cost:</strong> A typical 10–13.5 kWh battery system runs $8,000–$14,000 installed, depending on the brand and complexity of the installation.</li>
+  <li><strong>Lifespan:</strong> Most lithium-iron-phosphate (LFP) batteries are warrantied for 10–15 years or a set number of cycles (typically 4,000–6,000 full cycles).</li>
+  <li><strong>Maintenance:</strong> Essentially zero. Batteries are solid-state with no moving parts.</li>
+</ul>
 
-      <h2>The Hybrid Play: Best of Both Worlds</h2>
-      <p>Here's what we're seeing more and more: <strong>solar + battery + generator</strong>. The battery handles the short outages (a few hours to a day), recharges from your solar panels, and provides daily energy value. The generator is your insurance policy for the multi-day ice storm or extended grid failure.</p>
-      <p>In this setup, the battery and solar dramatically <strong>reduce how often the generator runs</strong>, which means less fuel, less noise, and less wear. The generator is there for the worst-case scenario.</p>
+<h2>When a Battery Makes Sense in Indiana/Illinois</h2>
+<p>Here's our honest take on who benefits most:</p>
+<ul>
+  <li><strong>Frequent outage areas:</strong> If you're in a rural area where ice storms or wind events knock out power multiple times per year, backup power has real value — both for comfort and for protecting a freezer full of food.</li>
+  <li><strong>Medical equipment needs:</strong> If someone in the household depends on powered medical devices, battery backup isn't a luxury — it's a safety measure.</li>
+  <li><strong>Off-grid systems:</strong> If you're fully off-grid, batteries aren't optional — they're the whole deal. Combined with a generator for extended cloudy periods, batteries are your primary power storage.</li>
+  <li><strong>Illinois TOU customers:</strong> If your Illinois utility offers time-of-use rates with significant peak/off-peak spread, arbitrage can shorten your payback period.</li>
+</ul>
 
-      <h2>Which Is Right for You?</h2>
-      <ul>
-        <li><strong>Urban/suburban home with natural gas</strong> → A Kohler standby generator is hard to beat on cost and whole-home coverage.</li>
-        <li><strong>Rural property already going solar</strong> → Battery backup makes sense as an add-on. If you're off-grid or want energy independence, battery + solar is the foundation.</li>
-        <li><strong>Anyone who wants the belt-and-suspenders approach</strong> → Solar + battery + generator is the gold standard for resilience.</li>
-      </ul>
+<h2>When a Battery Might Not Be Worth It (Yet)</h2>
+<p>For grid-tied Indiana homes with net metering and reliable power, the pure financial math on a battery is often tight. Net metering effectively uses the grid as a free battery — you export during the day and import at night. Adding a physical battery to this equation can double your solar investment without doubling your savings.</p>
+<p>That said, battery economics are improving every year. Prices dropped roughly 20% between 2024 and 2026, and that trend is expected to continue as manufacturing scales up globally.</p>
 
-      <p><strong>We install and service all three options.</strong> Let us assess your property, loads, and goals — we'll recommend the setup that actually makes sense for your situation.</p>
-    `,
+<h2>Batteries vs. Generators</h2>
+<p>We install both Kohler generators and battery systems, so we don't have a horse in this race. Here's the quick comparison:</p>
+<ul>
+  <li><strong>Generators</strong> provide unlimited runtime (as long as you have fuel), whole-home coverage, and lower upfront cost ($5,000–$12,000 installed for a Kohler standby unit). They do require fuel, maintenance, and produce noise and emissions.</li>
+  <li><strong>Batteries</strong> are silent, maintenance-free, and work seamlessly with solar. But they have limited capacity and higher cost per kWh of backup.</li>
+  <li><strong>Hybrid approach:</strong> Many of our customers pair a smaller battery for instant switchover with a generator for extended outages. Belt and suspenders — works great.</li>
+</ul>
+
+<h2>The Bottom Line</h2>
+<p>A home battery is worth it in 2026 if you have a specific need it solves — outage protection, medical power, off-grid living, or TOU optimization. If you're grid-tied with solid net metering and reliable power, you might want to wait a year or two for prices to drop further. Either way, we'll run the numbers for your specific situation during a free consultation — no sales pressure, just math.</p>
+`,
+    sources: [
+      "NREL — Cost Projections for Utility-Scale Battery Storage (nrel.gov)",
+      "EnergySage — Home Battery Cost Guide 2025-2026 (energysage.com)",
+      "Kohler Power — Standby Generator Sizing Guide (kohlerpower.com)",
+      "BloombergNEF — Battery Pack Prices (about.bnef.com)",
+    ],
+  },
+  {
+    slug: "solar-panel-myths-busted-5-things-your-neighbor-got-wrong",
+    title: "Solar Panel Myths Busted: 5 Things Your Neighbor Got Wrong",
+    subtitle: "No, solar panels don't work only in Arizona. Yes, we checked.",
+    excerpt:
+      "From 'solar doesn't work here' to 'panels destroy your roof,' we're tackling the top five solar myths that keep popping up at Indiana barbecues. Spoiler: the sun works in the Midwest too.",
+    author: "Accutek Solar",
+    date: "2026-05-03",
+    readTime: "5 min read",
+    category: "Solar 101",
+    tags: ["myths", "education", "solar basics", "FAQ"],
+    heroImage:
+      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Bright sunlight breaking through clouds over a green field",
+    content: `
+<p>We love our neighbors. But after 32 years in the solar business, we've heard some doozies at cookouts, church potlucks, and hardware store checkout lines. Here are five solar myths that refuse to die — and the facts that should finally put them to rest.</p>
+
+<h2>Myth #1: "We Don't Get Enough Sun Here for Solar to Work"</h2>
+<p><strong>The truth:</strong> Indiana and Illinois receive about 4.2–4.7 peak sun hours per day on an annual average basis. That's more solar resource than Germany — which was the world's top solar producer for over a decade and still generates about 10% of its electricity from solar.</p>
+<p>Solar panels don't need blazing desert heat. They need <em>light</em>, and they actually perform slightly better in cooler temperatures. A crisp, clear Indiana spring day is peak solar production weather.</p>
+
+<h2>Myth #2: "Solar Panels Will Destroy My Roof"</h2>
+<p><strong>The truth:</strong> Properly installed solar panels actually <em>protect</em> the section of roof they cover from UV degradation, rain, and hail. The mounting hardware uses lag bolts sealed with flashing — the same waterproofing methods used for any roof penetration (think plumbing vents or satellite dishes).</p>
+<p>The key phrase is "properly installed." This is where hiring experienced, licensed installers matters. In 32 years, we've never had a roof leak from a solar installation. Not once.</p>
+
+<h2>Myth #3: "Solar Panels Require Constant Maintenance"</h2>
+<p><strong>The truth:</strong> Modern solar panels have no moving parts and require almost zero maintenance. Rain handles most cleaning naturally. The inverter (the box that converts DC to AC power) might need attention once every 10–15 years. That's about it.</p>
+<p>We recommend a visual inspection once a year — check for debris, animal nests, or shading from new tree growth. Total time: five minutes with a cup of coffee. It's the lowest-maintenance major home investment you'll ever make.</p>
+
+<h2>Myth #4: "Solar Is Only for Rich People"</h2>
+<p><strong>The truth:</strong> The cost of residential solar has dropped over 70% in the last decade. A typical 8 kW residential system in Indiana costs roughly $22,000–$30,000 before incentives. With state programs, USDA REAP grants (for rural/ag properties), and financing options, the effective cost is often significantly lower.</p>
+<p>More importantly, solar is an investment that pays you back. In Indiana, a properly sized system typically pays for itself in 8–12 years through electricity savings — and the panels keep producing for 25–30+ years. That's 15–20 years of essentially free electricity after payback.</p>
+
+<h2>Myth #5: "I Should Wait Because Solar Technology Is About to Get Way Better"</h2>
+<p><strong>The truth:</strong> This one has been "true" for 20 years, and people who waited 20 years ago missed out on 20 years of savings. Solar panel efficiency has improved steadily — from about 15% to 22–24% for standard residential panels — but the gains are incremental, not revolutionary.</p>
+<p>Meanwhile, every month you wait is a month of electricity you're buying instead of generating. The best time to plant a tree was 20 years ago. The second best time is now. Same goes for solar panels (which are arguably better than trees at generating electricity, though worse at providing shade for hammocks).</p>
+
+<h2>The Real "Myth" to Watch Out For</h2>
+<p>The biggest misconception isn't about the technology — it's that you need to figure everything out yourself before calling an installer. A good solar company (hi, that's us) will evaluate your property, pull your utility data, model your savings, and give you real numbers — all for free. You don't need to become a solar engineer. You just need to make the call.</p>
+`,
+    sources: [
+      "NREL — Solar Resource Data for the United States (nrel.gov/gis)",
+      "Fraunhofer ISE — Photovoltaics Report (ise.fraunhofer.de)",
+      "SEIA/Wood Mackenzie — U.S. Solar Market Insight Q1 2026 (seia.org)",
+      "EnergySage — Solar Panel Cost Guide (energysage.com)",
+    ],
   },
 ];
 
-/** Helper to get posts sorted by date (newest first) */
-export function getSortedPosts(): BlogPost[] {
+/** Helper: get a single post by slug */
+export function getBlogPost(slug: string): BlogPost | undefined {
+  return BLOG_POSTS.find((p) => p.slug === slug);
+}
+
+/** Helper: get all posts sorted by date (newest first) */
+export function getAllBlogPosts(): BlogPost[] {
   return [...BLOG_POSTS].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
 
-/** Get a single post by slug */
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((p) => p.slug === slug);
-}
-
-/** Get posts by category */
-export function getPostsByCategory(category: BlogCategory): BlogPost[] {
-  return getSortedPosts().filter((p) => p.category === category);
-}
-
-/** Get all unique tags */
-export function getAllTags(): string[] {
-  const tags = new Set<string>();
-  BLOG_POSTS.forEach((p) => p.tags.forEach((t) => tags.add(t)));
-  return Array.from(tags).sort();
+/** Helper: get unique categories */
+export function getBlogCategories(): string[] {
+  return [...new Set(BLOG_POSTS.map((p) => p.category))];
 }
