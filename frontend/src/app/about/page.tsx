@@ -10,13 +10,13 @@ const TEAM_BG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?cr
 const TEAM = [
   {
     name: "Clint Lenover",
-    role: "Owner & Operations",
+    role: "Install Tech",
     slug: "clint-lenover",
-    bio: "Runs the day-to-day at Accutek — sales, scheduling, customer care. The voice you'll hear on the other end of the line.",
+    bio: "Hands-on install tech — on the roof, in the field, getting systems wired up right.",
   },
   {
     name: "Seth Davis",
-    role: "Partner · Solar Specialist",
+    role: "Owner · Solar Specialist",
     slug: "seth-davis",
     bio: "Carries the 30+ years of Davis-family solar know-how. Designs every system from monthly bill to mounting plan.",
   },
@@ -27,10 +27,10 @@ const TEAM = [
     bio: "Leads field crews on roof, ground-mount and pole-mount installs across Indiana and Illinois.",
   },
   {
-    name: "Quill",
-    role: "Field Technician",
+    name: "Quill Davis",
+    role: "Owner · Field Operations",
     slug: "quill",
-    bio: "Handles installs, service calls and the electrical side of every job. Loves a clean wire pull.",
+    bio: "Co-owner running field operations — installs, service calls, and the electrical side of every job.",
   },
   {
     name: "AJ (\"Scruff\")",

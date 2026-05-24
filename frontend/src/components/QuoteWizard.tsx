@@ -189,22 +189,10 @@ export default function QuoteWizard() {
               </div>
             </Group>
 
-            {/* Q5 */}
-            <Group label="05 · Did you know the big federal solar tax credit ended this year for new systems?">
-              <div className="flex gap-2">
-                <Pill active={a.aware_credit_ended === true} onClick={() => setA({ ...a, aware_credit_ended: true })} testId="q5-yes">Yes, I'm aware</Pill>
-                <Pill active={a.aware_credit_ended === false} onClick={() => setA({ ...a, aware_credit_ended: false })} testId="q5-no">No — tell me more</Pill>
-              </div>
-              {a.aware_credit_ended === false && (
-                <div className="mt-3 flex items-start gap-2 text-xs text-foreground/70 bg-muted/50 border border-border/70 rounded-md p-3" data-testid="q5-expectation">
-                  <AlertCircle className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                  <span>The 30% federal solar credit has ended for new systems starting this year. State programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants and utility rebates are still active — and equipment pricing is down. We'll walk you through today's real math.</span>
-                </div>
-              )}
-            </Group>
+
 
             {/* Q6 */}
-            <Group label="06 · What's your ideal timeline?">
+            <Group label="05 · What's your ideal timeline?">
               <div className="flex flex-wrap gap-2">
                 {TIMELINES.map((o) => (
                   <Pill key={o.v} active={a.timeline === o.v} onClick={() => setA({ ...a, timeline: o.v })} testId={`q6-${o.v}`}>{o.l}</Pill>
@@ -228,7 +216,7 @@ export default function QuoteWizard() {
                 <Stat label="Payback" value={`${estimate.payback_years} yrs`} />
               </div>
               <p className="mt-5 text-xs text-muted-foreground">
-                Directional estimate based on Central IN / Western IL sun hours. Federal solar credit ended this year — your real, free site-visit quote will include all active state &amp; utility incentives.
+                Directional estimate based on Central IN / Western IL sun hours. Your real, free site-visit quote will include all active state &amp; utility incentives.
               </p>
             </div>
 

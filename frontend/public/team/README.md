@@ -7,10 +7,10 @@ Place real JPGs here using the slug-based filename convention used by
 
 | File                    | Person                          |
 |-------------------------|---------------------------------|
-| `clint-lenover.jpg`     | Clint Lenover — Owner & Operations           |
-| `seth-davis.jpg`        | Seth Davis — Partner · Solar Specialist       |
+| `clint-lenover.jpg`     | Clint Lenover — Install Tech                 |
+| `seth-davis.jpg`        | Seth Davis — Owner · Solar Specialist         |
 | `colt.jpg`              | Colt — Lead Installer                         |
-| `quill.jpg`             | Quill — Field Technician                      |
+| `quill.jpg`             | Quill Davis — Owner · Field Operations        |
 
 ## Image specs
 
