@@ -4,8 +4,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, X, Phone, CalendarClock } from "lucide-react";
+import { Menu, X, Phone, CalendarClock, LogIn } from "lucide-react";
 import { cn, HCP_BOOK_URL } from "@/lib/utils";
+import { CUSTOMER_PORTAL } from "@/lib/site-data";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -46,6 +47,16 @@ export default function Header() {
         </nav>
 
         <div className="hidden md:flex items-center gap-3">
+          <a
+            href={CUSTOMER_PORTAL.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Existing customers: view jobs, invoices & estimates"
+            className="text-sm font-medium text-foreground/60 flex items-center gap-1.5 hover:text-primary transition focus-ring"
+            data-testid="header-portal"
+          >
+            <LogIn className="w-3.5 h-3.5" /> Portal
+          </a>
           <a href="tel:+18128787343" className="text-sm font-medium text-foreground/80 flex items-center gap-2 hover:text-primary focus-ring" data-testid="header-phone">
             <Phone className="w-4 h-4" /> (812) 878-7343
           </a>
@@ -62,13 +73,23 @@ export default function Header() {
         </button>
       </div>
 
-      <div className={cn("md:hidden overflow-hidden transition-[max-height] duration-300 border-t border-border", open ? "max-h-[28rem]" : "max-h-0")}>
+      <div className={cn("md:hidden overflow-hidden transition-[max-height] duration-300 border-t border-border", open ? "max-h-[32rem]" : "max-h-0")}>
         <div className="container mx-auto container-px py-4 flex flex-col gap-2.5" data-testid="mobile-menu">
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="py-2 text-base font-medium" data-testid={`mobile-nav-${n.label.toLowerCase().replace(/\s/g,'-')}`}>
               {n.label}
             </Link>
           ))}
+          <a
+            href={CUSTOMER_PORTAL.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setOpen(false)}
+            className="py-2 text-base font-medium text-foreground/70 flex items-center gap-2"
+            data-testid="mobile-portal"
+          >
+            <LogIn className="w-4 h-4" /> Customer Portal
+          </a>
           <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 font-bold" data-testid="mobile-book">
             <CalendarClock className="w-4 h-4" /> Book Online
           </a>
