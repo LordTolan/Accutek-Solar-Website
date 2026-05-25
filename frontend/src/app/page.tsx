@@ -8,6 +8,7 @@ import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import BlogTeaser from "@/components/BlogTeaser";
+import HolidayHero from "@/components/holiday/HolidayHero";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array — primary hero imagery (Seth's note: balance roof + ground)
@@ -27,6 +28,9 @@ const SERVICES = [
 export default function HomePage() {
   return (
     <>
+      {/* Holiday hero — renders only when a holiday theme is active */}
+      <HolidayHero />
+
       {/* Hero — clean light / technical, no video */}
       <section className="relative overflow-hidden border-b border-border" data-testid="hero-section">
         {/* Background grid + soft gradient */}
