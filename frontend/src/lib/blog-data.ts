@@ -23,6 +23,81 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "homegrown-watts-inside-americas-solar-manufacturing-boom",
+    title: "Homegrown Watts: Inside America's Solar Manufacturing Boom",
+    subtitle: "From 8 gigawatts to 60 — and why your next panels might have a shorter commute",
+    excerpt:
+      "U.S. solar manufacturing capacity has exploded 700% since the IRA passed. Meanwhile, tariffs on Southeast Asian imports are hitting triple digits. Here's what the reshuffled supply chain means for Indiana and Illinois homeowners shopping for panels in 2026.",
+    author: "Accutek Solar",
+    date: "2026-05-25",
+    readTime: "6 min read",
+    category: "Industry News",
+    tags: ["manufacturing", "tariffs", "trade policy", "supply chain", "pricing", "Made in USA"],
+    heroImage:
+      "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Solar panels being manufactured in a modern factory setting",
+    content: `
+<p>Something remarkable has happened to American solar manufacturing, and most homeowners have no idea. Three years ago, the U.S. could barely produce enough solar panels to cover a midsized utility project. Today, domestic factories can churn out over 60 gigawatts of modules per year — a 700% increase since the Inflation Reduction Act landed in 2022. If your last set of panels came from a factory in Southeast Asia, your next ones might come from Georgia, Ohio, or Alabama. Here's what's driving the shift and what it means for your wallet.</p>
+
+<h2>The Factory Floor Scoreboard</h2>
+<p>The numbers are staggering. U.S. solar module production capacity jumped from roughly <strong>8 GW per year</strong> before the IRA to over <strong>60 GW by late 2025</strong>, according to the Solar Energy Industries Association. Solar cell production — the heart of each panel — saw a <strong>300% increase</strong> over the same period. For context, the entire U.S. installed about 40 GW of solar in 2025. Domestic factories can now theoretically supply more panels than the country installs.</p>
+<p>The headliners tell the story:</p>
+<ul>
+  <li><strong>First Solar</strong> opened a $1.1 billion factory in Alabama in late 2024, adding 3.5 GW of annual thin-film capacity. Combined with its Ohio and Louisiana plants, First Solar's U.S. output is on track to hit <strong>14 GW by end of 2026</strong> — making it the largest domestic solar manufacturer by a wide margin.</li>
+  <li><strong>Qcells (Hanwha)</strong> ramped its Dalton, Georgia plant past 3 GW annually and broke ground on a <strong>$2.5 billion complex in Cartersville, GA</strong> that will integrate the entire supply chain — ingots, wafers, cells, and finished modules — under one roof. That's nearly unheard of outside China.</li>
+  <li><strong>Corning</strong> entered the game with a solar manufacturing hub in Michigan, targeting up to 15% of the U.S. wafer market.</li>
+</ul>
+<p>These aren't press releases and renderings. These are real factories, hiring real workers, shipping real panels.</p>
+
+<h2>Why Now? The Tariff Wall Is Real</h2>
+<p>The manufacturing boom didn't happen in a vacuum. It's riding a wave of trade policy that has made importing cheap panels from Southeast Asia — the industry's go-to supply chain for a decade — dramatically more expensive.</p>
+<p>In April 2025, the U.S. Commerce Department finalized anti-dumping and countervailing duty rates on crystalline solar cells and modules from Vietnam, Malaysia, Thailand, and Cambodia. The numbers are eye-watering:</p>
+<ul>
+  <li><strong>Cambodia:</strong> countervailing duties up to 534%, anti-dumping duties of 117%</li>
+  <li><strong>Vietnam:</strong> anti-dumping duties of 271%, countervailing duties of 125%</li>
+  <li><strong>Thailand:</strong> anti-dumping duties of 111%, countervailing duties of 264%</li>
+  <li><strong>Malaysia:</strong> countervailing duties of 32%, anti-dumping duties of about 2%</li>
+</ul>
+<p>These stack on top of existing Section 201 safeguard tariffs and reciprocal tariffs ranging from 24% to 49% depending on the country. The practical effect? Panels that used to arrive from a Vietnamese factory at rock-bottom prices now carry duty loads that can double or triple the landed cost. The era of 15-cent imported modules is over for the U.S. market.</p>
+
+<h2>What This Means for Panel Prices</h2>
+<p>Here's the part that actually affects your quote. As of Q1 2026, U.S. solar module pricing looks like this:</p>
+<ul>
+  <li><strong>Imported modules</strong> (not subject to the harshest penalties): ~$0.265 per watt</li>
+  <li><strong>U.S.-assembled modules with imported cells:</strong> ~$0.36 per watt</li>
+  <li><strong>Fully U.S.-made modules (domestic cells):</strong> ~$0.46 per watt</li>
+</ul>
+<p>That's a meaningful spread. On an 8 kW residential system, the module cost difference between imported and fully domestic panels is roughly <strong>$1,500–$1,600</strong>. The median installed system price nationally sits at about <strong>$2.58 per watt</strong> before incentives, per EnergySage — which translates to around $20,600 for an 8 kW system. Modules are one piece of that cost (the rest is inverters, racking, labor, permitting, and overhead), but they're the piece most affected by trade policy.</p>
+<p>The good news: as domestic production scales up and factories hit full capacity through 2026 and 2027, competition among U.S. manufacturers should put downward pressure on that $0.46 premium. More supply, same demand — economics still works even when trade policy gets weird.</p>
+
+<h2>The Policy Seesaw</h2>
+<p>If you're sensing some tension in the numbers, you're right. The federal government is simultaneously <em>protecting</em> domestic manufacturing with tariffs and <em>sunsetting</em> the tax credits that fueled the factory boom in the first place.</p>
+<p>The One Big Beautiful Bill Act (OBBBA), signed in 2025, accelerates the phase-out of the technology-neutral clean energy tax credits (Sections 45Y and 48E) for wind and solar projects placed in service after December 31, 2027. It maintains the Section 45X Advanced Manufacturing Production Credit that directly supports panel makers — but the demand-side incentives that drove installations are on a shorter clock than the IRA originally planned.</p>
+<p>Translation for homeowners: the policy window is narrowing. Factories are ramping up <em>now</em>, but the incentive environment that makes installations attractive is evolving. Waiting for prices to drop further is a gamble against a policy landscape that's actively shifting under everyone's feet.</p>
+
+<h2>What Indiana and Illinois Homeowners Should Know</h2>
+<p>For folks in our service area, here's the practical takeaway:</p>
+<ul>
+  <li><strong>Panel selection matters more than it used to.</strong> Ask your installer where the panels are made and what certifications they carry. U.S.-manufactured panels from First Solar, Qcells, and others come with domestic warranty support and shorter supply chains — that means faster replacements if something ever goes wrong.</li>
+  <li><strong>Don't chase the cheapest module.</strong> A panel with questionable tariff status or fly-by-night warranty isn't a deal — it's a liability on your roof for 25 years. We've always used established, bankable manufacturers, and the domestic boom gives us more options, not fewer.</li>
+  <li><strong>Pricing has stabilized, not skyrocketed.</strong> Despite all the tariff drama, installed residential solar costs in the Midwest remain in the <strong>$2.50–$3.80 per watt</strong> range. The tariff costs are mostly absorbed at the utility scale; residential installers have been pivoting to domestic and tariff-exempt supply lines.</li>
+  <li><strong>Timing still favors action.</strong> Between state-level incentives (Illinois Shines, Indiana's sales tax exemption) and the shifting federal landscape, the math works best for homeowners who move sooner rather than later. Panels installed today lock in today's economics for 25–30 years.</li>
+</ul>
+
+<h2>The Bottom Line</h2>
+<p>American solar manufacturing has gone from afterthought to powerhouse in three years. Billions of dollars in factories are producing panels right here in the U.S., and the trade barriers that once protected cheap imports now redirect demand toward domestic products. For Indiana and Illinois homeowners, the shift means better warranty coverage, more reliable supply, and a domestic industry that's finally competing on capacity — not just policy. The panels may cost a touch more than the rock-bottom imports of 2023, but they'll be made by companies with U.S. addresses, U.S. service teams, and a vested interest in keeping your system running for decades. That's a trade we're happy to make.</p>
+`,
+    sources: [
+      "Solar Energy Industries Association — U.S. Solar Manufacturing Capacity Report 2025 (seia.org)",
+      "U.S. Commerce Department — Final AD/CVD Rates on Solar Cells and Modules from SE Asia, April 2025 (commerce.gov)",
+      "pv magazine USA — U.S. Solar Module Prices Face Upward Pressure, Q1 2026 (pv-magazine-usa.com)",
+      "First Solar — Q3 2025 Earnings Report and Manufacturing Expansion (firstsolar.com)",
+      "Hanwha Qcells — Cartersville, GA Solar Manufacturing Complex Announcement (qcells.com)",
+      "EnergySage — Solar Panel Cost Guide 2026 (energysage.com)",
+      "Sidley Austin — The One Big Beautiful Bill Act: Navigating the New Energy Landscape (sidley.com)",
+    ],
+  },
+  {
     slug: "illinois-solar-incentives-2026-the-prairie-state-is-a-solar-goldmine",
     title: "Illinois Solar Incentives in 2026: The Prairie State Is a Solar Goldmine",
     subtitle: "SRECs, net metering, tax breaks — Illinois basically pays you to go solar",
