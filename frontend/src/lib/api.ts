@@ -40,4 +40,15 @@ export const api = {
     request<any>(`/leads/${id}`, { method: "PATCH", body: JSON.stringify({ status }) }),
   syncHcp: (id: string) => request<any>(`/leads/${id}/sync-hcp`, { method: "POST" }),
   stats: () => request<any>("/admin/stats"),
+
+  // Site settings (admin)
+  getSettings: () => request<any>("/admin/settings"),
+  setHolidayOverride: (force_active: boolean, theme_name = "fourth-of-july") =>
+    request<any>("/admin/settings/holiday-theme", {
+      method: "PUT",
+      body: JSON.stringify({ force_active, theme_name }),
+    }),
+
+  // Public holiday theme check
+  getHolidayTheme: () => request<any>("/public/holiday-theme"),
 };

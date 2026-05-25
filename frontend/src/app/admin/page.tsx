@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
-import { Loader2, LogOut, RefreshCcw, Filter, Search, Send, CheckCircle2, X } from "lucide-react";
+import { Loader2, LogOut, RefreshCcw, Filter, Search, Send, CheckCircle2, X, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 
 const TIER_STYLES: Record<string, string> = {
@@ -23,6 +23,33 @@ export default function AdminDashboard() {
   const [filterStatus, setFilterStatus] = useState("");
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(true);
+  const [holidayForced, setHolidayForced] = useState(false);
+  const [holidayThemeName, setHolidayThemeName] = useState("fourth-of-july");
+  const [holidayLoading, setHolidayLoading] = useState(false);
+
+  async function refreshHolidaySettings() {
+    try {
+      const s = await api.getSettings();
+      if (s?.holiday_theme) {
+        setHolidayForced(s.holiday_theme.force_active ?? false);
+        setHolidayThemeName(s.holiday_theme.theme_name ?? "fourth-of-july");
+      }
+    } catch {}
+  }
+
+  async function toggleHoliday() {
+    setHolidayLoading(true);
+    try {
+      const newState = !holidayForced;
+      await api.setHolidayOverride(newState, holidayThemeName);
+      setHolidayForced(newState);
+      toast.success(newState ? "Holiday theme activated!" : "Holiday theme deactivated");
+    } catch (e: any) {
+      toast.error(e.message || "Failed to update");
+    } finally {
+      setHolidayLoading(false);
+    }
+  }
 
   async function refresh() {
     setLoading(true);
@@ -38,7 +65,7 @@ export default function AdminDashboard() {
     } finally { setLoading(false); }
   }
 
-  useEffect(() => { refresh(); }, []);
+  useEffect(() => { refresh(); refreshHolidaySettings(); }, []);
   useEffect(() => { if (user) refresh(); }, [filterTier, filterStatus]);
 
   async function logout() {
@@ -92,6 +119,25 @@ export default function AdminDashboard() {
           <StatCard label="Warm" value={stats?.warm ?? 0} />
           <StatCard label="Nurture" value={stats?.nurture ?? 0} />
           <StatCard label="Won %" value={`${stats?.conversion_rate ?? 0}%`} accent="text-secondary" />
+        </div>
+
+        {/* Holiday Theme Control */}
+        <div className="bg-card rounded-2xl border border-border/60 p-4 mb-6 flex items-center justify-between gap-4" data-testid="holiday-theme-control">
+          <div className="flex items-center gap-3">
+            <span className="grid place-items-center w-9 h-9 rounded-lg bg-red-600/20 text-red-400"><Sparkles className="w-5 h-5" /></span>
+            <div>
+              <div className="font-heading text-sm font-bold">Holiday Theme Preview</div>
+              <div className="text-xs text-muted-foreground">Force-activate the 4th of July theme for testing (overrides date window)</div>
+            </div>
+          </div>
+          <button
+            onClick={toggleHoliday}
+            disabled={holidayLoading}
+            className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer items-center rounded-full transition-colors focus-ring ${holidayForced ? "bg-red-600" : "bg-muted"}`}
+            data-testid="holiday-toggle"
+          >
+            <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow transition-transform ${holidayForced ? "translate-x-7" : "translate-x-1"}`} />
+          </button>
         </div>
 
         {/* Filters */}
