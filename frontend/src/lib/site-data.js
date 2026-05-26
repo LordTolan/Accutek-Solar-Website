@@ -235,6 +235,11 @@ export const GALLERY = [
   { src: "/gallery/clinton-in/array-closeup-front.jpg", alt: "Ground-mount array — front view", location: "Clinton, IN" },
   { src: "/gallery/clinton-in/array-closeup-rear.jpg", alt: "Ground-mount array — rear view", location: "Clinton, IN" },
   { src: "/gallery/clinton-in/kohler-standby-generator.jpg", alt: "Kohler standby generator", location: "Clinton, IN" },
+  // ─── West Terre Haute, IN — Generator + battery monitoring (2026) ───
+  { src: "/gallery/west-terre-haute-in/horizon-standby-generator.jpg", alt: "Horizon standby generator", location: "West Terre Haute, IN" },
+  { src: "/gallery/west-terre-haute-in/cummins-transfer-switch.jpg", alt: "Cummins transfer switch & service disconnect", location: "West Terre Haute, IN" },
+  { src: "/gallery/west-terre-haute-in/equipment-room-inverters.jpg", alt: "Equipment room — inverters & panels", location: "West Terre Haute, IN" },
+  { src: "/gallery/west-terre-haute-in/victron-cerbo-gx-monitor.jpg", alt: "Victron Cerbo GX monitoring system", location: "West Terre Haute, IN" },
   // ─── Legacy installs ───
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20170626_174551225-3.jpg?resize=750%2C422&ssl=1", alt: "Roof solar array — residential install" },
   { src: "https://i0.wp.com/accuteksolar.com/wp-content/uploads/2020/03/img_20191213_171847326-1.jpg?resize=750%2C422&ssl=1", alt: "Battery backup interior install" },
