@@ -50,7 +50,7 @@ export default function Testimonials() {
       <div className="container mx-auto container-px">
         <div className="flex items-end justify-between gap-6 mb-10">
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Real customers \u00b7 Real results</div>
+            <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Real customers · Real results</div>
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">From neighbors who chose the future.</h2>
           </div>
           <div className="hidden md:flex gap-2">
@@ -72,7 +72,7 @@ export default function Testimonials() {
                     <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-foreground/80 leading-relaxed mb-6">&ldquo;{t.quote}&rdquo;</p>
+                <p className="text-foreground/80 leading-relaxed mb-6">“{t.quote}”</p>
                 <div className="flex items-center gap-3 mt-auto">
                   <div className="w-10 h-10 rounded-full bg-primary/10 text-primary grid place-items-center text-sm font-bold">{t.initials}</div>
                   <div className="text-sm text-foreground/60">{t.location}</div>
