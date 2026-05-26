@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ArrowRight, ArrowLeft, Loader2, Phone, AlertCircle } from "lucide-react";
 import { api } from "@/lib/api";
@@ -40,7 +40,11 @@ const TIMELINES = [
   { v: "gathering_info", l: "Just gathering info" },
 ] as const;
 
-export default function QuoteWizard() {
+interface QuoteWizardProps {
+  onContactChange?: (contact: { name: string; email: string; phone: string; zip: string }) => void;
+}
+
+export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -64,6 +68,11 @@ export default function QuoteWizard() {
   });
   const [estimate, setEstimate] = useState<any>(null);
   const [leadId, setLeadId] = useState<string | null>(null);
+
+  // Sync contact info to parent so Option B can auto-fill
+  useEffect(() => {
+    onContactChange?.({ name, email, phone, zip });
+  }, [name, email, phone, zip, onContactChange]);
 
   const canNext1 = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && phone.replace(/\D/g, "").length >= 7 && zip.length >= 4;
   const canNext2 = a.monthly_bill > 0 && a.interest_areas.length > 0 && a.aware_credit_ended !== null;
