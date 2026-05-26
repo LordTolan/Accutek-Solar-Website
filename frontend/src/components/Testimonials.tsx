@@ -1,43 +1,18 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-
-const TESTIMONIALS = [
-  {
-    initials: "A.F.",
-    location: "Dana, IN",
-    quote: "Superior knowledge of his products along with great service and reliability!",
-    rating: 5,
-  },
-  {
-    initials: "E.D.",
-    location: "Clinton, IN",
-    quote: "Accutek Solar designed a customized system for us based upon our location, lifestyle, and budget. We are extremely satisfied with our PV panels and solar thermal tubes. Clean solar energy has enabled us to lower our carbon footprint and eliminate our monthly electric bill.",
-    rating: 5,
-  },
-  {
-    initials: "J.V.",
-    location: "Terre Haute, IN",
-    quote: "I am really glad I decided to buy a system from Accutek. There is no better feeling than seeing your electric meter spin backwards! System was installed in a timely manner with professionalism and has been working flawlessly since.",
-    rating: 5,
-  },
-  {
-    initials: "J.R.",
-    location: "Ivy Tech, Lafayette, IN",
-    quote: "Accutek has been key in the design, integration, and custom installation of new and existing systems at the Craig Porter Energy Center. Their expertise and installation quality is one to admire.",
-    rating: 5,
-  },
-];
+import { api } from "@/lib/api";
 
 type T = { initials: string; location: string; quote: string; rating: number };
 
 export default function Testimonials() {
-  const items: T[] = TESTIMONIALS;
+  const [items, setItems] = useState<T[]>([]);
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
 
+  useEffect(() => { api.getTestimonials().then((d) => setItems(d.testimonials)).catch(() => {}); }, []);
   useEffect(() => {
     if (!embla) return;
     embla.on("select", () => setSelected(embla.selectedScrollSnap()));
@@ -50,7 +25,7 @@ export default function Testimonials() {
       <div className="container mx-auto container-px">
         <div className="flex items-end justify-between gap-6 mb-10">
           <div>
-            <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Real customers · Real results</div>
+            <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Real customers | Real results</div>
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">From neighbors who chose the future.</h2>
           </div>
           <div className="hidden md:flex gap-2">
@@ -66,25 +41,26 @@ export default function Testimonials() {
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex gap-6">
             {items.map((t, i) => (
-              <div key={i} className="flex-[0_0_90%] sm:flex-[0_0_45%] lg:flex-[0_0_30%] min-w-0 rounded-2xl border border-border/60 bg-card p-7 shadow-ambient" data-testid={`testimonial-${i}`}>
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: t.rating }).map((_, s) => (
-                    <Star key={s} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  ))}
+              <article key={i} className="min-w-0 flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] bg-card rounded-2xl p-8 shadow-ambient border border-border/60" data-testid={`testimonial-${i}`}>
+                <div className="flex gap-1 text-primary">
+                  {Array.from({ length: t.rating }).map((_, k) => <Star key={k} className="w-4 h-4 fill-primary" />)}
                 </div>
-                <p className="text-foreground/80 leading-relaxed mb-6">“{t.quote}”</p>
-                <div className="flex items-center gap-3 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary grid place-items-center text-sm font-bold">{t.initials}</div>
-                  <div className="text-sm text-foreground/60">{t.location}</div>
+                <p className="mt-5 text-base leading-relaxed text-foreground/85">"{t.quote}"</p>
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-secondary text-secondary-foreground grid place-items-center font-heading font-bold text-sm">{t.initials}</div>
+                  <div className="text-sm">
+                    <div className="font-semibold">{t.initials}</div>
+                    <div className="text-muted-foreground">{t.location}</div>
+                  </div>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
 
-        <div className="flex justify-center gap-2 mt-8 md:hidden">
+        <div className="md:hidden mt-6 flex justify-center gap-2">
           {items.map((_, i) => (
-            <button key={i} onClick={() => embla?.scrollTo(i)} className={`w-2.5 h-2.5 rounded-full transition ${i === selected ? "bg-primary" : "bg-border"}`} aria-label={`Go to testimonial ${i + 1}`} />
+            <span key={i} className={`h-1.5 rounded-full transition-all ${i === selected ? "w-8 bg-primary" : "w-2 bg-border"}`} />
           ))}
         </div>
       </div>

@@ -21,10 +21,10 @@ const TAGLINES = [
   "Sun-powered Indiana.",
   "Bills die here.",
   // Longer regional lines (Indiana + Illinois)
-  "Local solar experts serving Indiana and Illinois — from rooftops to fields.",
+  "Local solar experts serving Indiana and Illinois - from rooftops to fields.",
   "Real savings and backup power for homes and farms in Indiana and Illinois.",
   "Solar done right for Indiana and Eastern Illinois.",
-  "Your roof. Your field. Your power — Indiana & Illinois.",
+  "Your roof. Your field. Your power - Indiana & Illinois.",
   "Family-owned solar that performs in Indiana and Illinois.",
   "Turn sunlight into savings across Indiana and Illinois.",
   "Dependable solar solutions for Indiana and Illinois property owners.",
@@ -38,7 +38,7 @@ const ROTATE_MS = 4200; // matches .rh-line animation duration in globals.css
  * Falls back to all-primary when there's no natural split point.
  */
 function splitHeadline(line: string): [string, string] {
-  const dashIdx = line.indexOf(" — ");
+  const dashIdx = line.indexOf(" - ");
   if (dashIdx > 0) return [line.slice(0, dashIdx), line.slice(dashIdx + 3)];
   const trimmedEnd = line.endsWith(".") ? line.slice(0, -1) : line;
   const lastDot = trimmedEnd.lastIndexOf(". ");
@@ -54,9 +54,9 @@ function pickRandom(prev: number, len: number): number {
 }
 
 export default function RotatingHeadline() {
-  // Deterministic SSR start (index 0) — avoids hydration mismatch.
+  // Deterministic SSR start (index 0) - avoids hydration mismatch.
   const [i, setI] = useState(0);
-  // `cycle` always increments — guarantees React remounts the span and
+  // `cycle` always increments - guarantees React remounts the span and
   // re-triggers the CSS animation even if random picks the same index twice.
   const [cycle, setCycle] = useState(0);
 
@@ -78,11 +78,11 @@ export default function RotatingHeadline() {
     <h1 data-testid="hero-title" className="relative">
       {/* SEO + screen-reader stable headline */}
       <span className="sr-only">
-        Accutek Solar — local solar, ground-mount and electrical contractor
+        Accutek Solar - local solar, ground-mount and electrical contractor
         serving Indiana and Illinois since 1994.
       </span>
 
-      {/* Visual rotating slot — fixed minimum height = no layout shift */}
+      {/* Visual rotating slot - fixed minimum height = no layout shift */}
       <span
         aria-hidden="true"
         className="relative block min-h-[16rem] sm:min-h-[15rem] md:min-h-[17rem] lg:min-h-[20rem] overflow-hidden"

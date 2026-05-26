@@ -10,13 +10,13 @@ const TEAM_BG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?cr
 const TEAM = [
   {
     name: "Clint Lenover",
-    role: "Install Tech",
+    role: "Owner & Operations",
     slug: "clint-lenover",
-    bio: "Hands-on install tech — on the roof, in the field, getting systems wired up right.",
+    bio: "Runs the day-to-day at Accutek - sales, scheduling, customer care. The voice you'll hear on the other end of the line.",
   },
   {
     name: "Seth Davis",
-    role: "Owner · Solar Specialist",
+    role: "Partner | Solar Specialist",
     slug: "seth-davis",
     bio: "Carries the 30+ years of Davis-family solar know-how. Designs every system from monthly bill to mounting plan.",
   },
@@ -27,28 +27,28 @@ const TEAM = [
     bio: "Leads field crews on roof, ground-mount and pole-mount installs across Indiana and Illinois.",
   },
   {
-    name: "Quill Davis",
-    role: "Owner · Field Operations",
+    name: "Quill",
+    role: "Field Technician",
     slug: "quill",
-    bio: "Co-owner running field operations — installs, service calls, and the electrical side of every job.",
+    bio: "Handles installs, service calls and the electrical side of every job. Loves a clean wire pull.",
   },
   {
     name: "AJ (\"Scruff\")",
     role: "Tech / Installer",
     slug: "aj",
-    bio: "On the truck, on the roof, in the field — wherever the work is. Goes by Scruff around the shop.",
+    bio: "On the truck, on the roof, in the field - wherever the work is. Goes by Scruff around the shop.",
   },
 ];
 
 const VALUES = [
   { icon: Heart, title: "Family-owned", body: "Founded by Keith Davis in 1994. Same name on the truck, same hands on the wrench, three decades later." },
   { icon: ShieldCheck, title: "Lifetime support", body: "Every install gets lifetime support from the team that built it. Not a 1-800 number, not a chatbot." },
-  { icon: Wrench, title: "Built local", body: "Roof, ground or pole — we engineer for your specific site, your climate, your budget. No cookie-cutter kits." },
+  { icon: Wrench, title: "Built local", body: "Roof, ground or pole - we engineer for your specific site, your climate, your budget. No cookie-cutter kits." },
   { icon: MapPin, title: "Real coverage", body: "17 counties across Indiana and Illinois. Headquartered in Clinton, IN. Trucks rolling daily." },
 ];
 
 export const metadata = {
-  title: "About Accutek Solar — Family-Owned Since 1994",
+  title: "About Accutek Solar - Family-Owned Since 1994",
   description: "Meet the Accutek Solar team. Family-owned solar and electrical contractor serving Indiana and Illinois for over 32 years.",
 };
 
@@ -63,11 +63,11 @@ export default function AboutPage() {
           <div className="lg:col-span-7">
             <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// ABOUT ACCUTEK</div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-black text-balance leading-[1.05]" data-testid="about-title">
-              32 years of pulling wire — and tilting it <span className="text-primary">toward the sun.</span>
+              32 years of pulling wire - and tilting it <span className="text-primary">toward the sun.</span>
             </h1>
             <div className="mt-6 space-y-5 text-foreground/80 text-lg leading-relaxed">
               <p>Accutek Solar was founded in 1994 by Keith Davis in Clinton, Indiana. What started as a small electrical-installation shop is today a full-service solar, ground-mount, generator and electrical contractor serving 17 counties across Indiana and Illinois.</p>
-              <p>We're family-owned, environmentally conscious, and proud of both. Our mission is simple: deliver the most cost-effective energy solutions for our customers — from a single PV panel for a cabin to a fully off-grid farmstead with Kohler standby power.</p>
+              <p>We're family-owned, environmentally conscious, and proud of both. Our mission is simple: deliver the most cost-effective energy solutions for our customers - from a single PV panel for a cabin to a fully off-grid farmstead with Kohler standby power.</p>
               <p>Every install is performed by our own team. Every system is supported for life. That's how we've kept neighbors as customers for three decades.</p>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -127,7 +127,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <p className="max-w-md text-foreground/70 leading-relaxed">
-              You won't be passed around. You'll get the same names, same crew, same shop — every call, every install, every service visit.
+              You won't be passed around. You'll get the same names, same crew, same shop - every call, every install, every service visit.
             </p>
           </div>
 
@@ -152,7 +152,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-5xl font-heading font-black text-balance">
             Let's design a system <span className="text-primary">that fits your site.</span>
           </h2>
-          <p className="mt-4 text-foreground/70 text-lg">Free estimate, no pressure, roof or ground — your call.</p>
+          <p className="mt-4 text-foreground/70 text-lg">Free estimate, no pressure, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="about-final-cta-quote">
               Get free estimate <ArrowRight className="w-4 h-4" />

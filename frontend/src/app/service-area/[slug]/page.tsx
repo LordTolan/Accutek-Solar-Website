@@ -46,7 +46,7 @@ export async function generateStaticParams() {
         }
       }
     } catch {
-      // API unavailable at build time — use fallback list
+      // API unavailable at build time - use fallback list
     }
   }
 

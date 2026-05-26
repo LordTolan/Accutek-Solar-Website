@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Check, ArrowRight, ArrowLeft, Loader2, Phone, AlertCircle } from "lucide-react";
 import { api } from "@/lib/api";
@@ -35,16 +35,12 @@ const INTEREST_AREAS = [
 ] as const;
 
 const TIMELINES = [
-  { v: "ready_1_3m", l: "Ready in 1–3 months" },
+  { v: "ready_1_3m", l: "Ready in 1-3 months" },
   { v: "exploring", l: "Exploring" },
   { v: "gathering_info", l: "Just gathering info" },
 ] as const;
 
-interface QuoteWizardProps {
-  onContactChange?: (contact: { name: string; email: string; phone: string; zip: string }) => void;
-}
-
-export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
+export default function QuoteWizard() {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -68,11 +64,6 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
   });
   const [estimate, setEstimate] = useState<any>(null);
   const [leadId, setLeadId] = useState<string | null>(null);
-
-  // Sync contact info to parent so Option B can auto-fill
-  useEffect(() => {
-    onContactChange?.({ name, email, phone, zip });
-  }, [name, email, phone, zip, onContactChange]);
 
   const canNext1 = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && phone.replace(/\D/g, "").length >= 7 && zip.length >= 4;
   const canNext2 = a.monthly_bill > 0 && a.interest_areas.length > 0 && a.aware_credit_ended !== null;
@@ -105,7 +96,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
       });
       setLeadId(res.lead_id);
       setEstimate({ score: res.score, tier: res.tier, annual_savings: res.annual_savings, twenty_five_year_savings: res.twenty_five_year_savings, system_size_kw: res.system_size_kw, payback_years: res.payback_years });
-      toast.success("Your request is in. We’ll be in touch within one business day.");
+      toast.success("Your request is in. We'll be in touch within one business day.");
     } catch (e: any) { toast.error(e.message || "Submit failed"); }
     finally { setSubmitting(false); }
   }
@@ -161,7 +152,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
         {step === 1 && (
           <div className="space-y-8" data-testid="step-2">
             {/* Q1 */}
-            <Group label="01 · What prompted your interest?">
+            <Group label="01 | What prompted your interest?">
               <div className="flex flex-wrap gap-2">
                 {INTEREST_SOURCES.map((o) => (
                   <Pill key={o.v} active={a.interest_source === o.v} onClick={() => setA({ ...a, interest_source: o.v })} testId={`q1-${o.v}`}>{o.l}</Pill>
@@ -170,7 +161,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q2 */}
-            <Group label="02 · Average monthly electric bill">
+            <Group label="02 | Average monthly electric bill">
               <div className="flex items-baseline justify-between mb-3">
                 <span className="font-mono text-xs text-muted-foreground">USD / month</span>
                 <span className="font-heading text-3xl font-black text-primary text-glow" data-testid="bill-display">{formatCurrency(a.monthly_bill)}</span>
@@ -182,7 +173,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q3 */}
-            <Group label="03 · Do you own your home and plan to stay 5–7+ years?">
+            <Group label="03 | Do you own your home and plan to stay 5-7+ years?">
               <div className="flex gap-2">
                 <Pill active={a.homeowner_5_7y === true} onClick={() => setA({ ...a, homeowner_5_7y: true })} testId="q3-yes">Yes</Pill>
                 <Pill active={a.homeowner_5_7y === false} onClick={() => setA({ ...a, homeowner_5_7y: false })} testId="q3-no">No</Pill>
@@ -190,7 +181,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q4 */}
-            <Group label="04 · What are you mainly interested in? (select all that apply)">
+            <Group label="04 | What are you mainly interested in? (select all that apply)">
               <div className="flex flex-wrap gap-2">
                 {INTEREST_AREAS.map((o) => (
                   <Pill key={o.v} active={a.interest_areas.includes(o.v)} onClick={() => toggleArea(o.v)} testId={`q4-${o.v}`}>{o.l}</Pill>
@@ -199,7 +190,21 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q5 */}
-            <Group label="05 · What’s your ideal timeline?">
+            <Group label="05 | Did you know the big federal solar tax credit ended this year for new systems?">
+              <div className="flex gap-2">
+                <Pill active={a.aware_credit_ended === true} onClick={() => setA({ ...a, aware_credit_ended: true })} testId="q5-yes">Yes, I'm aware</Pill>
+                <Pill active={a.aware_credit_ended === false} onClick={() => setA({ ...a, aware_credit_ended: false })} testId="q5-no">No - tell me more</Pill>
+              </div>
+              {a.aware_credit_ended === false && (
+                <div className="mt-3 flex items-start gap-2 text-xs text-foreground/70 bg-muted/50 border border-border/70 rounded-md p-3" data-testid="q5-expectation">
+                  <AlertCircle className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+                  <span>The 30% federal solar credit has ended for new systems starting this year. State programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants and utility rebates are still active - and equipment pricing is down. We'll walk you through today's real math.</span>
+                </div>
+              )}
+            </Group>
+
+            {/* Q6 */}
+            <Group label="06 | What's your ideal timeline?">
               <div className="flex flex-wrap gap-2">
                 {TIMELINES.map((o) => (
                   <Pill key={o.v} active={a.timeline === o.v} onClick={() => setA({ ...a, timeline: o.v })} testId={`q6-${o.v}`}>{o.l}</Pill>
@@ -214,7 +219,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             <div className={`rounded-lg p-6 md:p-8 bg-muted/40 border ring-1 ${tierTone.ring}`}>
               <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] uppercase tracking-[0.2em] font-mono border ${tierTone.chip}`}>{tierTone.label}</div>
               <div className="mt-4 flex items-baseline gap-3">
-                <div className="font-heading text-5xl md:text-6xl font-black text-primary text-glow" data-testid="savings-display">{formatCurrency(estimate.twenty_five_year_savings)}</div>
+                <div className="font-heading text-5xl md:text-6xl font-black text-primary text-glow">{formatCurrency(estimate.twenty_five_year_savings)}</div>
                 <div className="text-sm text-muted-foreground font-mono">// 25-year est. savings</div>
               </div>
               <div className="mt-5 grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
@@ -223,7 +228,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
                 <Stat label="Payback" value={`${estimate.payback_years} yrs`} />
               </div>
               <p className="mt-5 text-xs text-muted-foreground">
-                Directional estimate based on Central IN / Western IL sun hours. Your real, free site-visit quote will include all active state &amp; utility incentives.
+                Directional estimate based on Central IN / Western IL sun hours. Federal solar credit ended this year - your real, free site-visit quote will include all active state &amp; utility incentives.
               </p>
             </div>
 

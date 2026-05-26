@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
-import { Loader2, LogOut, RefreshCcw, Filter, Search, Send, CheckCircle2, X, Sparkles } from "lucide-react";
+import { Loader2, LogOut, RefreshCcw, Filter, Search, Send, CheckCircle2, X } from "lucide-react";
 import { toast } from "sonner";
 
 const TIER_STYLES: Record<string, string> = {
@@ -23,33 +23,6 @@ export default function AdminDashboard() {
   const [filterStatus, setFilterStatus] = useState("");
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(true);
-  const [holidayForced, setHolidayForced] = useState(false);
-  const [holidayThemeName, setHolidayThemeName] = useState("fourth-of-july");
-  const [holidayLoading, setHolidayLoading] = useState(false);
-
-  async function refreshHolidaySettings() {
-    try {
-      const s = await api.getSettings();
-      if (s?.holiday_theme) {
-        setHolidayForced(s.holiday_theme.force_active ?? false);
-        setHolidayThemeName(s.holiday_theme.theme_name ?? "fourth-of-july");
-      }
-    } catch {}
-  }
-
-  async function toggleHoliday() {
-    setHolidayLoading(true);
-    try {
-      const newState = !holidayForced;
-      await api.setHolidayOverride(newState, holidayThemeName);
-      setHolidayForced(newState);
-      toast.success(newState ? "Holiday theme activated!" : "Holiday theme deactivated");
-    } catch (e: any) {
-      toast.error(e.message || "Failed to update");
-    } finally {
-      setHolidayLoading(false);
-    }
-  }
 
   async function refresh() {
     setLoading(true);
@@ -65,7 +38,7 @@ export default function AdminDashboard() {
     } finally { setLoading(false); }
   }
 
-  useEffect(() => { refresh(); refreshHolidaySettings(); }, []);
+  useEffect(() => { refresh(); }, []);
   useEffect(() => { if (user) refresh(); }, [filterTier, filterStatus]);
 
   async function logout() {
@@ -121,30 +94,11 @@ export default function AdminDashboard() {
           <StatCard label="Won %" value={`${stats?.conversion_rate ?? 0}%`} accent="text-secondary" />
         </div>
 
-        {/* Holiday Theme Control */}
-        <div className="bg-card rounded-2xl border border-border/60 p-4 mb-6 flex items-center justify-between gap-4" data-testid="holiday-theme-control">
-          <div className="flex items-center gap-3">
-            <span className="grid place-items-center w-9 h-9 rounded-lg bg-red-600/20 text-red-400"><Sparkles className="w-5 h-5" /></span>
-            <div>
-              <div className="font-heading text-sm font-bold">Holiday Theme Preview</div>
-              <div className="text-xs text-muted-foreground">Force-activate the 4th of July theme for testing (overrides date window)</div>
-            </div>
-          </div>
-          <button
-            onClick={toggleHoliday}
-            disabled={holidayLoading}
-            className={`relative inline-flex h-8 w-14 shrink-0 cursor-pointer items-center rounded-full transition-colors focus-ring ${holidayForced ? "bg-red-600" : "bg-muted"}`}
-            data-testid="holiday-toggle"
-          >
-            <span className={`inline-block h-6 w-6 transform rounded-full bg-white shadow transition-transform ${holidayForced ? "translate-x-7" : "translate-x-1"}`} />
-          </button>
-        </div>
-
         {/* Filters */}
         <div className="bg-card rounded-2xl border border-border/60 p-4 mb-6 flex flex-wrap items-center gap-3" data-testid="admin-filters">
           <div className="flex items-center gap-2 flex-1 min-w-[200px]">
             <Search className="w-4 h-4 text-muted-foreground" />
-            <input value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => e.key === "Enter" && refresh()} placeholder="Search name, email, phone…" className="bg-transparent border-0 outline-none text-sm flex-1" data-testid="admin-search" />
+            <input value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={(e) => e.key === "Enter" && refresh()} placeholder="Search name, email, phone..." className="bg-transparent border-0 outline-none text-sm flex-1" data-testid="admin-search" />
           </div>
           <div className="flex items-center gap-2 text-xs">
             <Filter className="w-4 h-4 text-muted-foreground" />
@@ -161,7 +115,7 @@ export default function AdminDashboard() {
             <table className="min-w-full text-sm">
               <thead className="bg-muted/50 text-xs uppercase tracking-[0.12em] text-muted-foreground">
                 <tr>
-                  <th className="text-left p-4">Tier · Score</th>
+                  <th className="text-left p-4">Tier | Score</th>
                   <th className="text-left p-4">Name</th>
                   <th className="text-left p-4">Contact</th>
                   <th className="text-left p-4">Service</th>
@@ -177,7 +131,7 @@ export default function AdminDashboard() {
                 {leads.map((l) => (
                   <tr key={l.id} className="border-t border-border/60 hover:bg-muted/30 cursor-pointer" onClick={() => setSelected(l)} data-testid={`lead-row-${l.id}`}>
                     <td className="p-4">
-                      <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${TIER_STYLES[l.tier]}`}>{l.tier} · {l.score}</span>
+                      <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${TIER_STYLES[l.tier]}`}>{l.tier} | {l.score}</span>
                     </td>
                     <td className="p-4 font-semibold">{l.name}</td>
                     <td className="p-4 text-foreground/70">{l.email}<br/><span className="text-xs text-muted-foreground">{l.phone}</span></td>
@@ -207,24 +161,24 @@ export default function AdminDashboard() {
             </div>
             <div className="p-6 space-y-5 text-sm">
               <div className="flex items-center gap-2">
-                <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${TIER_STYLES[selected.tier]}`}>{selected.tier} · score {selected.score}</span>
+                <span className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wide ${TIER_STYLES[selected.tier]}`}>{selected.tier} | score {selected.score}</span>
                 <span className="text-xs uppercase font-semibold">{selected.status}</span>
               </div>
               <Row label="Email" value={selected.email} />
               <Row label="Phone" value={selected.phone} />
-              <Row label="ZIP / State" value={`${selected.zip_code}${selected.state ? " · " + selected.state : ""}`} />
+              <Row label="ZIP / State" value={`${selected.zip_code}${selected.state ? " | " + selected.state : ""}`} />
               <Row label="Type" value={selected.answers?.service_type} />
               <Row label="Monthly bill" value={formatCurrency(selected.answers?.monthly_bill)} />
               <Row label="Interest source" value={(selected.answers?.interest_source || "").replace(/_/g, " ")} />
-              <Row label="Interest areas" value={(selected.answers?.interest_areas || []).join(", ") || "—"} />
-              <Row label="Homeowner 5–7y" value={selected.answers?.homeowner_5_7y ? "Yes" : "No"} />
+              <Row label="Interest areas" value={(selected.answers?.interest_areas || []).join(", ") || " - "} />
+              <Row label="Homeowner 5-7y" value={selected.answers?.homeowner_5_7y ? "Yes" : "No"} />
               <Row label="Aware credit ended" value={selected.answers?.aware_credit_ended ? "Yes" : "No"} />
               <Row label="Timeline" value={(selected.answers?.timeline || "").replace(/_/g, " ")} />
 
               <div className="bg-muted/40 rounded-xl p-4 space-y-1">
                 <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Estimate</div>
                 <div className="font-heading text-2xl font-extrabold text-primary">{formatCurrency(selected.estimate?.twenty_five_year_savings)}</div>
-                <div className="text-xs text-muted-foreground">{selected.estimate?.system_size_kw} kW · {selected.estimate?.payback_years} yr payback</div>
+                <div className="text-xs text-muted-foreground">{selected.estimate?.system_size_kw} kW | {selected.estimate?.payback_years} yr payback</div>
               </div>
 
               {selected.hcp_sync && (
@@ -260,7 +214,7 @@ function Row({ label, value }: { label: string; value: any }) {
   return (
     <div className="flex justify-between gap-4 py-1 border-b border-border/40 last:border-0">
       <span className="text-xs uppercase tracking-[0.15em] text-muted-foreground">{label}</span>
-      <span className="font-semibold text-right capitalize">{value ?? "—"}</span>
+      <span className="font-semibold text-right capitalize">{value ?? " - "}</span>
     </div>
   );
 }

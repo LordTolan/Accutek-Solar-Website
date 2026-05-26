@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* Light Technical — clean off-white base + Forest Green + Electric Green accents */
+    /* Light Technical - clean off-white base + Forest Green + Electric Green accents */
     --background: 210 16% 97%;        /* clean light technical (very subtle cool gray) */
     --foreground: 220 14% 12%;        /* near-black with a hint of cool */
     --card: 0 0% 100%;

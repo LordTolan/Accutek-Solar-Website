@@ -1,5 +1,5 @@
 // Tiny localStorage-backed store for calculator results,
-// so /tools → /contact can hand off numbers without a backend hop.
+// so /tools -> /contact can hand off numbers without a backend hop.
 import { logger } from "@/lib/logger";
 
 const KEY = "accutek_calc_results";
