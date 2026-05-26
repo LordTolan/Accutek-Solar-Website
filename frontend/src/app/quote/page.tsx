@@ -1,10 +1,14 @@
+"use client";
+
+import { useState, useCallback } from "react";
 import QuoteWizard from "@/components/QuoteWizard";
 import HCPLeadCapture from "@/components/HCPLeadCapture";
 import { Sparkles, FileText } from "lucide-react";
 
-export const metadata = { title: "Get Your Free Solar Estimate" };
-
 export default function QuotePage() {
+  const [contact, setContact] = useState({ name: "", email: "", phone: "", zip: "" });
+  const handleContactChange = useCallback((c: typeof contact) => { setContact(c); }, []);
+
   return (
     <section className="py-16 md:py-24" data-testid="quote-page">
       <div className="container mx-auto container-px max-w-3xl">
@@ -21,7 +25,7 @@ export default function QuotePage() {
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
             <Sparkles className="w-3 h-3" /> // OPTION A | INSTANT ESTIMATE
           </div>
-          <QuoteWizard />
+          <QuoteWizard onContactChange={handleContactChange} />
         </div>
 
         {/* Path 2: Official HCP Lead Capture */}
@@ -35,7 +39,7 @@ export default function QuotePage() {
           <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
             <FileText className="w-3 h-3" /> // OPTION B | OFFICIAL LEAD FORM
           </div>
-          <HCPLeadCapture />
+          <HCPLeadCapture contact={contact} />
         </div>
       </div>
     </section>
