@@ -42,7 +42,7 @@ export default function CountyPage() {
   }, [slug]);
 
   if (loading) return <div className="py-24 text-center text-muted-foreground">Loading...</div>;
-  if (notFound || !county) return <div className="py-24 text-center"><h1 className="text-2xl font-bold">County not found</h1><Link href="/service-area" className="text-primary mt-4 inline-block"><- Back to service areas</Link></div>;
+  if (notFound || !county) return <div className="py-24 text-center"><h1 className="text-2xl font-bold">County not found</h1><Link href="/service-area" className="text-primary mt-4 inline-block">← Back to service areas</Link></div>;
 
   const c = county;
 
