@@ -35,7 +35,7 @@ const INTEREST_AREAS = [
 ] as const;
 
 const TIMELINES = [
-  { v: "ready_1_3m", l: "Ready in 1\u20133 months" },
+  { v: "ready_1_3m", l: "Ready in 1–3 months" },
   { v: "exploring", l: "Exploring" },
   { v: "gathering_info", l: "Just gathering info" },
 ] as const;
@@ -74,7 +74,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
     onContactChange?.({ name, email, phone, zip });
   }, [name, email, phone, zip, onContactChange]);
 
-  const canNext1 = name.trim().length > 1 && /\\S+@\\S+\\.\\S+/.test(email) && phone.replace(/\\D/g, "").length >= 7 && zip.length >= 4;
+  const canNext1 = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && phone.replace(/\D/g, "").length >= 7 && zip.length >= 4;
   const canNext2 = a.monthly_bill > 0 && a.interest_areas.length > 0 && a.aware_credit_ended !== null;
 
   function toggleArea(v: Answers["interest_areas"][number]) {
@@ -105,7 +105,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
       });
       setLeadId(res.lead_id);
       setEstimate({ score: res.score, tier: res.tier, annual_savings: res.annual_savings, twenty_five_year_savings: res.twenty_five_year_savings, system_size_kw: res.system_size_kw, payback_years: res.payback_years });
-      toast.success("Your request is in. We\u2019ll be in touch within one business day.");
+      toast.success("Your request is in. We’ll be in touch within one business day.");
     } catch (e: any) { toast.error(e.message || "Submit failed"); }
     finally { setSubmitting(false); }
   }
@@ -161,7 +161,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
         {step === 1 && (
           <div className="space-y-8" data-testid="step-2">
             {/* Q1 */}
-            <Group label="01 \u00b7 What prompted your interest?">
+            <Group label="01 · What prompted your interest?">
               <div className="flex flex-wrap gap-2">
                 {INTEREST_SOURCES.map((o) => (
                   <Pill key={o.v} active={a.interest_source === o.v} onClick={() => setA({ ...a, interest_source: o.v })} testId={`q1-${o.v}`}>{o.l}</Pill>
@@ -170,7 +170,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q2 */}
-            <Group label="02 \u00b7 Average monthly electric bill">
+            <Group label="02 · Average monthly electric bill">
               <div className="flex items-baseline justify-between mb-3">
                 <span className="font-mono text-xs text-muted-foreground">USD / month</span>
                 <span className="font-heading text-3xl font-black text-primary text-glow" data-testid="bill-display">{formatCurrency(a.monthly_bill)}</span>
@@ -182,7 +182,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q3 */}
-            <Group label="03 \u00b7 Do you own your home and plan to stay 5\u20137+ years?">
+            <Group label="03 · Do you own your home and plan to stay 5–7+ years?">
               <div className="flex gap-2">
                 <Pill active={a.homeowner_5_7y === true} onClick={() => setA({ ...a, homeowner_5_7y: true })} testId="q3-yes">Yes</Pill>
                 <Pill active={a.homeowner_5_7y === false} onClick={() => setA({ ...a, homeowner_5_7y: false })} testId="q3-no">No</Pill>
@@ -190,7 +190,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q4 */}
-            <Group label="04 \u00b7 What are you mainly interested in? (select all that apply)">
+            <Group label="04 · What are you mainly interested in? (select all that apply)">
               <div className="flex flex-wrap gap-2">
                 {INTEREST_AREAS.map((o) => (
                   <Pill key={o.v} active={a.interest_areas.includes(o.v)} onClick={() => toggleArea(o.v)} testId={`q4-${o.v}`}>{o.l}</Pill>
@@ -199,7 +199,7 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
             </Group>
 
             {/* Q5 */}
-            <Group label="05 \u00b7 What\u2019s your ideal timeline?">
+            <Group label="05 · What’s your ideal timeline?">
               <div className="flex flex-wrap gap-2">
                 {TIMELINES.map((o) => (
                   <Pill key={o.v} active={a.timeline === o.v} onClick={() => setA({ ...a, timeline: o.v })} testId={`q6-${o.v}`}>{o.l}</Pill>
