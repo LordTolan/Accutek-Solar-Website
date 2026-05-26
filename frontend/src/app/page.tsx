@@ -8,12 +8,11 @@ import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
 import BlogTeaser from "@/components/BlogTeaser";
-import HolidayHero from "@/components/holiday/HolidayHero";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array — primary hero imagery (Seth's note: balance roof + ground)
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
-const ROOF_IMG = "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
+const ROOF_IMG = "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
 const TECH_IMG = "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&q=85&w=1400";
 
 const SERVICES = [
@@ -28,9 +27,6 @@ const SERVICES = [
 export default function HomePage() {
   return (
     <>
-      {/* Holiday hero — renders only when a holiday theme is active */}
-      <HolidayHero />
-
       {/* Hero — clean light / technical, no video */}
       <section className="relative overflow-hidden border-b border-border" data-testid="hero-section">
         {/* Background grid + soft gradient */}
