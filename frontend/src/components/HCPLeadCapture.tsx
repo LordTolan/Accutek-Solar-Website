@@ -1,19 +1,37 @@
 "use client";
 
+import { useMemo } from "react";
 import Script from "next/script";
-import { CalendarClock, Cpu } from "lucide-react";
+import { CalendarClock, Cpu, CheckCircle2 } from "lucide-react";
 
-/**
- * Official Housecall Pro Lead Capture widget.
- * Snippet provided by Donna - pairs the loader script with the lead-form iframe.
- * The script hydrates / resizes the iframe by its id (#hcp-lead-iframe).
- */
 const HCP_TOKEN = "00b573cbf4914e25b1cf35dd4028831f";
 const HCP_ORG = "Accutek-Solar";
 const HCP_SCRIPT = `https://online-booking.housecallpro.com/script.js?token=${HCP_TOKEN}&orgName=${HCP_ORG}`;
-const HCP_LEAD_FORM = `https://book.housecallpro.com/lead-form/${HCP_ORG}/${HCP_TOKEN}`;
+const HCP_LEAD_BASE = `https://book.housecallpro.com/lead-form/${HCP_ORG}/${HCP_TOKEN}`;
 
-export default function HCPLeadCapture() {
+interface HCPLeadCaptureProps {
+  contact?: { name: string; email: string; phone: string; zip: string };
+}
+
+export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
+  const hasContact = contact && (contact.name || contact.email || contact.phone);
+
+  // Build the iframe URL with pre-fill params when contact info is available
+  const iframeSrc = useMemo(() => {
+    if (!contact) return HCP_LEAD_BASE;
+    const params = new URLSearchParams();
+    if (contact.name) {
+      const parts = contact.name.trim().split(/\s+/);
+      params.set("firstName", parts[0] || "");
+      if (parts.length > 1) params.set("lastName", parts.slice(1).join(" "));
+    }
+    if (contact.email) params.set("email", contact.email);
+    if (contact.phone) params.set("phone", contact.phone);
+    if (contact.zip) params.set("zipCode", contact.zip);
+    const qs = params.toString();
+    return qs ? `${HCP_LEAD_BASE}?${qs}` : HCP_LEAD_BASE;
+  }, [contact]);
+
   return (
     <section className="bg-card rounded-xl border border-border shadow-ambient overflow-hidden" data-testid="hcp-lead-capture">
       <header className="px-6 md:px-10 pt-7 pb-5 border-b border-border bg-muted/40">
@@ -24,17 +42,22 @@ export default function HCPLeadCapture() {
         <p className="mt-1.5 text-foreground/65 text-sm">
           Submit through our Housecall Pro lead form - routes straight to Seth and the Accutek team.
         </p>
+        {hasContact && (
+          <div className="mt-3 inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border border-primary/20 rounded-md px-3 py-1.5">
+            <CheckCircle2 className="w-3.5 h-3.5" />
+            Pre-filled from your info above
+          </div>
+        )}
       </header>
 
       <div className="relative">
-        {/* Subtle loading shimmer behind the iframe */}
         <div className="absolute inset-0 grid place-items-center text-muted-foreground text-xs font-mono pointer-events-none" aria-hidden="true">
           <div className="flex items-center gap-2"><CalendarClock className="w-4 h-4" /> Loading Housecall Pro form...</div>
         </div>
 
         <iframe
           id="hcp-lead-iframe"
-          src={HCP_LEAD_FORM}
+          src={iframeSrc}
           title="Accutek Solar - Lead Capture (Housecall Pro)"
           loading="lazy"
           referrerPolicy="strict-origin-when-cross-origin"
@@ -54,7 +77,7 @@ export default function HCPLeadCapture() {
 
       <footer className="px-6 md:px-10 py-4 border-t border-border bg-muted/30 flex flex-wrap items-center justify-between gap-3 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground">
         <span>// POWERED BY HOUSECALL PRO</span>
-        <a href={HCP_LEAD_FORM} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition" data-testid="hcp-lead-form-newtab">
+        <a href={HCP_LEAD_BASE} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition" data-testid="hcp-lead-form-newtab">
           Open in a new tab ->
         </a>
       </footer>
