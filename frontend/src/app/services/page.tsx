@@ -4,10 +4,10 @@ import { ArrowRight, Sun, Mountain, Building2, BatteryCharging, Wrench, Lightbul
 export const metadata = { title: "Solar & Electrical Services" };
 
 const SERVICES = [
-  { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems sized for your home — roof, ground or pole mount." },
+  { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems sized for your home - roof, ground or pole mount." },
   { icon: Mountain, title: "Ground-Mount Arrays", desc: "Field, yard and ag-site installs. Better tilt, easier service, no roof penetrations." },
-  { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations — USDA REAP-grant eligible." },
-  { icon: BatteryCharging, title: "Kohler Backup Generators", desc: "Authorized Kohler installer — automatic standby power that's ready 24/7." },
+  { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations - USDA REAP-grant eligible." },
+  { icon: BatteryCharging, title: "Kohler Backup Generators", desc: "Authorized Kohler installer - automatic standby power that's ready 24/7." },
   { icon: Wrench, title: "Electrical Install & Repair", desc: "32 years of full-service electrical from a licensed, insured team." },
   { icon: LightbulbIcon, title: "LED & Energy Monitoring", desc: "Smart lighting and live energy monitoring to lower your usage." },
 ];
@@ -19,7 +19,7 @@ export default function ServicesPage() {
         <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// WHAT WE DO</div>
         <h1 className="text-4xl md:text-6xl font-heading font-black text-balance">From a single panel to a fully off-grid farm.</h1>
         <p className="mt-4 text-foreground/70 text-lg max-w-2xl">
-          Roof, ground or pole mount. Solar PV, Kohler generators, and full electrical — engineered for your site.
+          Roof, ground or pole mount. Solar PV, Kohler generators, and full electrical - engineered for your site.
         </p>
 
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">

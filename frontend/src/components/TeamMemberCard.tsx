@@ -33,7 +33,7 @@ const ACCENTS = [
  * Team member card with branded initials placeholder.
  *
  * To swap in a real headshot: drop a JPG at /app/frontend/public/team/{slug}.jpg
- * (recommended size: 800×800 or larger, square crop). The image is loaded
+ * (recommended size: 800x800 or larger, square crop). The image is loaded
  * automatically; if it's missing, the styled initials block stays.
  */
 export default function TeamMemberCard({ name, role, slug, bio, index = 0 }: Props) {
@@ -54,7 +54,7 @@ export default function TeamMemberCard({ name, role, slug, bio, index = 0 }: Pro
               {initials}
             </span>
             <div className="mt-3 inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.22em] font-mono text-foreground/60">
-              <User className="w-3 h-3" /> headshot · drop /team/{slug}.jpg
+              <User className="w-3 h-3" /> headshot | drop /team/{slug}.jpg
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@ export default function TeamMemberCard({ name, role, slug, bio, index = 0 }: Pro
         {/* Real headshot overlays on top of placeholder when /team/{slug}.jpg exists */}
         <img
           src={`/team/${slug}.jpg`}
-          alt={`${name} — ${role}`}
+          alt={`${name} - ${role}`}
           loading="lazy"
           decoding="async"
           onError={() => setImgOk(false)}

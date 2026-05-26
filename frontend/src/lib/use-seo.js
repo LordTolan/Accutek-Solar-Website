@@ -34,7 +34,7 @@ function setCanonical(href) {
 export default function useSEO({ title, description, path = "/", image } = {}) {
   useEffect(() => {
     if (title) {
-      document.title = title.includes(SITE) ? title : `${title} · ${SITE}`;
+      document.title = title.includes(SITE) ? title : `${title} | ${SITE}`;
     }
     if (description) {
       setMeta("description", description);
@@ -42,7 +42,7 @@ export default function useSEO({ title, description, path = "/", image } = {}) {
       setMeta("twitter:description", description);
     }
     if (title) {
-      setMeta("og:title", title.includes(SITE) ? title : `${title} · ${SITE}`, "property");
+      setMeta("og:title", title.includes(SITE) ? title : `${title} | ${SITE}`, "property");
       setMeta("twitter:title", title);
     }
     const canonical = `${ORIGIN}${path}`;

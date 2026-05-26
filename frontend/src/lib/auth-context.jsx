@@ -71,7 +71,7 @@ export function AuthProvider({ children }) {
     try {
       await axios.post(`${API}/auth/logout`, {}, { headers: authHeaders(token) });
     } catch (err) {
-      // Server-side logout is best-effort (token is stateless JWT) — log and continue.
+      // Server-side logout is best-effort (token is stateless JWT) - log and continue.
       logger.warn("auth: server-side logout failed; clearing local session anyway", err);
     }
     persistToken(null);

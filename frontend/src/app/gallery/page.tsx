@@ -156,7 +156,7 @@ export default function GalleryPage() {
           <h2 className="text-3xl md:text-5xl font-heading font-black text-balance">
             Let&apos;s design a system <span className="text-primary">worth showing off.</span>
           </h2>
-          <p className="mt-4 text-foreground/70 text-lg">Free estimate, custom design, roof or ground — your call.</p>
+          <p className="mt-4 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link
               href="/quote"

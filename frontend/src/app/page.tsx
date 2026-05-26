@@ -1,25 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, AlertCircle, CheckCircle2 } from "lucide-react";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
 import RotatingHeadline from "@/components/RotatingHeadline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
-import BlogTeaser from "@/components/BlogTeaser";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
-// Ground-mount solar array — primary hero imagery (Seth's note: balance roof + ground)
+// Ground-mount solar array - primary hero imagery (Seth's note: balance roof + ground)
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
-const ROOF_IMG = "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
+const ROOF_IMG = "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
 const TECH_IMG = "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&q=85&w=1400";
 
 const SERVICES = [
-  { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems — roof, ground mount, or pole mount." },
-  { icon: Mountain, title: "Ground-Mount Arrays", desc: "Field & yard installs sized for higher-output sites — ideal for ag, rural and larger lots." },
-  { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations — REAP-grant eligible." },
-  { icon: BatteryCharging, title: "Kohler Generators", desc: "Authorized Kohler installer — 24/7 automatic backup power." },
+  { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems - roof, ground mount, or pole mount." },
+  { icon: Mountain, title: "Ground-Mount Arrays", desc: "Field & yard installs sized for higher-output sites - ideal for ag, rural and larger lots." },
+  { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations - REAP-grant eligible." },
+  { icon: BatteryCharging, title: "Kohler Generators", desc: "Authorized Kohler installer - 24/7 automatic backup power." },
   { icon: Wrench, title: "Electrical Install & Repair", desc: "Licensed electricians with 32 years of full-service experience." },
   { icon: LightbulbIcon, title: "LED & Energy Monitoring", desc: "Smart lighting + live energy monitoring to drive your usage down." },
 ];
@@ -27,7 +26,7 @@ const SERVICES = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero — clean light / technical, no video */}
+      {/* Hero - clean light / technical, no video */}
       <section className="relative overflow-hidden border-b border-border" data-testid="hero-section">
         {/* Background grid + soft gradient */}
         <div className="absolute inset-0 grid-bg grid-bg-fade opacity-60" aria-hidden="true" />
@@ -37,11 +36,11 @@ export default function HomePage() {
         <div className="relative container mx-auto container-px py-20 md:py-28 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-7 max-w-2xl">
             <div className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-primary bg-primary/8 border border-primary/30 px-3 py-1.5 rounded-md mb-7 animate-fade-up" data-testid="hero-eyebrow">
-              <Cpu className="w-3 h-3" /> FAMILY-OWNED · SINCE 1994
+              <Cpu className="w-3 h-3" /> FAMILY-OWNED | SINCE 1994
             </div>
             <RotatingHeadline />
             <p className="mt-6 md:mt-8 text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "0.1s" }}>
-              32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across Indiana and Illinois — engineered for your site, your bill, your budget.
+              32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across Indiana and Illinois - engineered for your site, your bill, your budget.
             </p>
             <div className="mt-10 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
               <Link href="/quote" className="group inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow hover:-translate-y-0.5 transition focus-ring" data-testid="hero-cta-primary">
@@ -51,16 +50,16 @@ export default function HomePage() {
                 Book Online
               </a>
               <Link href="/tools/calculator" className="inline-flex items-center gap-2 text-foreground/70 px-2 py-4 text-sm font-bold hover:text-primary transition focus-ring" data-testid="hero-cta-secondary">
-                Savings calculator →
+                Savings calculator ->
               </Link>
             </div>
 
             {/* Roof / Ground / Pole capability strip */}
             <div className="mt-10 grid grid-cols-3 gap-3 max-w-md animate-fade-up" style={{ animationDelay: "0.3s" }} data-testid="hero-capability">
               {[
-                { l: "Roof Mount", s: "Asphalt · metal · tile" },
-                { l: "Ground Mount", s: "Field · yard · ag" },
-                { l: "Pole Mount", s: "Sun-tracking · remote" },
+                { l: "Roof Mount", s: "Asphalt | metal | tile" },
+                { l: "Ground Mount", s: "Field | yard | ag" },
+                { l: "Pole Mount", s: "Sun-tracking | remote" },
               ].map((c) => (
                 <div key={c.l} className="rounded-md border border-border bg-card/60 backdrop-blur p-3">
                   <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-primary">{c.l}</div>
@@ -70,7 +69,7 @@ export default function HomePage() {
             </div>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground">
-              {["NABCEP", "BBB A+", "Google 5★", "Indiana Solar Coalition", "Licensed & Insured"].map((b) => (
+              {["NABCEP", "BBB A+", "Google 5*", "Indiana Solar Coalition", "Licensed & Insured"].map((b) => (
                 <span key={b} className="flex items-center gap-2"><span className="w-1 h-1 rounded-full bg-primary" /> {b}</span>
               ))}
             </div>
@@ -85,7 +84,7 @@ export default function HomePage() {
                 <Mountain className="w-5 h-5 text-primary shrink-0" />
                 <div className="flex-1 min-w-0">
                   <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// GROUND MOUNT</div>
-                  <div className="text-xs text-foreground/80 truncate">Rural Indiana ag site · 12.8 kW</div>
+                  <div className="text-xs text-foreground/80 truncate">Rural Indiana ag site | 12.8 kW</div>
                 </div>
               </div>
             </div>
@@ -118,7 +117,16 @@ export default function HomePage() {
         </div>
       </section>
 
-
+      {/* Tax-credit notice strip */}
+      <section className="py-5 bg-secondary/8 border-b border-border" data-testid="credit-notice">
+        <div className="container mx-auto container-px flex items-start md:items-center gap-3 text-sm">
+          <AlertCircle className="w-4 h-4 text-primary mt-0.5 md:mt-0 shrink-0" />
+          <span className="text-foreground/85">
+            <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary mr-2">// HEADS UP</span>
+            The 30% federal solar tax credit ended this year for new systems. Indiana net metering, Illinois Shines SREC, USDA REAP grants and utility rebates are still active - and equipment pricing is down. We'll walk you through today's real numbers.
+          </span>
+        </div>
+      </section>
 
       {/* Roof vs Ground feature strip */}
       <section className="py-20 md:py-28" data-testid="roof-ground-section">
@@ -130,11 +138,11 @@ export default function HomePage() {
                 Wherever the sun lands, <span className="text-primary">we build there.</span>
               </h2>
               <p className="mt-5 text-foreground/70 text-lg leading-relaxed">
-                Plenty of customers come to us thinking solar = roof only. The truth is roughly half of our installs are <strong>ground mounts</strong> — better orientation, easier maintenance, no roof penetrations, and often higher annual output.
+                Plenty of customers come to us thinking solar = roof only. The truth is roughly half of our installs are <strong>ground mounts</strong> - better orientation, easier maintenance, no roof penetrations, and often higher annual output.
               </p>
               <ul className="mt-6 space-y-3 text-foreground/80">
                 {[
-                  "Optimal tilt & azimuth — no compromise with your roof shape",
+                  "Optimal tilt & azimuth - no compromise with your roof shape",
                   "Easier service access for cleaning and repairs",
                   "Great for rural lots, farms and homes with shaded roofs",
                   "Sun-tracking pole mounts for premium output where space allows",
@@ -194,8 +202,8 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/10" />
             <div className="absolute inset-0 grid md:grid-cols-2 items-center container-px">
               <div className="py-10">
-                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// FREE · NO PRESSURE</div>
-                <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-balance">Tell us about your site — we'll tell you what's possible.</h3>
+                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// FREE | NO PRESSURE</div>
+                <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-balance">Tell us about your site - we'll tell you what's possible.</h3>
                 <p className="mt-3 text-foreground/75 max-w-md">Six quick questions, a real 25-year estimate, and a free site visit on the calendar.</p>
                 <div className="mt-6"><HCPBookOnline variant="primary" /></div>
               </div>
@@ -207,7 +215,6 @@ export default function HomePage() {
       <ServiceAreaTeaser />
       <Testimonials />
       <FAQ />
-      <BlogTeaser />
 
       {/* Final CTA */}
       <section className="py-20 md:py-28 relative overflow-hidden" data-testid="final-cta-section">
@@ -218,7 +225,7 @@ export default function HomePage() {
           <h2 className="text-4xl md:text-6xl font-heading font-black text-balance">
             Ready to make your meter <span className="text-primary">spin backwards?</span>
           </h2>
-          <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground — your call.</p>
+          <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="final-cta-quote">
               Get free estimate <ArrowRight className="w-4 h-4" />
