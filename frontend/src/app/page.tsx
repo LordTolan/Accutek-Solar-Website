@@ -7,6 +7,7 @@ import RotatingHeadline from "@/components/RotatingHeadline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import FAQ from "@/components/FAQ";
+import UtilityCostProjection from "@/components/UtilityCostProjection";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array - primary hero imagery (Seth's note: balance roof + ground)
@@ -95,6 +96,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Utility Cost Escalation — dark "what doing nothing costs" module */}
+      <UtilityCostProjection />
 
       {/* Counters */}
       <section className="py-16 md:py-24 border-b border-border bg-card/50" data-testid="counters-section">
