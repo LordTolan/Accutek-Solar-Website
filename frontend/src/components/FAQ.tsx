@@ -18,7 +18,7 @@ const DEFAULT_FAQS = [
   },
   {
     q: "What is net metering?",
-    a: "Net metering credits you for excess power you produce. In Indiana, the utility doesn\u2019t pay cash but credits your account — perfect for using summer overproduction to offset winter use.",
+    a: "Net metering credits you for excess power you produce. In Indiana, the utility doesn't pay cash but credits your account - perfect for using summer overproduction to offset winter use.",
   },
   {
     q: "How long has Accutek Solar been in business?",
@@ -26,11 +26,11 @@ const DEFAULT_FAQS = [
   },
   {
     q: "Is the federal solar tax credit still available?",
-    a: "The big federal solar tax credit for new systems ended this year. The good news: state-level programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants for ag/rural businesses, and utility incentives are still in play — and equipment pricing has come down. Talk to us about today\u2019s real-world payback math.",
+    a: "The big federal solar tax credit for new systems ended this year. The good news: state-level programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants for ag/rural businesses, and utility incentives are still in play - and equipment pricing has come down. Talk to us about today's real-world payback math.",
   },
   {
     q: "Do you install backup generators?",
-    a: "Yes — we are authorized Kohler generator installers. Kohler has a proven track record for emergency power that\u2019s ready when you need it.",
+    a: "Yes - we are authorized Kohler generator installers. Kohler has a proven track record for emergency power that's ready when you need it.",
   },
   {
     q: "Do you offer free estimates?",
