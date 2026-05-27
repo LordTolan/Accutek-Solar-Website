@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import Script from "next/script";
-import { CalendarClock, Cpu, CheckCircle2, Copy } from "lucide-react";
+import { CalendarClock, Cpu } from "lucide-react";
 
 const HCP_TOKEN = "00b573cbf4914e25b1cf35dd4028831f";
 const HCP_ORG = "Accutek-Solar";
@@ -14,8 +14,6 @@ interface HCPLeadCaptureProps {
 }
 
 export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
-  const hasContact = contact && (contact.name || contact.email || contact.phone);
-
   // Build the iframe URL with pre-fill params when contact info is available
   const iframeSrc = useMemo(() => {
     if (!contact) return HCP_LEAD_BASE;
@@ -46,22 +44,8 @@ export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
         </div>
         <h2 className="mt-2 font-heading text-2xl md:text-3xl font-extrabold">Prefer to fill in the form?</h2>
         <p className="mt-1.5 text-foreground/65 text-sm">
-          Submit through our Housecall Pro lead form - routes straight to Seth and the Accutek team.
+          Submit through our Housecall Pro lead form — routes straight to Seth and the Accutek team.
         </p>
-        {hasContact && (
-          <div className="mt-3 space-y-2">
-            <div className="inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border border-primary/20 rounded-md px-3 py-1.5">
-              <CheckCircle2 className="w-3.5 h-3.5" />
-              Your info from the estimate above - copy into the form below
-            </div>
-            <div className="flex flex-wrap gap-2 text-xs text-foreground/70">
-              {contact?.name && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.name}</span>}
-              {contact?.email && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.email}</span>}
-              {contact?.phone && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.phone}</span>}
-              {contact?.zip && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.zip}</span>}
-            </div>
-          </div>
-        )}
       </header>
 
       <div className="relative">
@@ -93,7 +77,7 @@ export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
       <footer className="px-6 md:px-10 py-4 border-t border-border bg-muted/30 flex flex-wrap items-center justify-between gap-3 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground">
         <span>// POWERED BY HOUSECALL PRO</span>
         <a href={HCP_LEAD_BASE} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition" data-testid="hcp-lead-form-newtab">
-          Open in a new tab ->
+          Open in a new tab -&gt;
         </a>
       </footer>
     </section>
