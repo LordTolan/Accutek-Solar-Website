@@ -4,7 +4,7 @@ import { Suspense, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Script from "next/script";
-import { CalendarClock, Phone, ArrowLeft, CheckCircle2, Cpu } from "lucide-react";
+import { CalendarClock, Phone, ArrowLeft, Cpu } from "lucide-react";
 
 const HCP_TOKEN = "00b573cbf4914e25b1cf35dd4028831f";
 const HCP_ORG = "Accutek-Solar";
@@ -18,8 +18,6 @@ function HousecallContent() {
   const email = searchParams.get("email") || "";
   const phone = searchParams.get("phone") || "";
   const zip = searchParams.get("zip") || "";
-
-  const hasContact = !!(name || email || phone);
 
   const iframeSrc = useMemo(() => {
     const params = new URLSearchParams();
@@ -44,17 +42,8 @@ function HousecallContent() {
         Schedule your free <span className="text-primary">house call.</span>
       </h1>
       <p className="mt-4 text-foreground/70 text-lg max-w-2xl">
-        {hasContact
-          ? "Your info is pre-filled below. Just confirm the details, pick a service, and submit."
-          : "Fill in your details below and our team will be in touch within one business day."}
+        Enter your details below and submit. Our team will reach out to get you on the calendar.
       </p>
-
-      {hasContact && (
-        <div className="mt-5 inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border border-primary/20 rounded-md px-3 py-2">
-          <CheckCircle2 className="w-3.5 h-3.5" />
-          Pre-filled from your estimate
-        </div>
-      )}
 
       {/* HCP Lead Form */}
       <div className="mt-8 bg-card rounded-xl border border-border shadow-ambient-lg overflow-hidden" data-testid="hcp-lead-section">
@@ -114,7 +103,7 @@ function HousecallSkeleton() {
         Schedule your free <span className="text-primary">house call.</span>
       </h1>
       <p className="mt-4 text-foreground/70 text-lg max-w-2xl">
-        Fill in your details below and our team will be in touch within one business day.
+        Enter your details below and submit. Our team will reach out to get you on the calendar.
       </p>
       <div className="mt-8 bg-card rounded-xl border border-border shadow-ambient-lg overflow-hidden">
         <div className="grid place-items-center text-muted-foreground text-xs font-mono py-40">
