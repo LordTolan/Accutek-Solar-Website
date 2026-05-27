@@ -1,0 +1,19 @@
+{
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/admin/login/page": "app/admin/login/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/page": "app/page.js",
+  "/gallery/page": "app/gallery/page.js",
+  "/quote/page": "app/quote/page.js",
+  "/service-area/page": "app/service-area/page.js",
+  "/quote/housecall/page": "app/quote/housecall/page.js",
+  "/about/page": "app/about/page.js",
+  "/blog/[slug]/page": "app/blog/[slug]/page.js",
+  "/quote/thank-you/page": "app/quote/thank-you/page.js",
+  "/services/page": "app/services/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/book/page": "app/book/page.js",
+  "/service-area/[slug]/page": "app/service-area/[slug]/page.js",
+  "/tools/calculator/page": "app/tools/calculator/page.js"
+}

@@ -1,12 +1,28 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Sun, ArrowRight } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
 export default function CalculatorClient() {
+  return (
+    <Suspense fallback={null}>
+      <CalculatorClientInner />
+    </Suspense>
+  );
+}
+
+function CalculatorClientInner() {
+  const searchParams = useSearchParams();
   const [bill, setBill] = useState(180);
+
+  // Pre-fill from utility cost projection (?bill=xxx)
+  useEffect(() => {
+    const bp = searchParams.get("bill");
+    if (bp) { const v = parseInt(bp, 10); if (!isNaN(v) && v >= 30 && v <= 1500) setBill(v); }
+  }, [searchParams]);
   const [type, setType] = useState<"residential" | "commercial">("residential");
 
   const r = useMemo(() => {
