@@ -65,6 +65,50 @@
   .text-emerald { color: hsl(var(--primary)); }
 }
 
+/* --- Utility Cost Projection: custom range slider ---------------------- */
+.utility-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+.utility-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #1e3a5f;
+  box-shadow: 0 0 12px -2px rgba(59, 130, 246, 0.5);
+  cursor: grab;
+  position: relative;
+  z-index: 2;
+  transition: box-shadow 0.2s ease;
+}
+.utility-slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 18px -2px rgba(59, 130, 246, 0.7);
+}
+.utility-slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #3b82f6;
+  border: 2px solid #1e3a5f;
+  box-shadow: 0 0 12px -2px rgba(59, 130, 246, 0.5);
+  cursor: grab;
+}
+.utility-slider:focus-visible::-webkit-slider-thumb {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
+}
+
 @keyframes fade-up { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
 .animate-fade-up { animation: fade-up 0.7s ease-out both; }
 
