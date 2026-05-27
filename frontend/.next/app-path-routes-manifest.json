@@ -1,0 +1,19 @@
+{
+  "/favicon.ico/route": "/favicon.ico",
+  "/admin/login/page": "/admin/login",
+  "/_not-found/page": "/_not-found",
+  "/admin/page": "/admin",
+  "/page": "/",
+  "/gallery/page": "/gallery",
+  "/quote/page": "/quote",
+  "/service-area/page": "/service-area",
+  "/quote/housecall/page": "/quote/housecall",
+  "/about/page": "/about",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/quote/thank-you/page": "/quote/thank-you",
+  "/services/page": "/services",
+  "/blog/page": "/blog",
+  "/book/page": "/book",
+  "/service-area/[slug]/page": "/service-area/[slug]",
+  "/tools/calculator/page": "/tools/calculator"
+}

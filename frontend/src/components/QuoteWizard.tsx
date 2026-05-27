@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useState, useMemo, useRef, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ArrowRight, ArrowLeft, Loader2, Phone, AlertCircle, CalendarClock } from "lucide-react";
 import { api } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
@@ -41,7 +41,16 @@ const TIMELINES = [
 ] as const;
 
 export default function QuoteWizard() {
+  return (
+    <Suspense fallback={null}>
+      <QuoteWizardInner />
+    </Suspense>
+  );
+}
+
+function QuoteWizardInner() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const leadSubmitted = useRef(false);
@@ -63,6 +72,17 @@ export default function QuoteWizard() {
     service_type: "residential",
   });
   const [estimate, setEstimate] = useState<any>(null);
+
+  // Pre-fill monthly bill from utility cost projection (URL ?bill=xxx)
+  useEffect(() => {
+    const billParam = searchParams.get("bill");
+    if (billParam) {
+      const parsed = parseInt(billParam, 10);
+      if (!isNaN(parsed) && parsed >= 30 && parsed <= 1500) {
+        setA((prev) => ({ ...prev, monthly_bill: parsed }));
+      }
+    }
+  }, [searchParams]);
 
   const canNext1 = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && phone.replace(/\D/g, "").length >= 7 && zip.length >= 4;
   const canNext2 = a.monthly_bill > 0 && a.interest_areas.length > 0 && a.aware_credit_ended !== null;
