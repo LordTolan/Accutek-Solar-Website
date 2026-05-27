@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import Script from "next/script";
-import { CalendarClock, Cpu, CheckCircle2 } from "lucide-react";
+import { CalendarClock, Cpu, CheckCircle2, Copy } from "lucide-react";
 
 const HCP_TOKEN = "00b573cbf4914e25b1cf35dd4028831f";
 const HCP_ORG = "Accutek-Solar";
@@ -22,14 +22,20 @@ export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
     const params = new URLSearchParams();
     if (contact.name) {
       const parts = contact.name.trim().split(/\s+/);
-      params.set("firstName", parts[0] || "");
-      if (parts.length > 1) params.set("lastName", parts.slice(1).join(" "));
+      params.set("first_name", parts[0] || "");
+      if (parts.length > 1) params.set("last_name", parts.slice(1).join(" "));
     }
     if (contact.email) params.set("email", contact.email);
-    if (contact.phone) params.set("phone", contact.phone);
-    if (contact.zip) params.set("zipCode", contact.zip);
+    if (contact.phone) params.set("phone_number", contact.phone);
+    if (contact.zip) params.set("zip_code", contact.zip);
     const qs = params.toString();
     return qs ? `${HCP_LEAD_BASE}?${qs}` : HCP_LEAD_BASE;
+  }, [contact]);
+
+  // Key forces iframe remount when contact changes so new URL actually loads
+  const iframeKey = useMemo(() => {
+    if (!contact) return "hcp-default";
+    return `hcp-${contact.name}-${contact.email}-${contact.phone}-${contact.zip}`;
   }, [contact]);
 
   return (
@@ -43,9 +49,17 @@ export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
           Submit through our Housecall Pro lead form - routes straight to Seth and the Accutek team.
         </p>
         {hasContact && (
-          <div className="mt-3 inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border border-primary/20 rounded-md px-3 py-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5" />
-            Pre-filled from your info above
+          <div className="mt-3 space-y-2">
+            <div className="inline-flex items-center gap-2 text-xs text-primary bg-primary/10 border border-primary/20 rounded-md px-3 py-1.5">
+              <CheckCircle2 className="w-3.5 h-3.5" />
+              Your info from the estimate above - copy into the form below
+            </div>
+            <div className="flex flex-wrap gap-2 text-xs text-foreground/70">
+              {contact?.name && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.name}</span>}
+              {contact?.email && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.email}</span>}
+              {contact?.phone && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.phone}</span>}
+              {contact?.zip && <span className="bg-muted rounded px-2 py-1 font-mono">{contact.zip}</span>}
+            </div>
           </div>
         )}
       </header>
@@ -56,6 +70,7 @@ export default function HCPLeadCapture({ contact }: HCPLeadCaptureProps) {
         </div>
 
         <iframe
+          key={iframeKey}
           id="hcp-lead-iframe"
           src={iframeSrc}
           title="Accutek Solar - Lead Capture (Housecall Pro)"
