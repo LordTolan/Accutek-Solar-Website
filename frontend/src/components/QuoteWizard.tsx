@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Check, ArrowRight, ArrowLeft, Loader2, Phone, AlertCircle } from "lucide-react";
+import { ArrowRight, ArrowLeft, Loader2, Phone, AlertCircle, CalendarClock } from "lucide-react";
 import { api } from "@/lib/api";
 import { formatCurrency } from "@/lib/utils";
 import { toast } from "sonner";
@@ -40,14 +40,11 @@ const TIMELINES = [
   { v: "gathering_info", l: "Just gathering info" },
 ] as const;
 
-interface QuoteWizardProps {
-  onContactChange?: (contact: { name: string; email: string; phone: string; zip: string }) => void;
-}
-
-export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
+export default function QuoteWizard() {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+  const leadSubmitted = useRef(false);
 
   // Contact basics
   const [name, setName] = useState("");
@@ -55,7 +52,6 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
   const [phone, setPhone] = useState("");
   const [zip, setZip] = useState("");
   const [state, setState] = useState<"IN" | "IL" | "">("");
-  const [tcpa, setTcpa] = useState(false);
 
   const [a, setA] = useState<Answers>({
     interest_source: "bill_savings",
@@ -67,12 +63,6 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
     service_type: "residential",
   });
   const [estimate, setEstimate] = useState<any>(null);
-  const [leadId, setLeadId] = useState<string | null>(null);
-
-  // Sync contact info to parent so Option B can auto-fill
-  useEffect(() => {
-    onContactChange?.({ name, email, phone, zip });
-  }, [name, email, phone, zip, onContactChange]);
 
   const canNext1 = name.trim().length > 1 && /\S+@\S+\.\S+/.test(email) && phone.replace(/\D/g, "").length >= 7 && zip.length >= 4;
   const canNext2 = a.monthly_bill > 0 && a.interest_areas.length > 0 && a.aware_credit_ended !== null;
@@ -84,6 +74,19 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
     });
   }
 
+  // Silently submit the lead to the database (fire-and-forget)
+  function submitLeadSilently() {
+    if (leadSubmitted.current) return;
+    leadSubmitted.current = true;
+    const payload = { ...a, aware_credit_ended: !!a.aware_credit_ended };
+    api.submitLead({
+      name, email, phone, zip_code: zip, state: state || undefined, answers: payload, tcpa_consent: true,
+    }).catch(() => {
+      // Silent failure — lead will still come through the HCP form
+      leadSubmitted.current = false;
+    });
+  }
+
   async function runQualify() {
     setSubmitting(true);
     try {
@@ -91,23 +94,19 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
       const res = await api.qualify(payload);
       setEstimate(res);
       setStep(2);
-    } catch (e: any) { toast.error(e.message || "Failed to score lead"); }
+      // Silently save the lead in the background
+      submitLeadSilently();
+    } catch (e: any) { toast.error(e.message || "Failed to generate estimate"); }
     finally { setSubmitting(false); }
   }
 
-  async function handleSubmit() {
-    if (!tcpa) { toast.error("Please consent to be contacted."); return; }
-    setSubmitting(true);
-    try {
-      const payload = { ...a, aware_credit_ended: !!a.aware_credit_ended };
-      const res = await api.submitLead({
-        name, email, phone, zip_code: zip, state: state || undefined, answers: payload, tcpa_consent: true,
-      });
-      setLeadId(res.lead_id);
-      setEstimate({ score: res.score, tier: res.tier, annual_savings: res.annual_savings, twenty_five_year_savings: res.twenty_five_year_savings, system_size_kw: res.system_size_kw, payback_years: res.payback_years });
-      toast.success("Your request is in. We'll be in touch within one business day.");
-    } catch (e: any) { toast.error(e.message || "Submit failed"); }
-    finally { setSubmitting(false); }
+  function navigateToHousecall() {
+    const params = new URLSearchParams();
+    if (name) params.set("name", name);
+    if (email) params.set("email", email);
+    if (phone) params.set("phone", phone);
+    if (zip) params.set("zip", zip);
+    router.push(`/quote/housecall?${params.toString()}`);
   }
 
   const tierTone = useMemo(() => {
@@ -241,45 +240,51 @@ export default function QuoteWizard({ onContactChange }: QuoteWizardProps) {
               </p>
             </div>
 
-            {!leadId ? (
-              <>
-                <label className="flex items-start gap-3 text-sm">
-                  <input type="checkbox" checked={tcpa} onChange={(e) => setTcpa(e.target.checked)} className="mt-1 w-4 h-4 accent-primary" data-testid="tcpa-checkbox" />
-                  <span className="text-foreground/80">I consent to be contacted by Accutek Solar at the phone or email above. Standard rates may apply. I understand consent is not required to purchase.</span>
-                </label>
-                <button onClick={handleSubmit} disabled={submitting || !tcpa} className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-8 py-4 font-bold disabled:opacity-50 hover:shadow-green-glow transition focus-ring uppercase tracking-wider text-sm" data-testid="submit-button">
-                  {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
-                  Submit my request
-                </button>
-              </>
-            ) : (
-              <div className="rounded-lg border border-primary/40 ring-1 ring-primary/30 p-6 bg-primary/5 text-center" data-testid="lead-success">
-                <div className="font-heading text-2xl font-extrabold">Thanks, {name.split(" ")[0]}.</div>
-                <p className="mt-2 text-foreground/70">Your request is in. Seth or the Accutek team will reach you within one business day.</p>
-                <div className="mt-5 flex flex-wrap gap-3 justify-center">
-                  <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-background px-5 py-3 font-bold focus-ring"><Phone className="w-4 h-4" /> (812) 878-7343</a>
-                  <button onClick={() => router.push("/")} className="inline-flex items-center gap-2 rounded-md bg-secondary text-secondary-foreground px-5 py-3 font-bold focus-ring">Back to home</button>
-                </div>
+            {/* CTA: Navigate to HCP form */}
+            <div className="space-y-4">
+              <p className="text-foreground/80 text-sm">
+                Ready for the next step? Schedule a free house call and we'll put together a custom quote for your property.
+              </p>
+              <button
+                onClick={navigateToHousecall}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-8 py-4 font-bold hover:shadow-green-glow transition focus-ring uppercase tracking-wider text-sm"
+                data-testid="schedule-housecall-button"
+              >
+                <CalendarClock className="w-4 h-4" />
+                Schedule my free house call
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <div className="flex flex-wrap gap-3 justify-center">
+                <a href="tel:+18128787343" className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-primary transition">
+                  <Phone className="w-4 h-4" /> Or call (812) 878-7343
+                </a>
               </div>
-            )}
+            </div>
           </div>
         )}
       </div>
 
-      {!leadId && (
-        <div className="px-6 md:px-10 py-5 border-t border-border bg-background/40 flex items-center justify-between gap-3">
-          <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0} className="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-bold border border-border disabled:opacity-30 focus-ring" data-testid="prev-button">
-            <ArrowLeft className="w-4 h-4" /> Back
-          </button>
-          {step < 1 && (
-            <button onClick={() => setStep(1)} disabled={!canNext1} className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold disabled:opacity-50 hover:shadow-green-glow transition focus-ring uppercase tracking-wider" data-testid="next-button">
-              Next <ArrowRight className="w-4 h-4" />
+      {step < 2 && (
+        <div className="px-6 md:px-10 py-5 border-t border-border bg-background/40">
+          <div className="flex items-center justify-between gap-3">
+            <button onClick={() => setStep(Math.max(0, step - 1))} disabled={step === 0} className="inline-flex items-center gap-2 rounded-md px-5 py-3 text-sm font-bold border border-border disabled:opacity-30 focus-ring" data-testid="prev-button">
+              <ArrowLeft className="w-4 h-4" /> Back
             </button>
-          )}
-          {step === 1 && (
-            <button onClick={runQualify} disabled={!canNext2 || submitting} className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold disabled:opacity-50 hover:shadow-green-glow transition focus-ring uppercase tracking-wider" data-testid="qualify-button">
-              {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <>See my estimate <ArrowRight className="w-4 h-4" /></>}
-            </button>
+            {step === 0 && (
+              <button onClick={() => setStep(1)} disabled={!canNext1} className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold disabled:opacity-50 hover:shadow-green-glow transition focus-ring uppercase tracking-wider" data-testid="next-button">
+                Next <ArrowRight className="w-4 h-4" />
+              </button>
+            )}
+            {step === 1 && (
+              <button onClick={runQualify} disabled={!canNext2 || submitting} className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold disabled:opacity-50 hover:shadow-green-glow transition focus-ring uppercase tracking-wider" data-testid="qualify-button">
+                {submitting ? <Loader2 className="w-4 h-4 animate-spin" /> : <>See my estimate <ArrowRight className="w-4 h-4" /></>}
+              </button>
+            )}
+          </div>
+          {step === 0 && (
+            <p className="mt-4 text-[10px] text-muted-foreground text-center leading-relaxed">
+              By continuing, you consent to be contacted by Accutek Solar at the phone number and email above. Standard msg &amp; data rates may apply. Consent is not required to purchase.
+            </p>
           )}
         </div>
       )}
