@@ -1,9 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, DollarSign, Zap } from "lucide-react";
+import { ArrowRight, TrendingUp, Zap } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
 /* ─────────────────────────── Calculation Engine ─────────────────────────── */
@@ -333,7 +333,7 @@ function TimeframePills({
 
 export default function UtilityCostProjection() {
   const [monthlyBill, setMonthlyBill] = useState(250);
-  const [inflationRate, setInflationRate] = useState(5.5);
+  const inflationRate = 5.5; // fixed — not user-adjustable
   const [years, setYears] = useState(30);
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -413,67 +413,16 @@ export default function UtilityCostProjection() {
         >
           {/* ── Left: Input panel ── */}
           <div className="lg:col-span-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-6 md:p-8 space-y-6">
-            {/* Monthly bill input */}
-            <div>
-              <label
-                htmlFor="monthly-bill"
-                className="text-xs uppercase tracking-[0.18em] text-white/50 font-mono mb-2 block"
-              >
-                Monthly Electric Bill
-              </label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
-                <input
-                  id="monthly-bill"
-                  type="number"
-                  min={50}
-                  max={2000}
-                  step={10}
-                  value={monthlyBill}
-                  onChange={(e) => {
-                    const v = parseInt(e.target.value) || 0;
-                    setMonthlyBill(Math.max(50, Math.min(2000, v)));
-                  }}
-                  className="
-                    w-full bg-white/5 border border-white/10 rounded-lg 
-                    pl-10 pr-4 py-3.5 text-white text-xl font-mono font-bold
-                    focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/40
-                    placeholder:text-white/20 transition
-                  "
-                  aria-label="Monthly electric bill in dollars"
-                />
-              </div>
-              {/* Quick-set buttons */}
-              <div className="flex gap-1.5 mt-3">
-                {[150, 250, 400, 600].map((v) => (
-                  <button
-                    key={v}
-                    onClick={() => setMonthlyBill(v)}
-                    className={`
-                      flex-1 py-1.5 rounded text-xs font-mono transition
-                      ${
-                        monthlyBill === v
-                          ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                          : "bg-white/5 text-white/30 border border-white/5 hover:text-white/50"
-                      }
-                    `}
-                  >
-                    ${v}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Inflation slider */}
+            {/* Monthly bill slider */}
             <StyledSlider
-              id="inflation-rate"
-              label="Utility Inflation Rate"
-              value={inflationRate}
-              min={2}
-              max={10}
-              step={0.5}
-              displayValue={`${inflationRate.toFixed(1)}%`}
-              onChange={setInflationRate}
+              id="monthly-bill"
+              label="Monthly Electric Bill"
+              value={monthlyBill}
+              min={50}
+              max={450}
+              step={10}
+              displayValue={`$${monthlyBill}`}
+              onChange={(v) => setMonthlyBill(Math.round(v))}
             />
 
             {/* Timeframe pills */}
