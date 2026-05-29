@@ -9,6 +9,12 @@ const TEAM_BG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?cr
 
 const TEAM = [
   {
+    name: "Keith Davis",
+    role: "Founder",
+    slug: "keith-davis",
+    bio: "Founded Accutek in 1994. Three decades of electrical and solar work across Indiana and Illinois — the name on the building.",
+  },
+  {
     name: "Seth Davis",
     role: "Owner / Operator",
     slug: "seth-davis",
@@ -17,8 +23,14 @@ const TEAM = [
   {
     name: "Quill Davis",
     role: "Owner / Operator",
-    slug: "quill-davis",
-    bio: "Handles the business side and keeps every project on track from contract to commissioning.",
+    slug: "quill",
+    bio: "Manages field operations and keeps the crews running. Handles logistics, service calls, and the hands-on side of every project.",
+  },
+  {
+    name: "Clint Lenover",
+    role: "Solar Technician",
+    slug: "clint-lenover",
+    bio: "On roofs, on racks, pulling wire — Clint's in the field getting systems installed and running right.",
   },
   {
     name: "Colt",
@@ -31,12 +43,6 @@ const TEAM = [
     role: "Solar Technician",
     slug: "aj",
     bio: "On the truck, on the roof, in the field - wherever the work is. Goes by Scruff around the shop.",
-  },
-  {
-    name: "Clint",
-    role: "Solar Technician",
-    slug: "clint",
-    bio: "Out on the job site pulling wire and mounting panels. One of the crew that shows up to get the work done.",
   },
 ];
 
@@ -131,7 +137,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-5" data-testid="team-grid">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-5" data-testid="team-grid">
             {TEAM.map((m, i) => (
               <TeamMemberCard key={m.slug} index={i} {...m} />
             ))}
