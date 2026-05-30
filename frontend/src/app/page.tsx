@@ -6,6 +6,7 @@ import HCPBookOnline from "@/components/HCPBookOnline";
 import RotatingHeadline from "@/components/RotatingHeadline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
+import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import { HCP_BOOK_URL } from "@/lib/utils";
@@ -218,6 +219,7 @@ export default function HomePage() {
 
       <ServiceAreaTeaser />
       <Testimonials />
+      <HCPReviews />
       <FAQ />
 
       {/* Final CTA */}
