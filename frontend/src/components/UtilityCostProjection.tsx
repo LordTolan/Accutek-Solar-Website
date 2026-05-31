@@ -381,7 +381,7 @@ export default function UtilityCostProjection() {
               max={450}
               step={25}
               displayValue={`$${monthlyBill}`}
-              onChange={(v) => setMonthlyBill(Math.round(v))}
+              onChange={(v) => setMonthlyBill(Math.round(v / 25) * 25)}
             />
           </div>
 
@@ -468,6 +468,18 @@ export default function UtilityCostProjection() {
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
+                href={`/tools/calculator?bill=${monthlyBill}`}
+                className="
+                  flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl
+                  border border-white/15 bg-white/[0.04] text-white/70
+                  px-7 py-4 text-sm font-bold uppercase tracking-wider
+                  hover:border-white/30 hover:text-white transition-all duration-200 focus-ring
+                "
+                data-testid="projection-cta-secondary"
+              >
+                See What Solar Would Cost
+              </Link>
+              <Link
                 href={`/quote?bill=${monthlyBill}`}
                 className="
                   group flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl
@@ -480,18 +492,6 @@ export default function UtilityCostProjection() {
               >
                 Get My Solar Savings Plan
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
-              </Link>
-              <Link
-                href={`/tools/calculator?bill=${monthlyBill}`}
-                className="
-                  flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl
-                  border border-white/15 bg-white/[0.04] text-white/70
-                  px-7 py-4 text-sm font-bold uppercase tracking-wider
-                  hover:border-white/30 hover:text-white transition-all duration-200 focus-ring
-                "
-                data-testid="projection-cta-secondary"
-              >
-                See What Solar Would Cost
               </Link>
             </div>
           </div>

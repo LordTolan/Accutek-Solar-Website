@@ -109,6 +109,18 @@
   outline-offset: 2px;
 }
 
+/* Touch-device: larger thumb meets Apple HIG 44px minimum */
+@media (pointer: coarse) {
+  .utility-slider::-webkit-slider-thumb {
+    width: 32px;
+    height: 32px;
+  }
+  .utility-slider::-moz-range-thumb {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 @keyframes fade-up { 0% { opacity: 0; transform: translateY(14px); } 100% { opacity: 1; transform: translateY(0); } }
 .animate-fade-up { animation: fade-up 0.7s ease-out both; }
 

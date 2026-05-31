@@ -1,16 +1,32 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
-import { api } from "@/lib/api";
+
+// Static county list — mirrors service-area/page.tsx (avoids flaky runtime API fetch on homepage)
+const COUNTIES = [
+  { slug: "vermillion-county-in", name: "Vermillion County", state: "IN" },
+  { slug: "parke-county-in", name: "Parke County", state: "IN" },
+  { slug: "fountain-county-in", name: "Fountain County", state: "IN" },
+  { slug: "montgomery-county-in", name: "Montgomery County", state: "IN" },
+  { slug: "putnam-county-in", name: "Putnam County", state: "IN" },
+  { slug: "clay-county-in", name: "Clay County", state: "IN" },
+  { slug: "sullivan-county-in", name: "Sullivan County", state: "IN" },
+  { slug: "vigo-county-in", name: "Vigo County", state: "IN" },
+  { slug: "hendricks-county-in", name: "Hendricks County", state: "IN" },
+  { slug: "warren-county-in", name: "Warren County", state: "IN" },
+  { slug: "edgar-county-il", name: "Edgar County", state: "IL" },
+  { slug: "vermilion-county-il", name: "Vermilion County", state: "IL" },
+  { slug: "clark-county-il", name: "Clark County", state: "IL" },
+  { slug: "crawford-county-il", name: "Crawford County", state: "IL" },
+  { slug: "coles-county-il", name: "Coles County", state: "IL" },
+  { slug: "douglas-county-il", name: "Douglas County", state: "IL" },
+  { slug: "champaign-county-il", name: "Champaign County", state: "IL" },
+];
 
 export default function ServiceAreaTeaser() {
-  const [counties, setCounties] = useState<any[]>([]);
-  useEffect(() => { api.getServiceArea().then((d) => setCounties(d.counties)).catch(() => {}); }, []);
-
-  const indiana = counties.filter((c) => c.state === "IN");
-  const illinois = counties.filter((c) => c.state === "IL");
+  const indiana = COUNTIES.filter((c) => c.state === "IN");
+  const illinois = COUNTIES.filter((c) => c.state === "IL");
 
   return (
     <section className="py-20 md:py-28" data-testid="service-area-section">
@@ -26,7 +42,7 @@ export default function ServiceAreaTeaser() {
               for homes, farms and businesses across Central Indiana and Western Illinois.
             </p>
             <Link href="/service-area" className="mt-8 inline-flex items-center rounded-full bg-secondary text-secondary-foreground px-6 py-3 font-bold text-sm hover:-translate-y-0.5 transition focus-ring" data-testid="view-all-counties">
-              View All Counties ->
+              View All Counties -&gt;
             </Link>
           </div>
 

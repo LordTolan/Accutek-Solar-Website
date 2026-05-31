@@ -25,10 +25,6 @@ const DEFAULT_FAQS = [
     a: "Accutek Solar was founded in 1994 by Keith Davis. We are a family-owned company with over 32 years of electrical and solar installation experience.",
   },
   {
-    q: "Is the federal solar tax credit still available?",
-    a: "The big federal solar tax credit for new systems ended this year. The good news: state-level programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants for ag/rural businesses, and utility incentives are still in play - and equipment pricing has come down. Talk to us about today's real-world payback math.",
-  },
-  {
     q: "Do you install backup generators?",
     a: "Yes - we are authorized Kohler generator installers. Kohler has a proven track record for emergency power that's ready when you need it.",
   },
