@@ -379,7 +379,7 @@ export default function UtilityCostProjection() {
               value={monthlyBill}
               min={50}
               max={450}
-              step={10}
+              step={25}
               displayValue={`$${monthlyBill}`}
               onChange={(v) => setMonthlyBill(Math.round(v))}
             />
