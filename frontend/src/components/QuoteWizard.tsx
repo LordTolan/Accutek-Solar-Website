@@ -194,7 +194,7 @@ function QuoteWizardInner() {
                 <span className="font-mono text-xs text-muted-foreground">USD / month</span>
                 <span className="font-heading text-3xl font-black text-primary text-glow" data-testid="bill-display">{formatCurrency(a.monthly_bill)}</span>
               </div>
-              <input type="range" min={30} max={1500} step={10} value={a.monthly_bill}
+              <input type="range" min={30} max={1500} step={25} value={a.monthly_bill}
                 onChange={(e) => setA({ ...a, monthly_bill: parseInt(e.target.value) })}
                 className="w-full accent-primary h-2" data-testid="bill-slider" />
               <div className="flex justify-between text-[10px] font-mono text-muted-foreground mt-2"><span>$30</span><span>$1500+</span></div>
