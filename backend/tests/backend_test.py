@@ -52,16 +52,6 @@ class TestPublic:
         counties = r.json()["counties"]
         assert len(counties) == 17
 
-    def test_county_slug_credit_ended(self, session):
-        # NEW: incentive copy should mention credit ended, not "30% federal tax credit available"
-        r = session.get(f"{API}/public/service-area/vermillion-county-in")
-        assert r.status_code == 200
-        c = r.json()
-        assert c["slug"] == "vermillion-county-in"
-        incentive = c.get("incentive", "")
-        assert "30%" not in incentive
-        assert "ended" in incentive.lower()
-
     def test_service_area_not_found(self, session):
         r = session.get(f"{API}/public/service-area/nonexistent")
         assert r.status_code == 404
@@ -70,16 +60,6 @@ class TestPublic:
         r = session.get(f"{API}/public/testimonials")
         assert r.status_code == 200
         assert len(r.json()["testimonials"]) == 4
-
-    def test_faq_includes_tax_credit_ended(self, session):
-        # NEW: FAQ must contain a tax-credit FAQ mentioning the credit ended
-        r = session.get(f"{API}/public/faq")
-        assert r.status_code == 200
-        faqs = r.json()["faqs"]
-        assert len(faqs) >= 7
-        joined = " ".join(f["q"] + " " + f["a"] for f in faqs).lower()
-        assert "tax credit" in joined
-        assert "ended" in joined
 
 
 # ---------- Lead qualification (NEW 6-Q schema) ----------
@@ -90,7 +70,6 @@ class TestLeadQualify:
             "monthly_bill": 250,
             "homeowner_5_7y": True,
             "interest_areas": ["solar", "battery"],
-            "aware_credit_ended": True,
             "timeline": "ready_1_3m",
             "service_type": "residential",
         }
@@ -109,7 +88,6 @@ class TestLeadQualify:
             "monthly_bill": 50,
             "homeowner_5_7y": False,
             "interest_areas": [],
-            "aware_credit_ended": False,
             "timeline": "gathering_info",
             "service_type": "residential",
         }
@@ -128,7 +106,6 @@ class TestLeadQualify:
             "monthly_bill": 200,
             "homeowner_5_7y": True,
             "interest_areas": ["solar"],
-            "aware_credit_ended": True,
             "timeline": "asap",  # old value, now invalid
             "service_type": "residential",
         }
@@ -151,7 +128,6 @@ class TestLeadSubmit:
                 "monthly_bill": 250,
                 "homeowner_5_7y": True,
                 "interest_areas": ["solar", "battery"],
-                "aware_credit_ended": True,
                 "timeline": "ready_1_3m",
                 "service_type": "residential",
             },
@@ -242,7 +218,6 @@ class TestAdminLeads:
                 "monthly_bill": 250,
                 "homeowner_5_7y": True,
                 "interest_areas": ["solar", "battery"],
-                "aware_credit_ended": True,
                 "timeline": "ready_1_3m",
                 "service_type": "residential",
             },

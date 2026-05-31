@@ -132,9 +132,7 @@ class QualifyAnswers(BaseModel):
     homeowner_5_7y: bool = True  # Owns home & plans to stay 5-7 years
     # Q4 (multi-select)
     interest_areas: List[Literal["solar", "battery", "electrical", "combo"]] = Field(default_factory=list)
-    # Q5 — expectation-setter (federal tax credit ended)
-    aware_credit_ended: bool = False
-    # Q6
+    # Q5
     timeline: Literal["ready_1_3m", "exploring", "gathering_info"] = "exploring"
     # Optional residential/commercial split (still useful for routing)
     service_type: Literal["residential", "commercial"] = "residential"
@@ -190,15 +188,11 @@ def score_lead(a: QualifyAnswers) -> dict:
     # Service type (0-5) — commercial slightly higher
     score += 5 if a.service_type == "commercial" else 3
 
-    # Q5 — Already aware credit ended (+5 if yes, they're informed)
-    if a.aware_credit_ended: score += 5
-
     score = max(0, min(score, 100))
     if score >= 75: tier = "hot"
     elif score >= 50: tier = "warm"
     else: tier = "nurture"
 
-    # Estimate (no longer applies federal 30% credit — credit ended).
     # Annual = bill * 12 * offset; offset ~ 75% residential, 65% commercial in this region.
     offset = 0.75 if a.service_type == "residential" else 0.65
     annual_savings = round(a.monthly_bill * 12 * offset, 2)
@@ -242,56 +236,56 @@ COUNTIES = [
     # Indiana
     {"slug": "vermillion-county-in", "name": "Vermillion County", "state": "IN", "seat": "Newport",
      "blurb": "Home turf for Accutek Solar since 1994 — Vermillion County homeowners save thousands with right-sized solar arrays.",
-     "incentive": "Indiana net metering + state incentives (federal solar tax credit ended for new systems this year)."},
+     "incentive": "Indiana net metering + state and utility incentives available."},
     {"slug": "parke-county-in", "name": "Parke County", "state": "IN", "seat": "Rockville",
      "blurb": "Rural Parke County properties benefit massively from off-grid and hybrid systems with Kohler backup.",
      "incentive": "Eligible for USDA REAP grants for ag and rural businesses."},
     {"slug": "fountain-county-in", "name": "Fountain County", "state": "IN", "seat": "Covington",
      "blurb": "Custom PV designs for Fountain County homes — financing options available.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "montgomery-county-in", "name": "Montgomery County", "state": "IN", "seat": "Crawfordsville",
      "blurb": "Crawfordsville and Montgomery County families trust Accutek for grid-tied solar and standby generators.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "putnam-county-in", "name": "Putnam County", "state": "IN", "seat": "Greencastle",
      "blurb": "Solar arrays sized for Putnam County's sun hours — typical payback in 6-9 years.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "clay-county-in", "name": "Clay County", "state": "IN", "seat": "Brazil",
      "blurb": "Brazil and surrounding Clay County homes — we install reliable, monitored PV systems.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "sullivan-county-in", "name": "Sullivan County", "state": "IN", "seat": "Sullivan",
      "blurb": "Sullivan County farms and homes — solar plus Kohler generators for true energy independence.",
-     "incentive": "USDA REAP grants available for ag & rural businesses (federal solar credit ended for new systems)."},
+     "incentive": "USDA REAP grants available for ag & rural businesses."},
     {"slug": "vigo-county-in", "name": "Vigo County", "state": "IN", "seat": "Terre Haute",
      "blurb": "Terre Haute homeowners — see our work at Ivy Tech and trust our 32-year track record.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "hendricks-county-in", "name": "Hendricks County", "state": "IN", "seat": "Danville",
      "blurb": "Hendricks County residents — premium installs with attention to detail.",
-     "incentive": "Indiana net metering + locally-available rebates (federal solar credit ended this year)."},
+     "incentive": "Indiana net metering + locally-available rebates available."},
     {"slug": "warren-county-in", "name": "Warren County", "state": "IN", "seat": "Williamsport",
      "blurb": "Warren County rural properties — off-grid and hybrid systems our specialty.",
-     "incentive": "USDA REAP grants available for ag & rural businesses (federal solar credit ended for new systems)."},
+     "incentive": "USDA REAP grants available for ag & rural businesses."},
     # Illinois
     {"slug": "edgar-county-il", "name": "Edgar County", "state": "IL", "seat": "Paris",
-     "blurb": "Edgar County, IL — Illinois Shines program + federal tax credit make solar incredibly affordable.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "blurb": "Edgar County, IL — Illinois Shines SREC program makes solar a smart investment.",
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "vermilion-county-il", "name": "Vermilion County", "state": "IL", "seat": "Danville",
      "blurb": "Danville and Vermilion County homes — Accutek serves Illinois with the same rigor as Indiana.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "clark-county-il", "name": "Clark County", "state": "IL", "seat": "Marshall",
      "blurb": "Clark County residents — full-service solar from design to monitoring.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "crawford-county-il", "name": "Crawford County", "state": "IL", "seat": "Robinson",
      "blurb": "Crawford County — we handle every detail of your solar install.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "coles-county-il", "name": "Coles County", "state": "IL", "seat": "Charleston",
      "blurb": "Charleston, Mattoon and Coles County families — start saving with solar.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "douglas-county-il", "name": "Douglas County", "state": "IL", "seat": "Tuscola",
      "blurb": "Douglas County homes and farms — solar PV and Kohler generators.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
     {"slug": "champaign-county-il", "name": "Champaign County", "state": "IL", "seat": "Urbana",
      "blurb": "Champaign-Urbana — premium residential and commercial solar with monitoring.",
-     "incentive": "Illinois Shines SREC program available (federal solar credit ended for new systems this year)."},
+     "incentive": "Illinois Shines SREC program available."},
 ]
 
 TESTIMONIALS = [
@@ -316,8 +310,6 @@ FAQS = [
      "a": "Net metering credits you for excess power you produce. In Indiana, the utility doesn't pay cash but credits your account — perfect for using summer overproduction to offset winter use."},
     {"q": "How long has Accutek Solar been in business?",
      "a": "Accutek Solar was founded in 1994 by Keith Davis. We are a family-owned company with over 32 years of electrical and solar installation experience."},
-    {"q": "Is the federal solar tax credit still available?",
-     "a": "The big federal solar tax credit for new systems ended this year. The good news: state-level programs (Indiana net metering, Illinois Shines SREC), USDA REAP grants for ag/rural businesses, and utility incentives are still in play — and equipment pricing has come down. Talk to us about today's real-world payback math."},
     {"q": "Do you install backup generators?",
      "a": "Yes — we are authorized Kohler generator installers. Kohler has a proven track record for emergency power that's ready when you need it."},
     {"q": "Do you offer free estimates?",

@@ -7,18 +7,47 @@ import { api } from "@/lib/api";
 
 type T = { initials: string; location: string; quote: string; rating: number };
 
+const STATIC_TESTIMONIALS: T[] = [
+  {
+    initials: "A.F.",
+    location: "Dana, IN",
+    quote: "Superior knowledge of his products along with great service and reliability!",
+    rating: 5,
+  },
+  {
+    initials: "E.D.",
+    location: "Clinton, IN",
+    quote: "Accutek Solar designed a customized system for us based upon our location, lifestyle, and budget. We are extremely satisfied with our PV panels and solar thermal tubes. Clean solar energy has enabled us to lower our carbon footprint and eliminated our monthly electric bill while maintaining a very comfortable lifestyle.",
+    rating: 5,
+  },
+  {
+    initials: "J.V.",
+    location: "Terre Haute, IN",
+    quote: "I am really glad I decided to buy a system from Accutek Systems Inc. There is no better feeling than seeing your electric meter spin backwards! System was installed in a timely manner with professionalism and has been working flawlessly since.",
+    rating: 5,
+  },
+  {
+    initials: "J.R.",
+    location: "Ivy Tech Community College, Lafayette, IN",
+    quote: "Accutek has been key in the design, integration, and custom installation of new and existing systems at the Craig Porter Energy Center. Their expertise and installation quality is one to admire.",
+    rating: 5,
+  },
+];
+
 export default function Testimonials() {
-  const [items, setItems] = useState<T[]>([]);
+  const [items, setItems] = useState<T[]>(STATIC_TESTIMONIALS);
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
 
-  useEffect(() => { api.getTestimonials().then((d) => setItems(d.testimonials)).catch(() => {}); }, []);
+  useEffect(() => {
+    api.getTestimonials()
+      .then((d) => { if (d.testimonials?.length) setItems(d.testimonials); })
+      .catch(() => {});
+  }, []);
   useEffect(() => {
     if (!embla) return;
     embla.on("select", () => setSelected(embla.selectedScrollSnap()));
   }, [embla]);
-
-  if (!items.length) return null;
 
   return (
     <section className="py-20 md:py-28" data-testid="testimonials-section">
