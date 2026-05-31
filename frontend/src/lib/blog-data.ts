@@ -70,10 +70,7 @@ export const BLOG_POSTS: BlogPost[] = [
 <p>That's a meaningful spread. On an 8 kW residential system, the module cost difference between imported and fully domestic panels is roughly <strong>$1,500–$1,600</strong>. The median installed system price nationally sits at about <strong>$2.58 per watt</strong> before incentives, per EnergySage — which translates to around $20,600 for an 8 kW system. Modules are one piece of that cost (the rest is inverters, racking, labor, permitting, and overhead), but they're the piece most affected by trade policy.</p>
 <p>The good news: as domestic production scales up and factories hit full capacity through 2026 and 2027, competition among U.S. manufacturers should put downward pressure on that $0.46 premium. More supply, same demand — economics still works even when trade policy gets weird.</p>
 
-<h2>The Policy Seesaw</h2>
-<p>If you're sensing some tension in the numbers, you're right. The federal government is simultaneously <em>protecting</em> domestic manufacturing with tariffs and <em>sunsetting</em> the tax credits that fueled the factory boom in the first place.</p>
-<p>The One Big Beautiful Bill Act (OBBBA), signed in 2025, accelerates the phase-out of the technology-neutral clean energy tax credits (Sections 45Y and 48E) for wind and solar projects placed in service after December 31, 2027. It maintains the Section 45X Advanced Manufacturing Production Credit that directly supports panel makers — but the demand-side incentives that drove installations are on a shorter clock than the IRA originally planned.</p>
-<p>Translation for homeowners: the policy window is narrowing. Factories are ramping up <em>now</em>, but the incentive environment that makes installations attractive is evolving. Waiting for prices to drop further is a gamble against a policy landscape that's actively shifting under everyone's feet.</p>
+
 
 <h2>What Indiana and Illinois Homeowners Should Know</h2>
 <p>For folks in our service area, here's the practical takeaway:</p>
@@ -81,7 +78,7 @@ export const BLOG_POSTS: BlogPost[] = [
   <li><strong>Panel selection matters more than it used to.</strong> Ask your installer where the panels are made and what certifications they carry. U.S.-manufactured panels from First Solar, Qcells, and others come with domestic warranty support and shorter supply chains — that means faster replacements if something ever goes wrong.</li>
   <li><strong>Don't chase the cheapest module.</strong> A panel with questionable tariff status or fly-by-night warranty isn't a deal — it's a liability on your roof for 25 years. We've always used established, bankable manufacturers, and the domestic boom gives us more options, not fewer.</li>
   <li><strong>Pricing has stabilized, not skyrocketed.</strong> Despite all the tariff drama, installed residential solar costs in the Midwest remain in the <strong>$2.50–$3.80 per watt</strong> range. The tariff costs are mostly absorbed at the utility scale; residential installers have been pivoting to domestic and tariff-exempt supply lines.</li>
-  <li><strong>Timing still favors action.</strong> Between state-level incentives (Illinois Shines, Indiana's sales tax exemption) and the shifting federal landscape, the math works best for homeowners who move sooner rather than later. Panels installed today lock in today's economics for 25–30 years.</li>
+  <li><strong>Timing still favors action.</strong> State-level incentives (Illinois Shines, Indiana's sales tax exemption) remain in effect, and equipment pricing has stabilized. Panels installed today lock in today's economics for 25–30 years.</li>
 </ul>
 
 <h2>The Bottom Line</h2>
