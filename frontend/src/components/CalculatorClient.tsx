@@ -50,7 +50,7 @@ function CalculatorClientInner() {
             <label className="text-sm font-bold">Average monthly electric bill</label>
             <span className="font-heading text-3xl font-black text-primary" data-testid="calc-bill-display">{formatCurrency(bill)}</span>
           </div>
-          <input type="range" min={30} max={1500} step={10} value={bill}
+          <input type="range" min={30} max={1500} step={25} value={bill}
             onChange={(e) => setBill(parseInt(e.target.value))}
             className="w-full accent-primary h-2"
             data-testid="calc-bill-slider" />
