@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Sun, ArrowRight } from "lucide-react";
@@ -16,12 +16,22 @@ export default function CalculatorClient() {
 
 function CalculatorClientInner() {
   const searchParams = useSearchParams();
+  const prefillApplied = useRef(false);
   const [bill, setBill] = useState(180);
 
-  // Pre-fill from utility cost projection (?bill=xxx)
+  // Pre-fill from utility cost projection (?bill=xxx) — only run once on mount
   useEffect(() => {
+    if (prefillApplied.current) return;
     const bp = searchParams.get("bill");
-    if (bp) { const v = parseInt(bp, 10); if (!isNaN(v) && v >= 30 && v <= 1500) setBill(v); }
+    if (bp) {
+      const v = parseInt(bp, 10);
+      if (!isNaN(v) && v >= 30 && v <= 1500) {
+        setBill(v);
+        prefillApplied.current = true;
+      }
+    } else {
+      prefillApplied.current = true;
+    }
   }, [searchParams]);
   const [type, setType] = useState<"residential" | "commercial">("residential");
 
