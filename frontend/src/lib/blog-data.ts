@@ -23,6 +23,73 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "the-summer-solar-paradox-more-sun-less-efficiency",
+    title: "The Summer Solar Paradox: More Sun, Less Efficiency — and What to Do About It",
+    subtitle: "June through August is peak production season, but heat is quietly stealing your watts",
+    excerpt:
+      "Summer means longer days and more sunlight, but it also means hotter panels — and hotter panels produce less power per ray. Here's how the temperature coefficient works, what it costs you, and six practical ways to keep your Indiana or Illinois system running at full throttle all season.",
+    author: "Accutek Solar",
+    date: "2026-06-01",
+    readTime: "6 min read",
+    category: "Solar 101",
+    tags: ["summer", "efficiency", "temperature", "maintenance", "monitoring", "tips"],
+    heroImage:
+      "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
+    heroAlt: "Solar panels glistening under a bright summer sun",
+    content: `
+<p>Here's a fun bit of solar irony to kick off your summer: the season that delivers the most sunlight to your panels is also the season that makes them the least efficient at converting it. Indiana and Illinois homeowners with solar get roughly <strong>5 peak sun hours per day</strong> in June and July — compared to about 2.5 in December — so summer is still your highest-production season by a wide margin. But the heat that comes with all that sunshine quietly chips away at your panels' output. The good news? The losses are manageable, predictable, and partly preventable. Let's break it down.</p>
+
+<h2>Why Hot Panels Make Less Power</h2>
+<p>Every solar panel has a spec called the <strong>temperature coefficient of power</strong>, usually expressed as a negative percentage per degree Celsius (e.g., -0.35%/°C). It tells you exactly how much output you lose for every degree your panel's temperature rises above <strong>25°C (77°F)</strong> — the standard test condition (STC) that manufacturers use to rate their panels.</p>
+<p>Most residential monocrystalline panels sold today have a temperature coefficient between <strong>-0.30%/°C and -0.40%/°C</strong>. Premium panels from manufacturers like REC and Maxeon push as low as -0.24%/°C. Older polycrystalline panels can be -0.45%/°C or worse.</p>
+<p>Here's the math that matters: on a 90°F (32°C) Indiana afternoon, your roof surface can easily hit <strong>140–150°F (60–65°C)</strong>. The panel itself typically runs about <strong>20–35°C above ambient air temperature</strong>, depending on airflow. So on a 90°F day, your panel might be operating at 55–60°C — that's 30–35 degrees above the 25°C baseline.</p>
+<p>With a typical -0.35%/°C coefficient, that's a <strong>10–12% efficiency loss</strong> compared to the panel's rated output. On a 400-watt panel, that's 40–48 watts quietly evaporating into the atmosphere. Scale that across an 8 kW system (20 panels) and you're losing <strong>800–960 watts</strong> during the hottest hours of the day. That's real money left on the roof.</p>
+
+<h2>But Summer Still Wins — By a Lot</h2>
+<p>Before you panic, let's zoom out. Despite the heat penalty, summer absolutely crushes winter for total production. Here's why:</p>
+<ul>
+  <li><strong>Daylight hours:</strong> Central Indiana gets about <strong>15 hours of daylight</strong> at the June solstice, compared to roughly 9.5 hours in late December. That's nearly 60% more time collecting photons.</li>
+  <li><strong>Sun angle:</strong> The sun is higher in the sky, meaning more direct light hits your panels and less is lost to atmosphere. Solar irradiance peaks around <strong>1,000 W/m²</strong> on clear summer days.</li>
+  <li><strong>Peak sun hours:</strong> Indianapolis averages about <strong>5.0 peak sun hours</strong> in summer versus 2.5 in winter. A "peak sun hour" equals one hour of 1,000 W/m² irradiance — it's the standard unit for solar energy availability.</li>
+</ul>
+<p>The net result? Even with 10–12% heat losses during peak hours, a typical 8 kW system in Indiana produces <strong>35–45 kWh per day</strong> in June and July, compared to 15–20 kWh in December. Summer production is roughly <strong>double</strong> winter production. The temperature penalty reduces your theoretical maximum, but the sheer volume of sunlight more than compensates.</p>
+
+<h2>Six Ways to Fight the Heat (Without Climbing on Your Roof)</h2>
+
+<h3>1. Check Your Monitoring App — Seriously, This Week</h3>
+<p>If you have a solar monitoring system (Enphase Enlighten, SolarEdge, Tesla app, etc.), summer is the time to start watching it like a hawk. Specifically, look for your <strong>daily production curve</strong> — it should be a smooth bell shape peaking around midday. If you see sudden dips on clear days, flat spots, or individual panels underperforming, something's off. Common culprits: new tree growth casting afternoon shade, a tripped breaker, a failing microinverter, or a critter-chewed wire. Catching these issues in June means you fix them before losing peak-production weeks.</p>
+
+<h3>2. Keep Your Panels Clean</h3>
+<p>Spring pollen, bird droppings, and wind-blown dust build up over time. A dirty panel can lose <strong>5–25% of its output</strong> depending on how much gunk is blocking the glass. You don't need to hire a crew — a garden hose from ground level, early in the morning before the panels heat up, handles most residential jobs. <strong>Never spray cold water on hot panels</strong> — the thermal shock can crack the glass. And skip the soap unless you have very stubborn residue; detergent leaves a film that attracts more dust. A soft brush on an extension pole works for anything the hose can't handle.</p>
+
+<h3>3. Trim That Tree You've Been Meaning to Trim</h3>
+<p>Trees grow. Every year. That maple that was "barely in the way" two summers ago might be throwing an hour of afternoon shade across three panels now. In a string inverter system, one shaded panel can drag down the entire string — so even partial shade on one panel can reduce output from 6–10 panels. If you have microinverters or DC optimizers, the impact is limited to the shaded panel, but it still adds up. A few hours of afternoon shade during June and July can cost you <strong>10–15% of your monthly production</strong>. A $200 tree trim pays for itself in recovered energy within a single season.</p>
+
+<h3>4. Ensure Adequate Airflow</h3>
+<p>Panels need breathing room. The gap between your panels and the roof surface matters — it allows air to circulate underneath, carrying away heat. Standard residential racking creates a <strong>3–6 inch gap</strong>, which is usually sufficient. But if debris (leaves, nests, trash) has accumulated under your array, it blocks airflow and traps heat. Ground-mount systems generally have better airflow than roof mounts, which is one reason they run cooler and produce slightly more per panel in summer. If you have a roof-mount system and notice your panels running especially hot, ask your installer about critter guards — the mesh barriers that keep animals out also keep the underside clear of debris.</p>
+
+<h3>5. Time Your Heavy Usage Right</h3>
+<p>If you're on a net metering plan, this one's less critical — the grid acts as your battery. But if you have a home battery or you're on a time-of-use rate, align your heaviest electricity usage (EV charging, pool pump, laundry, dishwasher) with your production peak — <strong>roughly 10 AM to 3 PM</strong>. Using your own solar power directly avoids round-trip efficiency losses from battery storage and maximizes the financial value of every kilowatt-hour you produce.</p>
+
+<h3>6. Schedule a Professional Mid-Year Checkup</h3>
+<p>Think of it like a car oil change. A professional inspection catches things you can't see from the ground: micro-cracks in cells, hot spots from failing solder joints, loose wiring connections, or degraded weatherproofing. Research from the National Renewable Energy Laboratory (NREL) shows that professionally maintained systems maintain <strong>up to 95% of their original output</strong> after 10 years, compared to 88–90% for neglected systems. At Accutek Solar, we inspect the electrical connections, racking hardware, inverter performance, and panel surfaces. If something's underperforming, we find it before it becomes an expensive repair.</p>
+
+<h2>What About the Rest of 2026?</h2>
+<p>Summer is your system's peak earning season, but it's not the only story. Fall brings cooler temps (better efficiency per ray) with still-decent daylight hours — many systems have a sweet spot in September and October where moderate temperatures and 12-hour days combine for surprisingly strong output. Winter drops off, but a properly sized system with net metering banks summer credits that cover winter shortfalls. The annual cycle is exactly what your installer accounted for when designing your system.</p>
+
+<h2>The Bottom Line</h2>
+<p>Summer is a net positive for your solar system — by a lot. Yes, heat steals 10–12% of your panels' rated efficiency on the hottest days. But the longer days, higher sun angle, and stronger irradiance mean June and July are still your highest-production months by far. The smart play isn't to worry about the physics you can't change — it's to handle the maintenance you can. Clean your panels, trim your trees, watch your monitoring app, and keep that airflow clear. Do those four things, and your system will reward you with the biggest electricity credits of the year. Now go enjoy the sunshine — your panels already are.</p>
+`,
+    sources: [
+      "NREL — Best Practices for Operation and Maintenance of Photovoltaic Systems (nrel.gov/docs/fy17osti/67553.pdf)",
+      "SolarTech — Best Solar Panels for Hot Climates: Temperature Coefficient Guide 2025 (solartechonline.com)",
+      "NREL — Solar Resource Data for Indianapolis, IN (nsrdb.nrel.gov)",
+      "Illinois State Water Survey — Measured Solar Radiation Over Illinois (isws.illinois.edu)",
+      "Fire Mountain Solar — Peak Sun Hours by State, NREL Data (firemountainsolar.com)",
+      "EnergySage — How Does Heat Affect Solar Panel Efficiency? (energysage.com)",
+    ],
+  },
+  {
     slug: "homegrown-watts-inside-americas-solar-manufacturing-boom",
     title: "Homegrown Watts: Inside America's Solar Manufacturing Boom",
     subtitle: "From 8 gigawatts to 60 — and why your next panels might have a shorter commute",
