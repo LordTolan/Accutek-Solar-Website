@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   title: "Solar Blog — Tips, News & Insights",
   description:
     "Expert solar energy insights from Accutek Solar. Weekly articles on solar technology, Indiana & Illinois incentives, energy savings tips, and industry news — fact-checked by our 32-year veteran team.",
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Solar Blog — Accutek Solar",
     description:
