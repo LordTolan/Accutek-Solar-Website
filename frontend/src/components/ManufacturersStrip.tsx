@@ -47,6 +47,18 @@ const MANUFACTURERS: Manufacturer[] = [
     category: "Solar Inverters",
     color: "#EB0000",
   },
+  {
+    name: "Kohler",
+    tagline: "Automatic standby generators — authorized installer",
+    category: "Backup Generators",
+    color: "#005DAA",
+  },
+  {
+    name: "Generac PWRcell",
+    tagline: "Whole-home battery storage & backup systems",
+    category: "Battery Storage",
+    color: "#F7941D",
+  },
 ];
 
 export default function ManufacturersStrip() {
@@ -81,7 +93,7 @@ export default function ManufacturersStrip() {
         </div>
 
         {/* Manufacturer cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {MANUFACTURERS.map((m) => (
             <div
               key={m.name}
