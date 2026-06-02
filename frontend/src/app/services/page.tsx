@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sun, Mountain, Building2, BatteryCharging, Wrench, LightbulbIcon } from "lucide-react";
+import ManufacturersStrip from "@/components/ManufacturersStrip";
 
 export const metadata = { title: "Solar & Electrical Services" };
 
@@ -38,6 +39,8 @@ export default function ServicesPage() {
           </Link>
         </div>
       </div>
+
+      <ManufacturersStrip />
     </section>
   );
 }
