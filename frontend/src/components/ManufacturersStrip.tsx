@@ -59,6 +59,12 @@ const MANUFACTURERS: Manufacturer[] = [
     category: "Battery Storage",
     color: "#F7941D",
   },
+  {
+    name: "Schneider Electric",
+    tagline: "Energy management, inverters & load centers",
+    category: "Energy Management",
+    color: "#3DCD58",
+  },
 ];
 
 export default function ManufacturersStrip() {
