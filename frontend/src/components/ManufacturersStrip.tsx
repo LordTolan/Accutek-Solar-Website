@@ -65,6 +65,12 @@ const MANUFACTURERS: Manufacturer[] = [
     category: "Energy Management",
     color: "#3DCD58",
   },
+  {
+    name: "Emporia Energy",
+    tagline: "Real-time energy monitoring & smart EV charging",
+    category: "Energy Monitoring",
+    color: "#6C3FC5",
+  },
 ];
 
 export default function ManufacturersStrip() {
