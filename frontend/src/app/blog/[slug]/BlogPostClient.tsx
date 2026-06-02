@@ -14,7 +14,7 @@ import {
   Share2,
   CheckCircle2,
 } from "lucide-react";
-import { getBlogPost, getAllBlogPosts } from "@/lib/blog-data";
+import { getBlogPost, getAllBlogPosts, AI_DISCLAIMER } from "@/lib/blog-data";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 export default function BlogPostClient() {
@@ -179,6 +179,11 @@ export default function BlogPostClient() {
             </span>
           ))}
         </div>
+
+        {/* AI Disclaimer */}
+        <p className="mt-8 text-xs text-muted-foreground italic border-t border-border pt-4">
+          {AI_DISCLAIMER}
+        </p>
       </article>
 
       {/* Prev / Next Navigation */}

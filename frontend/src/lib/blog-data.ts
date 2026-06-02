@@ -5,6 +5,46 @@
  * Each post is fact-checked before merge.
  */
 
+/**
+ * Rotating pen names for blog authorship.
+ * Each week's post gets the next name in the list (index by week number % length).
+ */
+export const PEN_NAMES = [
+  "Ray Watts",
+  "Sol Brightman",
+  "Watt Kilowatt",
+  "Ray D. Ation",
+  "Sunny McVoltface",
+  "Phil O'Watt",
+  "Art Kilowatt",
+  "Al B. Sunny",
+  "Watt Burns",
+  "Sol R. Panel",
+  "Rick O'Shay Solar",
+  "Lumen Clearsky",
+  "Amp Voltsworth",
+  "Max Insolation",
+  "Barry Cade",
+  "Sonny Watt",
+  "Hugh Jouleson",
+  "Bill Kilowatt",
+  "Dirk Photon",
+  "Duke Electra",
+] as const;
+
+/** Pick a pen name for a given ISO date string (rotates weekly). */
+export function getPenName(isoDate: string): string {
+  const d = new Date(isoDate);
+  // Week number within year (0-based)
+  const startOfYear = new Date(d.getFullYear(), 0, 1);
+  const week = Math.floor((d.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000));
+  return PEN_NAMES[week % PEN_NAMES.length];
+}
+
+/** AI editorial disclaimer — shown at the bottom of every blog post. */
+export const AI_DISCLAIMER =
+  "This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions.";
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -28,7 +68,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "From 8 gigawatts to 60 — and why your next panels might have a shorter commute",
     excerpt:
       "U.S. solar manufacturing capacity has exploded 700% since the IRA passed. Meanwhile, tariffs on Southeast Asian imports are hitting triple digits. Here's what the reshuffled supply chain means for Indiana and Illinois homeowners shopping for panels in 2026.",
-    author: "Accutek Solar",
+    author: "Ray Watts",
     date: "2026-05-25",
     readTime: "6 min read",
     category: "Industry News",
@@ -100,7 +140,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "SRECs, net metering, tax breaks — Illinois basically pays you to go solar",
     excerpt:
       "Illinois has one of the most generous solar incentive stacks in the Midwest. From the Illinois Shines program to full-retail net metering and property tax exemptions, here's everything homeowners in eastern Illinois need to know.",
-    author: "Accutek Solar",
+    author: "Ray Watts",
     date: "2026-05-25",
     readTime: "7 min read",
     category: "Solar Policy",
@@ -173,7 +213,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "Your meter can spin backward — here's how to make the most of it",
     excerpt:
       "Indiana's net metering policy lets solar homeowners bank excess energy as credits. Here's exactly how it works, what the current rules are, and why acting sooner is smarter than later.",
-    author: "Accutek Solar",
+    author: "Ray Watts",
     date: "2026-05-24",
     readTime: "6 min read",
     category: "Solar Policy",
@@ -220,7 +260,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "Spoiler: it depends on your yard, your roof, and your tolerance for ladders",
     excerpt:
       "Choosing between ground-mount and roof-mount solar isn't just about aesthetics — it's about energy output, maintenance access, and long-term ROI. Here's a no-nonsense comparison.",
-    author: "Accutek Solar",
+    author: "Duke Electra",
     date: "2026-05-17",
     readTime: "7 min read",
     category: "Solar 101",
@@ -284,7 +324,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "Blackout insurance, bill optimizer, or expensive paperweight? Let's do the math.",
     excerpt:
       "Home batteries are getting cheaper and smarter, but are they worth the investment for Indiana and Illinois homeowners? We break down the costs, use cases, and when they actually make sense.",
-    author: "Accutek Solar",
+    author: "Dirk Photon",
     date: "2026-05-10",
     readTime: "8 min read",
     category: "Technology",
@@ -348,7 +388,7 @@ export const BLOG_POSTS: BlogPost[] = [
     subtitle: "No, solar panels don't work only in Arizona. Yes, we checked.",
     excerpt:
       "From 'solar doesn't work here' to 'panels destroy your roof,' we're tackling the top five solar myths that keep popping up at Indiana barbecues. Spoiler: the sun works in the Midwest too.",
-    author: "Accutek Solar",
+    author: "Bill Kilowatt",
     date: "2026-05-03",
     readTime: "5 min read",
     category: "Solar 101",
