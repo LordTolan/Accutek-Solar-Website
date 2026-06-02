@@ -24,6 +24,7 @@ export function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
+    robots: { index: false, follow: false },
     openGraph: {
       title: post.title,
       description: post.excerpt,
