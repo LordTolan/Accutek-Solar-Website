@@ -10,6 +10,7 @@ import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
 import ManufacturerLogos from "@/components/ManufacturerLogos";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
+import ManufacturersStrip from "@/components/ManufacturersStrip";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array - primary hero imagery (Seth's note: balance roof + ground)
@@ -209,6 +210,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <ManufacturersStrip />
       <ServiceAreaTeaser />
       <Testimonials />
       <HCPReviews />
