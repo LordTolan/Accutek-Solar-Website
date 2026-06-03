@@ -8,6 +8,7 @@ import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import Testimonials from "@/components/Testimonials";
 import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
+import ManufacturerLogos from "@/components/ManufacturerLogos";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
@@ -121,6 +122,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <ManufacturerLogos />
 
       {/* Roof vs Ground feature strip */}
       <section className="py-20 md:py-28" data-testid="roof-ground-section">
