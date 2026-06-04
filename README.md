@@ -4,41 +4,58 @@ Family-owned solar / backup power / facility automation contractor website + lea
 
 ## Stack
 
-- **Frontend**: React 19 + React Router + Tailwind + shadcn/ui (Montserrat / JetBrains Mono)
+- **Frontend**: Next.js 15 (App Router, TypeScript) + Tailwind + Framer Motion + Embla Carousel (Cabinet Grotesk / Satoshi / JetBrains Mono)
 - **Backend**: FastAPI (async) + Motor (async MongoDB driver)
 - **Storage**: MongoDB
-- **Auth**: bcrypt + PyJWT (HTTPBearer, 8-hour access token)
-- **Integrations**: Housecall Pro (customer portal · reviews widget · chat bubble · online booking)
+- **Auth**: bcrypt + PyJWT (HTTPBearer, access + refresh tokens, brute-force lockout)
+- **Integrations**: Housecall Pro (lead form · reviews widget · chat bubble · online booking)
+- **Blog**: Weekly automated blog with rotating pen names + AI-assist disclaimer
+- **Email notifications**: SendGrid (configured via `.env`)
 
 ## Pages
 
-| Route             | What                                                       |
-| ----------------- | ---------------------------------------------------------- |
-| `/`               | Marketing home (hero, services preview, reviews, CTA)      |
-| `/services`       | Solar & Storage · Backup Power · Facility Automation · Diagnostics |
-| `/commercial`     | Commercial intake form (file upload + TCPA consent)        |
-| `/tools`          | 5 calculators (solar size, battery, mount, generator, ROI) |
-| `/service-area`   | 4-quadrant IN/IL service map                               |
-| `/reviews`        | Embedded Housecall Pro reviews widget                      |
-| `/about`          | Family-owned story + team                                  |
-| `/contact`        | Schedule a call / TCPA-compliant lead form                 |
-| `/admin`          | Admin login                                                |
-| `/admin/leads`    | Protected dashboard (residential + commercial leads)       |
+| Route                        | What                                                                 |
+| ---------------------------- | -------------------------------------------------------------------- |
+| `/`                          | Marketing home (hero video, tagline slider, services preview, reviews, CTA) |
+| `/services`                  | Solar & Storage · Backup Power · Facility Automation · Diagnostics   |
+| `/commercial`                | Commercial intake form (file upload + TCPA consent)                  |
+| `/tools`                     | 5 calculators (solar size, battery, mount, generator, ROI)           |
+| `/service-area`              | 17-county IN/IL service map with individual county pages             |
+| `/reviews`                   | Embedded Housecall Pro reviews widget                                |
+| `/about`                     | Family-owned story + full team (owners, operators, technicians)      |
+| `/blog`                      | Weekly blog posts — auto-generated, rotating pen names               |
+| `/book`                      | HCP online booking widget                                            |
+| `/quote`                     | HCP lead form (HCP-only, no QuoteWizard)                             |
+| `/admin`                     | Admin login                                                          |
+| `/admin/leads`               | Protected dashboard (residential + commercial leads)                 |
+
+## Team
+
+| Name          | Role                         |
+| ------------- | ---------------------------- |
+| Keith Davis   | Founder                      |
+| Seth Davis    | Owner / Operator             |
+| Quill Davis   | Owner / Operator             |
+| Clint Lenover | Installer (Install Tech)     |
+| Colt          | Lead Installer               |
+| AJ ("Scruff") | Solar Technician             |
+
+> Seth, Quill, and Keith are the Owners/Operators. Clint, Colt, and AJ are Installers/Technicians.
 
 ## Setup
 
 ```bash
 # Backend
 cd backend
-cp .env.example .env       # fill in MONGO_URL, JWT_SECRET, ADMIN_*
+cp .env.example .env       # fill in MONGO_URL, JWT_SECRET, ADMIN_*, SENDGRID_API_KEY, HCP_API_KEY
 pip install -r requirements.txt
 uvicorn server:app --host 0.0.0.0 --port 8001 --reload
 
 # Frontend
 cd frontend
-cp .env.example .env       # set REACT_APP_BACKEND_URL
+cp .env.example .env       # set NEXT_PUBLIC_BACKEND_URL
 yarn install
-yarn start
+yarn dev
 ```
 
 ## Environment Variables
@@ -50,11 +67,14 @@ yarn start
 - `JWT_SECRET` — random 64-char hex (`python -c "import secrets; print(secrets.token_hex(32))"`)
 - `ADMIN_EMAIL` — admin account email (seeded on startup)
 - `ADMIN_PASSWORD` — admin account password (re-hashed on startup if changed)
+- `SENDGRID_API_KEY` — for hot-lead email notifications
+- `HCP_API_KEY` — Housecall Pro API key (lead sync)
+- `HCP_COMPANY_ID` — Housecall Pro company UUID
 
 ### Frontend (`frontend/.env`)
-- `REACT_APP_BACKEND_URL` — backend public URL
+- `NEXT_PUBLIC_BACKEND_URL` — backend public URL
 
-## API endpoints
+## API Endpoints
 
 ### Public
 - `GET /api/` — health
@@ -70,37 +90,26 @@ yarn start
 
 ### Admin (Bearer required)
 - `GET /api/admin/leads` — residential lead list
-- `GET /api/admin/commercial-leads` — commercial list (file bytes excluded)
-- `GET /api/admin/commercial-leads/{id}/site-plan` — download attachment
-- `GET /api/admin/stats` — counts
+- `GET /api/admin/commercial-leads` — commercial lead list
+- `PATCH /api/admin/leads/{id}` — update lead status / notes
+- `POST /api/admin/leads/{id}/sync-hcp` — sync lead to Housecall Pro
 
-## Housecall Pro
+## Manufacturers Supported
 
-Three Housecall Pro widgets are embedded:
+Sol-Ark · Victron Energy · Outback Power · Solis · Fronius · Kohler · Generac PWRcell · Schneider Electric · Emporia Energy
 
-1. **Customer Portal** (button in nav + footer) — request-link token `d2cca52d5dc74361b2c484f1306b70df`
-2. **Reviews widget** (on `/` and `/reviews`) — widget id `097cf23f-be1a-41ea-981b-8e6b9c7514eb`
-3. **Online Booking** ("Book online" button on hero + footer) — token `a610e2efa0494a03ae59009369f2a058`
-4. **Chat bubble** (site-wide, loaded in `index.html`) — organization id `097cf23f-be1a-41ea-981b-8e6b9c7514eb`
+Also install and service: Enphase · SolarEdge · SMA
 
-## Security checklist
+## Blog
 
-- Admin endpoints protected with JWT Bearer auth
-- 5-attempt rate limit per IP+email with 15-minute lockout (using `X-Forwarded-For` to get real client IP)
-- Passwords hashed with bcrypt (cost 12)
-- TCPA consent captured + timestamped on every lead submission
-- File uploads capped at 10 MB and content-type whitelisted
-- MongoDB `_id` excluded from all API responses
-- Brand asset PNGs optimized (22 MB → 1.4 MB total)
+- Weekly automated blog posts via Viktor cron
+- Rotating pen names: Ray Watts, Sol Brightman, Watt Kilowatt, Ray D. Ation, Sunny McVoltface, Phil O'Watt, Art Kilowatt, Al B. Sunny, Watt Burns, Sol R. Panel, Rick O'Shay Solar, Lumen Clearsky, Amp Voltsworth, Max Insolation, Barry Cade, Sonny Watt, Hugh Jouleson, Bill Kilowatt, Dirk Photon, Duke Electra
+- AI disclaimer on all posts: _"This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions."_
+- Shelved: "Summer Solar Paradox" post (heat concerns — not customer-facing messaging per Seth)
 
-## Test credentials (rotate after first deploy!)
+## Content Guidelines
 
-Stored at `/app/memory/test_credentials.md` (also excluded from this backup).
-
-## Known maintenance items
-
-- Migrate `@app.on_event("startup"|"shutdown")` to FastAPI lifespan handlers
-- Add Resend / SendGrid email forwarding for new leads
-- Consider GridFS or S3 for commercial site-plan files if uploads regularly approach 10 MB
-- Add a dedicated 404 page (currently falls back to home)
-- Pre-fill calculator results into the contact form payload
+- **Heat / temperature**: Accutek manages thermal design internally. Do NOT surface panel heat as a customer concern in marketing copy or blog posts.
+- **Ground mounts**: Actively promote alongside roof-mount installs — we do both.
+- **Lead form**: HCP-only. No QuoteWizard. One form → straight to Seth.
+- **Team hierarchy**: Seth, Quill, Keith = Owners/Operators. Clint = Installer, not management.
