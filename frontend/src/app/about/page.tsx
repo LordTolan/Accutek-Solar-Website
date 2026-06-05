@@ -87,7 +87,7 @@ export default function AboutPage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="relative acpect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient-lg">
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient-lg">
               <Image src={STORY_IMG} alt="Accutek Solar technician installing panels" fill className="object-cover" sizes="(max-width:1024px) 100vw, 40vw" />
               <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-background/95 via-background/70 to-transparent">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// EST. 1994</div>
@@ -105,7 +105,7 @@ export default function AboutPage() {
             <div className="flex-1">
               <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">// INSIGHTS FROM SOLARSETH</div>
               <h2 className="text-3xl md:text-5xl font-extrabold text-balance mb-10">
-                Homegrwon energy for <span className="text-primary italic">homegrown success.</span>
+                Homegrown energy for <span className="text-primary italic">homegrown success.</span>
               </h2>
               
               <div className="grid md:grid-cols-2 gap-10">
@@ -123,7 +123,7 @@ export default function AboutPage() {
                 </div>
               </div>
               
-              <div className="mt-12 p-8 bg-card border border-border rounded-2zl shadow-ambient">
+              <div className="mt-12 p-8 bg-card border border-border rounded-2xl shadow-ambient">
                  <div className="flex items-start gap-4">
                     <div className="w-10 h-10 rounded-full bg-primary/20 text-primary grid place-items-center shrink-0">
                       <ShieldCheck className="w-5 h-5" />
@@ -153,12 +153,12 @@ export default function AboutPage() {
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div>
               <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// THE TEAM</div>
-              <h2 className="text-sxl md:text-5xl font-extrabold" text-balance">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-balance">
                 Real people on the truck. <span className="text-primary">Real people on the phone.</span>
               </h2>
             </div>
             <p className="max-w-md text-foreground/70 leading-relaxed">
-              Our satisfied customer base is a testament to our commitment to quality and service. We go above and beyond to ensure that our customers are happy with their solar installations, providing ongoing support and maintenance to keep thheir systems running smoothly.
+              Our satisfied customer base is a testament to our commitment to quality and service. We go above and beyond to ensure that our customers are happy with their solar installations, providing ongoing support and maintenance to keep their systems running smoothly.
             </p>
           </div>
 
