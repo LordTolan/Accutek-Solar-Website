@@ -1,1 +1,214 @@
-InVzZSBjbGllbnQiOwoKaW1wb3J0IHsgdXNlRWZmZWN0LCB1c2VTdGF0ZSB9IGZyb20gInJlYWN0IjsKaW1wb3J0IExpbmsgZnJvbSAibmV4dC9saW5rIjsKaW1wb3J0IEltYWdlIGZyb20gIm5leHQvaW1hZ2UiOwppbXBvcnQgeyB1c2VQYXJhbXMgfSBmcm9tICJuZXh0L25hdmlnYXRpb24iOwppbXBvcnQgeyBBUEksIEhDUF9CT09LX1VSTCB9IGZyb20gIkAvbGliL3V0aWxzIjsKaW1wb3J0IHsgQXJyb3dSaWdodCwgQ2hlY2tDaXJjbGUyLCBNYXBQaW4sIFBob25lLCBTaGllbGRDaGVjaywgWmFwLCBMYW5kUGxvdCwgVXNlciB9IGZyb20gImx1Y2lkZS1yZWFjdCI7Cgpjb25zdCBDT1VOVFlfSU1HID0gImh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNjIxNDMxNzM1NjIzLTk1ZmNiYTZiODlhZT9jcm9wPWVudHJvcHkmY3M9c3JnYiZmbT1qcGcmcT04NSZ3PTIwMDAiOwoKaW50ZXJmYWNlIENvdW50eURhdGEgewogIG5hbWU6IHN0cmluZzsKICBzdGF0ZTogc3RyaW5nOwogIGJsdXJiOiBzdHJpbmc7CiAgaW5jZW50aXZlOiBzdHJpbmc7CiAgc2x1Zzogc3RyaW5nOwogIHNlYXQ/OiBzdHJpbmc7Cn0KCmV4cG9ydCBkZWZhdWx0IGZ1bmN0aW9uIENvdW50eVBhZ2UoKSB7CiAgY29uc3QgcGFyYW1zID0gdXNlUGFyYW1zKCk7CiAgY29uc3Qgc2x1ZyA9IHBhcmFtcz8uc2x1ZyBhcyBzdHJpbmc7CiAgY29uc3QgW2NvdW50eSwgc2V0Q291bnR5XSA9IHVzZVN0YXRlKENvdW50eURhdGEgfCBudWxsPihudWxsKTsKICBjb25zdCBbbG9hZGluZywgc2V0TG9hZGluZ10gPSB1c2VTdGF0ZSh0cnVlKTsKICBjb25zdCBbbm90Rm91bmQsIHNldE5vdEZvdW5kXSA9IHVzZVN0YXRlKGZhbHNlKTsKCiAgdXNlRWZmZWN0KCgpID0+IHsKICAgIGlmICghc2x1ZykgcmV0dXJuOwogICAgYXN5bmMgZnVuY3Rpb24gbG9hZCgpIHsKICAgICAgdHJ5IHsKICAgICAgICBjb25zdCByID0gYXdhaXQgZmV0Y2goYCR7QVBJfS9wdWJsaWMvc2VydmljZS1hcmVhLyR7c2x1Z31gKTsKICAgICAgICBpZiAoIXIub2spIHsgc2V0Tm90Rm91bmQodHJ1ZSk7IHJldHVybjsgfQogICAgICAgIGNvbnN0IGRhdGEgPSBhd2FpdCByLmpzb24oKTsKICAgICAgICBzZXRDb3VudHkoZGF0YSk7CiAgICAgIH0gY2F0Y2ggewogICAgICAgIHNldE5vdEZvdW5kKHRydWUpOwogICAgICB9IGZpbmFsbHkgewogICAgICAgIHNldExvYWRpbmcoZmFsc2UpOwogICAgICB9CiAgICB9CiAgICBsb2FkKCk7CiAgfSwgW3NsdWddKTsKCiAgaWYgKGxvYWRpbmcpIHJldHVybiA8ZGl2IGNsYXNzTmFtZT0icHktMjQgdGV4dC1jZW50ZXIgdGV4dC1tdXRlZC1mb3JlZ3JvdW5kIGZvbnQtbW9ubyB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZXN0IHRleHQtWzEwcHhdIj5Mb2FkaW5nIFByb2plY3QgRGF0YS4uLjwvZGl2PjsKICBpZiAobm90Rm91bmQgfHwgIWNvdW50eSkgcmV0dXJuIDxkaXYgY2xhc3NOYW1lPSJweS0yNCB0ZXh0LWNlbnRlciI+PGgxIGNsYXNzTmFtZT0idGV4dC0yeGwgZm9udC1ibGFjayBmb250LWhlYWRpbmciPkNvdW50eSBub3QgZm91bmQ8L2gxPjxMaW5rIGhyZWY9Ii9zZXJ2aWNlLWFyZWEiIGNsYXNzTmFtZT0idGV4dC1wcmltYXJ5IG10LTQgaW5saW5lLWJsb2NrIGZvbnQtYm9sZCI+4oaQIEJhY2sgdG8gc2VydmljZSBhcmVhczwvTGluaz48L2Rpdj47CgogIGNvbnN0IGMgPSBjb3VudHk7CgogIHJldHVybiAoCiAgICA8PgogICAgICB7LyogSGVybyBTZWN0aW9uICovfQogICAgICA8c2VjdGlvbiBjbGFzc05hbWU9InJlbGF0aXZlIG92ZXJmbG93LWhpZGRlbiBib3JkZXItYiBib3JkZXItYm9yZGVyIiBkYXRhLXRlc3RpZD0iY291bnR5LWhlcm8iPgogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJhYnNvbHV0ZSBpbnNldC0wIj4KICAgICAgICAgIDxJbWFnZSBzcmM9e0NPVU5UWV9JTUd9IGFsdD0iJHtjLm5hbWV9IGxhbmRzY2FwZSIgZmlsbCBjbGFzc05hbWU9Im9iamVjdC1jb3ZlciIvcGFjaXR5LTYwIiBwcmlvcml0eSAvPgogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImFic29sdXRlIGluc2V0LTAgYmctZ3JhZGllbnQtdG8tYiBmcm9tLWJhY2tncm91bmQvNDAgdmlhLWJhY2tncm91bmQvOTAgdG8tYmFja2dyb3VuZCIgLz4KICAgICAgICA8ZGl2PgogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJyZWxhdGl2ZSBjb250YWluZXIgbXgtYXV0byBjb250YWluZXItcHggcHktMjQgbWQ6cHktMzIgbWF4LXctNXhsIj4KICAgICAgICAgIDxMaW5rIGhyZWY9Ii9zZXJ2aWNlLWFyZWEiIGNsYXNzTmFtZT0iaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHRleHQtWzEwcHhdIHVwcGVyY2FzZSB0cmFja2luZy1bMC4yNWVtXSBmb250LW1vbm8gdGV4dC1wcmltYXJ5IG1iLTYgaG92ZXI6dGV4dC1mb3JlZ3JvdW5kIHRyYW5zaXRpb24iPgogICAgICAgICAgICA8TWFwUGluIGNsYXNzTmFtZT0idy0zLjUgaC0zLjUiIC8+IC8vIEFDQ1VURUsgU0VSVklDRSBBUkVBCiAgICAgICAgICA8L0xpbms+CiAgICAgICAgICA8aDEgY2xhc3NOYW1lPSJ0ZXh0LTV4bCBtZDp0ZXh0LTd4bCBmb250LWhlYWRpbmcgZm9udC1ibGFjayB0ZXh0LWZvcmVncm91bmQgdGV4dC1iYWxhbmNlIGxlYWRpbmctWzAuOTVlIj4KICAgICAgICAgICAgU29sYXIgaW4gPHNwYW4gY2xhc3NOYW1lPSJ0ZXh0LXByaW1hcnkgdGV4dC1nbG93Ij4ke2MubmFtZX08L3NwYW4+CiAgICAgICAgICA8L2gxPgogICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im10LTYgZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMiPgogICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iaC1weCB3LTEyIGJnLXByaW1hcnkvNDAiIC8+CiAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT0idGV4dC1bMTFweF0gdXBwZXJjYXNlIHRyYWNraW5nLVswLjJlbV0gZm9udC1tb25vIHRleHQtZm9yZWdyb3VuZC81MCI+JHtjLnN0YXRlfSB8IExvY2FsIEV4cGVydGlzZSBzaW5jZSAxOTk0PC9zcGFuPgogICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8cCBjbGFzc05hbWU9Im10LTggdGV4dC14bCB0ZXh0LWZvcmVncm91bmQvODAgbWF4LXctMnhsIGxlYWRpbmctcmVsYXhlZCBmb250LW1lZGl1bSI+CiAgICAgICAgICAgICR7Yy5ibHVyYn0KICAgICAgICAgIDwvcD4KICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC0xMCBmbGV4IGZsZXgtd3JhcCBnYXAt mansionsPgogICAgICAgICAgICA8TGluayBocmVmPSIvcXVvdGUiIGNsYXNzTmFtZT0iaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHJvdW5kZWQtbWQgYmctcHJpbWFyeSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZCBweC04IHB5LTQgZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciB0ZXh0LXhzIGhvdmVyOnNoYWRvdy1ncmVlbi1nbG93IHRyYW5zaXRpb24gZm9jdXMtcmluZyIgZGF0YS10ZXN0aWQ9ImNvdW50eS1jdGEtcXVvdGUiPgogICAgICAgICAgICAgIFN0YXJ0IEZyZWUgRXN0aW1hdGUgPEFycm93UmlnaHQgY2xhc3NOYW1lPSJ3LTQgaC00IiAvPgogICAgICAgICAgICA8L0xpbms+CiAgICAgICAgICAgIDxhIGhyZWY9InRlbDorMTgxMjg3ODczNDMiIGNsYXNzTmFtZT0iaW5saW5lLWZsZXggaXRlbXMtY2VudGVyIGdhcC0yIHJvdW5kZWQtbWQgYm9yZGVyIGJvcmRlci1ib3JkZXIgYmctY2FyZC81MCB0ZXh0LWZvcmVncm91bmQgcHgtOCBweS00IGZvbnQtYm9sZCB0ZXh0LXhzIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciBmb2N1cy1yaW5nIGhvdmVyOmJvcmRlci1wcmltYXJ5IHRyYW5zaXRpb24iPgogICAgICAgICAgICAgIDxQaG9uZSBjbGFzc05hbWU9InctNCBoLTQgdGV4dC1wcmltYXJ5IiAvPiAoODEyKSA4NzgtNzM0MwogICAgICAgICAgICA8L2E+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICA8L2Rpdj4KICAgICAgPC9zZWN0aW9uPgoKICAgICAgey8qIExvY2FsIEluc2lnaHRzIFNlY3Rpb24gKFNvbGFyU2V0aCkgKi99CiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT0icHktMjAgYmctbXV0ZWQvMjAgYm9yZGVyLWIgYm9yZGVyLWJvcmRlciIgZGF0YS10ZXN0aWQ9ImNvdW50eS1pbnNpZ2h0cyI+CiAgICAgICAgPGRpdiBjbGFzc05hbWU9ImNvbnRhaW5lciBteC1hdXRvIGNvbnRhaW5lci1weCBtYXgtdy02eGwiPgogICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImdyaWQgbWQ6Z3JpZC1jb2xzLTEyIGdhcC0xMiBpdGVtcy1zdGFydCI+CiAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ibWQ6Y29sLXNwYW4tOCBzcGFjZS15LTgiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InRleHQtWzEwcHhdIHVwcGVyY2FzZSB0cmFja2luZy1bMC4yNWVtXSBmb250LW1vbm8gdGV4dC1wcmltYXJ5Ij4vLyBMT0NBTCBJTlNJR0hUUyBCWSBTT0xBUlNFVEg8L2Rpdj4KICAgICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9InRleHQtM3hsIG1kOnRleHQtNHhsIGZvbnQtaGVhZGluZyBmb250LWV4dHJhYm9sZCB0ZXh0LWJhbGFuY2UiPlRoZSByZWFsIGNvc3Qgb2YgPHNwYW4gY2xhc3NOYW1lPSJ0ZXh0LXByaW1hcnkgaXRhbGljIj53YWl0aW5nIGZvciBzb2xhci48L3NwYW4+PC9oMj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJwcm9zZSBwcm9zZS1pbnZlcnQgbWF4LXctbm9uZSB0ZXh0LWZvcmVncm91bmQvNzUgbGVhZGluZy1yZWxheGVkIHNwYWNlLXktNiI+CiAgICAgICAgICAgICAgICAgIDxwPgogICAgICAgICAgICAgICAgICAgIEhvbWVvd25lcnMgaW4gJHtjLm5hbWV9IHdobyBpbnN0YWxsIHNvbGFyIGVuZXJneSBzeXN0ZW1zIGNhbiBlbmpveSBpbW1lZGlhdGUgZmluYW5jaWFsIGJlbmVmaXRzLCBpbmNsdWRpbmcgZ3JlYXRseSByZWR1Y2VkIGVsZWN0cmljaXR5IGJpbGxzIGFuZCBpbmNyZWFzZWQgcHJvcGVydHkgdmFsdWUuIFNvbGFyIHBhbmVscyBhcmUgbG93LW1haW50ZW5hbmNlIGFuZCBwcm92aWRlIGVuZXJneSBpbmRlcGVuZGVuY2UsIGluc3VsYXRpbmcgeW91IGZyb20gZmx1Y3R1YXRpbmcgZW5lcmd5IHByaWNlcyBhbmQgb3V0YWdlcy4KICAgICAgICAgICAgICAgICAgPC9wPgogICAgICAgICAgICAgICAgICA8cD4KICAgICAgICAgICAgICAgICAgICBQbHVzLCB0aGUgY29tYmluYXRpb24gb2YgZWxlY3RyaWMgdmVoaWNsZXMgKEVWcykgYW5kIHNvbGFyIG9mZmVycyBhIGNvbXBlbGxpbmcgc29sdXRpb24gdG8gdG9kYXnigJlzIGVuZXJneSBjaGFsbGVuZ2VzLiBCeSBnZW5lcmF0aW5nIHNvbGFyIHBvd2VyIGF0IGhvbWUsIHlvdSBjYW4gY2hhcmdlIHlvdXIgRVYgd2l0aCBob21lZ3Jvd24gZW5lcmd5LCBjdXR0aW5nIG91dCB0aGUgbmVlZCBmb3IgZ2Fzb2xpbmUgYW5kIHJlZHVjaW5nIHJlbGlhbmNlIG9uIHRoZSBncmlkLgogICAgICAgICAgICAgICAgICA8L3A+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9Im1kOmNvbC1zcGFuLTQiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InAtNiBiZy1jYXJkIGJvcmRlciBib3JkZXItYm9yZGVyIHJvdW5kZWQtMnhsIHNoYWRvdy1hbWiaWVudCI+CiAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTMgbWItNCI+CiAgICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0idy04IGgtOCByb3VuZGVkLWZ1bGwgYmctcHJpbWFyeS8yMCB0ZXh0LXByaW1hcnkgZ3JpZCBwbGFjZS1pdGVtcy1jZW50ZXIiPjxVc2VyIGNsYXNzTmFtZT0idy00IGgtNCIgLz48L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzTmFtZT0idGV4dC14cyBmb250LWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVzdCB0ZXh0LXByaW1hcnkiPlNvbGFyU2V0aCdzIE5vdGU8L3NwYW4+CiAgICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0idGV4dC1zbSB0ZXh0LWZvcmVncm91bmQvNzAgaXRhbGljIGxlYWRpbmctcmVsYXhlZCI+CiAgICAgICAgICAgICAgICAgICAgICJQb3dlcmluZyB5b3VyIHZlaGljbGUgd2l0aCBob21lZ3Jvd24gZW5lcmd5IGlzbid0IGp1c3QgYSB0cmVuZCDigJQgaXQncyBhbiBlbXBvd2VyaW5nIHN0ZXAgdG93YXJkIGEgc2VsZi1zdWZmaWNpZW50IGZ1dHVyZSB3aGVyZSByZW5ld2FibGUgZW5lcmd5IGFuZCB0cmFuc3BvcnRhdGlvbiBnbyBoYW5kIGluIGhhbmQuIgogICAgICAgICAgICAgICAgICAgPC9wPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L3NlY3Rpb24+CgogICAgICB7LyogR3JvdW5kIE1vdW50IHZzIFJvb2YgU2VjdGlvbiAoU2V0aCdzIFByaW9yaXR5KSAqL30KICAgICAgPHNlY3Rpb24gY2xhc3NOYW1lPSJweS0yMCBib3JkZXItYiBib3JkZXItYm9yZGVyIiBkYXRhLXRlc3RpZD0iY291bnR5LWluc3RhbGwtdHlwZXMiPgogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJjb250YWluZXIgbXgtYXV0byBjb250YWluZXItcHggbWF4LXctNnhsIj4KICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJncmlkIG1kOmdyaWQtY29scy0yIGdhcC0xMiBpdGVtcy1jZW50ZXIiPgogICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ic3BhY2UteS02Ij4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0idGV4dC1bMTBweF0gdXBwZXJjYXNlIHRyYWNraW5nLVswLjI1ZW1dIGZvbnQtbW9ubyB0ZXh0LXByaW1hcnkiPi8vIElOU1RBTExBVElPTiBUWVBFUzwvZGl2PgogICAgICAgICAgICAgIDxoMiBjbGFzc05hbWU9InRleHQtM3hsIG1kOnRleHQtNHhsIGZvbnQtaGVhZGluZyBmb250LWV4dHJhYm9sZCB0ZXh0LWJhbGFuY2UiPkJ1aWx0IGZvciB0aGUgPHNwYW4gY2xhc3NOYW1lPSJpdGFsaWMgdGV4dC1wcmltYXJ5Ij5sYW5kc2NhcGU8L3NwYW4+LjwvaDI+CiAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJ0ZXh0LWZvcmVncm91bmQvNzUgbGVhZGluZy1yZWxheGVkIj4KICAgICAgICAgICAgICAgIFdoZXRoZXIgeW91IGhhdmUgYSB0aWdodCByZXNpZGVudGlhbCByb29mIGluIE5ld3BvcnQgb3IgYSBtdWx0aS1hY3JlIGZpZWxkIGluIHJ1cmFsICR7Yy5uYW1lfSwgd2UgZW5naW5lZXIgdGhlIHJhY2sgdG8gZml0LiBNYWFueSBvZiBvdXIgbG9jYWwgc3lzdGVtcyBhcmUgZ3JvdW5kIG1vdW50cywgZGVzaWduZWQgZm9yIG1heGltdW0gaGFydmVzdCB3aXRob3V0IHRvdWNoaW5nIHlvdXIgc2hpbmdsZXMuCiAgICAgICAgICAgICAgPC9wPgogICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJncmlkIGdyaWQtY29scy0yIGdhcC02IHB0LTQiPgogICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InAtNSBiZy1jYXJkIGJvcmRlciBib3JkZXItYm9yZGVyIHJvdW5kZWQteGwiPgogICAgICAgICAgICAgICAgICA8WmFwIGNsYXNzTmFtZT0idy02IGgtNiB0ZXh0LXByaW1hcnkgbWItMyIgLz4KICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImZvbnQtaGVhZGluZyBmb250LWJvbGQgdGV4dC1zbSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZSI+Um9vZiBNb3VudDwvZGl2PgogICAgICAgICAgICAgICAgICA8cCBjbGFzc05hbWU9Im10LTEgdGV4dC14cyB0ZXh0LWZvcmVncm91bmQvNjAiPkZhc3QsIHN0cmVhbWxpbmVkLCB6ZXJvIGV4dHJhIGZvb3RwcmludC48L3A+CiAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJwLTUgYmctY2FyZCBib3JkZXIgYm9yZGVyLWJvcmRlciByb3VuZGVkLXhsIj4KICAgICAgICAgICAgICAgICAgPExhbmRQbG90IGNsYXNzTmFtZT0idy02IGgtNiB0ZXh0LXByaW1hcnkgbWItMyIgLz4KICAgICAgICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9ImZvbnQtaGVhZGluZyBmb250LWJvbGQgdGV4dC1zbSB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZSI+R3JvdW5kIE1vdW50PC9kaXY+CiAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMSB0ZXh0LXhzIHRleHQtZm9yZWdyb3VuZC82MCI+UGVyZmVjdCB0aWx0LCBlYXN5IHNlcnZpY2UsIGFnLWdyYWRlIHJhY2tzLjwvcD4KICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzc05hbWU9InJlbGF0aXZlIGFzcGVjdC12aWRlbyByb3VuZGVkLTJ4bCBvdmVyZmxvdy1oaWRkZW4gYm9yZGVyIGJvcmRlci1ib3JkZXIgc2hhZG93LWFtYmllbnQtbGciPgogICAgICAgICAgICAgIDxJbWFnZSBzcmM9Imh0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA5MzkxMzY2MzYwLTJlOTU5Nzg0YTI3Nj9jcm9wPWVudHJvcHkmY3M9c3JnYiZmbT1qcGcmcT04NSZ3PTEyMDAiIGFsdD0iU29sYXIgYXJyYXkgaW4gZmllbGQiIGZpbGwgY2xhc3NOYW1lPSJvYmplY3QtY292ZXIiIC8+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgIDwvc2VjdGlvbj4KCiAgICAgIHsvKiBXaHkgQ2hvb3NlIFNlY3Rpb24gKi99CiAgICAgIDxzZWN0aW9uIGNsYXNzTmFtZT0icHktMjQiIGRhdGEtdGVzdGlkPSJjb3VudHktd2h5LWFjY3V0ZWsiPgogICAgICAgIDxkaXYgY2xhc3NOYW1lPSJjb250YWluZXIgbXgtYXV0byBjb250YWluZXItcHggbWF4LXctNnhsIj4KICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4IGZsZXgtY29sIG1kOmZsZXgtcm93IGdhcC0xMiI+CiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmbGV4LTEgc3BhY2UteS04Ij4KICAgICAgICAgICAgICA8aDIgY2xhc3NOYW1lPSJmb250LWhlYWRpbmcgdGV4dC0zeGwgbWQ6dGV4dC00eGwgZm9udC1leHRyYWJvbGQiPldoeSAke2MubmFtZX0gY2hvb3NlcyBBY2N1dGVrPC9oMj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iZ3JpZCBnYXAtNiI+CiAgICAgICAgICAgICAgICB7WwogICAgICAgICAgICAgICAgICB7IHRpdGxlOiAiTG9jYWwsIEZhbWlseS1Pd25lZCIsIGJvZHk6ICJTZXJ2aW5nIEluZGlhbmEgYW5kIElsbGlub2lzIGZhbWlsaWVzIHNpbmNlIDE5OTQuIE5vIDEtODAwIG51bWJlcnMuIiB9LAogICAgICAgICAgICAgICAgICB7IHRpdGxlOiAiTkFCQ0VQIEV4cGVydGlzZSIsIGJvZHk6ICJDZXJ0aWZpZWQgcHJvZmVzc2lvbmFscyBoYW5kbGluZyBldmVyeSB3aXJlIHB1bGwgYW5kIHBhbmVsIHRpbHQuIiB9LAogICAgICAgICAgICAgICAgICB7IHRpdGxlOiAiS29obGVyIEdlbmVyYXRvcnMiLCBib2R5OiAiQXV0aG9yaXplZCBpbnN0YWxsZXJzIGZvciB3aG9sZS1ob21lIGJhY2t1cCBwb3dlciB0aGF0IHdvcmtzIHdoZW4gc29sYXIgZG9lc24ndC4iIH0sCiAgICAgICAgICAgICAgICAgIHsgdGl0bGU6ICJTdWItWmVybyBSZWxpYWJsZSIsIGJvZHk6ICJXZSB1c2UgYmF0dGVyeSBhbmQgbW9uaXRvcmluZyB0ZWNoIGJ1aWx0IGZvciBNaWR3ZXN0IHdpbnRlcnMuIiB9CiAgICAgICAgICAgICAgICBdLm1hcCgoaXRlbSwgaSkgPT4gKAogICAgICAgICAgICAgICAgICA8ZGl2IGtleT17aX0gY2xhc3NOYW1lPSJmbGV4IGdhcC00IGdyb3VwIj4KICAgICAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0ibXQtMSBmbGV4LXNocmluay0wIHctOCBoLTggcm91bmRlZCBiZy1wcmltYXJ5LzEwIHRleHQtcHJpbWFyeSBncmlkIHBsYWNlLWl0ZW1zLWNlbnRlciBncm91cC1ob3ZlcjpiZy1wcmltYXJ5IGdyb3VwLWhvdmVyOnRleHQtcHJpbWFyeS1mb3JlZ3JvdW5kIHRyYW5zaXRpb24tY29sb3JzIj4KICAgICAgICAgICAgICAgICAgICAgIDxTaGllbGRDaGVjayBjbGFzc05hbWU9InctNCBoLTQiIC8+CiAgICAgICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgICAgICAgPGRpdj4KICAgICAgICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJmb250LWhlYWRpbmcgZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy13aWRlIHRleHQtc20iPiR7aXRlbS50aXRsZX08L2Rpdj4KICAgICAgICAgICAgICAgICAgICAgIDxwIGNsYXNzTmFtZT0ibXQtMSB0ZXh0LXNtIHRleHQtZm9yZWdyb3VuZC82NSI+JHtpdGVtLmJvZHl9PC9wPgogICAgICAgICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICAgIikpfQogICAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJ3LWZ1bGwgbWQ6dy1bMzgwcHhdIHNocmluay0wIj4KICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0iYmctY2FyZCByb3VuZGVkLTJ4bCBwLTggYm9yZGVyIGJvcmRlci1ib3JkZXIgc2hhZG93LWFtYmllbnQgc3RpY2t5IHRvcC0yNCI+CiAgICAgICAgICAgICAgICA8ZGl2IGNsYXNzTmFtZT0idGV4dC1bMTBweF0gdXBwZXJjYXNlIHRyYWNraW5nLVswLjI1ZW1dIGZvbnQtbW9ubyB0ZXh0LXByaW1hcnkgbWItMiI+Ly8gTE9DQUwgSU5DRU5USVZFPC9kaXY+CiAgICAgICAgICAgICAgICA8aDMgY2xhc3NOYW1lPSJmb250LWhlYWRpbmcgdGV4dC14bCBmb250LWV4dHJhYm9sZCI+JHtjLmluY2VudGl2ZX08L2gzPgogICAgICAgICAgICAgICAgPHAgY2xhc3NOYW1lPSJtdC00IHRleHQtZm9yZWdyb3VuZC83MCB0ZXh0LXNtIGxlYWRpbmctcmVsYXhlZCI+CiAgICAgICAgICAgICAgICAgIFdlIGhhbmRsZSBhbGwgdGhlIGludGVyY29ubmVjdGlvbiBwYXBlcndvcmsgd2l0aCB5b3VyIGxvY2FsIHV0aWxpdHkgdG8gZW5zdXJlIHlvdSBnZXQgZnVsbCBjcmVkaXQgZm9yIHRoZSBwb3dlciB5b3UgcHJvZHVjZS4KICAgICAgICAgICAgICAgIDwvcD4KICAgICAgICAgICAgICAgIDxkaXYgY2xhc3NOYW1lPSJtdC04IHB0LTggYm9yZGVyLXQgYm9yZGVyLWJvcmRlciI+CiAgICAgICAgICAgICAgICAgIDxhIGhyZWY9e0hDUF9CT09LX1VSTH0gdGFyZ2V0PSJfYmxhbmsiIHJlbD0ibm9vcGVuZXIgbm9yZWZlcnJlciIgY2xhc3NOYW1lPSJpbmxpbmUtZmxleCB3LWZ1bGwgaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyIGdhcC0yIHJvdW5kZWQtbWQgYmctcHJpbWFyeSB0ZXh0LXByaW1hcnktZm9yZWdyb3VuZCBweC02IHB5LTQgZm9udC1ib2xkIHVwcGVyY2FzZSB0cmFja2luZy13aWRlciB0ZXh0LXhzIGhvdmVyOnNoYWRvdy1ncmVlbi1nbG93IHRyYW5zaXRpb24gZm9jdXMtcmluZyI+CiAgICAgICAgICAgICAgICAgICAgQm9vayBTaXRlIFZpc2l0IDxDYWxlbmRhckNsb2NrIGNsYXNzTmFtZT0idy00IGgtNCIgLz4KICAgICAgICAgICAgICAgICAgPC9hPgogICAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPC9kaXY+CiAgICAgICAgPC9kaXY+CiAgICAgIDwvc2VjdGlvbj4KICAgIDwvPgogICk7Cn0KCi8vIEljb25zIGZvciB0aGUgbGlzdApmdW5jdGlvbiBDYWxlbmRhckNsb2NrKHByb3BzOiBhbnkpIHsKICByZXR1cm4gKAogICAgPHN2ZwogICAgICB7Li4ucHJvcHN9CiAgICAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgICAgd2lkdGg9IjI0IgogICAgICBoZWlnaHQ9IjI0IgogICAgICB2aWV3Qm94PSIwIDAgMjQgMjQiCiAgICAgIGZpbGw9Im5vbmUiCiAgICAgIHN0cm9rZT0iY3VycmVudENvbG9yIgogICAgICBzdHJva2VXaWR0aD0iMiIKICAgICAgc3Ryb2tlTGluZWNhcD0icm91bmQiCiAgICAgIHN0cm9rZUxpbmVqb2luPSJyb3VuZCIKICAgID4KICAgICAgPHBhdGggZD0iTTIxIDcuNVY2YTIgMiAwIDAgMC0yLTJINWEyIDIgMCAwIDAtMiAydjE0YTIgMiAwIDAgMCAyIDJoMy41IiAvPgogICAgICA8cGF0aCBkPSJNMTYgMnY0IiAvPgogICAgICA8cGF0aCBkPSJNOCAydjQiIC8+CiAgICAgIDxwYXRoIGQ9Ik0zIDEwaDUiIC8+CiAgICAgIDxwYXRoIGQ9Ik0xNy41IDE3LjUgMTYgMTYuMjVWMTQiIC8+CiAgICAgIDxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjYiIC8+CiAgICA8L3N2Zz4KICApOwp9Cg==
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { API, HCP_BOOK_URL } from "@/lib/utils";
+import { ArrowRight, CheckCircle2, MapPin, Phone, ShieldCheck, Zap, LandPlot, User } from "lucide-react";
+
+const COUNTY_IMG = "https://images.unsplash.com/photo-1621431735623-95fcba6b89ae?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
+
+interface CountyData {
+  name: string;
+  state: string;
+  blurb: string;
+  incentive: string;
+  slug: string;
+  seat?: string;
+}
+
+export default function CountyPage() {
+  const params = useParams();
+  const slug = params?.slug as string;
+  const [county, setCounty] = useState<CountyData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
+  useEffect(() => {
+    if (!slug) return;
+    async function load() {
+      try {
+        const r = await fetch(`${API}/public/service-area/${slug}`);
+        if (!r.ok) { setNotFound(true); return; }
+        const data = await r.json();
+        setCounty(data);
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    }
+    load();
+  }, [slug]);
+
+  if (loading) return <div className="py-24 text-center text-muted-foreground font-mono uppercase tracking-widest text-[10px]">Loading Project Data...</div>;
+  if (notFound || !county) return <div className="py-24 text-center"><h1 className="text-2xl font-black font-heading">County not found</h1><Link href="/service-area" className="text-primary mt-4 inline-block font-bold">← Back to service areas</Link></div>;
+
+  const c = county;
+
+  return (
+    <>
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-border" data-testid="county-hero">
+        <div className="absolute inset-0">
+          <Image src={COUNTY_IMG} alt={`${c.name} landscape`} fill className="object-cover opacity-60" priority />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/90 to-background" />
+        </div>
+        <div className="relative container mx-auto container-px py-24 md:py-32 max-w-5xl">
+          <Link href="/service-area" className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-6 hover:text-foreground transition">
+            <MapPin className="w-3.5 h-3.5" /> // ACCUTEK SERVICE AREA
+          </Link>
+          <h1 className="text-5xl md:text-7xl font-heading font-black text-foreground text-balance leading-[0.95]">
+            Solar in <span className="text-primary text-glow">{c.name}</span>
+          </h1>
+          <div className="mt-6 flex items-center gap-3">
+            <div className="h-px w-12 bg-primary/40" />
+            <span className="text-[11px] uppercase tracking-[0.2em] font-mono text-foreground/50">{c.state} | Local Expertise since 1994</span>
+          </div>
+          <p className="mt-8 text-xl text-foreground/80 max-w-2xl leading-relaxed font-medium">
+            {c.blurb}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-8 py-4 font-bold uppercase tracking-wider text-xs hover:shadow-green-glow transition focus-ring" data-testid="county-cta-quote">
+              Start Free Estimate <ArrowRight className="w-4 h-4" />
+            </Link>
+            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card/50 text-foreground px-8 py-4 font-bold text-xs uppercase tracking-wider focus-ring hover:border-primary transition">
+              <Phone className="w-4 h-4 text-primary" /> (812) 878-7343
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Local Insights Section (SolarSeth) */}
+      <section className="py-20 bg-muted/20 border-b border-border" data-testid="county-insights">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="grid md:grid-cols-12 gap-12 items-start">
+            <div className="md:col-span-8 space-y-8">
+              <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary">// LOCAL INSIGHTS BY SOLARSETH</div>
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance">The real cost of <span className="text-primary italic">waiting for solar.</span></h2>
+              <div className="prose prose-invert max-w-none text-foreground/75 leading-relaxed space-y-6">
+                <p>
+                  Homeowners in {c.name} who install solar energy systems can enjoy immediate financial benefits, including greatly reduced electricity bills and increased property value. Solar panels are low-maintenance and provide energy independence, insulating you from fluctuating energy prices and outages.
+                </p>
+                <p>
+                  Plus, the combination of electric vehicles (EVs) and solar offers a compelling solution to today&apos;s energy challenges. By generating solar power at home, you can charge your EV with homegrown energy, cutting out the need for gasoline and reducing reliance on the grid.
+                </p>
+              </div>
+            </div>
+            <div className="md:col-span-4">
+              <div className="p-6 bg-card border border-border rounded-2xl shadow-ambient">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-8 rounded-full bg-primary/20 text-primary grid place-items-center"><User className="w-4 h-4" /></div>
+                  <span className="text-xs font-bold uppercase tracking-widest text-primary">SolarSeth&apos;s Note</span>
+                </div>
+                <p className="text-sm text-foreground/70 italic leading-relaxed">
+                  &ldquo;Powering your vehicle with homegrown energy isn&apos;t just a trend &mdash; it&apos;s an empowering step toward a self-sufficient future where renewable energy and transportation go hand in hand.&rdquo;
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ground Mount vs Roof Section (Seth's Priority) */}
+      <section className="py-20 border-b border-border" data-testid="county-install-types">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary">// INSTALLATION TYPES</div>
+              <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance">Built for the <span className="italic text-primary">landscape</span>.</h2>
+              <p className="text-foreground/75 leading-relaxed">
+                Whether you have a tight residential roof in Newport or a multi-acre field in rural {c.name}, we engineer the rack to fit. Many of our local systems are ground mounts, designed for maximum harvest without touching your shingles.
+              </p>
+              <div className="grid grid-cols-2 gap-6 pt-4">
+                <div className="p-5 bg-card border border-border rounded-xl">
+                  <Zap className="w-6 h-6 text-primary mb-3" />
+                  <div className="font-heading font-bold text-sm uppercase tracking-wide">Roof Mount</div>
+                  <p className="mt-1 text-xs text-foreground/60">Fast, streamlined, zero extra footprint.</p>
+                </div>
+                <div className="p-5 bg-card border border-border rounded-xl">
+                  <LandPlot className="w-6 h-6 text-primary mb-3" />
+                  <div className="font-heading font-bold text-sm uppercase tracking-wide">Ground Mount</div>
+                  <p className="mt-1 text-xs text-foreground/60">Perfect tilt, easy service, ag-grade racks.</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative aspect-video rounded-2xl overflow-hidden border border-border shadow-ambient-lg">
+              <Image src="https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200" alt="Solar array in field" fill className="object-cover" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Section */}
+      <section className="py-24" data-testid="county-why-accutek">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="flex flex-col md:flex-row gap-12">
+            <div className="flex-1 space-y-8">
+              <h2 className="font-heading text-3xl md:text-4xl font-extrabold">Why {c.name} chooses Accutek</h2>
+              <div className="grid gap-6">
+                {[
+                  { title: "Local, Family-Owned", body: "Serving Indiana and Illinois families since 1994. No 1-800 numbers." },
+                  { title: "NABCEP Expertise", body: "Certified professionals handling every wire pull and panel tilt." },
+                  { title: "Kohler Generators", body: "Authorized installers for whole-home backup power that works when solar doesn't." },
+                  { title: "Sub-Zero Reliable", body: "We use battery and monitoring tech built for Midwest winters." }
+                ].map((item, i) => (
+                  <div key={i} className="flex gap-4 group">
+                    <div className="mt-1 flex-shrink-0 w-8 h-8 rounded bg-primary/10 text-primary grid place-items-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                      <ShieldCheck className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="font-heading font-bold uppercase tracking-wide text-sm">{item.title}</div>
+                      <p className="mt-1 text-sm text-foreground/65">{item.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div className="w-full md:w-[380px] shrink-0">
+              <div className="bg-card rounded-2xl p-8 border border-border shadow-ambient sticky top-24">
+                <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-2">// LOCAL INCENTIVE</div>
+                <h3 className="font-heading text-xl font-extrabold">{c.incentive}</h3>
+                <p className="mt-4 text-foreground/70 text-sm leading-relaxed">
+                  We handle all the interconnection paperwork with your local utility to ensure you get full credit for the power you produce.
+                </p>
+                <div className="mt-8 pt-8 border-t border-border">
+                  <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-4 font-bold uppercase tracking-wider text-xs hover:shadow-green-glow transition focus-ring">
+                    Book Site Visit <CalendarClock className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+// Icons for the list
+function CalendarClock(props: any) {
+  return (
+    <svg
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+      <path d="M16 2v4" />
+      <path d="M8 2v4" />
+      <path d="M3 10h5" />
+      <path d="M17.5 17.5 16 16.25V14" />
+      <circle cx="16" cy="16" r="6" />
+    </svg>
+  );
+}
