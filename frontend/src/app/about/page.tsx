@@ -21,12 +21,6 @@ const TEAM = [
     bio: "Carries the 30+ years of Davis-family solar know-how. Designs every system from monthly bill to mounting plan.",
   },
   {
-    name: "Quill Davis",
-    role: "Owner / Operator",
-    slug: "quill",
-    bio: "Manages field operations and keeps the crews running. Handles logistics, service calls, and the hands-on side of every project.",
-  },
-  {
     name: "Clint Lenover",
     role: "Solar Technician",
     slug: "clint-lenover",
