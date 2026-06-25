@@ -35,12 +35,11 @@ Family-owned solar / backup power / facility automation contractor website + lea
 | ------------- | ---------------------------- |
 | Keith Davis   | Founder                      |
 | Seth Davis    | Owner / Operator             |
-| Quill Davis   | Owner / Operator             |
 | Clint Lenover | Installer (Install Tech)     |
 | Colt          | Lead Installer               |
 | AJ ("Scruff") | Solar Technician             |
 
-> Seth, Quill, and Keith are the Owners/Operators. Clint, Colt, and AJ are Installers/Technicians.
+> Seth and Keith are the Owners/Operators. Clint, Colt, and AJ are Installers/Technicians.
 
 ## Setup
 
@@ -103,7 +102,7 @@ Also install and service: Enphase · SolarEdge · SMA
 ## Blog
 
 - Weekly automated blog posts via Viktor cron
-- Rotating pen names: Ray Watts, Sol Brightman, Watt Kilowatt, Ray D. Ation, Sunny McVoltface, Phil O'Watt, Art Kilowatt, Al B. Sunny, Watt Burns, Sol R. Panel, Rick O'Shay Solar, Lumen Clearsky, Amp Voltsworth, Max Insolation, Barry Cade, Sonny Watt, Hugh Jouleson, Bill Kilowatt, Dirk Photon, Duke Electra
+- Rotating pen names: Ray Watts, Sol Brightman, Watt Kilowatt, Ray D. Ation, Sunny McVoltface, Phil O'Watt, Art Kilowatt, Al B. Sunny, Watt Burns, Sol R. Panel, Rick O'Shay Solar, Lumen Clearsky, Amp Voltsworth, Max Insolation, Barry Cade, Sunny Watt, Hugh Jouleson, Bill Kilowatt, Dirk Photon, Duke Electra
 - AI disclaimer on all posts: _"This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions."_
 - Shelved: "Summer Solar Paradox" post (heat concerns — not customer-facing messaging per Seth)
 
@@ -112,4 +111,4 @@ Also install and service: Enphase · SolarEdge · SMA
 - **Heat / temperature**: Accutek manages thermal design internally. Do NOT surface panel heat as a customer concern in marketing copy or blog posts.
 - **Ground mounts**: Actively promote alongside roof-mount installs — we do both.
 - **Lead form**: HCP-only. No QuoteWizard. One form → straight to Seth.
-- **Team hierarchy**: Seth, Quill, Keith = Owners/Operators. Clint = Installer, not management.
+- **Team hierarchy**: Seth, Keith = Owners/Operators. Clint = Installer, not management.

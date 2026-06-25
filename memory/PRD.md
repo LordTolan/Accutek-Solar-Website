@@ -55,7 +55,7 @@ Build the Accutek Solar website as a Next.js 15 (App Router, TypeScript) + FastA
 
 ### Iteration 4 — Open Items (June 2026)
 - 🔧 **Tagline slider**: Currently cycling 10 of 23 taglines — fix to use full 23-tagline deck with randomization
-- 🔧 **About page team roles**: Verified correct in code — Keith/Seth/Quill = Owners, Clint = Install Tech
+- 🔧 **About page team roles**: Verified correct in code — Keith/Seth = Owners, Clint = Install Tech
 - ⛔ **Shelved**: "Summer Solar Paradox" blog post (heat messaging — Seth's call; branch preserved)
 
 ---
@@ -88,7 +88,6 @@ Build the Accutek Solar website as a Next.js 15 (App Router, TypeScript) + FastA
 | ------------- | -------------------- | --------------- |
 | Keith Davis   | Founder              | —               |
 | Seth Davis    | Owner / Operator     | Seth            |
-| Quill Davis   | Owner / Operator     | Quill           |
 | Clint Lenover | Install Tech         | Clint           |
 | Colt          | Lead Installer       | Colt            |
 | AJ            | Solar Technician     | Scruff          |

@@ -16,7 +16,7 @@ The site is fully functional. All major features are live:
 - ✅ Weekly blog cron (Viktor-automated)
 - ✅ Tagline slider (23-tagline deck)
 - ✅ Reviews embed (HCP)
-- ✅ About page: full team with correct roles (Keith/Seth/Quill = owners, Clint = Installer)
+- ✅ About page: full team with correct roles (Keith/Seth = owners, Clint = Installer)
 
 ---
 
@@ -112,7 +112,7 @@ See `DEPLOYMENT.md` for full Render + MongoDB Atlas instructions.
 | **No heat warnings** | Panel temperature is an engineering concern, not customer messaging. Remove/avoid copy that sounds like a warning about heat. |
 | **Ground mounts** | Actively promote — balance roof and field arrays in all copy. |
 | **Lead form** | HCP only. One form → straight to Seth. No QuoteWizard. |
-| **Team roles** | Seth Davis, Quill Davis, Keith Davis = Owners/Operators. Clint Lenover = Installer/Install Tech. Never list Clint as owner or manager. |
+| **Team roles** | Seth Davis, Keith Davis = Owners/Operators. Clint Lenover = Installer/Install Tech. Never list Clint as owner or manager. |
 
 ---
 
@@ -122,7 +122,6 @@ See `DEPLOYMENT.md` for full Render + MongoDB Atlas instructions.
 | ------------- | ------------------ | -------------------------------------- |
 | Keith Davis   | Founder            | Founded 1994 in Clinton, IN            |
 | Seth Davis    | Owner / Operator   | System design, customer-facing         |
-| Quill Davis   | Owner / Operator   | Field operations, logistics            |
 | Clint Lenover | Install Tech       | In the field — roofs, racks, wire      |
 | Colt          | Lead Installer     | Leads field crews                      |
 | AJ ("Scruff") | Solar Technician   | Field tech                             |
