@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, CheckCircle2 } from "lucide-react";
+import HeroVideo from "@/components/HeroVideo";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
 import RotatingHeadline from "@/components/RotatingHeadline";
@@ -31,11 +32,9 @@ export default function HomePage() {
   return (
     <>
       {/* Hero - clean light / technical, no video */}
+        <HeroVideo />
       <section className="relative overflow-hidden border-b border-border" data-testid="hero-section">
         {/* Background grid + soft gradient */}
-        <div className="absolute inset-0 grid-bg grid-bg-fade opacity-60" aria-hidden="true" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background to-muted/40" aria-hidden="true" />
-        <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-primary/5 to-transparent" aria-hidden="true" />
 
         <div className="relative container mx-auto container-px py-20 md:py-28 lg:py-32 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           <div className="lg:col-span-7 max-w-2xl">
@@ -233,7 +232,7 @@ export default function HomePage() {
             <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:border-primary transition focus-ring" data-testid="final-cta-book">
               Book Online
             </a>
-            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold focus-ring hover:border-primary transition" data-testid="final-cta-call">
+            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold focus-ring hover:border-primary transition">
               <ShieldCheck className="w-4 h-4 text-primary" /> (812) 878-7343
             </a>
           </div>
