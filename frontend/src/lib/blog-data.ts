@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "understanding-the-net-metering-shift-2026-06-15",
+  "title": "Understanding the Net Metering Shift",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-06-15. We focus on durability and long-term ROI.",
+  "author": "Ray D. Ation",
+  "date": "2026-06-15",
+  "readTime": "5 min read",
+  "category": "Policy Update",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>Understanding the Net Metering Shift</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-15, our focus is on understanding the net metering shift...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
   "slug": "the-future-of-lfp-batteries-in-indiana-2026-06-08",
   "title": "The Future of LFP Batteries in Indiana",
   "subtitle": "Professional solar insights from the Accutek team.",
