@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "the-future-of-lfp-batteries-in-indiana-2026-06-08",
+  "title": "The Future of LFP Batteries in Indiana",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-06-08. We focus on durability and long-term ROI.",
+  "author": "Watt Kilowatt",
+  "date": "2026-06-08",
+  "readTime": "5 min read",
+  "category": "Battery Tech",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>The Future of LFP Batteries in Indiana</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-08, our focus is on the future of lfp batteries in indiana...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
   "slug": "spring-cleaning-for-solar-panels-2026-06-01",
   "title": "Spring Cleaning for Solar Panels",
   "subtitle": "Professional solar insights from the Accutek team.",
