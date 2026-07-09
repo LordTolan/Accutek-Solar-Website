@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "how-to-pay-off-your-solar-loan-in-under-10-years-2026-07-06",
+  "title": "How to Pay Off Your Solar Loan in Under 10 Years",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-07-06. We focus on durability and long-term ROI.",
+  "author": "Art Kilowatt",
+  "date": "2026-07-06",
+  "readTime": "5 min read",
+  "category": "Energy ROI",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>How to Pay Off Your Solar Loan in Under 10 Years</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-07-06, our focus is on how to pay off your solar loan in under 10 years...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
   "slug": "why-large-properties-prefer-field-arrays-2026-06-29",
   "title": "Why Large Properties Prefer Field Arrays",
   "subtitle": "Professional solar insights from the Accutek team.",
