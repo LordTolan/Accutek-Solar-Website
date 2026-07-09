@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "why-large-properties-prefer-field-arrays-2026-06-29",
+  "title": "Why Large Properties Prefer Field Arrays",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-06-29. We focus on durability and long-term ROI.",
+  "author": "Phil O'Watt",
+  "date": "2026-06-29",
+  "readTime": "5 min read",
+  "category": "Ground Mounts",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>Why Large Properties Prefer Field Arrays</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-29, our focus is on why large properties prefer field arrays...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
   "slug": "managing-system-temperature-during-peak-sun-2026-06-22",
   "title": "Managing System Temperature During Peak Sun",
   "subtitle": "Professional solar insights from the Accutek team.",
