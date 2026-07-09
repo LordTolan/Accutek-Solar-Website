@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "spring-cleaning-for-solar-panels-2026-06-01",
+  "title": "Spring Cleaning for Solar Panels",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-06-01. We focus on durability and long-term ROI.",
+  "author": "Sol Brightman",
+  "date": "2026-06-01",
+  "readTime": "5 min read",
+  "category": "Maintenance 101",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>Spring Cleaning for Solar Panels</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-01, our focus is on spring cleaning for solar panels...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
     slug: "homegrown-watts-inside-americas-solar-manufacturing-boom",
     title: "Homegrown Watts: Inside America's Solar Manufacturing Boom",
     subtitle: "From 8 gigawatts to 60 — and why your next panels might have a shorter commute",
