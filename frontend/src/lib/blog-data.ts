@@ -63,6 +63,27 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+  "slug": "managing-system-temperature-during-peak-sun-2026-06-22",
+  "title": "Managing System Temperature During Peak Sun",
+  "subtitle": "Professional solar insights from the Accutek team.",
+  "excerpt": "Our latest field observations for 2026-06-22. We focus on durability and long-term ROI.",
+  "author": "Sunny McVoltface",
+  "date": "2026-06-22",
+  "readTime": "5 min read",
+  "category": "Summer Heat",
+  "tags": [
+    "solar",
+    "ROI",
+    "Accutek"
+  ],
+  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
+  "heroAlt": "Accutek Solar Site",
+  "content": "<h2>Managing System Temperature During Peak Sun</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-22, our focus is on managing system temperature during peak sun...</p>",
+  "sources": [
+    "Accutek Internal Data"
+  ]
+},
+  {
   "slug": "understanding-the-net-metering-shift-2026-06-15",
   "title": "Understanding the Net Metering Shift",
   "subtitle": "Professional solar insights from the Accutek team.",
