@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowRight, TrendingUp, Zap } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 
-/* ─────────────────────────── Calculation Engine ─────────────────────────── */
+/* ─────────────────────────── Calculation Engine ───────────────────────────  */
 
 interface Projection {
   annualCosts: number[]; // cost each year (0..N)
@@ -36,7 +36,7 @@ function calcProjection(
   return { annualCosts, totalPaid, finalMonthly, currentAnnual: A0 };
 }
 
-/* ─────────────────────────── Animated Counter ─────────────────────────── */
+/* ─────────────────────────── Animated Counter ───────────────────────────  */
 
 function AnimatedCounter({
   value,
@@ -84,7 +84,7 @@ function AnimatedCounter({
   );
 }
 
-/* ──────────────────────────── SVG Chart ──────────────────────────── */
+/* ──────────────────────────── SVG Chart ────────────────────────────  */
 
 function EscalationChart({
   annualCosts,
@@ -211,7 +211,7 @@ function EscalationChart({
         fontWeight="bold"
         fontFamily="var(--font-mono)"
       >
-        {formatCurrency(annualCosts[annualCosts.length - 1])}/yr
+        {formatCurrency(annualCosts[annualCosts.length - 1])} / year
       </text>
       <text
         x={PAD.left + 4}
@@ -221,13 +221,13 @@ function EscalationChart({
         fontSize="11"
         fontFamily="var(--font-mono)"
       >
-        {formatCurrency(annualCosts[0])}/yr
+        {formatCurrency(annualCosts[0])} / year
       </text>
     </svg>
   );
 }
 
-/* ──────────────────────────── Slider ──────────────────────────── */
+/* ─────────────────────────── Slider ───────────────────────────  */
 
 function StyledSlider({
   label,
@@ -288,7 +288,7 @@ function StyledSlider({
   );
 }
 
-/* ═══════════════════════ Main Component ═══════════════════════ */
+/* ═══════════════════════IE11 Main Component ═══════════════════════  */
 
 export default function UtilityCostProjection() {
   const [monthlyBill, setMonthlyBill] = useState(250);
