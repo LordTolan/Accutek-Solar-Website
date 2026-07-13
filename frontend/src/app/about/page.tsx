@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarClock, MapPin, Wrench, ShieldCheck, Heart, User } from "lucide-react";
+import { ArrowRight, CalendarClock, MapPin, Wrench, ShieldCheck, Heart, User, Camera } from "lucide-react";
 import TeamMemberCard from "@/components/TeamMemberCard";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
@@ -83,13 +83,24 @@ export default function AboutPage() {
 
           <div className="lg:col-span-5">
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient-lg">
-              <Image src={STORY_IMG} alt="Accutek Solar technician installing panels" fill className="object-cover" sizes="(max-width:1024px) 100vw, 40vw" />
+              <Image src={STORY_IMG} alt="Accutek Solar technician installing panels" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
               <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-background/95 via-background/70 to-transparent">
                 <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// EST. 1994</div>
                 <div className="mt-1 font-heading text-2xl font-extrabold">A family business with a family of customers.</div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Group Photo Placeholder */}
+      <section className="py-12 md:py-20 bg-card/40 border-b border-border" data-testid="group-photo-placeholder">
+        <div className="container mx-auto container-px max-w-6xl text-center">
+           <div className="relative rounded-2xl border-2 border-dashed border-primary/30 bg-primary/5 p-12 md:p-20 overflow-hidden">
+              <Camera className="w-12 h-12 text-primary/40 mx-auto mb-4" />
+              <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground/50">Group photo coming soon</h2>
+              <p className="mt-2 text-sm text-foreground/40 font-mono uppercase tracking-widest">// Drop production crew photo at /public/gallery/crew-group.jpg</p>
+           </div>
         </div>
       </section>
 
@@ -125,7 +136,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="text-lg font-medium text-foreground/90 italic">
-                        "The idea that you can produce your own energy and use it to drive your car, all from the comfort of your home, speaks to a new era of energy independence and sustainability."
+                        \"The idea that you can produce your own energy and use it to drive your car, all from the comfort of your home, speaks to a new era of energy independence and sustainability.\"
                       </p>
                       <div className="mt-4 flex items-center gap-3">
                         <div className="w-6 h-6 rounded-full bg-muted grid place-items-center"><User className="w-3.5 h-3.5 text-muted-foreground" /></div>
@@ -134,33 +145,6 @@ export default function AboutPage() {
                     </div>
                  </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Group Photo Placeholder */}
-      <section className="py-16 md:py-24 border-b border-border" data-testid="about-group-photo">
-        <div className="container mx-auto container-px max-w-6xl">
-          <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// THE CREW</div>
-          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance mb-6">
-            Meet the team that shows up to your job site.
-          </h2>
-          <div
-            className="relative w-full aspect-[16/7] rounded-2xl border-2 border-dashed border-border bg-muted/40 flex flex-col items-center justify-center text-center gap-3 overflow-hidden"
-            data-testid="group-photo-placeholder"
-          >
-            <div className="absolute inset-0 opacity-[0.06]" aria-hidden="true">
-              <Image src={TEAM_BG} alt="" fill className="object-cover" sizes="100vw" />
-            </div>
-            <div className="relative">
-              <div className="w-12 h-12 rounded-full bg-primary/15 text-primary grid place-items-center">
-                <User className="w-6 h-6" />
-              </div>
-            </div>
-            <div>
-              <div className="font-heading font-bold text-lg">Group photo coming soon</div>
-              <div className="text-sm text-muted-foreground mt-1">Drop a production crew photo at <code className="font-mono text-xs bg-background/80 border border-border rounded-md px-2 py-1">/public/gallery/crew-group.jpg</code></div>
             </div>
           </div>
         </div>
@@ -181,7 +165,7 @@ export default function AboutPage() {
             </div>
             <p className="max-w-md text-foreground/70 leading-relaxed">
               Our satisfied customer base is a testament to our commitment to quality and service. We go above and beyond to ensure that our customers are happy with their solar installations, providing ongoing support and maintenance to keep their systems running smoothly.
-            </p>
+            <p>
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-5" data-testid="team-grid">
