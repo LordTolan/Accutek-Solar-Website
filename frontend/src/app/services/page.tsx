@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/link";
 import { ArrowRight, Sun, Mountain, Building2, BatteryCharging, Wrench, LightbulbIcon } from "lucide-react";
 import ManufacturersStrip from "@/components/ManufacturersStrip";
 
-export const metadata = { title: "Solar & Electrical Services" };
+export const metadata: Metadata = {
+  title: "Solar & Electrical Services",
+  description:
+    "Residential solar PV, ground-mount arrays, commercial & ag solar, Kohler generators, and full electrical from Accutek Solar. Free estimates for Indiana and Illinois.",
+  robots: { index: false, follow: false },
+  openGraph: {
+    title: "Solar & Electrical Services | Accutek Solar",
+    description:
+      "Roof, ground, or pole mount solar plus generators and electrical. Custom systems for Indiana and Illinois homeowners since 1994.",
+  },
+};
 
 const SERVICES = [
   { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems sized for your home - roof, ground or pole mount." },
