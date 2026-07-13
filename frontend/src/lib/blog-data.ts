@@ -89,7 +89,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "title": "How to Pay Off Your Solar Loan in Under 10 Years",
     "subtitle": "Professional solar insights from the Accutek team.",
     "excerpt": "Our latest field observations for 2026-07-06. We focus on durability and long-term ROI.",
-    "author": "Duke Electra",
+    "author": "Art Kilowatt",
     "date": "2026-07-06",
     "readTime": "5 min read",
     "category": "Energy ROI",
@@ -110,7 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "title": "Why Large Properties Prefer Field Arrays",
     "subtitle": "Professional solar insights from the Accutek team.",
     "excerpt": "Our latest field observations for 2026-06-29. We focus on durability and long-term ROI.",
-    "author": "Dirk Photon",
+    "author": "Phil O'Watt",
     "date": "2026-06-29",
     "readTime": "5 min read",
     "category": "Ground Mounts",
@@ -131,7 +131,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "title": "Managing System Temperature During Peak Sun",
     "subtitle": "Professional solar insights from the Accutek team.",
     "excerpt": "Our latest field observations for 2026-06-22. We focus on durability and long-term ROI.",
-    "author": "Hugh Jouleson",
+    "author": "Sunny McVoltface",
     "date": "2026-06-22",
     "readTime": "5 min read",
     "category": "Summer Heat",
@@ -152,7 +152,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "title": "Understanding the Net Metering Shift",
     "subtitle": "Professional solar insights from the Accutek team.",
     "excerpt": "Our latest field observations for 2026-06-15. We focus on durability and long-term ROI.",
-    "author": "Bill Kilowatt",
+    "author": "Ray D. Ation",
     "date": "2026-06-15",
     "readTime": "5 min read",
     "category": "Policy Update",
@@ -173,7 +173,7 @@ export const BLOG_POSTS: BlogPost[] = [
     "title": "The Future of LFP Batteries in Indiana",
     "subtitle": "Professional solar insights from the Accutek team.",
     "excerpt": "Our latest field observations for 2026-06-08. We focus on durability and long-term ROI.",
-    "author": "Ray Watts",
+    "author": "Watt Kilowatt",
     "date": "2026-06-08",
     "readTime": "5 min read",
     "category": "Battery Tech",
@@ -241,9 +241,7 @@ export const BLOG_POSTS: BlogPost[] = [
 \u003cp\u003eThe manufacturing boom didn't happen in a vacuum. It's riding a wave of trade policy that has made importing cheap panels from Southeast Asia — the industry's go-to supply chain for a decade — dramatically more expensive.\u003c/p\u003e
 \u003cp\u003eIn April 2025, the U.S. Commerce Department finalized anti-dumping and countervailing duty rates on crystalline solar cells and modules from Vietnam, Malaysia, Thailand, and Cambodia. The numbers are eye-watering:\u003c/p\u003e
 \u003cul\u003e
-  \u003cli\u003e\u003cstrong\u003eCambodia:\u003c/strong\u003e countervailing duties up to 534%, anti-dumping duties of 117%\u003c/li\u003e
-  \u003cli\u003e\u003cstrong\u003eVietnam:\u003c/strong\u003e anti-dumping duties of 271%, countervailing duties of 125%\u003c/li\u003e
-  \u003cli\u003e\u003cstrong\u003eThailand:\u003c/strong\u003e anti-dumping duties of 111%, countervailing duties of 264%\u003c/li\n  \u003cli\u003e\u003cstrong\u003eMalaysia:\u003c/strong\u003e countervailing duties of 32%, anti-dumping duties of about 2%\u003c/li\n\u003c/ul\u003e
+  \u003cli\u003e\u003cstrong\u003eCambodia:\u003c/strong\u003e countervailing duties up to 534%, anti-dumping duties of 117%\u003c/li\n  \u003cli\u003e\u003cstrong\u003eVietnam:\u003c/strong\u003e anti-dumping duties of 271%, countervailing duties of 125%\u003c/li\n  \u003cli\u003e\u003cstrong\u003eThailand:\u003c/strong\u003e anti-dumping duties of 111%, countervailing duties of 264%\u003c/li\n  \u003cli\u003e\u003cstrong\u003eMalaysia:\u003c/strong\u003e countervailing duties of 32%, anti-dumping duties of about 2%\u003c/li\n\u003c/ul\u003e
 \u003cp\u003eThese stack on top of existing Section 201 safeguard tariffs and reciprocal tariffs ranging from 24% to 49% depending on the country. The practical effect? Panels that used to arrive from a Vietnamese factory at rock-bottom prices now carry duty loads that can double or triple the landed cost. The era of 15-cent imported modules is over for the U.S. market.\u003c/p\u003e
 
 \u003ch2\u003eWhat This Means for Panel Prices\u003c/h2\u003e

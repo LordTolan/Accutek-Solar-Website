@@ -28,8 +28,7 @@ export default function BlogPage() {
       "@type": "ListItem",
       "position": i + 1,
       "url": `https://www.accuteksolar.com/blog/${post.slug}`,
-      "name": post.title,
-    })),
+      "name": post.title,    })),
   };
 
   return (

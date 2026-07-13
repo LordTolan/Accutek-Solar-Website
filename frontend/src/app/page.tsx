@@ -149,7 +149,7 @@ export default function HomePage() {
                     <span>{line}</span>
                   </li>
                 ))}
-              <ul>
+              </ul>
               <Link href="/quote" className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow transition focus-ring" data-testid="ground-cta">
                 Tell us about your site <ArrowRight className="w-4 h-4" />
               </Link>
@@ -261,7 +261,7 @@ export default function HomePage() {
           <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">// NO-PRESSURE CONSULTATION</div>
           <h2 className="text-4xl md:text-6xl font-heading font-black text-balance">
             Ready to make your meter <span className="text-primary">spin backwards?</span>
-          <h2>
+          </h2>
           <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="final-cta-quote">
