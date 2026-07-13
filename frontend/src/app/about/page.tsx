@@ -139,6 +139,33 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Group Photo Placeholder */}
+      <section className="py-16 md:py-24 border-b border-border" data-testid="about-group-photo">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// THE CREW</div>
+          <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance mb-6">
+            Meet the team that shows up to your job site.
+          </h2>
+          <div
+            className="relative w-full aspect-[16/7] rounded-2xl border-2 border-dashed border-border bg-muted/40 flex flex-col items-center justify-center text-center gap-3 overflow-hidden"
+            data-testid="group-photo-placeholder"
+          >
+            <div className="absolute inset-0 opacity-[0.06]" aria-hidden="true">
+              <Image src={TEAM_BG} alt="" fill className="object-cover" sizes="100vw" />
+            </div>
+            <div className="relative">
+              <div className="w-12 h-12 rounded-full bg-primary/15 text-primary grid place-items-center">
+                <User className="w-6 h-6" />
+              </div>
+            </div>
+            <div>
+              <div className="font-heading font-bold text-lg">Group photo coming soon</div>
+              <div className="text-sm text-muted-foreground mt-1">Drop a production crew photo at <code className="font-mono text-xs bg-background/80 border border-border rounded-md px-2 py-1">/public/gallery/crew-group.jpg</code></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Team */}
       <section className="py-20 md:py-28 relative overflow-hidden" data-testid="about-team">
         <div className="absolute inset-0 opacity-[0.04]" aria-hidden="true">
