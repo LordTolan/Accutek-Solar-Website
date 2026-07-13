@@ -107,8 +107,8 @@ export default function HomePage() {
         <div className="container mx-auto container-px">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-4">
             {[
-              { label: "Homes & sites powered", value: 1247, suffix: "+" },
-              { label: "Customer savings", value: 24, prefix: "$", suffix: "M+" },
+              { label: "Homes & sites powered", value: 1400, suffix: "+" },
+              { label: "Customer savings", value: 25, prefix: "$", suffix: "M+" },
               { label: "Satisfaction", value: 98, suffix: "%" },
               { label: "Years experience", value: 32, suffix: "" },
             ].map((s, i) => (
@@ -232,7 +232,7 @@ export default function HomePage() {
             <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:border-primary transition focus-ring" data-testid="final-cta-book">
               Book Online
             </a>
-            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold focus-ring hover:border-primary transition">
+            <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold focus-ring hover:border-primary transition" data-testid="final-cta-call">
               <ShieldCheck className="w-4 h-4 text-primary" /> (812) 878-7343
             </a>
           </div>

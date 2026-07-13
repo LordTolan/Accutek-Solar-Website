@@ -327,7 +327,7 @@ COMPANY = {
     "email": "solarseth7@yahoo.com",
     "address": "9797 S Rangeline Rd., Clinton, IN 47842",
     "address_short": "Clinton, IN",
-    "stats": {"homes_powered": 1247, "money_saved": 2400000, "satisfaction": 98, "years_experience": datetime.now(timezone.utc).year - 1994},
+    "stats": {"homes_powered": 1400, "money_saved": 25000000, "satisfaction": 98, "years_experience": datetime.now(timezone.utc).year - 1994},
     "services": [
         {"slug": "residential-solar", "name": "Residential Solar PV", "desc": "Grid-tied, hybrid and off-grid systems — roof, ground or pole mount."},
         {"slug": "ground-mount", "name": "Ground-Mount Arrays", "desc": "Field, yard and ag-site arrays sized for higher output and easier service."},
@@ -622,7 +622,7 @@ async def refresh(request: Request, response: Response):
                             max_age=ACCESS_TTL_MIN * 60, path="/")
         return {"access_token": access}
     except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Refresh token expired")
+        raise HTTPException(status_code=401, detail="Token expired")
     except jwt.InvalidTokenError:
         raise HTTPException(status_code=401, detail="Invalid refresh token")
 
@@ -685,4 +685,3 @@ async def shutdown():
 
 
 app.include_router(api)
-
