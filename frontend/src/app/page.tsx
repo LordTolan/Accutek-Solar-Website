@@ -149,7 +149,7 @@ export default function HomePage() {
                     <span>{line}</span>
                   </li>
                 ))}
-              </ul>
+              <ul>
               <Link href="/quote" className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow transition focus-ring" data-testid="ground-cta">
                 Tell us about your site <ArrowRight className="w-4 h-4" />
               </Link>
@@ -215,6 +215,44 @@ export default function HomePage() {
       <HCPReviews />
       <FAQ />
 
+
+      {/* Latest from the Blog */}
+      <section className="py-20 md:py-28 bg-muted/10" data-testid="home-blog-section">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// LATEST INSIGHTS</div>
+              <h2 className="text-3xl md:text-5xl font-extrabold">The <span className="text-primary">Solar Dispatch.</span></h2>
+            </div>
+            <Link href="/blog" className="text-sm font-bold text-primary hover:underline">
+              View all articles ->
+            </Link>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Link href="/blog/the-rate-hike-nobody-voted-for-why-indiana-is-fighting-back-2026-07-13" className="group block bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all">
+              <div className="relative aspect-video">
+                <Image src="https://images.unsplash.com/photo-1509391366360-2e959784a276" alt="Solar array" fill className="object-cover group-hover:scale-105 transition-transform" />
+              </div>
+              <div className="p-6">
+                <div className="text-[10px] uppercase tracking-wider font-mono text-primary mb-2">Big Utility Wars | July 13, 2026</div>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">The Rate Hike Nobody Voted For: Why Indiana is Fighting Back</h3>
+                <p className="mt-2 text-sm text-foreground/70">Big Utility is winning because you’re letting them. Here is the Accutek plan to take your power back.</p>
+              </div>
+            </Link>
+            <Link href="/blog/how-to-pay-off-your-solar-loan-in-under-10-years-2026-07-06" className="group block bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all">
+              <div className="relative aspect-video">
+                <Image src="https://images.unsplash.com/photo-1509391366360-2e959784a276" alt="Accutek site" fill className="object-cover group-hover:scale-105 transition-transform" />
+              </div>
+              <div className="p-6">
+                <div className="text-[10px] uppercase tracking-wider font-mono text-primary mb-2">Energy ROI | July 6, 2026</div>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">How to Pay Off Your Solar Loan in Under 10 Years</h3>
+                <p className="mt-2 text-sm text-foreground/70">Professional solar insights on maximizing your investment and reaching zero-bill status faster.</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="py-20 md:py-28 relative overflow-hidden" data-testid="final-cta-section">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background" />
@@ -223,7 +261,7 @@ export default function HomePage() {
           <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">// NO-PRESSURE CONSULTATION</div>
           <h2 className="text-4xl md:text-6xl font-heading font-black text-balance">
             Ready to make your meter <span className="text-primary">spin backwards?</span>
-          </h2>
+          <h2>
           <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="final-cta-quote">
