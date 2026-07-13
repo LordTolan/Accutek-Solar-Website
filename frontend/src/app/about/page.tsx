@@ -163,9 +163,11 @@ export default function AboutPage() {
                 Real people on the truck. <span className="text-primary">Real people on the phone.</span>
               </h2>
             </div>
-            <p className="max-w-md text-foreground/70 leading-relaxed">
-              Our satisfied customer base is a testament to our commitment to quality and service. We go above and beyond to ensure that our customers are happy with their solar installations, providing ongoing support and maintenance to keep their systems running smoothly.
-            <p>
+            <div className="max-w-md text-foreground/70 leading-relaxed">
+              <p>
+                Our satisfied customer base is a testament to our commitment to quality and service. We go above and beyond to ensure that our customers are happy with their solar installations, providing ongoing support and maintenance to keep their systems running smoothly.
+              </p>
+            </div>
           </div>
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-5" data-testid="team-grid">
@@ -176,6 +178,7 @@ export default function AboutPage() {
 
           <p className="mt-10 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground text-center">
             // THE CREW THAT SHOWS UP TO YOUR JOB SITE
+
           </p>
         </div>
       </section>
