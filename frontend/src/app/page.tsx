@@ -23,7 +23,7 @@ const SERVICES = [
   { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems - roof, ground mount, or pole mount." },
   { icon: Mountain, title: "Ground-Mount Arrays", desc: "Field & yard installs sized for higher-output sites - ideal for ag, rural and larger lots." },
   { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations - REAP-grant eligible." },
-  { icon: BatteryCharging, title: "Kohler Generators", desc: "Authorized Kohler installer - 24/7 automatic backup power." },
+  { icon: BatteryCharging, title: "Kohler Generators", desc: "Authorized Kohler installer - 24 / 7 automatic backup power." },
   { icon: Wrench, title: "Electrical Install & Repair", desc: "Licensed electricians with 32 years of full-service experience." },
   { icon: LightbulbIcon, title: "LED & Energy Monitoring", desc: "Smart lighting + live energy monitoring to drive your usage down." },
 ];
