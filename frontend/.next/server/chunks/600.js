@@ -1,230 +1,4 @@
-/**
- * Blog post data — embedded for static export.
- *
- * New posts are added here via automated PRs (weekly AI-generated content).
- * Each post is fact-checked before merge.
- */
-
-/**
- * Rotating pen names for blog authorship.
- * Each week's post gets the next name in the list (index by week number % length).
- */
-export const PEN_NAMES = [
-  "Ray Watts",
-  "Sol Brightman",
-  "Watt Kilowatt",
-  "Ray D. Ation",
-  "Sunny McVoltface",
-  "Phil O'Watt",
-  "Art Kilowatt",
-  "Al B. Sunny",
-  "Watt Burns",
-  "Sol R. Panel",
-  "Rick O'Shay Solar",
-  "Lumen Clearsky",
-  "Amp Voltsworth",
-  "Max Insolation",
-  "Barry Cade",
-  "Sonny Watt",
-  "Hugh Jouleson",
-  "Bill Kilowatt",
-  "Dirk Photon",
-  "Duke Electra",
-] as const;
-
-/** Pick a pen name for a given ISO date string (rotates weekly). */
-export function getPenName(isoDate: string): string {
-  const d = new Date(isoDate);
-  // Week number within year (0-based)
-  const startOfYear = new Date(d.getFullYear(), 0, 1);
-  const week = Math.floor((d.getTime() - startOfYear.getTime()) / (7 * 24 * 60 * 60 * 1000));
-  return PEN_NAMES[week % PEN_NAMES.length];
-}
-
-/** AI editorial disclaimer — shown at the bottom of every blog post. */
-export const AI_DISCLAIMER =
-  "This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions.";
-
-export interface BlogPost {
-  slug: string;
-  title: string;
-  subtitle: string;
-  excerpt: string;
-  author: string;
-  date: string;            // ISO date string (YYYY-MM-DD)
-  readTime: string;        // e.g. "5 min read"
-  category: string;
-  tags: string[];
-  heroImage: string;
-  heroAlt: string;
-  content: string;         // HTML content
-  sources?: string[];      // fact-check sources
-}
-
-export const BLOG_POSTS: BlogPost[] = [
-  {
-  "slug": "the-rate-hike-nobody-voted-for:-why-indiana-is-fighting-back-2026-07-13",
-  "title": "The Rate Hike Nobody Voted For: Why Indiana is Fighting Back",
-  "subtitle": "Stop paying for their grid and start building your legacy.",
-  "excerpt": "Viktor would have called it like it is: Big Utility is winning because you're letting them. Here is the Accutek plan for 2026-07-13.",
-  "author": "Al B. Sunny",
-  "date": "2026-07-13",
-  "readTime": "7 min read",
-  "category": "Big Utility Wars",
-  "tags": [
-    "freedom",
-    "ROI",
-    "Accutek",
-    "energy independence"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Solar array harvesting freedom",
-  "content": "<h2>The Rate Hike Nobody Voted For: Why Indiana is Fighting Back</h2><p>For 32 years, Accutek Solar has been on the front lines in Indiana and Illinois. We don't just install panels; we build energy independence. Big Utility wants you to keep paying their rising rates, but on 2026-07-13, we are saying 'enough'...</p>",
-  "sources": [
-    "Accutek Internal Field Data"
-  ]
-},
-  {
-  "slug": "how-to-pay-off-your-solar-loan-in-under-10-years-2026-07-06",
-  "title": "How to Pay Off Your Solar Loan in Under 10 Years",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-07-06. We focus on durability and long-term ROI.",
-  "author": "Art Kilowatt",
-  "date": "2026-07-06",
-  "readTime": "5 min read",
-  "category": "Energy ROI",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>How to Pay Off Your Solar Loan in Under 10 Years</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-07-06, our focus is on how to pay off your solar loan in under 10 years...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-  "slug": "why-large-properties-prefer-field-arrays-2026-06-29",
-  "title": "Why Large Properties Prefer Field Arrays",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-06-29. We focus on durability and long-term ROI.",
-  "author": "Phil O'Watt",
-  "date": "2026-06-29",
-  "readTime": "5 min read",
-  "category": "Ground Mounts",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>Why Large Properties Prefer Field Arrays</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-29, our focus is on why large properties prefer field arrays...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-  "slug": "managing-system-temperature-during-peak-sun-2026-06-22",
-  "title": "Managing System Temperature During Peak Sun",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-06-22. We focus on durability and long-term ROI.",
-  "author": "Sunny McVoltface",
-  "date": "2026-06-22",
-  "readTime": "5 min read",
-  "category": "Summer Heat",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>Managing System Temperature During Peak Sun</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-22, our focus is on managing system temperature during peak sun...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-  "slug": "understanding-the-net-metering-shift-2026-06-15",
-  "title": "Understanding the Net Metering Shift",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-06-15. We focus on durability and long-term ROI.",
-  "author": "Ray D. Ation",
-  "date": "2026-06-15",
-  "readTime": "5 min read",
-  "category": "Policy Update",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>Understanding the Net Metering Shift</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-15, our focus is on understanding the net metering shift...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-  "slug": "the-future-of-lfp-batteries-in-indiana-2026-06-08",
-  "title": "The Future of LFP Batteries in Indiana",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-06-08. We focus on durability and long-term ROI.",
-  "author": "Watt Kilowatt",
-  "date": "2026-06-08",
-  "readTime": "5 min read",
-  "category": "Battery Tech",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>The Future of LFP Batteries in Indiana</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-08, our focus is on the future of lfp batteries in indiana...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-  "slug": "spring-cleaning-for-solar-panels-2026-06-01",
-  "title": "Spring Cleaning for Solar Panels",
-  "subtitle": "Professional solar insights from the Accutek team.",
-  "excerpt": "Our latest field observations for 2026-06-01. We focus on durability and long-term ROI.",
-  "author": "Sol Brightman",
-  "date": "2026-06-01",
-  "readTime": "5 min read",
-  "category": "Maintenance 101",
-  "tags": [
-    "solar",
-    "ROI",
-    "Accutek"
-  ],
-  "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-  "heroAlt": "Accutek Solar Site",
-  "content": "<h2>Spring Cleaning for Solar Panels</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-01, our focus is on spring cleaning for solar panels...</p>",
-  "sources": [
-    "Accutek Internal Data"
-  ]
-},
-  {
-    slug: "homegrown-watts-inside-americas-solar-manufacturing-boom",
-    title: "Homegrown Watts: Inside America's Solar Manufacturing Boom",
-    subtitle: "From 8 gigawatts to 60 — and why your next panels might have a shorter commute",
-    excerpt:
-      "U.S. solar manufacturing capacity has exploded 700% since the IRA passed. Meanwhile, tariffs on Southeast Asian imports are hitting triple digits. Here's what the reshuffled supply chain means for Indiana and Illinois homeowners shopping for panels in 2026.",
-    author: "Ray Watts",
-    date: "2026-05-25",
-    readTime: "6 min read",
-    category: "Industry News",
-    tags: ["manufacturing", "tariffs", "trade policy", "supply chain", "pricing", "Made in USA"],
-    heroImage:
-      "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Solar panels being manufactured in a modern factory setting",
-    content: `
+"use strict";exports.id=600,exports.ids=[600],exports.modules={43403:(e,t,a)=>{a.d(t,{A:()=>o});let o=(0,a(17607).A)("tag",[["path",{d:"M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z",key:"vktsd0"}],["circle",{cx:"7.5",cy:"7.5",r:".5",fill:"currentColor",key:"kqv944"}]])},61121:(e,t,a)=>{a.d(t,{A:()=>o});let o=(0,a(17607).A)("calendar-days",[["path",{d:"M8 2v4",key:"1cmpym"}],["path",{d:"M16 2v4",key:"4m81vk"}],["rect",{width:"18",height:"18",x:"3",y:"4",rx:"2",key:"1hopcy"}],["path",{d:"M3 10h18",key:"8toen8"}],["path",{d:"M8 14h.01",key:"6423bh"}],["path",{d:"M12 14h.01",key:"1etili"}],["path",{d:"M16 14h.01",key:"1gbofw"}],["path",{d:"M8 18h.01",key:"lrp35t"}],["path",{d:"M12 18h.01",key:"mhygvu"}],["path",{d:"M16 18h.01",key:"kzsmim"}]])},72678:(e,t,a)=>{a.d(t,{$3:()=>s,fv:()=>n,pf:()=>o,tz:()=>i});let o="This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions.",r=[{slug:"how-to-pay-off-your-solar-loan-in-under-10-years-2026-07-06",title:"How to Pay Off Your Solar Loan in Under 10 Years",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-07-06. We focus on durability and long-term ROI.",author:"Art Kilowatt",date:"2026-07-06",readTime:"5 min read",category:"Energy ROI",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>How to Pay Off Your Solar Loan in Under 10 Years</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-07-06, our focus is on how to pay off your solar loan in under 10 years...</p>",sources:["Accutek Internal Data"]},{slug:"why-large-properties-prefer-field-arrays-2026-06-29",title:"Why Large Properties Prefer Field Arrays",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-06-29. We focus on durability and long-term ROI.",author:"Phil O'Watt",date:"2026-06-29",readTime:"5 min read",category:"Ground Mounts",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>Why Large Properties Prefer Field Arrays</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-29, our focus is on why large properties prefer field arrays...</p>",sources:["Accutek Internal Data"]},{slug:"managing-system-temperature-during-peak-sun-2026-06-22",title:"Managing System Temperature During Peak Sun",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-06-22. We focus on durability and long-term ROI.",author:"Sunny McVoltface",date:"2026-06-22",readTime:"5 min read",category:"Summer Heat",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>Managing System Temperature During Peak Sun</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-22, our focus is on managing system temperature during peak sun...</p>",sources:["Accutek Internal Data"]},{slug:"understanding-the-net-metering-shift-2026-06-15",title:"Understanding the Net Metering Shift",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-06-15. We focus on durability and long-term ROI.",author:"Ray D. Ation",date:"2026-06-15",readTime:"5 min read",category:"Policy Update",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>Understanding the Net Metering Shift</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-15, our focus is on understanding the net metering shift...</p>",sources:["Accutek Internal Data"]},{slug:"the-future-of-lfp-batteries-in-indiana-2026-06-08",title:"The Future of LFP Batteries in Indiana",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-06-08. We focus on durability and long-term ROI.",author:"Watt Kilowatt",date:"2026-06-08",readTime:"5 min read",category:"Battery Tech",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>The Future of LFP Batteries in Indiana</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-08, our focus is on the future of lfp batteries in indiana...</p>",sources:["Accutek Internal Data"]},{slug:"spring-cleaning-for-solar-panels-2026-06-01",title:"Spring Cleaning for Solar Panels",subtitle:"Professional solar insights from the Accutek team.",excerpt:"Our latest field observations for 2026-06-01. We focus on durability and long-term ROI.",author:"Sol Brightman",date:"2026-06-01",readTime:"5 min read",category:"Maintenance 101",tags:["solar","ROI","Accutek"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276",heroAlt:"Accutek Solar Site",content:"<h2>Spring Cleaning for Solar Panels</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-01, our focus is on spring cleaning for solar panels...</p>",sources:["Accutek Internal Data"]},{slug:"homegrown-watts-inside-americas-solar-manufacturing-boom",title:"Homegrown Watts: Inside America's Solar Manufacturing Boom",subtitle:"From 8 gigawatts to 60 — and why your next panels might have a shorter commute",excerpt:"U.S. solar manufacturing capacity has exploded 700% since the IRA passed. Meanwhile, tariffs on Southeast Asian imports are hitting triple digits. Here's what the reshuffled supply chain means for Indiana and Illinois homeowners shopping for panels in 2026.",author:"Ray Watts",date:"2026-05-25",readTime:"6 min read",category:"Industry News",tags:["manufacturing","tariffs","trade policy","supply chain","pricing","Made in USA"],heroImage:"https://images.unsplash.com/photo-1611348524140-53c9a25263d6?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Solar panels being manufactured in a modern factory setting",content:`
 <p>Something remarkable has happened to American solar manufacturing, and most homeowners have no idea. Three years ago, the U.S. could barely produce enough solar panels to cover a midsized utility project. Today, domestic factories can churn out over 60 gigawatts of modules per year — a 700% increase since the Inflation Reduction Act landed in 2022. If your last set of panels came from a factory in Southeast Asia, your next ones might come from Georgia, Ohio, or Alabama. Here's what's driving the shift and what it means for your wallet.</p>
 
 <h2>The Factory Floor Scoreboard</h2>
@@ -271,32 +45,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Bottom Line</h2>
 <p>American solar manufacturing has gone from afterthought to powerhouse in three years. Billions of dollars in factories are producing panels right here in the U.S., and the trade barriers that once protected cheap imports now redirect demand toward domestic products. For Indiana and Illinois homeowners, the shift means better warranty coverage, more reliable supply, and a domestic industry that's finally competing on capacity — not just policy. The panels may cost a touch more than the rock-bottom imports of 2023, but they'll be made by companies with U.S. addresses, U.S. service teams, and a vested interest in keeping your system running for decades. That's a trade we're happy to make.</p>
-`,
-    sources: [
-      "Solar Energy Industries Association — U.S. Solar Manufacturing Capacity Report 2025 (seia.org)",
-      "U.S. Commerce Department — Final AD/CVD Rates on Solar Cells and Modules from SE Asia, April 2025 (commerce.gov)",
-      "pv magazine USA — U.S. Solar Module Prices Face Upward Pressure, Q1 2026 (pv-magazine-usa.com)",
-      "First Solar — Q3 2025 Earnings Report and Manufacturing Expansion (firstsolar.com)",
-      "Hanwha Qcells — Cartersville, GA Solar Manufacturing Complex Announcement (qcells.com)",
-      "EnergySage — Solar Panel Cost Guide 2026 (energysage.com)",
-      "Sidley Austin — The One Big Beautiful Bill Act: Navigating the New Energy Landscape (sidley.com)",
-    ],
-  },
-  {
-    slug: "illinois-solar-incentives-2026-the-prairie-state-is-a-solar-goldmine",
-    title: "Illinois Solar Incentives in 2026: The Prairie State Is a Solar Goldmine",
-    subtitle: "SRECs, net metering, tax breaks — Illinois basically pays you to go solar",
-    excerpt:
-      "Illinois has one of the most generous solar incentive stacks in the Midwest. From the Illinois Shines program to full-retail net metering and property tax exemptions, here's everything homeowners in eastern Illinois need to know.",
-    author: "Ray Watts",
-    date: "2026-05-25",
-    readTime: "7 min read",
-    category: "Solar Policy",
-    tags: ["Illinois", "incentives", "Illinois Shines", "net metering", "SREC", "policy"],
-    heroImage:
-      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Golden sunlight over Illinois farmland",
-    content: `
+`,sources:["Solar Energy Industries Association — U.S. Solar Manufacturing Capacity Report 2025 (seia.org)","U.S. Commerce Department — Final AD/CVD Rates on Solar Cells and Modules from SE Asia, April 2025 (commerce.gov)","pv magazine USA — U.S. Solar Module Prices Face Upward Pressure, Q1 2026 (pv-magazine-usa.com)","First Solar — Q3 2025 Earnings Report and Manufacturing Expansion (firstsolar.com)","Hanwha Qcells — Cartersville, GA Solar Manufacturing Complex Announcement (qcells.com)","EnergySage — Solar Panel Cost Guide 2026 (energysage.com)","Sidley Austin — The One Big Beautiful Bill Act: Navigating the New Energy Landscape (sidley.com)"]},{slug:"illinois-solar-incentives-2026-the-prairie-state-is-a-solar-goldmine",title:"Illinois Solar Incentives in 2026: The Prairie State Is a Solar Goldmine",subtitle:"SRECs, net metering, tax breaks — Illinois basically pays you to go solar",excerpt:"Illinois has one of the most generous solar incentive stacks in the Midwest. From the Illinois Shines program to full-retail net metering and property tax exemptions, here's everything homeowners in eastern Illinois need to know.",author:"Ray Watts",date:"2026-05-25",readTime:"7 min read",category:"Solar Policy",tags:["Illinois","incentives","Illinois Shines","net metering","SREC","policy"],heroImage:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Golden sunlight over Illinois farmland",content:`
 <p>If Indiana's solar incentives are a solid handshake, Illinois's are a bear hug with a gift card tucked inside. The Prairie State has quietly built one of the most aggressive solar incentive programs in the country — and if you're a homeowner in Vermilion, Edgar, Champaign, Clark, Crawford, Coles, or Douglas County, you're sitting in the sweet spot. Here's the full breakdown for 2026.</p>
 
 <h2>Illinois Shines: Getting Paid for the Sun You Harvest</h2>
@@ -345,31 +94,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Bottom Line</h2>
 <p>Illinois has built one of the best solar incentive stacks in the Midwest — arguably the best between the coasts. SRECs pay you upfront. Net metering credits at full retail. Property taxes stay flat. And the state's clean energy law ensures these programs have legs. If you're in our eastern Illinois service area and you've been thinking about solar, 2026 is the year to stop thinking and start harvesting. The sun's already doing its part — let the incentives do theirs.</p>
-`,
-    sources: [
-      "Illinois Power Agency — Illinois Shines / Adjustable Block Program (illinoisabp.com)",
-      "Climate and Equitable Jobs Act (CEJA), Public Act 102-0662 — Illinois General Assembly",
-      "Illinois Compiled Statutes 35 ILCS 200/10-720 — Solar energy property tax exemption",
-      "DSIRE — Illinois Net Metering (dsireusa.org)",
-      "USDA — Rural Energy for America Program (rd.usda.gov)",
-      "Illinois Commerce Commission — Net metering rules and tariffs",
-    ],
-  },
-  {
-    slug: "indiana-net-metering-2026-what-homeowners-need-to-know",
-    title: "Indiana Net Metering in 2026: What Homeowners Need to Know",
-    subtitle: "Your meter can spin backward — here's how to make the most of it",
-    excerpt:
-      "Indiana's net metering policy lets solar homeowners bank excess energy as credits. Here's exactly how it works, what the current rules are, and why acting sooner is smarter than later.",
-    author: "Ray Watts",
-    date: "2026-05-24",
-    readTime: "6 min read",
-    category: "Solar Policy",
-    tags: ["net metering", "Indiana", "policy", "savings"],
-    heroImage:
-      "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Solar panels on a sunny Indiana field",
-    content: `
+`,sources:["Illinois Power Agency — Illinois Shines / Adjustable Block Program (illinoisabp.com)","Climate and Equitable Jobs Act (CEJA), Public Act 102-0662 — Illinois General Assembly","Illinois Compiled Statutes 35 ILCS 200/10-720 — Solar energy property tax exemption","DSIRE — Illinois Net Metering (dsireusa.org)","USDA — Rural Energy for America Program (rd.usda.gov)","Illinois Commerce Commission — Net metering rules and tariffs"]},{slug:"indiana-net-metering-2026-what-homeowners-need-to-know",title:"Indiana Net Metering in 2026: What Homeowners Need to Know",subtitle:"Your meter can spin backward — here's how to make the most of it",excerpt:"Indiana's net metering policy lets solar homeowners bank excess energy as credits. Here's exactly how it works, what the current rules are, and why acting sooner is smarter than later.",author:"Ray Watts",date:"2026-05-24",readTime:"6 min read",category:"Solar Policy",tags:["net metering","Indiana","policy","savings"],heroImage:"https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Solar panels on a sunny Indiana field",content:`
 <p>If you've ever watched your electric meter and wished it could run backward, solar net metering is basically that dream — with paperwork. Indiana's net metering rules allow residential solar owners to send excess electricity back to the grid and receive bill credits in return. It's one of the strongest financial reasons to go solar in the Hoosier State, and in 2026, the rules are still on your side — for now.</p>
 
 <h2>How Net Metering Actually Works</h2>
@@ -395,28 +120,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Bottom Line</h2>
 <p>Indiana net metering remains one of the best financial tools for solar homeowners in 2026. The credits are real, the math works, and the policy — while evolving — still rewards early adopters. If you've been on the fence, this is the year your electric bill starts working for you instead of against you.</p>
-`,
-    sources: [
-      "Indiana SEA 309 (2017) — Indiana General Assembly",
-      "Indiana Utility Regulatory Commission (IURC) net metering orders",
-      "DSIRE — Database of State Incentives for Renewables & Efficiency (dsireusa.org)",
-    ],
-  },
-  {
-    slug: "ground-mount-vs-roof-mount-solar-which-is-right-for-your-property",
-    title: "Ground-Mount vs. Roof-Mount Solar: Which Is Right for Your Property?",
-    subtitle: "Spoiler: it depends on your yard, your roof, and your tolerance for ladders",
-    excerpt:
-      "Choosing between ground-mount and roof-mount solar isn't just about aesthetics — it's about energy output, maintenance access, and long-term ROI. Here's a no-nonsense comparison.",
-    author: "Duke Electra",
-    date: "2026-05-17",
-    readTime: "7 min read",
-    category: "Solar 101",
-    tags: ["ground mount", "roof mount", "installation", "comparison"],
-    heroImage:
-      "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Roof-mounted solar panel array on a residential home",
-    content: `
+`,sources:["Indiana SEA 309 (2017) — Indiana General Assembly","Indiana Utility Regulatory Commission (IURC) net metering orders","DSIRE — Database of State Incentives for Renewables & Efficiency (dsireusa.org)"]},{slug:"ground-mount-vs-roof-mount-solar-which-is-right-for-your-property",title:"Ground-Mount vs. Roof-Mount Solar: Which Is Right for Your Property?",subtitle:"Spoiler: it depends on your yard, your roof, and your tolerance for ladders",excerpt:"Choosing between ground-mount and roof-mount solar isn't just about aesthetics — it's about energy output, maintenance access, and long-term ROI. Here's a no-nonsense comparison.",author:"Duke Electra",date:"2026-05-17",readTime:"7 min read",category:"Solar 101",tags:["ground mount","roof mount","installation","comparison"],heroImage:"https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Roof-mounted solar panel array on a residential home",content:`
 <p>When folks call us about going solar, one of the first questions is: "Does it go on the roof or in the yard?" The honest answer is "yes" — and which one's right for you depends on a few key factors. After 32 years of installing both, here's our no-spin breakdown.</p>
 
 <h2>Roof-Mount: The Classic Choice</h2>
@@ -459,28 +163,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Verdict</h2>
 <p>There's no universal "better" — there's only what's better for <em>your</em> site. Tight suburban lot with a south-facing roof in good shape? Roof-mount. Rural property with open acreage and a 30-year-old roof? Ground-mount all day. Either way, the sun doesn't care where the panels are — it just keeps showing up.</p>
-`,
-    sources: [
-      "EnergySage — Ground-Mounted Solar Panels: Costs, Pros & Cons (energysage.com)",
-      "SEIA — Solar Installation Types (seia.org)",
-      "Indiana Code IC 32-21-14 — Solar easements and HOA restrictions",
-    ],
-  },
-  {
-    slug: "battery-storage-101-is-a-home-battery-worth-it-in-2026",
-    title: "Battery Storage 101: Is a Home Battery Worth It in 2026?",
-    subtitle: "Blackout insurance, bill optimizer, or expensive paperweight? Let's do the math.",
-    excerpt:
-      "Home batteries are getting cheaper and smarter, but are they worth the investment for Indiana and Illinois homeowners? We break down the costs, use cases, and when they actually make sense.",
-    author: "Dirk Photon",
-    date: "2026-05-10",
-    readTime: "8 min read",
-    category: "Technology",
-    tags: ["battery storage", "backup power", "technology", "ROI"],
-    heroImage:
-      "https://images.unsplash.com/photo-1558449028-b53a39d100fc?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Modern home battery storage system mounted on a garage wall",
-    content: `
+`,sources:["EnergySage — Ground-Mounted Solar Panels: Costs, Pros & Cons (energysage.com)","SEIA — Solar Installation Types (seia.org)","Indiana Code IC 32-21-14 — Solar easements and HOA restrictions"]},{slug:"battery-storage-101-is-a-home-battery-worth-it-in-2026",title:"Battery Storage 101: Is a Home Battery Worth It in 2026?",subtitle:"Blackout insurance, bill optimizer, or expensive paperweight? Let's do the math.",excerpt:"Home batteries are getting cheaper and smarter, but are they worth the investment for Indiana and Illinois homeowners? We break down the costs, use cases, and when they actually make sense.",author:"Dirk Photon",date:"2026-05-10",readTime:"8 min read",category:"Technology",tags:["battery storage","backup power","technology","ROI"],heroImage:"https://images.unsplash.com/photo-1558449028-b53a39d100fc?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Modern home battery storage system mounted on a garage wall",content:`
 <p>Home batteries have gone from Silicon Valley novelty to mainstream conversation in about five years. Tesla Powerwalls, Enphase IQ Batteries, Franklin WH — the options are multiplying and the prices are dropping. But the question we get most from Indiana and Illinois homeowners isn't "which battery?" It's "do I even need one?" Fair question. Let's dig in.</p>
 
 <h2>What a Home Battery Actually Does</h2>
@@ -522,29 +205,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Bottom Line</h2>
 <p>A home battery is worth it in 2026 if you have a specific need it solves — outage protection, medical power, off-grid living, or TOU optimization. If you're grid-tied with solid net metering and reliable power, you might want to wait a year or two for prices to drop further. Either way, we'll run the numbers for your specific situation during a free consultation — no sales pressure, just math.</p>
-`,
-    sources: [
-      "NREL — Cost Projections for Utility-Scale Battery Storage (nrel.gov)",
-      "EnergySage — Home Battery Cost Guide 2025-2026 (energysage.com)",
-      "Kohler Power — Standby Generator Sizing Guide (kohlerpower.com)",
-      "BloombergNEF — Battery Pack Prices (about.bnef.com)",
-    ],
-  },
-  {
-    slug: "solar-panel-myths-busted-5-things-your-neighbor-got-wrong",
-    title: "Solar Panel Myths Busted: 5 Things Your Neighbor Got Wrong",
-    subtitle: "No, solar panels don't work only in Arizona. Yes, we checked.",
-    excerpt:
-      "From 'solar doesn't work here' to 'panels destroy your roof,' we're tackling the top five solar myths that keep popping up at Indiana barbecues. Spoiler: the sun works in the Midwest too.",
-    author: "Bill Kilowatt",
-    date: "2026-05-03",
-    readTime: "5 min read",
-    category: "Solar 101",
-    tags: ["myths", "education", "solar basics", "FAQ"],
-    heroImage:
-      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",
-    heroAlt: "Bright sunlight breaking through clouds over a green field",
-    content: `
+`,sources:["NREL — Cost Projections for Utility-Scale Battery Storage (nrel.gov)","EnergySage — Home Battery Cost Guide 2025-2026 (energysage.com)","Kohler Power — Standby Generator Sizing Guide (kohlerpower.com)","BloombergNEF — Battery Pack Prices (about.bnef.com)"]},{slug:"solar-panel-myths-busted-5-things-your-neighbor-got-wrong",title:"Solar Panel Myths Busted: 5 Things Your Neighbor Got Wrong",subtitle:"No, solar panels don't work only in Arizona. Yes, we checked.",excerpt:"From 'solar doesn't work here' to 'panels destroy your roof,' we're tackling the top five solar myths that keep popping up at Indiana barbecues. Spoiler: the sun works in the Midwest too.",author:"Bill Kilowatt",date:"2026-05-03",readTime:"5 min read",category:"Solar 101",tags:["myths","education","solar basics","FAQ"],heroImage:"https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?crop=entropy&cs=srgb&fm=jpg&q=85&w=1600",heroAlt:"Bright sunlight breaking through clouds over a green field",content:`
 <p>We love our neighbors. But after 32 years in the solar business, we've heard some doozies at cookouts, church potlucks, and hardware store checkout lines. Here are five solar myths that refuse to die — and the facts that should finally put them to rest.</p>
 
 <h2>Myth #1: "We Don't Get Enough Sun Here for Solar to Work"</h2>
@@ -569,29 +230,4 @@ export const BLOG_POSTS: BlogPost[] = [
 
 <h2>The Real "Myth" to Watch Out For</h2>
 <p>The biggest misconception isn't about the technology — it's that you need to figure everything out yourself before calling an installer. A good solar company (hi, that's us) will evaluate your property, pull your utility data, model your savings, and give you real numbers — all for free. You don't need to become a solar engineer. You just need to make the call.</p>
-`,
-    sources: [
-      "NREL — Solar Resource Data for the United States (nrel.gov/gis)",
-      "Fraunhofer ISE — Photovoltaics Report (ise.fraunhofer.de)",
-      "SEIA/Wood Mackenzie — U.S. Solar Market Insight Q1 2026 (seia.org)",
-      "EnergySage — Solar Panel Cost Guide (energysage.com)",
-    ],
-  },
-];
-
-/** Helper: get a single post by slug */
-export function getBlogPost(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find((p) => p.slug === slug);
-}
-
-/** Helper: get all posts sorted by date (newest first) */
-export function getAllBlogPosts(): BlogPost[] {
-  return [...BLOG_POSTS].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-}
-
-/** Helper: get unique categories */
-export function getBlogCategories(): string[] {
-  return [...new Set(BLOG_POSTS.map((p) => p.category))];
-}
+`,sources:["NREL — Solar Resource Data for the United States (nrel.gov/gis)","Fraunhofer ISE — Photovoltaics Report (ise.fraunhofer.de)","SEIA/Wood Mackenzie — U.S. Solar Market Insight Q1 2026 (seia.org)","EnergySage — Solar Panel Cost Guide (energysage.com)"]}];function n(e){return r.find(t=>t.slug===e)}function s(){return[...r].sort((e,t)=>new Date(t.date).getTime()-new Date(e.date).getTime())}function i(){return[...new Set(r.map(e=>e.category))]}},87865:(e,t,a)=>{a.d(t,{A:()=>o});let o=(0,a(17607).A)("clock",[["circle",{cx:"12",cy:"12",r:"10",key:"1mglay"}],["polyline",{points:"12 6 12 12 16 14",key:"68esgv"}]])}};
