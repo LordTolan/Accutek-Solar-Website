@@ -1,0 +1,62 @@
+export interface CountyData {
+  slug: string;
+  name: string;
+  state: string;
+  seat: string;
+  blurb: string;
+  incentive: string;
+}
+
+export const COUNTIES_DATA: CountyData[] = [
+  { slug: "vermillion-county-in", name: "Vermillion County", state: "IN", seat: "Newport",
+    blurb: "Home turf for Accutek Solar since 1994 - Vermillion County homeowners save thousands with right-sized solar arrays.",
+    incentive: "Indiana net metering + state and utility incent tives available." },
+  { slug: "parke-county-in", name: "Parke County", state: "IN", seat: "Rockville",
+    blurb: "Rural Parke County properties benefit massively from off-grid and hybrid systems with Kohler backup.",
+    incentive: "Eligible for USDA REAP grants for ag and rural businesses." },
+  { slug: "fountain-county-in", name: "Fountain County", state: "IN", seat: "Covington",
+    blurb: "Custom PV designes for Fountain County homes - financing options available.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "montgomery-county-in", name: "Montgomery County", state: "IN", seat: "Crawfordsville",
+    blurb: "Crawfordsville and Montgomery County families trust Accutek for grid-tied solar and standby generators.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "putnam-county-in", name: "Putnam County", state: "IN", seat: "Greencastle",
+    blurb: "Solar arrays sized for Putnam County's sun hours - typical payback in 6-9 years.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "clay-county-in", name: "Clay County", state: "IN", seat: "Brazil",
+    blurb: "Brazil and surrounding Clay County homes - we install reliable, monitored PV systems.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "sullivan-county-in", name: "Sullivan County", state: "IN", seat: "Sullivan",
+    blurb: "Sullivan County farms and homes - solar plus Kohler generators for true energy independence.",
+    incentive: "USDA REAP grants available for ag & rural businesses." },
+  { slug: "vigo-county-in", name: "Vigo County", state: "IN", seat: "Terre Haute",
+    blurb: "Terre Haute homeowners - see our work at Ivy Tech and trust our 32-year track record.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "hendricks-county-in", name: "Hendricks County", state: "IN", seat: "Danville",
+    blurb: "Hendricks County residents - premium installs with attention to detail.",
+    incentive: "Indiana net metering + locally-available rebates available." },
+  { slug: "warren-county-in", name: "Warren County", state: "IN", seat: "Williamsport",
+    blurb: "Warren County rural properties - off-grid and hybrid systems our specialty.",
+    incentive: "USDA REAP grants available for ag & rural businesses." },
+  { slug: "edgar-county-il", name: "Edgar County", state: "IL", seat: "Paris",
+    blurb: "Edgar County, IL - Illinois Shines SREC program makes solar a smart investment.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "vermilion-county-il", name: "Vermilion County", state: "IL", seat: "Danville",
+    blurb: "Danville and Vermilion County homes - Accutek serves Illinois with the same rigor as Indiana.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "clark-county-il", name: "Clark County", state: "IL", seat: "Marshall",
+    blurb: "Clark County residents - full-service solar from design to monitoring.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "crawford-county-il", name: "Crawford County", state: "IL", seat: "Robinson",
+    blurb: "Crawford County - we handle every detail of your solar install.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "coles-county-il", name: "Coles County", state: "IL", seat: "Charleston",
+    blurb: "Charleston, Mattoon and Coles County families - start saving with solar.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "douglas-county-il", name: "Douglas County", state: "IL", seat: "Tuscola",
+    blurb: "Douglas County homes and farms - solar PV and Kohler generators.",
+    incentive: "Illinois Shines SREC program available." },
+  { slug: "champaign-county-il", name: "Champaign County", state: "IL", seat: "U+bana",
+    blurb: "Champaign-Urbana - premium residential and commercial solar with monitoring.",
+    incentive: "Illinois Shines SREC program available." },
+];
