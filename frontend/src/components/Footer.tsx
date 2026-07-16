@@ -23,7 +23,7 @@ export default function Footer() {
             data-testid="footer-logo"
           />
           <p className="text-foreground/70 text-sm leading-relaxed">
-            Family-owned solar &amp; electrical contractor serving Indiana and Illinois since 1994.
+            Family-owned solar & electrical contractor serving West Central Indiana and East Central Illinois since 1994.
           </p>
           <div className="mt-5 flex flex-wrap gap-1.5">
             {["NABCEP", "BBB A+", "Licensed", "32 YRS"].map((b) => (

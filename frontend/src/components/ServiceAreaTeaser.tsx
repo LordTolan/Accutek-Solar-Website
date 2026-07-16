@@ -35,11 +35,11 @@ export default function ServiceAreaTeaser() {
           <div className="lg:col-span-5">
             <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Where we serve</div>
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
-              17 counties across <span className="text-primary">Indiana & Illinois.</span>
+              17 counties across <span className="text-primary">West Central Indiana & East Central Illinois.</span>
             </h2>
             <p className="mt-5 text-foreground/70 leading-relaxed text-lg">
               Headquartered in Clinton, Indiana, we install solar PV, Kohler generators and full electrical
-              for homes, farms and businesses across Central Indiana and Western Illinois.
+              for homes, farms and businesses across West Central Indiana and East Central Illinois.
             </p>
             <Link href="/service-area" className="mt-8 inline-flex items-center rounded-full bg-secondary text-secondary-foreground px-6 py-3 font-bold text-sm hover:-translate-y-0.5 transition focus-ring" data-testid="view-all-counties">
               View All Counties -&gt;
