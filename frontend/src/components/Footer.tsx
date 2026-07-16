@@ -3,8 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Phone, Mail, MapPin, CalendarClock } from "lucide-react";
-import { HCP_BOOK_URL } from "@/lib/utils";
+import { Phone, Mail, MapPin, CalendarClock, LogIn } from "lucide-react";
+import { HCP_BOOK_URL, HCP_PORTAL_URL } from "@/lib/utils";
 
 export default function Footer() {
   const pathname = usePathname();
@@ -41,6 +41,7 @@ export default function Footer() {
             <li><Link href="/about" className="text-foreground/80 hover:text-primary transition">About | Meet the Team</Link></li>
             <li><Link href="/quote" className="text-foreground/80 hover:text-primary transition">Free Quote</Link></li>
             <li><a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition">Book Online</a></li>
+            <li><a href={HCP_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="text-foreground/80 hover:text-primary transition font-bold text-primary">Customer Portal</a></li>
           </ul>
         </div>
 
