@@ -1,82 +1,86 @@
-"use client";
-
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { Menu, X, Phone, CalendarClock } from "lucide-react";
-import { cn, HCP_BOOK_URL } from "@/lib/utils";
-
-const NAV = [
-  { href: "/", label: "Home" },
-  { href: "/services", label: "Services" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/service-area", label: "Service Area" },
-  { href: "/tools/calculator", label: "Calculator" },
-  { href: "/about", label: "About | Team" },
-  { href: "/contact", label: "Contact" },
-];
-
-export default function Header() {
-  const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  if (pathname?.startsWith("/admin")) return null;
-  return (
-    <header className="sticky top-0 z-40 backdrop-blur-xl bg-background/80 border-b border-border" data-testid="site-header">
-      <div className="container mx-auto container-px h-16 md:h-20 flex items-center justify-between">
-        <Link href="/" className="flex items-center group focus-ring rounded-md" data-testid="logo-link" aria-label="Accutek Solar - home">
-          <Image
-            src="/logo.png"
-            alt="Accutek Solar"
-            width={458}
-            height={192}
-            priority
-            sizes="(max-width: 768px) 130px, 180px"
-            className="h-9 md:h-11 w-auto object-contain"
-            data-testid="site-logo"
-          />
-        </Link>
-
-        <nav className="hidden md:flex items-center gap-7" data-testid="primary-nav">
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} className="text-sm font-medium text-foreground/75 hover:text-primary transition focus-ring" data-testid={`nav-${n.label.toLowerCase().replace(/\s/g,'-')}`}>
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-3">
-          <a href="tel:+18128787343" className="text-sm font-medium text-foreground/80 flex items-center gap-2 hover:text-primary focus-ring" data-testid="header-phone">
-            <Phone className="w-4 h-4" /> (812) 878-7343
-          </a>
-          <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border bg-background/60 text-foreground px-4 py-2.5 text-sm font-bold hover:border-primary transition focus-ring" data-testid="header-book">
-            <CalendarClock className="w-4 h-4" /> Book Online
-          </a>
-          <Link href="/quote" className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-5 py-2.5 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow transition focus-ring" data-testid="header-cta">
-            Get Quote
-          </Link>
-        </div>
-
-        <button onClick={() => setOpen(!open)} aria-label="Menu" className="md:hidden p-2 rounded-md focus-ring" data-testid="mobile-menu-toggle">
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      <div className={cn("md:hidden overflow-hidden transition-[max-height] duration-300 border-t border-border", open ? "max-h-[28rem]" : "max-h-0")}>
-        <div className="container mx-auto container-px py-4 flex flex-col gap-2.5" data-testid="mobile-menu">
-          {NAV.map((n) => (
-            <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="py-2 text-base font-medium" data-testid={`mobile-nav-${n.label.toLowerCase().replace(/\s/g,'-')}`}>
-              {n.label}
-            </Link>
-          ))}
-          <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)} className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 font-bold" data-testid="mobile-book">
-            <CalendarClock className="w-4 h-4" /> Book Online
-          </a>
-          <Link href="/quote" onClick={() => setOpen(false)} className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-5 py-3 font-bold uppercase tracking-wider" data-testid="mobile-cta">
-            Get Quote
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+InVzZSBjbGllbnQiOwoKaW1wb3J0IExpbmsgZnJvbSAibmV4dC9saW5rIjsKaW1wb3J0IEltYWdl
+ZnJvbSAibmV4dC9tYWdlIjsKaW1wb3J0IHsgdXNlU3RhdGUgfSBmcm9tICJyZWFjdCI7CmltcG9y
+dCB7IHVzZVBhdGhuYW1lIH0gZnJvbSAibmV4dC9uYXZpZ2F0aW9uIjsKaW1wb3J0IHsgTWVudSwg
+XCwgUGhvbmUsIENhbGVuZGFyQ2xvY2ssIExvZ0luIH0gZnJvbSAibHVjaWRlLXJlYWN0IjsKaW1w
+b3J0IHsgY24sIEhDUF9CT09LX1VSTCwgSENQX1BPUlRBTF9VUkwgfSBmcm9tICJAL2xpYi91dGls
+cyI7Cgpjb25zdCBOQVYgPSBbCiAgeyBocmVmOiAiLyIsIGxhYmVsOiAiSG9tZSIgfSwKICB7IGhy
+ZWY6ICIvc2VydmljZXMiLCBsYWJlbDogIlNlcnZpY2VzIiB9LAogIHsgaHJlZjogIi9nYWxsZXJ5
+IiwgbGFiZWw6ICJHYWxsZXJ5IiB9LAogIHsgaHJlZjogIi9zZXJ2aWNlLWFyZWEiLCBsYWJlbDog
+IlNlcnZpY2UgQXJlYSIgfSwKICB7IGhyZWY6ICIvdG9vbHMvY2FsY3VsYXRvciIsIGxhYmVsOiAi
+Q2FsY3VsYXRvciIgfSwKICB7IGhyZWY6ICIvYWJvdXQiLCBsYWJlbDogIkFib3V0IHwgVGVhbSIg
+fSwKICB7IGhyZWY6ICIvY29udGFjdCIsIGxhYmVsOiAiQ29udGFjdCIgfSwKXTsKCmV4cG9ydCBk
+ZWZhdWx0IGZ1bmN0aW9uIEhlYWRlcigpIHsKICBjb25zdCBbb3Blbiwgc2V0T3Blbl0gPSB1c2VT
+dGF0ZShmYWxzZSk7CiAgY29uc3QgcGF0aG5hbWUgPSB1c2VQYXRobmFtZSgpOwogIGlmIChwYXRo
+bmFtZT8uc3RhcnRzV2l0aCgiL2FkbWluIikpIHJldHVybiBudWxsOwogIHJldHVybiAoCiAgICA8
+aGVhZGVyIGNsYXNzTmFtZT0ic3RpY2t5IHRvcC0wIHotNDAgYmFja2Ryb3AtYmx1ci14bCBiZy1i
+YWNrZ3JvdW5kLzgwIGJvcmRlci1iIGJvcmRlci1ib3JkZXIiIGRhdGEtdGVzdGlkPSJzaXRlLWhl
+YWRlciI+CiAgICAgIDxkaXYgY2xhc3NOYW1lPSJjb250YWluZXIgbXgtYXV0byBjb250YWluZXIt
+cHggaC0xNiBtZDpoLTIwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktYmV0d2VlbiI+CiAgICAg
+ICAgPExp
+bmsgocmVmPSIvIiBjbGFzc05hbWU9ImZsZXggaXRlbXMtY2VudGVyIGdyb3VwIGZvY3VzLXJpbmcg
+cm91bmRlZC1tZCIgZGF0YS10ZXN0aWQ9ImxvZ28tbGluayIgYXJpYS1sYWJlbD0iQWNjdXRlayBT
+b2xhciAtIGhvbWUiPgogICAgICAgICAgPEltYWdlCiAgICAgICAgICAgIHNyYz0iL2xvZ28ucG5n
+IgogICAgICAgICAgICBhbHQ9IkFjY3V0ZWsgU29sYXIiCiAgICAgICAgICAgIHdpZHRoPXs0NTh9
+CiAgICAgICAgICAgIGhlaWdodD17MTkyfQogICAgICAgICAgICBwcmlvcml0eQogICAgICAgICAg
+ICBzaXplcz0iKG1heC13aWR0aDogNzY4cHgpIDEzMHB4LCAxODBweCIKICAgICAgICAgICAgY2xh
+c3NOYW1lPSJoLTkgbWQ6aC0xMSB3LWF1dG8gb2JqZWN0LWNvbnRhaW4iCiAgICAgICAgICAgIGRh
+dGEtdGVzdGlkPSJzaXRlLWxvZ28iCiAgICAgICAgICAvPgogICAgICAgIDwvTGluaz4KCiAgICAg
+ICAgPG5hdiBjbGFzc05hbWU9ImhpZGRlbiBtZDpmbGV4IGl0ZW1zLWNlbnRlciBnYXAtNyIgZGF0
+YS10ZXN0aWQ9InByaW1hcnktbmF2Ij4KICAgICAgICAgIHtOQVYubWFwKChuKSA9PiAoCiAgICAg
+ICAgICAgIDxMaW5rIGtleT17bi5ocmVmfSBocmVmPXtuLmhyZWZ9IGNsYXNzTmFtZT0idGV4dC1z
+bSBmb250LW1lZGl1bSB0ZXh0LWZvcmVncm91bmQvNzUgaG92ZXI6dGV4dC1wcmltYXJ5IHRyYW5z
+aXRpb24gZm9jdXMtcmluZyIgZGF0YS10ZXN0aWQ9e2BuYXYtJHtuLmxhYmVsLnRvTG93ZXJDYXNl
+KCkucmVwbGFjZSgvXHMvZywnLScpfWB9PgogICAgICAgICAgICAgIHtuLmxhYmVsfQogICAgICAg
+ICAgICA8L0xpbms+CiAgICAgICAgICApKX0KICAgICAgICA8L25hdj4KCiAgICAgICAgPGRpdiBj
+bGFzc05hbWU9ImhpZGRlbiBtZDpmbGV4IGl0ZW1zLWNlbnRlciBnYXAtMyI+CiAgICAgICAgICA8
+YSBocmVmPSJ0ZWw6KzE4MTI4Nzg3MzQzIiBjbGFzc05hbWU9InRleHQtc20gZm9udC1tZWRpdW0g
+dGV4dC1mb3JlZ3JvdW5kLzgwIGZsZXggaXRlbXMtY2VudGVyIGdhcC0yIGhvdmVyOnRleHQtcHJp
+bWFyeSBmb2N1cy1yaW5nIiBkYXRhLXRlc3RpZD0iaGVhZGVyLXBob25lIj4KICAgICAgICAgICAg
+PFBob25lIGNsYXNzTmFtZT0idy00IGgtNCIgLz4gKDgxMikgODc4LTczNDMKICAgICAgICAgIDwv
+YT4KICAgICAgICAgIDxhIGhyZWY9e0hDUF9QT1JUQUxfVVJMfSB0YXJnZXQ9Il9ibGFuayIgcmVs
+PSJub29wZW5lciBub3JlZmVycmVyIiBjbGFzc05hbWU9InRleHQtc20gZm9udC1tZWRpdW0gdGV4
+dC1mb3JlZ3JvdW5kLzYwIGZsZXggaXRlbXMtY2VudGVyIGdhcC0yIGhvdmVyOnRleHQtcHJpbWFy
+eSBmb2N1cy1yaW5nIGJvcmRlci1sIGJvcmRlci1ib3JkZXIgcGwtMyBtbC0xIiBkYXRhLXRlc3Rp
+dD0iaGVhZGVyLXBvcnRhbCI+CiAgICAgICAgICAgIDxMb2dJbiBjbGFzc05hbWU9InctMy41IGgt
+My41IiAvPiBMb2dpbgogICAgICAgICAgPC9hPgogICAgICAgICAgPGEgaHJlZj17SENQX0JPT0tf
+VVJMfSB0YXJnZXQ9Il9ibGFuayIgcmVsPSJub29wZW5lciBub3JlZmVycmVyIiBjbGFzc05hbWU9
+ImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBnYXAtMiByb3VuZGVkLW1kIGJvcmRlciBib3JkZXIt
+Ym9yZGVyIGJnLWJhY2tncm91bmQvNjAgdGV4dC1mb3JlZ3JvdW5kIHB4LTQgcHktMi41IHRleHQt
+c20gZm9udC1ib2xkIGhvdmVyOmJvcmRlci1wcmltYXJ5IHRyYW5zaXRpb24gZm9jdXMtcmluZyIg
+ZGF0YS10ZXN0aWQ9ImhlYWRlci1ib29rIj4KICAgICAgICAgICAgPENhbGVuZGFyQ2xvY2sgY2xh
+c3NOYW1lPSJ3LTQgaC00IiAvPiBCb29rIE9ubGluZQogICAgICAgICAgPC9hPgogICAgICAgICAg
+PExpbmsgaHJlZj0iL3F1b3RlIiBjbGFzc05hbWU9ImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBq
+dXN0aWZ5LWNlbnRlciByb3VuZGVkLW1kIGJnLXByaW1hcnkgdGV4dC1wcmltYXJ5LWZvcmVncm91
+bmQgcHgtNSBweS0yLjUgdGV4dC1zbSBmb250LWJvbGQgdXBwZXJjYXNlIHRyYWNraW5nLXdpZGVy
+IGhvdmVyOnNoYWRvdy1ncmVlbi1nbG93IHRyYW5zaXRpb24gZm9jdXMtcmluZyIgZGF0YS10ZXN0
+aWQ9ImhlYWRlci1jdGEiPgogICAgICAgICAgICBHZXQgUXVvdGUKICAgICAgICAgIDwvTGluaz4K
+ICAgICAgICA8L2Rpdj4KCiAgICAgICAgPGJ1dHRvbiBvbkNsaWNrPXsoKSA9PiBzZXRPcGVuKCFv
+cGVuKX0gYXJpYS1sYWJlbD0iTWVudSIgY2xhc3NOYW1lPSJtZDpoaWRkZW4gcC0yIHJvdW5kZWQt
+bWQgZm9jdXMtcmluZyIgZGF0YS10ZXN0aWQ9Im1vYmlsZS1tZW51LXRvZ2dsZSI+CiAgICAgICAg
+ICB7b3BlbiA/IDxYIC8+IDogPE1lbnUgLz59CiAgICAgICAgPC9idXR0b24+CiAgICAgIDwvZGl2
+PgoKICAgICAgPGRpdiBjbGFzc05hbWU9e2NuKCJtZDpoaWRkZW4gb3ZlcmZsb3ctaGlkZGVuIHRy
+YW5zaXRpb24tW21heC1oZWlnaHRdIGR1cmF0aW9uLTMwMCBib3JkZXItdCBib3JkZXItYm9yZGVy
+Iiwgb3BlbiA/ICJtYXgtaC1bMjhyZW1dIiA6ICJtYXgtaC0wIil9PgogICAgICAgIDxkaXYgY2xh
+c3NOYW1lPSJjb250YWluZXIgbXgtYXV0byBjb250YWluZXItcHggcHktNCBmbGV4IGZsZXgtY29s
+IGdhcC0yLjUiIGRhdGEtdGVzdGlkPSJtb2JpbGUtbWVudSI+CiAgICAgICAgICB7TkFWLm1hcCgo
+bikgPT4gKAogICAgICAgICAgICA8TGluayBrZXk9e24uaHJlZn0gaHJlZj17bi5ocmVmfSBvbkNs
+aWNrPXsoKSA9PiBzZXRPcGVuKGZhbHNlKX0gY2xhc3NOYW1lPSJweS0yIHRleHQtYmFzZSBmb250
+LW1lZGl1bSIgZGF0YS10ZXN0aWQ9e2Btb2JpbGUtbmF2LSR7bi5sYWJlbC50b0xvd2VyQ2FzZSgp
+LnJlcGxhY2UoL1xzL2csJy0nKX1gfT4KICAgICAgICAgICAgICB7bi5sYWJlbH0KICAgICAgICAg
+ICAgPC9MaW5rPgogICAgICAgICAgKSl9CiAgICAgICAgICA8YSBocmVmPXtIQ1BfUE9SVEFMX1VS
+TH0gdGFyZ2V0PSJfYmxhbmsiIHJlbD0ibm9vcGVuZXIgbm9yZWZlcnJlciIgb25DbGljaz17KCkg
+PT4gc2V0T3BlbihmYWxzZSl9IGNsYXNzTmFtZT0icHktMiB0ZXh0LWJhc2UgZm9udC1tZWRpdW0g
+ZmxleCBpdGVtcy1jZW50ZXIgZ2FwLTIiIGRhdGEtdGVzdGlkPSJtb2JpbGUtcG9ydGFsIj4KICAg
+ICAgICAgICAgPExvZ0luIGNsYXNzTmFtZT0idy00IGgtNCIgLz4gQ3VzdG9tZXIgTG9naW4KICAg
+ICAgICAgIDwvYT4KICAgICAgICAgIDxhIGhyZWY9e0hDUF9CT09LX1VSTH0gdGFyZ2V0PSJfYmxh
+bmsiIHJlbD0ibm9vcGVuZXIgbm9yZWZlcnJlciIgb25DbGljaz17KCkgPT4gc2V0T3BlbihmYWxz
+ZSl9IGNsYXNzTmFtZT0ibXQtMiBpbmxpbmUtZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50
+ZXIgZ2FwLTIgcm91bmRlZC1tZCBib3JkZXIgYm9yZGVyLWJvcmRlciBweC01IHB5LTMgZm9udC1i
+b2xkIiBkYXRhLXRlc3RpZD0ibW9iaWxlLWJvb2siPgogICAgICAgICAgICA8Q2FsZW5kYXJDbG9j
+ayBjbGFzc05hbWU9InctNCBoLTQiIC8+IEJvb2sgT25saW5lCiAgICAgICAgICA8L2E+CiAgICAg
+ICAgICA8TGluayBocmVmPSIvcXVvdGUiIG9uQ2xpY2s9eygpID0+IHNldE9wZW4oZmFsc2UpfSBj
+bGFzc05hbWU9ImlubGluZS1mbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciByb3VuZGVk
+LW1kIGJnLXByaW1hcnkgdGV4dC1wcmltYXJ5LWZvcmVncm91bmQgcHgtNSBweS0zIGZvbnQtYm9s
+ZCB1cHBlcmNhc2UgdHJhY2tpbmctd2lkZXIiIGRhdGEtdGVzdGlkPSJtb2JpbGUtY3RhIj4KICAg
+ICAgICAgICAgR2V0IFF1b3RlCiAgICAgICAgICA8L0xpbms+CiAgICAgICAgPC9kaXY+CiAgICAg
+IDwvdivCiAgICA8L2hlYWRlcj4KICApOwp9Cg==
