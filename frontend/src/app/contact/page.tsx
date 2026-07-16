@@ -52,7 +52,7 @@ export default function ContactPage() {
                     <p className="mt-1 text-foreground/65 leading-relaxed">
                       9797 S Rangeline Rd.<br />
                       Clinton, IN 47842
-                    <p>
+                    </p>
                     <a 
                       href="https://www.google.com/maps/search/9797+S+Rangeline+Rd.,+Clinton,+IN,+47842" 
                       target="_blank" 
