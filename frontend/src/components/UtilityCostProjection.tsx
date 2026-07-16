@@ -308,6 +308,7 @@ export default function UtilityCostProjection() {
       ref={sectionRef}
       className="relative overflow-hidden"
       data-testid="utility-cost-hero"
+
     >
       {/* Dark background */}
       <div className="absolute inset-0 bg-[#0a0f1a]" />

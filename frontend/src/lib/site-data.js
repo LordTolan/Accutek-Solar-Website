@@ -8,7 +8,7 @@ import {
 
 export const COMPANY = {
   name: "Accutek Solar",
-  tagline: "30 years of electrical expertise. Solar, storage, backup power & facility automation across Indiana & Illinois.",
+  tagline: "30 years of electrical expertise. Solar, storage, backup power & facility automation across West Central Indiana & East Central Illinois.",
   founded: 1994,
   yearsInBusiness: 30,
   founder: "Keith Davis",
@@ -36,35 +36,35 @@ export const COMPANY = {
     stacked: "/brand/logo_stacked.png",
   },
   housecallWidgetUrl: "https://client.housecallpro.com/reviews/widget/097cf23f-be1a-41ea-981b-8e6b9c7514eb",
-  aboutShort: "Family-owned and serving Indiana and Illinois since 1994. With 30 years of electrical expertise, Accutek Solar provides technically precise energy solutions for residential and commercial clients.",
+  aboutShort: "Family-owned and serving West Central Indiana and East Central Illinois since 1994. With 30 years of electrical expertise, Accutek Solar provides technically precise energy solutions for residential and commercial clients.",
 };
 
 // Service area broken into 4 operational quadrants
 export const SERVICE_QUADRANTS = [
   {
     id: "in-west",
-    label: "Central Indiana - West",
+    label: "West Central Indiana - West",
     state: "Indiana",
     counties: ["Warren", "Fountain", "Vermillion", "Parke", "Vigo"],
     description: "Western corridor of Indiana along the IL state line.",
   },
   {
     id: "in-east",
-    label: "Central Indiana - East",
+    label: "West Central Indiana - East",
     state: "Indiana",
     counties: ["Montgomery", "Hendricks", "Putnam", "Clay", "Sullivan"],
     description: "Inland Indiana counties east of our home base in Clinton.",
   },
   {
     id: "il-east",
-    label: "Central Illinois - East",
+    label: "East Central Illinois - East",
     state: "Illinois",
     counties: ["Vermilion", "Edgar", "Clark", "Crawford"],
     description: "Eastern Illinois counties bordering Indiana.",
   },
   {
     id: "il-west",
-    label: "Central Illinois - West",
+    label: "East Central Illinois - West",
     state: "Illinois",
     counties: ["Champaign", "Douglas", "Coles"],
     description: "Inland central Illinois counties.",
@@ -205,7 +205,7 @@ export const FAQS = [
   },
   {
     q: "Do you handle commercial work?",
-    a: "Absolutely. A meaningful portion of our work is commercial - including facility automation support, decommissioning, technical restoration projects, and standby power for businesses across Indiana and Illinois.",
+    a: "Absolutely. A meaningful portion of our work is commercial - including facility automation support, decommissioning, technical restoration projects, and standby power for businesses across West Central Indiana and East Central Illinois.",
   },
   {
     q: "Do you offer free estimates?",
