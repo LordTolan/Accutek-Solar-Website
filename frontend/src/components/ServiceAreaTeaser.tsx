@@ -2,31 +2,11 @@
 
 import Link from "next/link";
 import { MapPin } from "lucide-react";
-
-// Static county list — mirrors service-area/page.tsx (avoids flaky runtime API fetch on homepage)
-const COUNTIES = [
-  { slug: "vermillion-county-in", name: "Vermillion County", state: "IN" },
-  { slug: "parke-county-in", name: "Parke County", state: "IN" },
-  { slug: "fountain-county-in", name: "Fountain County", state: "IN" },
-  { slug: "montgomery-county-in", name: "Montgomery County", state: "IN" },
-  { slug: "putnam-county-in", name: "Putnam County", state: "IN" },
-  { slug: "clay-county-in", name: "Clay County", state: "IN" },
-  { slug: "sullivan-county-in", name: "Sullivan County", state: "IN" },
-  { slug: "vigo-county-in", name: "Vigo County", state: "IN" },
-  { slug: "hendricks-county-in", name: "Hendricks County", state: "IN" },
-  { slug: "warren-county-in", name: "Warren County", state: "IN" },
-  { slug: "edgar-county-il", name: "Edgar County", state: "IL" },
-  { slug: "vermilion-county-il", name: "Vermilion County", state: "IL" },
-  { slug: "clark-county-il", name: "Clark County", state: "IL" },
-  { slug: "crawford-county-il", name: "Crawford County", state: "IL" },
-  { slug: "coles-county-il", name: "Coles County", state: "IL" },
-  { slug: "douglas-county-il", name: "Douglas County", state: "IL" },
-  { slug: "champaign-county-il", name: "Champaign County", state: "IL" },
-];
+import { COUNTIES_DATA } from "@/lib/counties-data";
 
 export default function ServiceAreaTeaser() {
-  const indiana = COUNTIES.filter((c) => c.state === "IN");
-  const illinois = COUNTIES.filter((c) => c.state === "IL");
+  const indiana = COUNTIES_DATA.filter((c) => c.state === "IN");
+  const illinois = COUNTIES_DATA.filter((c) => c.state === "IL");
 
   return (
     <section className="py-20 md:py-28" data-testid="service-area-section">
@@ -47,7 +27,7 @@ export default function ServiceAreaTeaser() {
           </div>
 
           <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-            <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="counties-indiana">
+            <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="county-install-indiana">
               <div className="flex items-center justify-between mb-4">
                 <div className="font-heading text-lg font-bold">Indiana</div>
                 <span className="text-xs px-2 py-1 rounded-full bg-primary/15 text-foreground font-semibold">{indiana.length}</span>
@@ -62,7 +42,7 @@ export default function ServiceAreaTeaser() {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="counties-illinois">
+            <div className="rounded-2xl border border-border/60 p-6 bg-card shadow-ambient" data-testid="county-install-illinois">
               <div className="flex items-center justify-between mb-4">
                 <div className="font-heading text-lg font-bold">Illinois</div>
                 <span className="text-xs px-2 py-1 rounded-full bg-primary/15 text-foreground font-semibold">{illinois.length}</span>
@@ -70,8 +50,8 @@ export default function ServiceAreaTeaser() {
               <ul className="space-y-1.5">
                 {illinois.map((c) => (
                   <li key={c.slug}>
-                    <Link href={`/service-area/${c.slug}`} className="flex items-center gap-2 text-sm py-1 hover:text-primary transition">
-                      <MapPin className="w-3.5 h-3.5 text-muted-foreground" /> {c.name}
+                    <Link href={`/service-area/${c.slug}`} className="flex items-start gap-2 text-sm py-1 hover:text-primary transition">
+                      <MapPin className="w-3.5 h-3.5 mt-0.5 text-muted-foreground" /> {c.name}
                     </Link>
                   </li>
                 ))}
