@@ -6,12 +6,12 @@ import { getAllBlogPosts } from "@/lib/blog-data";
 export const metadata: Metadata = {
   title: "Solar Blog — Tips, News – Insights",
   description:
-    "Expert solar energy insights from Accutek Solar. Weekly articles on solar technology, Indiana & Illinois incentives, energy savings tips, and industry news — fact-checked by our 32-year veteran team.",
+    "Expert solar energy insights from Accutek Solar. Weekly articles on solar technology, West Central Indiana & East Central Illinois incentives, energy savings tips, and industry news — fact-checked by our 32-year veteran team.",
   robots: { index: true, follow: true },
   openGraph: {
     title: "Solar Blog — Accutek Solar",
     description:
-      "Weekly solar energy insights, policy updates, and practical tips for Indiana & Illinois homeowners.",
+      "Weekly solar energy insights, policy updates, and practical tips for West Central Indiana & East Central Illinois homeowners.",
   },
 };
 
@@ -28,7 +28,8 @@ export default function BlogPage() {
       "@type": "ListItem",
       "position": i + 1,
       "url": `https://www.accuteksolar.com/blog/${post.slug}`,
-      "name": post.title,    })),
+      "name": post.title,
+    })),
   };
 
   return (
