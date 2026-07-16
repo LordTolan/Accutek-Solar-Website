@@ -57,7 +57,7 @@ export default function ServiceAreaPage() {
       <div className="container mx-auto container-px max-w-6xl">
         <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Service area</div>
         <h1 className="text-4xl md:text-6xl font-heading font-black text-balance">17 counties. One trusted local installer.</h1>
-        <p className="mt-4 text-foreground/70 text-lg max-w-2xl">From our HQ in Clinton, Indiana we cover Central Indiana and Western Illinois. Find your county below for local incentives.</p>
+        <p className="mt-4 text-foreground/70 text-lg max-w-2xl">From our HQ in Clinton, Indiana we cover West Central Indiana and East Central Illinois. Find your county below for local incentives.</p>
 
         {(["IN", "IL"] as const).map((s) => (
           <div key={s} className="mt-14">

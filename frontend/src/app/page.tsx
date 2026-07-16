@@ -43,7 +43,7 @@ export default function HomePage() {
             </div>
             <RotatingHeadline />
             <p className="mt-6 md:mt-8 text-lg md:text-xl text-foreground/70 max-w-xl leading-relaxed animate-fade-up" style={{ animationDelay: "0.1s" }}>
-              32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across Indiana and Illinois - engineered for your site, your bill, your budget.
+              32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across West Central Indiana and East Central Illinois - engineered for your site, your bill, your budget.
             </p>
             <div className="mt-10 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
               <Link href="/quote" className="group inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow hover:-translate-y-0.5 transition focus-ring" data-testid="hero-cta-primary">

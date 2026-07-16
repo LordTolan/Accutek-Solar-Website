@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
   title: "Contact Accutek Solar - Local Solar & Electrical Contractor",
-  description: "Get in touch with Accutek Solar. Located in Clinton, IN, we serve 17 counties across Indiana and Illinois. Call (812) 878-7343 for a free site assessment.",
+  description: "Get in touch with Accutek Solar. Located in Clinton, IN, we serve 17 counties across West Central Indiana and East Central Illinois. Call (812) 878-7343 for a free site assessment.",
 };
 
 export default function ContactPage() {
@@ -52,7 +52,7 @@ export default function ContactPage() {
                     <p className="mt-1 text-foreground/65 leading-relaxed">
                       9797 S Rangeline Rd.<br />
                       Clinton, IN 47842
-                    </p>
+                    <p>
                     <a 
                       href="https://www.google.com/maps/search/9797+S+Rangeline+Rd.,+Clinton,+IN,+47842" 
                       target="_blank" 
@@ -89,6 +89,7 @@ export default function ContactPage() {
             <div className="relative">
               <div className="absolute inset-0 bg-primary/5 blur-3xl -z-10 rounded-full" />
               <div className="rounded-2xl border border-border bg-card overflow-hidden shadow-ambient-lg aspect-square lg:aspect-auto lg:h-full min-h-[400px]">
+                {/* Google Maps Embed */}
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3077.58!2d-87.4061!3d39.6556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886d38!2s9797%20S%20Rangeline%20Rd%2C%20Clinton%2C%20IN%2047842!5e0!3m2!1sen!2sus!4v1720875600000!5m2!1sen!2sus" 
                   width="100%" 

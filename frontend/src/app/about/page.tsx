@@ -12,7 +12,13 @@ const TEAM = [
     name: "Keith Davis",
     role: "Founder / Owner",
     slug: "keith-davis",
-    bio: "Founded Accutek in 1994. Three decades of electrical and solar work across Indiana and Illinois — the name on the building.",
+    bio: "Founded Accutek in 1994. Three decades of electrical and solar work across West Central Indiana and East Central Illinois — the name on the building.",
+  },
+  {
+    name: "Master Breaker",
+    role: "Lead Website Architect",
+    slug: "master-breaker",
+    bio: "Digital Operations and Lead Website Architect. Handles code deployments, site health monitoring, and automated metrics reporting.",
   },
   {
     name: "Seth Davis",
@@ -31,7 +37,7 @@ const TEAM = [
     name: "Colt",
     role: "Lead Solar Technician",
     slug: "colt",
-    bio: "Leads field crews on roof, ground-mount and pole-mount installs across Indiana and Illinois.",
+    bio: "Leads field crews on roof, ground-mount and pole-mount installs across West Central Indiana and East Central Illinois.",
   },
   {
     name: "AJ (\"Scruff\")",
@@ -45,12 +51,12 @@ const VALUES = [
   { icon: Heart, title: "Family-owned", body: "Founded by Keith Davis in 1994. Same name on the truck, same hands on the wrench, three decades later." },
   { icon: ShieldCheck, title: "Lifetime support", body: "Every install gets lifetime support from the team that built it. Not a 1-800 number, not a chatbot." },
   { icon: Wrench, title: "Built local", body: "Roof, ground or pole - we engineer for your specific site, your climate, your budget. No cookie-cutter kits." },
-  { icon: MapPin, title: "Real coverage", body: "17 counties across Indiana and Illinois. Headquartered in Clinton, IN. Trucks rolling daily." },
+  { icon: MapPin, title: "Real coverage", body: "17 counties across West Central Indiana and East Central Illinois. Headquartered in Clinton, IN. Trucks rolling daily." },
 ];
 
 export const metadata = {
   title: "About Accutek Solar - Family-Owned Since 1994",
-  description: "Meet the Accutek Solar team. Family-owned solar and electrical contractor serving Indiana and Illinois for over 32 years.",
+  description: "Meet the Accutek Solar team. Family-owned solar and electrical contractor serving West Central Indiana and East Central Illinois for over 32 years.",
 };
 
 export default function AboutPage() {
@@ -67,7 +73,7 @@ export default function AboutPage() {
               32 years of pulling wire - and tilting it <span className="text-primary">toward the sun.</span>
             </h1>
             <div className="mt-6 space-y-5 text-foreground/80 text-lg leading-relaxed">
-              <p>Accutek Solar was founded in 1994 by Keith Davis in Clinton, Indiana. What started as a small electrical-installation shop is today a full-service solar, ground-mount, generator and electrical contractor serving 17 counties across Indiana and Illinois.</p>
+              <p>Accutek Solar was founded in 1994 by Keith Davis in Clinton, Indiana. What started as a small electrical-installation shop is today a full-service solar, ground-mount, generator and electrical contractor serving 17 counties across West Central Indiana and East Central Illinois.</p>
               <p>As a local, family-owned business, we understand the specific needs and preferences of our local customers and provide personalized service that larger, national companies can&#39;t match.</p>
               <p>We pride ourselves on our ability to design and build solar systems that are customized to meet the specific needs and goals of our customers. Whether it&#39;s maximizing energy efficiency, reducing costs, providing backup power, or achieving sustainability goals, we have the expertise to deliver the right solution.</p>
             </div>
