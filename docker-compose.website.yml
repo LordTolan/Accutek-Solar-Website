@@ -1,0 +1,49 @@
+version: "3.8"
+
+# Accutek Solar Website — VPS Deployment
+# Serves at: https://new.accuteksolar.com (frontend) + https://api-new.accuteksolar.com (API)
+# Requires: existing Traefik running in host network mode on the VPS
+
+services:
+  # ── Frontend: Next.js static export served by Nginx ──────────────────────
+  accutek-web-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_BACKEND_URL: https://api-new.accuteksolar.com
+    container_name: accutek-web-frontend
+    restart: unless-stopped
+    network_mode: host
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.accutek-web.rule=Host(`new.accuteksolar.com`)"
+      - "traefik.http.routers.accutek-web.entrypoints=websecure"
+      - "traefik.http.routers.accutek-web.tls.certresolver=letsencrypt"
+      - "traefik.http.services.accutek-web.loadbalancer.server.port=3001"
+      # HTTP → HTTPS redirect
+      - "traefik.http.routers.accutek-web-http.rule=Host(`new.accuteksolar.com`)"
+      - "traefik.http.routers.accutek-web-http.entrypoints=web"
+      - "traefik.http.routers.accutek-web-http.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+
+  # ── Backend: FastAPI + MongoDB ────────────────────────────────────────────
+  accutek-web-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: accutek-web-backend
+    restart: unless-stopped
+    network_mode: host
+    env_file:
+      - ./backend/.env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.accutek-api.rule=Host(`api-new.accuteksolar.com`)"
+      - "traefik.http.routers.accutek-api.entrypoints=websecure"
+      - "traefik.http.routers.accutek-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.accutek-api.loadbalancer.server.port=8010"
+      # HTTP → HTTPS redirect
+      - "traefik.http.routers.accutek-api-http.rule=Host(`api-new.accuteksolar.com`)"
+      - "traefik.http.routers.accutek-api-http.entrypoints=web"
+      - "traefik.http.routers.accutek-api-http.middlewares=redirect-to-https"
