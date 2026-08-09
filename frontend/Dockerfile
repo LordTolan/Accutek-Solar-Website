@@ -2,7 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 COPY . .
 ARG NEXT_PUBLIC_BACKEND_URL=https://api-new.accuteksolar.com
 ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
