@@ -146,3 +146,14 @@
     transform: none;
   }
 }
+
+@keyframes hero-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-25%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-\[hero-marquee_40s_linear_infinite\] {
+    animation: none !important;
+  }
+}
