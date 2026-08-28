@@ -7,6 +7,9 @@ import { ArrowUpRight } from "lucide-react";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 const MEDIA_BASE = "/media/darkness-to-light";
+const MEDIA_VERSION = "20260828-text-free";
+
+const mediaUrl = (fileName: string) => `${MEDIA_BASE}/${fileName}?v=${MEDIA_VERSION}`;
 
 const HEADLINE = [
   { text: "32 Years of", accent: false },
@@ -78,7 +81,7 @@ export default function DarknessToLightHero() {
       <motion.div style={shouldReduceMotion ? undefined : { scale: videoScale }} className="absolute inset-0">
         {!showVideo && (
           <img
-            src={`${MEDIA_BASE}/accutek_hero_poster.jpg`}
+            src={mediaUrl("accutek_hero_poster.jpg")}
             alt=""
             aria-hidden="true"
             className="absolute inset-0 h-full w-full object-cover"
@@ -93,7 +96,7 @@ export default function DarknessToLightHero() {
             loop
             playsInline
             preload="metadata"
-            poster={`${MEDIA_BASE}/accutek_hero_poster.jpg`}
+            poster={mediaUrl("accutek_hero_poster.jpg")}
             aria-hidden="true"
             onTimeUpdate={(event) => {
               const video = event.currentTarget;
@@ -109,10 +112,10 @@ export default function DarknessToLightHero() {
             }}
             className="absolute inset-0 h-full w-full object-cover transition-opacity duration-150"
           >
-            <source src={`${MEDIA_BASE}/hero_9x16.webm`} type="video/webm" media="(max-width: 768px)" />
-            <source src={`${MEDIA_BASE}/hero_9x16.mp4`} type="video/mp4" media="(max-width: 768px)" />
-            <source src={`${MEDIA_BASE}/hero_16x9.webm`} type="video/webm" />
-            <source src={`${MEDIA_BASE}/hero_16x9.mp4`} type="video/mp4" />
+            <source src={mediaUrl("hero_9x16.webm")} type="video/webm" media="(max-width: 768px)" />
+            <source src={mediaUrl("hero_9x16.mp4")} type="video/mp4" media="(max-width: 768px)" />
+            <source src={mediaUrl("hero_16x9.webm")} type="video/webm" />
+            <source src={mediaUrl("hero_16x9.mp4")} type="video/mp4" />
           </video>
         )}
       </motion.div>
