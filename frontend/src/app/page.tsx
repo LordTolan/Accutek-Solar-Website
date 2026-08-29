@@ -17,7 +17,7 @@ import { HCP_BOOK_URL } from "@/lib/utils";
 
 // Ground-mount solar array - primary hero imagery (Seth's note: balance roof + ground)
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
-const ROOF_IMG = "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
+const ROOF_IMG = "https://hcp-priceboo-vdubc3b2.manus.space/manus-storage/accutek-residential-roof-mount_b9e23d11.jpg";
 const TECH_IMG = "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&q=85&w=1400";
 
 const SERVICES = [

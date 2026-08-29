@@ -13,6 +13,7 @@ const nextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "i0.wp.com" },
       { protocol: "https", hostname: "customer-assets.emergentagent.com" },
+      { protocol: "https", hostname: "hcp-priceboo-vdubc3b2.manus.space" },
     ],
   },
   eslint: { ignoreDuringBuilds: true },
