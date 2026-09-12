@@ -15,12 +15,6 @@ const TEAM = [
     bio: "Founded Accutek in 1994. Three decades of electrical and solar work across West Central Indiana and East Central Illinois — the name on the building.",
   },
   {
-    name: "Master Breaker",
-    role: "Lead Website Architect",
-    slug: "master-breaker",
-    bio: "Digital Operations and Lead Website Architect. Handles code deployments, site health monitoring, and automated metrics reporting.",
-  },
-  {
     name: "Seth Davis",
     role: "Owner / Operator",
     slug: "seth-davis",
