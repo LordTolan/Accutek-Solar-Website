@@ -24,7 +24,7 @@ export default function OriginalHomeHero() {
           </p>
           <div className="mt-10 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
             <Link href="/quote" className="group inline-flex items-center gap-2 rounded-md bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-green-glow focus-ring" data-testid="hero-cta-primary">
-              Get my free estimate <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              Start My Free Assessment <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
             </Link>
             <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-md border border-border bg-card px-7 py-4 text-sm font-bold uppercase tracking-wider text-foreground transition hover:border-primary hover:text-primary focus-ring" data-testid="hero-cta-book">
               Book Online

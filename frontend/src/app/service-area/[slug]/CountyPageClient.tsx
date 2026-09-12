@@ -35,7 +35,7 @@ export default function CountyPageClient({ initialData }: { initialData: CountyD
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-8 py-4 font-bold uppercase tracking-wider text-xs hover:shadow-green-glow transition focus-ring" data-testid="county-cta-quote">
-              Start Free Estimate <ArrowRight className="w-4 h-4" />
+              Start My Free Assessment <ArrowRight className="w-4 h-4" />
             </Link>
             <a href="tel:+18128787343" className="inline-flex items-center gap-2 rounded-md border border-border bg-card/50 text-foreground px-8 py-4 font-bold text-xs uppercase tracking-wider focus-ring hover:border-primary transition">
               <Phone className="w-4 h-4 text-primary" /> (812) 878-7343

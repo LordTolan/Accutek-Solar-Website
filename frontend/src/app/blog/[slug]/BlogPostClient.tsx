@@ -279,7 +279,7 @@ export default function BlogPostClient() {
               href="/quote"
               className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow transition"
             >
-              Get my free estimate <ArrowRight className="w-4 h-4" />
+              Start My Free Assessment <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/blog"

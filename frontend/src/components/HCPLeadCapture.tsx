@@ -15,7 +15,7 @@ export default function HCPLeadCapture() {
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.22em] font-mono text-primary">
           <Cpu className="w-3 h-3" /> // HOUSECALL PRO LEAD FORM
         </div>
-        <h2 className="mt-2 font-heading text-2xl md:text-3xl font-extrabold">Request your free estimate</h2>
+        <h2 className="mt-2 font-heading text-2xl md:text-3xl font-extrabold">Start My Free Assessment</h2>
         <p className="mt-1.5 text-foreground/65 text-sm">
           Submit below — your request goes straight to Seth and the Accutek team.
         </p>

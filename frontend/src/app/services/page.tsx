@@ -47,7 +47,7 @@ export default function ServicesPage() {
 
         <div className="mt-16 text-center">
           <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="services-cta">
-            Get my free estimate <ArrowRight className="w-4 h-4" />
+            Start My Free Assessment <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>

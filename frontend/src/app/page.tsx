@@ -205,7 +205,7 @@ export default function HomePage() {
             </div>
             <div className="flex flex-col gap-3 lg:items-stretch">
               <Link href="/quote" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-green-glow focus-ring" data-testid="final-cta-quote">
-                Start My Free Estimate <ArrowRight className="w-4 h-4" />
+                Start My Free Assessment <ArrowRight className="w-4 h-4" />
               </Link>
               <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:border-primary hover:bg-white/10 focus-ring" data-testid="final-cta-book">
                 <CalendarClock className="w-4 h-4" /> Book a Time Now

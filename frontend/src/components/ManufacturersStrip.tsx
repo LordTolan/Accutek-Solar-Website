@@ -100,7 +100,7 @@ export default function ManufacturersStrip() {
             href="/quote"
             className="shrink-0 inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 text-sm font-bold uppercase tracking-wider hover:shadow-green-glow hover:-translate-y-0.5 transition focus-ring"
           >
-            Get a free estimate
+            Start My Free Assessment
           </Link>
         </div>
 

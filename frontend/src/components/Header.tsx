@@ -22,7 +22,7 @@ export default function Header() {
   const pathname = usePathname();
   if (pathname?.startsWith("/admin")) return null;
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#050807]/95 text-white backdrop-blur-xl" data-testid="site-header">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-[#07110d]/95 text-white backdrop-blur-xl" data-testid="site-header">
       <div className="container mx-auto container-px h-16 md:h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center group focus-ring rounded-md" data-testid="logo-link" aria-label="Accutek Solar - home">
           <Image
@@ -68,7 +68,7 @@ export default function Header() {
         </button>
       </div>
 
-      <div className={cn("md:hidden overflow-hidden border-t border-white/10 bg-[#050807] transition-[max-height] duration-300", open ? "max-h-[28rem]" : "max-h-0")}>
+      <div className={cn("md:hidden overflow-hidden border-t border-white/10 bg-[#07110d] transition-[max-height] duration-300", open ? "max-h-[28rem]" : "max-h-0")}>
         <div className="container mx-auto container-px py-4 flex flex-col gap-2.5" data-testid="mobile-menu">
           {NAV.map((n) => (
             <Link key={n.href} href={n.href} onClick={() => setOpen(false)} className="py-2 text-base font-medium text-white/80 hover:text-primary" data-testid={`mobile-nav-${n.label.toLowerCase().replace(/\s/g,'-')}`}>

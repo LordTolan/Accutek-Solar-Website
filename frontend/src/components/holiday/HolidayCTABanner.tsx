@@ -28,7 +28,7 @@ export default function HolidayCTABanner() {
         transition
       "
     >
-      🇺🇸 Independence Day Solar Savings Event — Get Your Free Estimate 🇺🇸
+      🇺🇸 Independence Day Solar Savings Event — Start My Free Assessment 🇺🇸
     </Link>
   )
 }
