@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, CalendarClock, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, CalendarClock, ShieldCheck, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { GALLERY } from "@/lib/site-data";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
@@ -147,33 +147,32 @@ export default function GalleryPage() {
         </div>
       )}
 
-      {/* CTA */}
-      <section className="py-16 md:py-24 relative overflow-hidden border-t border-border" data-testid="gallery-cta">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background" />
-        <div className="absolute inset-0 grid-bg grid-bg-fade opacity-40" />
-        <div className="relative container mx-auto container-px text-center max-w-3xl">
-          <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">// WANT YOUR SITE IN THE GALLERY?</div>
-          <h2 className="text-3xl md:text-5xl font-heading font-black text-balance">
-            Let&apos;s design a system <span className="text-primary">worth showing off.</span>
-          </h2>
-          <p className="mt-4 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
-          <div className="mt-8 flex flex-wrap gap-3 justify-center">
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring"
-              data-testid="gallery-cta-quote"
-            >
-              Get free estimate <ArrowRight className="w-4 h-4" />
-            </Link>
-            <a
-              href={HCP_BOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-md border border-border bg-card text-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:border-primary transition focus-ring"
-              data-testid="gallery-cta-book"
-            >
-              <CalendarClock className="w-4 h-4" /> Book Online
-            </a>
+      {/* CTA — dark Housecall Pro conversion band */}
+      <section className="relative overflow-hidden bg-[#07110d] text-white" data-testid="gallery-cta">
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:56px_56px]" />
+        <div className="absolute -right-28 -top-36 h-[30rem] w-[30rem] rounded-full border border-primary/25 shadow-[inset_0_0_100px_rgba(34,197,94,.08)]" aria-hidden="true" />
+        <div className="relative container mx-auto container-px py-20 md:py-24">
+          <div className="grid items-end gap-10 lg:grid-cols-[1.2fr_.8fr]">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-4">// WANT YOUR SITE IN THE GALLERY?</div>
+              <h2 className="max-w-3xl text-4xl md:text-6xl font-heading font-black text-balance">
+                Let&apos;s design a system worth showing off.
+              </h2>
+              <p className="mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
+                Share your project through Housecall Pro so your details, estimate, appointment, and follow-up stay together.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 lg:items-stretch">
+              <Link href="/quote" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-green-glow focus-ring" data-testid="gallery-cta-quote">
+                Start My Free Estimate <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:border-primary hover:bg-white/10 focus-ring" data-testid="gallery-cta-book">
+                <CalendarClock className="w-4 h-4" /> Book a Time Now
+              </a>
+              <a href="tel:+18128787343" className="inline-flex items-center justify-center gap-2 py-2 text-sm font-semibold text-white/65 transition hover:text-white focus-ring" data-testid="gallery-cta-call">
+                <ShieldCheck className="w-4 h-4 text-primary" /> Or call (812) 878-7343
+              </a>
+            </div>
           </div>
         </div>
       </section>

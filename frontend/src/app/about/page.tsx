@@ -188,6 +188,36 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
+
+      {/* CTA — dark Housecall Pro conversion band */}
+      <section className="relative overflow-hidden bg-[#07110d] text-white" data-testid="about-team-cta">
+        <div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.12)_1px,transparent_1px)] [background-size:56px_56px]" />
+        <div className="absolute -right-28 -top-36 h-[30rem] w-[30rem] rounded-full border border-primary/25 shadow-[inset_0_0_100px_rgba(34,197,94,.08)]" aria-hidden="true" />
+        <div className="relative container mx-auto container-px py-20 md:py-24">
+          <div className="grid items-end gap-10 lg:grid-cols-[1.2fr_.8fr]">
+            <div>
+              <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-4">// TALK TO THE TEAM</div>
+              <h2 className="max-w-3xl text-4xl md:text-6xl font-heading font-black text-balance">
+                Ready to put our crew to work?
+              </h2>
+              <p className="mt-5 max-w-2xl text-base md:text-lg leading-relaxed text-white/65">
+                Share your project through Housecall Pro so your details, estimate, appointment, and follow-up stay together.
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 lg:items-stretch">
+              <Link href="/quote" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md bg-primary px-7 py-4 text-sm font-bold uppercase tracking-wider text-primary-foreground transition hover:-translate-y-0.5 hover:shadow-green-glow focus-ring" data-testid="about-team-cta-quote">
+                Start My Free Estimate <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center gap-2 rounded-md border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold uppercase tracking-wider text-white transition hover:border-primary hover:bg-white/10 focus-ring" data-testid="about-team-cta-book">
+                <CalendarClock className="w-4 h-4" /> Book a Time Now
+              </a>
+              <a href="tel:+18128787343" className="inline-flex items-center justify-center gap-2 py-2 text-sm font-semibold text-white/65 transition hover:text-white focus-ring" data-testid="about-team-cta-call">
+                <ShieldCheck className="w-4 h-4 text-primary" /> Or call (812) 878-7343
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
