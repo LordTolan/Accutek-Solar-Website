@@ -58,10 +58,10 @@ export default function Footer() {
           <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-4">// GET STARTED</div>
           <p className="text-sm text-foreground/70">Tell us about your home or business and we'll size the right system - at no cost.</p>
           <Link href="/quote" className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-5 py-3 text-xs font-bold uppercase tracking-wider hover:shadow-green-glow transition" data-testid="footer-cta">
-            Start My Quote
+            Start My Free Estimate
           </Link>
           <a href={HCP_BOOK_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-2 rounded-md border border-border px-5 py-3 text-xs font-bold uppercase tracking-wider hover:border-primary transition w-full" data-testid="footer-book">
-            <CalendarClock className="w-4 h-4" /> Book Online
+            <CalendarClock className="w-4 h-4" /> Book a Time Now
           </a>
         </div>
       </div>

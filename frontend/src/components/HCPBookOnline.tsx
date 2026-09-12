@@ -21,7 +21,7 @@ export default function HCPBookOnline({ variant = "primary" }: { variant?: "prim
         }`}
         data-testid="hcp-book-cta"
       >
-        <CalendarClock className="w-4 h-4" /> Book Online
+        <CalendarClock className="w-4 h-4" /> Book a Time Now
       </a>
       <a
         href="tel:+18128787343"
