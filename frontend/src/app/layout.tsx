@@ -9,6 +9,9 @@ import { Toaster } from "sonner";
 import { HolidayThemeProvider } from "@/context/HolidayThemeProvider";
 import HolidayCTABanner from "@/components/holiday/HolidayCTABanner";
 import HalloweenSiteDecor from "@/components/HalloweenSiteDecor";
+import HalloweenBackdrop from "@/components/holiday/HalloweenBackdrop";
+import HalloweenAmbientSound from "@/components/holiday/HalloweenAmbientSound";
+import HalloweenExitIntent from "@/components/holiday/HalloweenExitIntent";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.accuteksolar.com"),
@@ -46,8 +49,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen flex flex-col bg-background text-foreground relative">
+      <body className="min-h-screen flex flex-col bg-background text-foreground relative isolate">
         <HolidayThemeProvider>
+          <HalloweenBackdrop />
           <HolidayCTABanner />
           <HalloweenSiteDecor />
           <Header />
@@ -55,6 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <StickyMobileCTA />
           <SunnyCompanion />
+          <HalloweenAmbientSound />
+          <HalloweenExitIntent />
           <Toaster position="top-right" theme="dark" richColors />
         </HolidayThemeProvider>
 
