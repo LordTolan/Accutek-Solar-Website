@@ -5,6 +5,9 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { Toaster } from "sonner";
+import { HolidayThemeProvider } from "@/context/HolidayThemeProvider";
+import HolidayCTABanner from "@/components/holiday/HolidayCTABanner";
+import HalloweenSiteDecor from "@/components/HalloweenSiteDecor";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.accuteksolar.com"),
@@ -42,12 +45,16 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen flex flex-col bg-background text-foreground">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <StickyMobileCTA />
-        <Toaster position="top-right" theme="dark" richColors />
+      <body className="min-h-screen flex flex-col bg-background text-foreground relative">
+        <HolidayThemeProvider>
+          <HolidayCTABanner />
+          <HalloweenSiteDecor />
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <StickyMobileCTA />
+          <Toaster position="top-right" theme="dark" richColors />
+        </HolidayThemeProvider>
 
         {/* ---------------------------------------------------------------------
             HOUSECALL PRO - Book Online widget script

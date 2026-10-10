@@ -37,15 +37,15 @@ export default function RotatingHeadline() {
   }, []);
 
   return (
-    <div className="h-[4.5rem] md:h-32 flex items-center">
+    <div className="min-h-[5.5rem] sm:min-h-[6.5rem] md:min-h-[8.5rem] flex items-center">
       <AnimatePresence mode="wait">
-        <motion.h2
+        <motion.h1
           key={index}
           initial={{ opacity: 0, y: 15, filter: "blur(8px)" }}
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           exit={{ opacity: 0, y: -15, filter: "blur(8px)" }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-4xl md:text-5xl lg:text-7xl font-heading font-black leading-[1.05] tracking-tight text-balance"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-heading font-black leading-[1.1] md:leading-[1.05] tracking-tight text-balance"
           data-testid="hero-headline"
         >
           {HEADLINES[index].split(" ").map((word, i) => (
@@ -57,7 +57,7 @@ export default function RotatingHeadline() {
               )}
             </span>
           ))}
-        </motion.h2>
+        </motion.h1>
       </AnimatePresence>
     </div>
   );

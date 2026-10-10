@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
 
 const DEFAULT_FAQS = [
   {
@@ -38,9 +39,12 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-20 md:py-28 bg-muted/40" data-testid="faq-section">
+    <section className="py-20 md:py-28 bg-muted/40 relative" data-testid="faq-section">
       <div className="container mx-auto container-px max-w-4xl">
-        <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Common questions</div>
+        <div className="flex items-center justify-between mb-3">
+          <div className="text-xs uppercase tracking-[0.2em] text-secondary/70">Common questions</div>
+          <PumpkinCollectible pumpkinId="gandalf" size="sm" />
+        </div>
         <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">Everything you wanted to ask.</h2>
 
         <div className="mt-12 divide-y divide-border border-t border-b border-border">

@@ -157,3 +157,120 @@
     animation: none !important;
   }
 }
+
+/* ----------------------------------------------------------------------
+   Halloween Seasonal Animation Keyframes & Reduced Motion rules
+   ----------------------------------------------------------------------*/
+/* Bats looping across hero top */
+@keyframes hw-bat-fly-1 {
+  0% { transform: translate(-10vw, 10px) scale(0.8) rotate(5deg); }
+  30% { transform: translate(30vw, -10px) scale(1) rotate(-8deg); }
+  60% { transform: translate(70vw, 15px) scale(0.9) rotate(6deg); }
+  100% { transform: translate(110vw, -5px) scale(0.8) rotate(-4deg); }
+}
+@keyframes hw-bat-fly-2 {
+  0% { transform: translate(110vw, 25px) scale(0.7) scaleX(-1) rotate(-5deg); }
+  40% { transform: translate(60vw, 5px) scale(0.8) scaleX(-1) rotate(6deg); }
+  75% { transform: translate(25vw, 30px) scale(0.7) scaleX(-1) rotate(-8deg); }
+  100% { transform: translate(-10vw, 10px) scale(0.7) scaleX(-1) rotate(4deg); }
+}
+@keyframes hw-bat-fly-3 {
+  0% { transform: translate(-5vw, 30px) scale(1) rotate(0deg); }
+  50% { transform: translate(50vw, 0px) scale(1.1) rotate(12deg); }
+  100% { transform: translate(115vw, 25px) scale(1) rotate(-10deg); }
+}
+
+.hw-bat-1 { animation: hw-bat-fly-1 18s linear infinite; }
+.hw-bat-2 { animation: hw-bat-fly-2 22s linear infinite 4s; }
+.hw-bat-3 { animation: hw-bat-fly-3 15s linear infinite 8s; }
+
+/* UFO abducting solar panel with glowing beam */
+@keyframes hw-ufo-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
+}
+@keyframes hw-beam-pulse {
+  0%, 100% { opacity: 0.75; transform: scaleX(1); }
+  50% { opacity: 0.95; transform: scaleX(1.08); }
+}
+@keyframes hw-panel-levitate {
+  0% { transform: translate(-50%, 15px) scale(0.85) rotate(-5deg); opacity: 0.7; }
+  50% { transform: translate(-50%, -15px) scale(1.05) rotate(4deg); opacity: 1; }
+  100% { transform: translate(-50%, 15px) scale(0.85) rotate(-5deg); opacity: 0.7; }
+}
+
+.hw-ufo-wobble { animation: hw-ufo-float 6s ease-in-out infinite; }
+.hw-ufo-beam { animation: hw-beam-pulse 2.5s ease-in-out infinite; }
+.hw-abducted-panel { animation: hw-panel-levitate 4s ease-in-out infinite; }
+
+/* Zombies shuffling across */
+@keyframes hw-zombie-walk {
+  0% { transform: translateX(-15vw); }
+  100% { transform: translateX(115vw); }
+}
+@keyframes hw-sway-1 {
+  0%, 100% { transform: rotate(-5deg) translateY(0); }
+  50% { transform: rotate(5deg) translateY(-4px); }
+}
+@keyframes hw-sway-2 {
+  0%, 100% { transform: rotate(4deg) translateY(-3px); }
+  50% { transform: rotate(-6deg) translateY(0); }
+}
+
+.hw-zombie-march { animation: hw-zombie-walk 35s linear infinite; }
+.hw-zombie-sway-1 { animation: hw-sway-1 1.4s ease-in-out infinite; }
+.hw-zombie-sway-2 { animation: hw-sway-2 1.6s ease-in-out infinite; }
+
+/* Dancing zombie couple */
+@keyframes hw-dance-a {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(8deg) translateY(-6px); }
+}
+@keyframes hw-dance-b {
+  0%, 100% { transform: rotate(8deg) translateY(-6px); }
+  50% { transform: rotate(-8deg) translateY(0); }
+}
+.hw-dance-partner-a { animation: hw-dance-a 1.8s ease-in-out infinite; }
+.hw-dance-partner-b { animation: hw-dance-b 1.8s ease-in-out infinite; }
+
+/* Scuttling spider dropping down */
+@keyframes hw-spider-drop {
+  0%, 100% { transform: translateY(-120px); }
+  35%, 65% { transform: translateY(0); }
+}
+@keyframes hw-spider-shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg); }
+  75% { transform: rotate(-8deg); }
+}
+.hw-spider-descend { animation: hw-spider-drop 12s ease-in-out infinite; }
+.hw-spider-wiggle { animation: hw-spider-shake 0.8s ease-in-out infinite; }
+
+/* Blinking jack-o'-lantern */
+@keyframes hw-jack-blink {
+  0%, 45%, 55%, 100% { opacity: 1; fill: #ffe082; filter: drop-shadow(0 0 6px #ff9800); }
+  50% { opacity: 0.15; fill: #5d4037; filter: none; }
+}
+.hw-jack-eye, .hw-jack-mouth { animation: hw-jack-blink 4s ease-in-out infinite; }
+
+/* Lantern ghoul swaying glow */
+@keyframes hw-ghoul-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+.hw-lantern-ghoul { animation: hw-ghoul-float 5s ease-in-out infinite; }
+
+/* prefers-reduced-motion safety: stops all decor movement */
+@media (prefers-reduced-motion: reduce) {
+  .hw-bat-1, .hw-bat-2, .hw-bat-3,
+  .hw-ufo-wobble, .hw-ufo-beam, .hw-abducted-panel,
+  .hw-zombie-march, .hw-zombie-sway-1, .hw-zombie-sway-2,
+  .hw-dance-partner-a, .hw-dance-partner-b,
+  .hw-spider-descend, .hw-spider-wiggle,
+  .hw-jack-eye, .hw-jack-mouth,
+  .hw-lantern-ghoul {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+

@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { HCP_BOOK_URL } from "@/lib/utils";
+import HalloweenHeroPromo from "@/components/HalloweenHeroPromo";
 
 const MEDIA_BASE = "/media/darkness-to-light";
 const MEDIA_VERSION = "20260828-text-free";
@@ -143,6 +144,7 @@ export default function DarknessToLightHero() {
       >
         <div className="container mx-auto w-full container-px pb-12 pt-12 md:pb-16 md:pt-16 lg:pb-20">
           <div className="max-w-5xl">
+            <HalloweenHeroPromo />
             <motion.p
               {...motionProps}
               initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}

@@ -23,6 +23,11 @@ export default function AdminDashboard() {
   const [filterStatus, setFilterStatus] = useState("");
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(true);
+  const [holidaySettings, setHolidaySettings] = useState<{ force_active: boolean; theme_name: string }>({
+    force_active: false,
+    theme_name: "halloween",
+  });
+  const [savingTheme, setSavingTheme] = useState(false);
 
   async function refresh() {
     setLoading(true);
@@ -31,11 +36,39 @@ export default function AdminDashboard() {
       if (filterTier) params.tier = filterTier;
       if (filterStatus) params.status = filterStatus;
       if (q) params.q = q;
-      const [me, st, ls] = await Promise.all([api.me(), api.stats(), api.listLeads(params)]);
-      setUser(me); setStats(st); setLeads(ls.leads);
+      const [me, st, ls, set] = await Promise.all([
+        api.me(),
+        api.stats(),
+        api.listLeads(params),
+        api.getSettings().catch(() => null),
+      ]);
+      setUser(me);
+      setStats(st);
+      setLeads(ls.leads);
+      if (set?.holiday_theme) {
+        setHolidaySettings({
+          force_active: !!set.holiday_theme.force_active,
+          theme_name: set.holiday_theme.theme_name || "halloween",
+        });
+      }
     } catch (e: any) {
       router.push("/admin/login");
-    } finally { setLoading(false); }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateHolidayOverride(forceActive: boolean, themeName: string) {
+    setSavingTheme(true);
+    try {
+      await api.setHolidayOverride(forceActive, themeName);
+      setHolidaySettings({ force_active: forceActive, theme_name: themeName });
+      toast.success(`Holiday theme override updated: ${forceActive ? `Forced ${themeName}` : "Off"}`);
+    } catch (e: any) {
+      toast.error(e.message || "Failed to update holiday theme");
+    } finally {
+      setSavingTheme(false);
+    }
   }
 
   useEffect(() => { refresh(); }, []);
@@ -92,6 +125,41 @@ export default function AdminDashboard() {
           <StatCard label="Warm" value={stats?.warm ?? 0} />
           <StatCard label="Nurture" value={stats?.nurture ?? 0} />
           <StatCard label="Won %" value={`${stats?.conversion_rate ?? 0}%`} accent="text-secondary" />
+        </div>
+
+        {/* Holiday Seasonal Theme Admin Controls */}
+        <div className="bg-card rounded-2xl border border-border/60 p-5 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4" data-testid="admin-holiday-theme-controls">
+          <div>
+            <div className="text-xs uppercase tracking-[0.18em] font-mono text-primary">// SEASONAL THEME CONTROLS</div>
+            <div className="font-heading text-lg font-bold mt-0.5">Live Holiday Theme Override</div>
+            <p className="text-xs text-muted-foreground mt-1">
+              Override date-based automation to force Halloween (or 4th of July) on/off for staging, testing, or marketing campaigns.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <select
+              value={holidaySettings.theme_name}
+              onChange={(e) => setHolidaySettings((prev) => ({ ...prev, theme_name: e.target.value }))}
+              className="bg-background border border-border rounded-lg px-3 py-2 text-xs font-semibold focus-ring"
+              data-testid="admin-holiday-theme-select"
+            >
+              <option value="halloween">Halloween (Spooky)</option>
+              <option value="fourth-of-july">Fourth of July</option>
+            </select>
+            <button
+              onClick={() => updateHolidayOverride(!holidaySettings.force_active, holidaySettings.theme_name)}
+              disabled={savingTheme}
+              className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider transition focus-ring ${
+                holidaySettings.force_active
+                  ? "bg-amber-600 text-white hover:bg-amber-700"
+                  : "bg-primary text-primary-foreground hover:shadow-green-glow"
+              }`}
+              data-testid="admin-holiday-theme-toggle"
+            >
+              {savingTheme ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : null}
+              {holidaySettings.force_active ? "Deactivate Override" : "Force Active Now"}
+            </button>
+          </div>
         </div>
 
         {/* Filters */}
