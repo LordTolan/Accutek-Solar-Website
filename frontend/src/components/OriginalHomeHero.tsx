@@ -5,6 +5,7 @@ import { HCP_BOOK_URL } from "@/lib/utils";
 import HeroVideo from "@/components/HeroVideo";
 import RotatingHeadline from "@/components/RotatingHeadline";
 import HalloweenHeroPromo from "@/components/HalloweenHeroPromo";
+import HalloweenHeroSeasonal from "@/components/holiday/HalloweenHeroSeasonal";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
 const ROOF_IMG = "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
@@ -52,6 +53,7 @@ export default function OriginalHomeHero() {
               <span key={badge} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> {badge}</span>
             ))}
           </div>
+          <HalloweenHeroSeasonal />
         </div>
         <div className="relative animate-fade-up lg:col-span-5" style={{ animationDelay: "0.2s" }} data-testid="hero-image-card">
           <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-border bg-card shadow-ambient-lg">
