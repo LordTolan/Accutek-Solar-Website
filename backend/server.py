@@ -394,6 +394,13 @@ async def chat_with_sunny(req: SunnyChatRequest, request: Request):
     return await handle_sunny_chat(req, client_ip)
 
 
+@api.post("/chat", response_model=SunnyChatResponse)
+async def chat_generic(req: SunnyChatRequest, request: Request):
+    """Alias for POST /api/chat as specified in research memo."""
+    client_ip = request.client.host if request.client else "unknown"
+    return await handle_sunny_chat(req, client_ip)
+
+
 @api.get("/chat/sunny/faqs")
 async def get_sunny_faqs():
     """Return list of quick-start FAQ suggestions for Sunny companion."""

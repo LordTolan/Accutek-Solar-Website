@@ -110,6 +110,16 @@ class TestSunnyChatbotEndpoints:
         assert "$" not in data["reply"]
         assert data["source"] in ("faq", "faq_grounded_fallback", "openai", "anthropic")
 
+    def test_chat_generic_alias(self):
+        res = client.post(
+            "/api/chat",
+            json={"message": "Do you install Kohler generators?"},
+        )
+        assert res.status_code == 200
+        data = res.json()
+        assert "reply" in data
+        assert data["source"] in ("faq", "pricing_fixed")
+
     def test_sunny_faqs_list(self):
         res = client.get("/api/chat/sunny/faqs")
         assert res.status_code == 200
