@@ -209,7 +209,7 @@ export const FAQS = [
   },
   {
     q: "What services does Accutek offer?",
-    a: "We provide turnkey residential, commercial, and agricultural solar PV installations (roof, ground, and pole mounts), lithium battery storage (LFP), authorized Kohler standby generators (plus Generac and Cummins service), high-efficiency mini-split heat pumps, Level 2 EV charging stations, and full master-level electrical service and panel upgrades.",
+    a: "We provide turnkey residential, commercial, and agricultural solar PV installations (roof, ground, and pole mounts) and lithium battery storage (LFP). For backup power, we install Kohler standby generators, and we service Generac and Cummins generators. We also offer high-efficiency mini-split heat pumps, Level 2 EV charging stations, and full master-level electrical contracting and panel upgrades.",
   },
   {
     q: "Do you service systems you didn't install?",
@@ -241,7 +241,7 @@ export const FAQS = [
   },
   {
     q: "What warranties and craftsmanship guarantees do you provide?",
-    a: "We install Tier-1 solar panels backed by 25-year manufacturer power production warranties, lithium battery storage systems with 10- to 15-year manufacturer warranties, and authorized standby generators with full factory warranty backing. Beyond manufacturer hardware warranties, Accutek stands behind our installation craftsmanship with direct, lifetime local service — backed by over 32 years of continuous electrical contracting in Indiana and Illinois.",
+    a: "We install Tier-1 solar panels backed by 25-year manufacturer power production warranties, lithium battery storage systems with 10- to 15-year manufacturer warranties, and Kohler standby generators (we are an authorized Kohler installer) with full factory warranty backing. Beyond manufacturer hardware warranties, Accutek stands behind our installation craftsmanship with direct, lifetime local service — backed by over 32 years of continuous electrical contracting in Indiana and Illinois.",
   },
   {
     q: "Are financing and grant options available?",
