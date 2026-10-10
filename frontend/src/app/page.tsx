@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Zap, Wrench, BatteryCharging, LightbulbIcon, Building2, ShieldCheck, Sun, Mountain, Cpu, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ShieldCheck, CheckCircle2, Sun, Mountain, Building2, BatteryCharging, Wrench, Lightbulb, BatteryMedium, Flame, Zap, Activity } from "lucide-react";
 import DarknessToLightHero from "@/components/DarknessToLightHero";
 import OriginalHomeHero from "@/components/OriginalHomeHero";
 import { ACTIVE_HOME_HERO } from "@/config/homeHero";
@@ -14,20 +14,25 @@ import ManufacturerLogos from "@/components/ManufacturerLogos";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import ManufacturersStrip from "@/components/ManufacturersStrip";
 import { HCP_BOOK_URL } from "@/lib/utils";
+import { SERVICES_DATA } from "@/lib/services-data";
 
 // Ground-mount solar array - primary hero imagery (Seth's note: balance roof + ground)
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
 const ROOF_IMG = "https://hcp-priceboo-vdubc3b2.manus.space/manus-storage/accutek-residential-roof-mount_b9e23d11.jpg";
 const TECH_IMG = "https://images.unsplash.com/photo-1668097613572-40b7c11c8727?crop=entropy&cs=srgb&fm=jpg&q=85&w=1400";
 
-const SERVICES = [
-  { icon: Sun, title: "Residential Solar PV", desc: "Grid-tied, hybrid and off-grid systems - roof, ground mount, or pole mount." },
-  { icon: Mountain, title: "Ground-Mount Arrays", desc: "Field & yard installs sized for higher-output sites - ideal for ag, rural and larger lots." },
-  { icon: Building2, title: "Commercial & Ag Solar", desc: "Custom systems for businesses, farms and ag operations - REAP-grant eligible." },
-  { icon: BatteryCharging, title: "Kohler Generators", desc: "Authorized Kohler installer - 24 / 7 automatic backup power." },
-  { icon: Wrench, title: "Electrical Install & Repair", desc: "Licensed electricians with 32 years of full-service experience." },
-  { icon: LightbulbIcon, title: "LED & Energy Monitoring", desc: "Smart lighting + live energy monitoring to drive your usage down." },
-];
+const ICON_MAP = {
+  Sun,
+  Mountain,
+  Building2,
+  BatteryCharging,
+  Wrench,
+  Lightbulb,
+  BatteryMedium,
+  Flame,
+  Zap,
+  Activity,
+};
 
 export default function HomePage() {
   return (
@@ -117,16 +122,37 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
-            {SERVICES.map((s, i) => (
-              <div key={i} className="group bg-card rounded-lg p-7 border border-border hover:border-primary hover:shadow-green-glow transition" data-testid={`service-card-${i}`}>
-                <div className="w-12 h-12 rounded-md bg-primary/10 text-primary grid place-items-center mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition">
-                  <s.icon className="w-6 h-6" strokeWidth={2} />
-                </div>
-                <div className="font-heading text-xl font-bold">{s.title}</div>
-                <p className="mt-2 text-foreground/65 text-sm leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {SERVICES_DATA.map((s, i) => {
+              const IconComp = ICON_MAP[s.iconName] || Zap;
+              return (
+                <Link
+                  key={s.slug}
+                  href={`/services/${s.slug}`}
+                  className="group bg-card rounded-xl p-7 border border-border hover:border-primary hover:shadow-green-glow transition focus-ring flex flex-col justify-between"
+                  data-testid={`service-card-${i}`}
+                >
+                  <div>
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary grid place-items-center group-hover:bg-primary group-hover:text-primary-foreground transition">
+                        <IconComp className="w-6 h-6" strokeWidth={2} />
+                      </div>
+                      {s.badge && (
+                        <span className="text-[9px] uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border group-hover:border-primary/40 group-hover:text-primary transition-colors">
+                          {s.badge}
+                        </span>
+                      )}
+                    </div>
+                    <div className="font-heading text-xl font-bold group-hover:text-primary transition-colors">{s.title}</div>
+                    <p className="mt-2 text-foreground/65 text-sm leading-relaxed">{s.shortDesc}</p>
+                  </div>
+                  <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-primary">
+                    <span>Learn more &amp; photo gallery</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              );
+            })}
           </div>
 
           <div className="mt-12 relative rounded-xl overflow-hidden border border-border shadow-ambient-lg" data-testid="services-cta-banner">
@@ -160,7 +186,7 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-5xl font-extrabold">The <span className="text-primary">Solar Dispatch.</span></h2>
             </div>
             <Link href="/blog" className="text-sm font-bold text-primary hover:underline">
-              View all articles ->
+              View all articles &rarr;
             </Link>
           </div>
           <div className="grid md:grid-cols-2 gap-8">

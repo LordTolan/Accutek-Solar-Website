@@ -14,13 +14,16 @@ export function generateStaticParams() {
  */
 export const SITE_URL = "https://www.accuteksolar.com";
 
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
 /** Dynamic metadata + JSON-LD per blog post. */
-export function generateMetadata({
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const post = getBlogPost(params.slug);
+}: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) {
     return { title: "Post Not Found", robots: { index: false, follow: false } };
   }

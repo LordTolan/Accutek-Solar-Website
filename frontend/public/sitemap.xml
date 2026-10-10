@@ -11,6 +11,56 @@
         <priority>0.9</priority>
     </url>
     <url>
+        <loc>https://www.accuteksolar.com/services/residential-solar</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/ground-mount-solar</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/commercial-ag-solar</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/battery-storage</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/standby-generators</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/mini-split-hvac</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/ev-chargers</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/solar-service-repair</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/electrical-install-repair</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://www.accuteksolar.com/services/led-energy-monitoring</loc>
+        <changefreq>monthly</changefreq>
+        <priority>0.75</priority>
+    </url>
+    <url>
         <loc>https://www.accuteksolar.com/commercial</loc>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
