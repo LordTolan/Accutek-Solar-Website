@@ -197,15 +197,15 @@ export const FAQS = [
   },
   {
     q: "How much does a solar or backup power system cost?",
-    a: "Because every property has unique energy usage, service panel capacity, and mounting requirements, every system is custom designed. Quotes are tailored to your specific site, budget, and power goals. Seth personally reviews your historical utility bills and property layout to provide a comprehensive, transparent quote.",
+    a: "Every project is custom to your property, energy usage, and electrical panel setup. Please request a quote online or give us a call at (812) 878-7343, and an Accutek team member will follow up directly with detailed pricing for your site.",
   },
   {
     q: "Do you offer free estimates?",
-    a: "Yes, every solar and generator quote is 100% free with no high-pressure sales. You can use our online calculator for a fast 25-year savings projection, request a quote online, or book a free physical site visit.",
+    a: "Yes. Every solar, battery storage, and generator consultation is 100% free with no obligation. Reach out through our quote form or call our office to schedule a free on-site property evaluation.",
   },
   {
     q: "What areas do you serve?",
-    a: "Accutek Solar is headquartered in Clinton, IN (9797 S Rangeline Rd) and serves 17 counties across West Central Indiana and East Central Illinois. If you are located in or near our regional footprint, contact us with your ZIP code or county and we will gladly confirm service availability.",
+    a: "Accutek Solar is headquartered in Clinton, IN (9797 S Rangeline Rd) and serves a wide regional footprint across Indiana and East Central Illinois covering over 70 counties and 500+ ZIP codes through our Housecall Pro service territory. Send us your ZIP code or request a quote and our team will gladly confirm service availability for your property.",
   },
   {
     q: "What services does Accutek offer?",
@@ -236,16 +236,16 @@ export const FAQS = [
     a: "Net metering / net billing tracks the difference between energy your panels send to the grid and energy you consume. In Indiana, utilities credit your account for excess kilowatt-hours, helping offset winter bills with summer production. In Illinois, customers may also participate in the Illinois Shines incentive program. Utility credit rules vary by provider, and we model your specific utility tariff during system design.",
   },
   {
-    q: "How does billing, deposits, and payment work for installations and service?",
-    a: "For turnkey solar, battery, and generator installations, project milestones and deposit terms are clearly itemized in your written agreement prior to ordering equipment and commencing work. For service calls, diagnostics, and electrical repairs, invoices are provided upon completion. Existing customers can also review project details and invoices directly through our Housecall Pro customer portal.",
+    q: "How does billing, invoices, and customer account access work?",
+    a: "Existing customers can review project details, track service visits, and pay invoices securely online through our Housecall Pro customer portal. For any questions regarding your account or active project, our team is always available by phone or email.",
   },
   {
     q: "What warranties and craftsmanship guarantees do you provide?",
     a: "We install Tier-1 solar panels backed by 25-year manufacturer power production warranties, lithium battery storage systems with 10- to 15-year manufacturer warranties, and authorized standby generators with full factory warranty backing. Beyond manufacturer hardware warranties, Accutek stands behind our installation craftsmanship with direct, lifetime local service — backed by over 32 years of continuous electrical contracting in Indiana and Illinois.",
   },
   {
-    q: "Do you offer financing options?",
-    a: "Yes, flexible solar financing options and loan programs are available to help spread system costs into predictable monthly payments that replace or lower your utility bill. We can also assist rural small businesses and agricultural operations with technical documentation for USDA REAP grants.",
+    q: "Are financing and grant options available?",
+    a: "Yes. Flexible financing options are available through third-party lending partners for qualified property owners, and we assist agricultural and rural small business clients with technical documentation for USDA REAP grants. Ask our team during your consultation for current program details.",
   },
   {
     q: "Should I choose battery storage, a standby generator, or both?",
