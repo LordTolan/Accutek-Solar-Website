@@ -236,8 +236,12 @@ export const FAQS = [
     a: "Net metering / net billing tracks the difference between energy your panels send to the grid and energy you consume. In Indiana, utilities credit your account for excess kilowatt-hours, helping offset winter bills with summer production. In Illinois, customers may also participate in the Illinois Shines incentive program. Utility credit rules vary by provider, and we model your specific utility tariff during system design.",
   },
   {
-    q: "What warranties protect my equipment and installation?",
-    a: "Tier-1 solar panels come with 25-year manufacturer power production warranties. Modern Lithium Iron Phosphate (LFP) battery banks generally carry 10- to 15-year manufacturer warranties, and standby generators include manufacturer warranties backed by authorized installer support. As a local, family-owned electrical contractor in business since 1994, Accutek stands behind our craftsmanship with direct, lifetime local service.",
+    q: "How does billing, deposits, and payment work for installations and service?",
+    a: "For turnkey solar, battery, and generator installations, project milestones and deposit terms are clearly itemized in your written agreement prior to ordering equipment and commencing work. For service calls, diagnostics, and electrical repairs, invoices are provided upon completion. Existing customers can also review project details and invoices directly through our Housecall Pro customer portal.",
+  },
+  {
+    q: "What warranties and craftsmanship guarantees do you provide?",
+    a: "We install Tier-1 solar panels backed by 25-year manufacturer power production warranties, lithium battery storage systems with 10- to 15-year manufacturer warranties, and authorized standby generators with full factory warranty backing. Beyond manufacturer hardware warranties, Accutek stands behind our installation craftsmanship with direct, lifetime local service — backed by over 32 years of continuous electrical contracting in Indiana and Illinois.",
   },
   {
     q: "Do you offer financing options?",
