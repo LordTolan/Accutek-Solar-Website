@@ -47,7 +47,7 @@ export default function ManufacturerLogos() {
       className="py-16 md:py-20 border-b border-border bg-card/40"
       data-testid="manufacturer-logos-section"
     >
-      <div className="container mx-auto container-px max-w-6xl">
+      <div className="container mx-auto container-px max-w-7xl">
         {/* Header */}
         <div className="text-center mb-10">
           <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">
@@ -62,35 +62,35 @@ export default function ManufacturerLogos() {
         </div>
 
         {/* Logo grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
-          {MANUFACTURERS.map((mfr) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {MANUFACTURERS.map((mfr, i) => (
             <a
               key={mfr.slug}
               href={mfr.url}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${mfr.name} — ${mfr.category}`}
-              className="group flex flex-col items-center justify-between gap-4 rounded-lg border border-border bg-card p-5 hover:border-primary hover:shadow-green-glow transition focus-ring"
+              className={`group flex min-h-[12rem] flex-col items-center justify-between gap-5 rounded-xl border border-border bg-card p-6 hover:border-primary hover:shadow-green-glow transition focus-ring md:min-h-[14rem] md:p-7 ${i === MANUFACTURERS.length - 1 ? "col-span-2 sm:col-span-1" : ""}`}
               data-testid={`mfr-card-${mfr.slug}`}
             >
               {/* Logo */}
-              <div className="relative w-full h-12 flex items-center justify-center">
+              <div className="relative flex h-20 w-full items-center justify-center md:h-24">
                 <Image
                   src={mfr.logo}
                   alt={`${mfr.name} logo`}
-                  width={140}
-                  height={48}
-                  className="object-contain max-h-10 w-auto opacity-75 group-hover:opacity-100 transition"
+                  width={240}
+                  height={96}
+                  className="object-contain max-h-16 md:max-h-20 max-w-full w-auto opacity-90 group-hover:opacity-100 transition"
                   unoptimized
                 />
               </div>
 
               {/* Name + category */}
               <div className="text-center">
-                <div className="font-heading text-sm font-bold text-foreground group-hover:text-primary transition">
+                <div className="font-heading text-base md:text-lg font-bold text-foreground group-hover:text-primary transition">
                   {mfr.name}
                 </div>
-                <div className="mt-0.5 text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground">
+                <div className="mt-1 text-[10px] md:text-[11px] uppercase tracking-[0.18em] font-mono text-muted-foreground">
                   {mfr.category}
                 </div>
               </div>
