@@ -101,3 +101,37 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+
+user_problem_statement: "Build Accutek Solar's custom website Sunny chatbot as a draft PR only (no merge, no deploy). Separate from Halloween/holiday files and blog-data.ts."
+
+backend:
+  - task: "Sunny chatbot backend chat endpoint"
+    implemented: true
+    working: true
+    file: "backend/sunny_chat.py"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Implemented FAQ-first matcher, price guardrails with fixed reply + /quote CTA, AI fallback with Accutek grounding, $25/mo spend cap + IP rate limiter, and link allowlist. Passed 8/8 pytest unit tests."
+
+frontend:
+  - task: "Sunny companion floating mascot & chat panel"
+    implemented: true
+    working: true
+    file: "frontend/src/components/sunny/SunnyCompanion.tsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Built animated SVG sun mascot with sunglasses/smile, Framer Motion gentle float + navigation hop, reduced motion accessibility, parked bottom-corner positioning above mobile CTAs, drawer/bottom-sheet modal with focus trap, quick FAQ chips, and direct quote/calculator CTA link buttons."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.0"
+  test_sequence: 1
+  run_ui: false

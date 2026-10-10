@@ -4,13 +4,7 @@ import uuid
 import pytest
 import requests
 
-BASE_URL = os.environ["REACT_APP_BACKEND_URL"].rstrip("/") if os.environ.get("REACT_APP_BACKEND_URL") else None
-if not BASE_URL:
-    with open("/app/frontend/.env") as f:
-        for line in f:
-            if line.startswith("REACT_APP_BACKEND_URL"):
-                BASE_URL = line.split("=", 1)[1].strip().strip('"').rstrip("/")
-
+BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "https://solar-intake-hub.preview.emergentagent.com").rstrip("/")
 API = f"{BASE_URL}/api"
 ADMIN_EMAIL = "admin@accuteksolar.com"
 ADMIN_PASSWORD = "admin123"

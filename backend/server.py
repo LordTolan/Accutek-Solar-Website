@@ -378,6 +378,35 @@ async def get_faq():
 
 
 # ---------------------------------------------------------------------------
+# Sunny Chatbot endpoints
+# ---------------------------------------------------------------------------
+from sunny_chat import (
+    SunnyChatRequest,
+    SunnyChatResponse,
+    handle_sunny_chat,
+    SUNNY_FAQS,
+)
+
+
+@api.post("/chat/sunny", response_model=SunnyChatResponse)
+async def chat_with_sunny(req: SunnyChatRequest, request: Request):
+    client_ip = request.client.host if request.client else "unknown"
+    return await handle_sunny_chat(req, client_ip)
+
+
+@api.get("/chat/sunny/faqs")
+async def get_sunny_faqs():
+    """Return list of quick-start FAQ suggestions for Sunny companion."""
+    return {
+        "faqs": [
+            {"id": f["id"], "question": f["question"]}
+            for f in SUNNY_FAQS
+        ]
+    }
+
+
+
+# ---------------------------------------------------------------------------
 # Lead endpoints
 # ---------------------------------------------------------------------------
 

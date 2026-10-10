@@ -98,6 +98,9 @@ Every time code is pushed to `main`, Render automatically rebuilds and deploys b
 | `SENDGRID_API_KEY` | Optional | For lead email notifications |
 | `LEAD_NOTIFY_FROM` | Optional | Sender email for lead notifications |
 | `LEAD_NOTIFY_TO` | Optional | Recipient email for lead notifications |
+| `OPENAI_API_KEY` | Optional | OpenAI API key for Sunny AI chatbot fallback |
+| `ANTHROPIC_API_KEY` | Optional | Anthropic API key for Sunny AI chatbot fallback |
+| `SUNNY_DAILY_AI_LIMIT` | Optional | Daily AI call cap for ~$25/mo spend ceiling (default: 500) |
 
 ### Frontend
 | Variable | Required | Description |

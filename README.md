@@ -69,6 +69,9 @@ yarn dev
 - `SENDGRID_API_KEY` — for hot-lead email notifications
 - `HCP_API_KEY` — Housecall Pro API key (lead sync)
 - `HCP_COMPANY_ID` — Housecall Pro company UUID
+- `OPENAI_API_KEY` — (Optional) OpenAI API key for Sunny AI chatbot fallback (e.g. `gpt-4o-mini`)
+- `ANTHROPIC_API_KEY` — (Optional) Anthropic API key for Sunny AI chatbot fallback (e.g. `claude-3-haiku-20240307`)
+- `SUNNY_DAILY_AI_LIMIT` — (Optional, default 500) Daily AI call cap for ~$25/mo spend ceiling
 
 ### Frontend (`frontend/.env`)
 - `NEXT_PUBLIC_BACKEND_URL` — backend public URL
@@ -80,6 +83,8 @@ yarn dev
 - `GET /api/company` — company facts (founder, owners, service areas, contact)
 - `POST /api/leads` — residential lead (TCPA consent required)
 - `POST /api/commercial-leads` — commercial intake (multipart, optional file ≤ 10 MB)
+- `POST /api/chat/sunny` — Sunny mascot chatbot (FAQ matching, price safety guardrails, AI fallback)
+- `GET /api/chat/sunny/faqs` — Quick FAQ suggestions for Sunny companion
 - `GET /api/status` / `POST /api/status` — status checks
 
 ### Auth (public)
