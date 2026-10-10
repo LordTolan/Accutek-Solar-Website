@@ -67,7 +67,7 @@ export async function generateMetadata({
   };
 }
 
-export function buildBlogPostJsonLd(post: BlogPost, categoryLabel?: string) {
+function buildBlogPostJsonLd(post: BlogPost, categoryLabel?: string) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",

@@ -1,4 +1,4 @@
-// File: /__modal/volumes/vo-dpW9J4iY6Htzkoa5hjRkyD/repos/wt-utility-hero/frontend/src/app/quote/thank-you/page.tsx
+// File: /workspace/frontend/src/app/quote/thank-you/page.tsx
 import * as entry from '../../../../../src/app/quote/thank-you/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

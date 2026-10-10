@@ -70,6 +70,10 @@
         {
           "protocol": "https",
           "hostname": "customer-assets.emergentagent.com"
+        },
+        {
+          "protocol": "https",
+          "hostname": "hcp-priceboo-vdubc3b2.manus.space"
         }
       ],
       "unoptimized": true
@@ -110,7 +114,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/__modal/volumes/vo-dpW9J4iY6Htzkoa5hjRkyD/repos/wt-utility-hero/frontend",
+    "outputFileTracingRoot": "/workspace/frontend",
     "experimental": {
       "nodeMiddleware": false,
       "cacheLife": {
@@ -168,7 +172,7 @@
       "middlewarePrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 16,
+      "cpus": 3,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -293,10 +297,10 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "/__modal/volumes/vo-dpW9J4iY6Htzkoa5hjRkyD/repos/wt-utility-hero/frontend"
+      "root": "/workspace/frontend"
     }
   },
-  "appDir": "/__modal/volumes/vo-dpW9J4iY6Htzkoa5hjRkyD/repos/wt-utility-hero/frontend",
+  "appDir": "/workspace/frontend",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
