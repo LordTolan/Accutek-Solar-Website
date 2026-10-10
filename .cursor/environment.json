@@ -1,0 +1,16 @@
+{
+  "name": "Accutek Solar",
+  "install": "bash .cursor/install.sh",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "backend",
+      "command": "cd backend && . .venv/bin/activate && uvicorn server:app --host 0.0.0.0 --port 8001 --reload"
+    },
+    {
+      "name": "frontend",
+      "command": "cd frontend && npm run start"
+    }
+  ],
+  "ports": [3000, 8001]
+}
