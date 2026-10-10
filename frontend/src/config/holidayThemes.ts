@@ -17,6 +17,11 @@ export type HolidayTheme = {
   }
 }
 
+/**
+ * Holiday themes configuration.
+ * Multi-holiday note: Future themes like Thanksgiving or Christmas can be added here.
+ * Only one holiday theme is active at a time via getActiveHolidayTheme() based on date range and enabled flag.
+ */
 export const holidayThemes: HolidayTheme[] = [
   {
     name: "fourth-of-july",
@@ -39,4 +44,25 @@ export const holidayThemes: HolidayTheme[] = [
       accent: "#b31942",
     },
   },
+  {
+    name: "halloween",
+
+    start: "2026-10-01",
+    end: "2026-11-01",
+
+    enabled: true,
+
+    assets: {
+      heroBanner: "/holidays/halloween/hero-banner.webp",
+      overlay: "/holidays/halloween/spooky-overlay.png",
+      backgroundPattern: "/holidays/halloween/spider-web-pattern.png",
+    },
+
+    styles: {
+      primary: "#ff7518",
+      secondary: "#1a0b2e",
+      accent: "#76ff03",
+    },
+  },
 ]
+

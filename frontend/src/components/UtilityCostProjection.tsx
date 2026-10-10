@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, TrendingUp, Zap } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
+import { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
 
 /* ─────────────────────────── Calculation Engine ───────────────────────────  */
 
@@ -330,15 +331,18 @@ export default function UtilityCostProjection() {
 
       <div className="relative container mx-auto container-px py-20 md:py-28 lg:py-32">
         {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-blue-400 mb-6"
-        >
-          <Zap className="w-3.5 h-3.5" />
-          <span>30-Year Utility Cost Projection</span>
-        </motion.div>
+        <div className="flex items-center justify-between mb-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5 }}
+            className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-blue-400"
+          >
+            <Zap className="w-3.5 h-3.5" />
+            <span>30-Year Utility Cost Projection</span>
+          </motion.div>
+          <PumpkinCollectible pumpkinId="mad-max" size="sm" />
+        </div>
 
         {/* Headline */}
         <motion.h2

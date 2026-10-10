@@ -4,6 +4,7 @@ import { ArrowRight, Cpu, Mountain } from "lucide-react";
 import { HCP_BOOK_URL } from "@/lib/utils";
 import HeroVideo from "@/components/HeroVideo";
 import RotatingHeadline from "@/components/RotatingHeadline";
+import HalloweenHeroPromo from "@/components/HalloweenHeroPromo";
 
 const HERO_IMG = "https://images.unsplash.com/photo-1509391366360-2e959784a276?crop=entropy&cs=srgb&fm=jpg&q=85&w=2000";
 const ROOF_IMG = "https://images.unsplash.com/photo-1611365892117-00ac5ef43c90?crop=entropy&cs=srgb&fm=jpg&q=85&w=1200";
@@ -13,13 +14,14 @@ export default function OriginalHomeHero() {
   return (
     <section className="relative overflow-hidden border-b border-border" data-testid="original-home-hero">
       <HeroVideo />
-      <div className="relative container mx-auto grid items-center gap-10 py-20 container-px md:py-28 lg:grid-cols-12 lg:gap-14 lg:py-32">
+      <div className="relative container mx-auto grid items-center gap-10 py-16 sm:py-20 container-px md:py-28 lg:grid-cols-12 lg:gap-14 lg:py-32">
         <div className="max-w-2xl lg:col-span-7">
-          <div className="mb-7 inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/8 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-primary animate-fade-up" data-testid="hero-eyebrow">
+          <HalloweenHeroPromo />
+          <div className="mb-5 sm:mb-7 inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/8 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-primary animate-fade-up" data-testid="hero-eyebrow">
             <Cpu className="h-3 w-3" /> FAMILY-OWNED | SINCE 1994
           </div>
           <RotatingHeadline />
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/70 animate-fade-up md:mt-8 md:text-xl" style={{ animationDelay: "0.1s" }}>
+          <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-foreground/70 animate-fade-up md:mt-8 md:text-xl" style={{ animationDelay: "0.1s" }}>
             32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across West Central Indiana and East Central Illinois — engineered for your site, your bill, your budget.
           </p>
           <div className="mt-10 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>

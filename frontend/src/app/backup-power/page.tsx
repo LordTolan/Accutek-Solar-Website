@@ -6,12 +6,12 @@ import DarknessToLightHero from "@/components/DarknessToLightHero";
 import CountUp from "@/components/CountUp";
 import HCPBookOnline from "@/components/HCPBookOnline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
-import Testimonials from "@/components/Testimonials";
 import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
 import ManufacturerLogos from "@/components/ManufacturerLogos";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import ManufacturersStrip from "@/components/ManufacturersStrip";
+import HalloweenPumpkinHuntSection, { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
 import BlogTeaser from "@/components/BlogTeaser";
 import { HCP_BOOK_URL } from "@/lib/utils";
 import { SERVICES_DATA } from "@/lib/services-data";
@@ -76,11 +76,14 @@ export default function BackupPowerPreviewPage() {
       <ManufacturerLogos />
 
       {/* Roof vs Ground feature strip */}
-      <section className="py-20 md:py-28" data-testid="roof-ground-section">
+      <section className="py-20 md:py-28 relative" data-testid="roof-ground-section">
         <div className="container mx-auto container-px">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
-              <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// MOUNTING OPTIONS</div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// MOUNTING OPTIONS</div>
+                <PumpkinCollectible pumpkinId="solar" size="sm" />
+              </div>
               <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
                 Wherever the sun lands, <span className="text-primary">we build there.</span>
               </h2>
@@ -120,11 +123,14 @@ export default function BackupPowerPreviewPage() {
       </section>
 
       {/* Services Bento */}
-      <section className="py-20 md:py-28 bg-card/40 border-y border-border" data-testid="services-section">
+      <section className="py-20 md:py-28 bg-card/40 border-y border-border relative" data-testid="services-section">
         <div className="container mx-auto container-px">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-end mb-12">
             <div className="md:col-span-7">
-              <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// WHAT WE INSTALL</div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// WHAT WE INSTALL</div>
+                <PumpkinCollectible pumpkinId="frankenstein" size="sm" />
+              </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-balance">From a single panel to a fully off-grid farm.</h2>
             </div>
             <div className="md:col-span-5 md:text-right">
@@ -182,9 +188,11 @@ export default function BackupPowerPreviewPage() {
 
       <ManufacturersStrip />
       <ServiceAreaTeaser />
-      <Testimonials />
       <HCPReviews />
       <FAQ />
+
+      {/* Halloween Pumpkin Hunt Section (active when Halloween theme is enabled) */}
+      <HalloweenPumpkinHuntSection />
 
       <BlogTeaser />
 

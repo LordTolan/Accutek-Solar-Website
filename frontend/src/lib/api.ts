@@ -43,7 +43,7 @@ export const api = {
 
   // Site settings (admin)
   getSettings: () => request<any>("/admin/settings"),
-  setHolidayOverride: (force_active: boolean, theme_name = "fourth-of-july") =>
+  setHolidayOverride: (force_active: boolean, theme_name = "halloween") =>
     request<any>("/admin/settings/holiday-theme", {
       method: "PUT",
       body: JSON.stringify({ force_active, theme_name }),

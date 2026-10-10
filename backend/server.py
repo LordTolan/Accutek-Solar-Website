@@ -540,12 +540,12 @@ async def sync_lead_to_hcp(lead_id: str, user: dict = Depends(get_current_user))
 class HolidayOverrideBody(BaseModel):
     model_config = ConfigDict(extra="forbid")
     force_active: bool = False
-    theme_name: str = "fourth-of-july"
+    theme_name: str = "halloween"
 
 @api.get("/admin/settings")
 async def get_admin_settings(user: dict = Depends(get_current_user)):
     doc = await db.site_settings.find_one({"key": "holiday_theme"}, {"_id": 0})
-    return {"holiday_theme": doc or {"force_active": False, "theme_name": "fourth-of-july"}}
+    return {"holiday_theme": doc or {"force_active": False, "theme_name": "halloween"}}
 
 @api.put("/admin/settings/holiday-theme")
 async def set_holiday_override(body: HolidayOverrideBody, user: dict = Depends(get_current_user)):
@@ -562,7 +562,7 @@ async def set_holiday_override(body: HolidayOverrideBody, user: dict = Depends(g
 async def get_holiday_theme_public():
     doc = await db.site_settings.find_one({"key": "holiday_theme"}, {"_id": 0})
     if doc and doc.get("force_active"):
-        return {"active": True, "theme_name": doc.get("theme_name", "fourth-of-july"), "reason": "admin_override"}
+        return {"active": True, "theme_name": doc.get("theme_name", "halloween"), "reason": "admin_override"}
     return {"active": False, "theme_name": None, "reason": "no_override"}
 
 
