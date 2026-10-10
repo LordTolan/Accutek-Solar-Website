@@ -181,35 +181,83 @@ export const TESTIMONIALS = [
 export const FAQS = [
   {
     q: "Do we have enough sun in Indiana / Illinois for solar to make sense?",
-    a: "Yes - and it isn't even close. Our region receives more usable solar energy per year than Germany, which produces more solar power per capita than any other country. The math works here.",
+    a: "Yes — and it isn't even close. Our region receives more usable solar energy per year than Germany, which produces more solar power per capita than any other country. The math works here.",
+  },
+  {
+    q: "What is the difference between roof-mount and ground-mount solar?",
+    a: "Roof-mount arrays use your existing roof structure for a streamlined installation with zero additional yard footprint. Ground-mount arrays sit in your yard or field on ag-grade steel posts, allowing optimal tilt and south-facing azimuth, easier ground-level servicing, and no roof penetrations. Roughly half of our installations are ground mounts. Pole mounts with tracking are also available for maximum rural harvest.",
   },
   {
     q: "What's the difference between solar thermal and PV?",
-    a: "Solar thermal uses the sun's heat to warm an antifreeze solution, which is pumped through a heat exchanger to heat water. Photovoltaic (PV) systems use the sun's radiation to generate DC electricity in the panels, which is either stored in batteries or converted to AC power by an inverter.",
+    a: "Solar thermal uses the sun's heat to warm an antifreeze solution pumped through a heat exchanger to heat water. Photovoltaic (PV) systems convert sunlight directly into DC electricity in the panels, which is either stored in batteries or converted to AC power by an inverter.",
   },
   {
     q: "What types of PV systems are there?",
-    a: "Three main types. (1) Grid-tied - no batteries, panels feed the grid to offset your bill. (2) Hybrid - grid-connected with a battery bank, supports loads during outages. (3) Off-grid - fully independent, batteries plus a backup generator for low-sun stretches.",
+    a: "Three main types: (1) Grid-tied — no batteries; panels feed the grid to reduce or eliminate your electric bill. (2) Hybrid — grid-connected with a lithium battery bank to keep critical circuits powered during outages. (3) Off-grid — fully independent with battery storage and an integrated backup generator for low-sun stretches.",
   },
   {
-    q: "Do you service systems you didn't install?",
-    a: "Yes. We work on a wide range of inverter and battery brands and routinely take on repair and diagnostic work for systems originally installed by other contractors who are no longer available or unwilling to service their work.",
-  },
-  {
-    q: "What is net metering?",
-    a: "Net metering tracks the difference between energy you produce and energy you consume. In Indiana, the utility won't pay cash for excess production, but they credit your account - letting you bank summer surplus and use it through the winter.",
-  },
-  {
-    q: "How long has Accutek been in business?",
-    a: "Accutek Solar was founded by Keith Davis in 1994 - over 30 years of electrical and solar expertise based in Clinton, Indiana. Keith remains President. His son Seth Davis runs day-to-day operations. Family-owned, second-generation operated.",
-  },
-  {
-    q: "Do you handle commercial work?",
-    a: "Absolutely. A meaningful portion of our work is commercial - including facility automation support, decommissioning, technical restoration projects, and standby power for businesses across West Central Indiana and East Central Illinois.",
+    q: "How much does a solar or backup power system cost?",
+    a: "Because every property has unique energy usage, service panel capacity, and mounting requirements, every system is custom designed. Quotes are tailored to your specific site, budget, and power goals. Seth personally reviews your historical utility bills and property layout to provide a comprehensive, transparent quote.",
   },
   {
     q: "Do you offer free estimates?",
-    a: "Yes. Every estimate is free. We'll review your bills, walk your property or facility, and design a system that's actually right for your usage and budget.",
+    a: "Yes, every solar and generator quote is 100% free with no high-pressure sales. You can use our online calculator for a fast 25-year savings projection, request a quote online, or book a free physical site visit.",
+  },
+  {
+    q: "What areas do you serve?",
+    a: "Accutek Solar is headquartered in Clinton, IN (9797 S Rangeline Rd) and serves 17 counties across West Central Indiana and East Central Illinois. If you are located in or near our regional footprint, contact us with your ZIP code or county and we will gladly confirm service availability.",
+  },
+  {
+    q: "What services does Accutek offer?",
+    a: "We provide turnkey residential, commercial, and agricultural solar PV installations (roof, ground, and pole mounts), lithium battery storage (LFP), authorized Kohler standby generators (plus Generac and Cummins service), high-efficiency mini-split heat pumps, Level 2 EV charging stations, and full master-level electrical service and panel upgrades.",
+  },
+  {
+    q: "Do you service systems you didn't install?",
+    a: "Yes. We work on a wide range of inverter and battery brands (including Enphase, SolarEdge, Sol-Ark, SMA, Outback, Fronius, and Schneider Electric) and routinely take on troubleshooting, warranty repairs, and orphaned system restoration for systems installed by contractors who are no longer in business.",
+  },
+  {
+    q: "What should I expect for appointment scheduling and service windows?",
+    a: "Our typical field work and site assessment windows run during daytime operational hours (approximately 10 AM to 5 PM local time, Monday through Friday). Because we travel across our multi-county footprint and dedicate thorough attention to each site, we schedule planned appointments carefully and do not overpromise same-day field arrivals.",
+  },
+  {
+    q: "What happens during a site assessment and on installation day?",
+    a: "During the initial site assessment, we inspect your main electrical panel, roof condition or ground site, verify utility meter access, and review your 12-month electric usage. On installation day, our licensed field crew arrives with equipment, manages all structural mounting and balance-of-system wiring, conducts initial safety testing, and cleans up the work area before walking you through system operation.",
+  },
+  {
+    q: "How long does the entire installation process take?",
+    a: "While physical on-site installation typically takes only a few days depending on system size and weather, the complete project timeline spans a few weeks to accommodate site engineering, municipal permitting, utility interconnection review, and final utility bi-directional meter swapping.",
+  },
+  {
+    q: "Do you handle permits, utility interconnection, and HOA approvals?",
+    a: "Yes. Accutek manages the entire permitting and utility interconnection process from start to finish. We submit one-line electrical diagrams, structural plans, and net-metering / net-billing paperwork to your electric cooperative or investor-owned utility, as well as necessary documentation for local building departments and HOAs.",
+  },
+  {
+    q: "What is net metering and how does billing work in Indiana and Illinois?",
+    a: "Net metering / net billing tracks the difference between energy your panels send to the grid and energy you consume. In Indiana, utilities credit your account for excess kilowatt-hours, helping offset winter bills with summer production. In Illinois, customers may also participate in the Illinois Shines incentive program. Utility credit rules vary by provider, and we model your specific utility tariff during system design.",
+  },
+  {
+    q: "What warranties protect my equipment and installation?",
+    a: "Tier-1 solar panels come with 25-year manufacturer power production warranties. Modern Lithium Iron Phosphate (LFP) battery banks generally carry 10- to 15-year manufacturer warranties, and standby generators include manufacturer warranties backed by authorized installer support. As a local, family-owned electrical contractor in business since 1994, Accutek stands behind our craftsmanship with direct, lifetime local service.",
+  },
+  {
+    q: "Do you offer financing options?",
+    a: "Yes, flexible solar financing options and loan programs are available to help spread system costs into predictable monthly payments that replace or lower your utility bill. We can also assist rural small businesses and agricultural operations with technical documentation for USDA REAP grants.",
+  },
+  {
+    q: "Should I choose battery storage, a standby generator, or both?",
+    a: "It depends on your backup priorities. Lithium batteries provide instant, silent, sub-20-millisecond power transfer during outages and cycle daily with your solar array. Standby generators provide long-duration continuous runtime fueled by natural gas or propane during extended winter storms. Pairing solar, hybrid batteries, and an automatic generator provides complete, indefinite energy resilience.",
+  },
+  {
+    q: "What ongoing maintenance is required for solar and generators?",
+    a: "Solar PV systems are solid-state with no moving parts, requiring minimal maintenance beyond periodic visual checks and keeping ground-mount arrays clear of heavy snow or overgrown vegetation. Standby generators require regular oil, filter, and spark plug maintenance, which we provide through scheduled annual preventive service checkups.",
+  },
+  {
+    q: "Do you handle commercial and agricultural installations?",
+    a: "Yes. A significant portion of our work includes 3-phase and split-phase commercial and agricultural projects — including grain drying systems, livestock barns, manufacturing shops, facility automation support, decommissioning, and high-capacity standby power across Indiana and Illinois.",
+  },
+  {
+    q: "How long has Accutek Solar been in business?",
+    a: "Accutek Solar was founded by Keith Davis in 1994 in Clinton, Indiana — bringing over 32 years of electrical and solar contracting experience. Keith remains President, while his son Seth Davis manages day-to-day operations and custom system designs.",
   },
 ];
 
