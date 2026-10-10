@@ -48,6 +48,11 @@
         "protocol": "https",
         "hostname": "^(?:^(?:customer\\-assets\\.emergentagent\\.com)$)$",
         "pathname": "^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$"
+      },
+      {
+        "protocol": "https",
+        "hostname": "^(?:^(?:hcp\\-priceboo\\-vdubc3b2\\.manus\\.space)$)$",
+        "pathname": "^(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)\\/?)$"
       }
     ],
     "unoptimized": true,

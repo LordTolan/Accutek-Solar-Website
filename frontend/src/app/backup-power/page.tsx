@@ -12,6 +12,7 @@ import ManufacturerLogos from "@/components/ManufacturerLogos";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import ManufacturersStrip from "@/components/ManufacturersStrip";
 import HalloweenPumpkinHuntSection, { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
+import BlogTeaser from "@/components/BlogTeaser";
 import { HCP_BOOK_URL } from "@/lib/utils";
 import { SERVICES_DATA } from "@/lib/services-data";
 
@@ -193,42 +194,7 @@ export default function BackupPowerPreviewPage() {
       {/* Halloween Pumpkin Hunt Section (active when Halloween theme is enabled) */}
       <HalloweenPumpkinHuntSection />
 
-      {/* Latest from the Blog */}
-      <section className="py-20 md:py-28 bg-muted/10" data-testid="home-blog-section">
-        <div className="container mx-auto container-px max-w-6xl">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// LATEST INSIGHTS</div>
-              <h2 className="text-3xl md:text-5xl font-extrabold">The <span className="text-primary">Solar Dispatch.</span></h2>
-            </div>
-            <Link href="/blog" className="text-sm font-bold text-primary hover:underline">
-              View all articles &rarr;
-            </Link>
-          </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Link href="/blog/the-rate-hike-nobody-voted-for-why-indiana-is-fighting-back-2026-07-13" className="group block bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all">
-              <div className="relative aspect-video">
-                <Image src="https://images.unsplash.com/photo-1509391366360-2e959784a276" alt="Solar array" fill className="object-cover group-hover:scale-105 transition-transform" />
-              </div>
-              <div className="p-6">
-                <div className="text-[10px] uppercase tracking-wider font-mono text-primary mb-2">Big Utility Wars | July 13, 2026</div>
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">The Rate Hike Nobody Voted For: Why Indiana is Fighting Back</h3>
-                <p className="mt-2 text-sm text-foreground/70">Big Utility is winning because you’re letting them. Here is the Accutek plan to take your power back.</p>
-              </div>
-            </Link>
-            <Link href="/blog/how-to-pay-off-your-solar-loan-in-under-10-years-2026-07-06" className="group block bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all">
-              <div className="relative aspect-video">
-                <Image src="https://images.unsplash.com/photo-1509391366360-2e959784a276" alt="Accutek site" fill className="object-cover group-hover:scale-105 transition-transform" />
-              </div>
-              <div className="p-6">
-                <div className="text-[10px] uppercase tracking-wider font-mono text-primary mb-2">Energy ROI | July 6, 2026</div>
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors">How to Pay Off Your Solar Loan in Under 10 Years</h3>
-                <p className="mt-2 text-sm text-foreground/70">Professional solar insights on maximizing your investment and reaching zero-bill status faster.</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <BlogTeaser />
 
       {/* Final CTA */}
       <section className="py-20 md:py-28 relative overflow-hidden" data-testid="final-cta-section">

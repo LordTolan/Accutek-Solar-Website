@@ -51,4 +51,17 @@ export const api = {
 
   // Public holiday theme check
   getHolidayTheme: () => request<any>("/public/holiday-theme"),
+
+  // Sunny Chatbot
+  chatWithSunny: (message: string, history: Array<{ role?: string; sender?: string; text: string }> = []) =>
+    request<{
+      reply: string;
+      source: string;
+      suggested_links: Array<{ label: string; url: string }>;
+      faq_match?: string;
+    }>("/chat/sunny", {
+      method: "POST",
+      body: JSON.stringify({ message, history }),
+    }),
+  getSunnyFaqs: () => request<{ faqs: Array<{ id: string; question: string }> }>("/chat/sunny/faqs"),
 };

@@ -13,6 +13,7 @@ const NAV = [
   { href: "/gallery", label: "Gallery" },
   { href: "/service-area", label: "Service Area" },
   { href: "/tools/calculator", label: "Calculator" },
+  { href: "/blog", label: "Blog" },
   { href: "/about", label: "About | Team" },
   { href: "/contact", label: "Contact" },
 ];

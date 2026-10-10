@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyMobileCTA from "@/components/StickyMobileCTA";
+import SunnyCompanion from "@/components/sunny/SunnyCompanion";
 import { Toaster } from "sonner";
 import { HolidayThemeProvider } from "@/context/HolidayThemeProvider";
 import HolidayCTABanner from "@/components/holiday/HolidayCTABanner";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1">{children}</main>
           <Footer />
           <StickyMobileCTA />
+          <SunnyCompanion />
           <Toaster position="top-right" theme="dark" richColors />
         </HolidayThemeProvider>
 

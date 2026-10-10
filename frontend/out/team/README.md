@@ -9,14 +9,13 @@ Place real JPGs here using the slug-based filename convention used by
 |-------------------------|---------------------------------------------|
 | `keith-davis.jpg`       | Keith Davis — Founder                       |
 | `seth-davis.jpg`        | Seth Davis — Owner · Operator               |
-| `quill.jpg`             | Quill Davis — Owner · Field Operations      |
 | `clint-lenover.jpg`     | Clint Lenover — Install Tech                |
 | `colt.jpg`              | Colt — Lead Installer                       |
 | `aj.jpg`                | AJ ("Scruff") — Solar Technician            |
 
 ## Roles
 
-> **Owners/Operators:** Keith Davis, Seth Davis, Quill Davis  
+> **Owners/Operators:** Keith Davis, Seth Davis  
 > **Install Team:** Clint Lenover (Install Tech), Colt (Lead Installer), AJ/Scruff (Solar Technician)
 
 ## Image specs
