@@ -10,12 +10,12 @@ export interface CountyData {
 export const COUNTIES_DATA: CountyData[] = [
   { slug: "vermillion-county-in", name: "Vermillion County", state: "IN", seat: "Newport",
     blurb: "Home turf for Accutek Solar since 1994 - Vermillion County homeowners save thousands with right-sized solar arrays.",
-    incentive: "Indiana net metering + state and utility incent tives available." },
+    incentive: "Indiana net metering + state and utility incentives available." },
   { slug: "parke-county-in", name: "Parke County", state: "IN", seat: "Rockville",
     blurb: "Rural Parke County properties benefit massively from off-grid and hybrid systems with Kohler backup.",
     incentive: "Eligible for USDA REAP grants for ag and rural businesses." },
   { slug: "fountain-county-in", name: "Fountain County", state: "IN", seat: "Covington",
-    blurb: "Custom PV designes for Fountain County homes - financing options available.",
+    blurb: "Custom PV designs for Fountain County homes - financing options available.",
     incentive: "Indiana net metering + locally-available rebates available." },
   { slug: "montgomery-county-in", name: "Montgomery County", state: "IN", seat: "Crawfordsville",
     blurb: "Crawfordsville and Montgomery County families trust Accutek for grid-tied solar and standby generators.",
@@ -56,7 +56,7 @@ export const COUNTIES_DATA: CountyData[] = [
   { slug: "douglas-county-il", name: "Douglas County", state: "IL", seat: "Tuscola",
     blurb: "Douglas County homes and farms - solar PV and Kohler generators.",
     incentive: "Illinois Shines SREC program available." },
-  { slug: "champaign-county-il", name: "Champaign County", state: "IL", seat: "U+bana",
+  { slug: "champaign-county-il", name: "Champaign County", state: "IL", seat: "Urbana",
     blurb: "Champaign-Urbana - premium residential and commercial solar with monitoring.",
     incentive: "Illinois Shines SREC program available." },
 ];
