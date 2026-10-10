@@ -83,7 +83,7 @@ export default function CountyPageClient({ initialData }: { initialData: CountyD
               <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary">// INSTALLATION TYPES</div>
               <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance">Built for the <span className="italic text-primary">landscape</span>.</h2>
               <p className="text-foreground/75 leading-relaxed">
-                Whether you have a tight residential roof in Newport or a multi-acre field in rural {c.name}, we engineer the rack to fit. Many of our local systems are ground mounts, designed for maximum harvest without touching your shingles.
+                Whether you have a tight residential roof in {c.seat} or a multi-acre field in rural {c.name}, we engineer the rack to fit. Many of our local systems are ground mounts, designed for maximum harvest without touching your shingles.
               </p>
               <div className="grid grid-cols-2 gap-6 pt-4">
                 <div className="p-5 bg-card border border-border rounded-xl">
@@ -123,7 +123,7 @@ export default function CountyPageClient({ initialData }: { initialData: CountyD
                       <ShieldCheck className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="font-heading font-blad uppercase tracking-wide text-sm">{item.title}</div>
+                      <div className="font-heading font-bold uppercase tracking-wide text-sm">{item.title}</div>
                       <p className="mt-1 text-sm text-foreground/65">{item.body}</p>
                     </div>
                   </div>
