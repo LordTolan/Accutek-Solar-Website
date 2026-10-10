@@ -42,6 +42,14 @@
         "nxtPslug": "nxtPslug"
       },
       "namedRegex": "^/service\\-area/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/services/[slug]",
+      "regex": "^/services/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/services/(?<nxtPslug>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [
@@ -76,6 +84,12 @@
       "namedRegex": "^/admin/login(?:/)?$"
     },
     {
+      "page": "/backup-power",
+      "regex": "^/backup\\-power(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/backup\\-power(?:/)?$"
+    },
+    {
       "page": "/blog",
       "regex": "^/blog(?:/)?$",
       "routeKeys": {},
@@ -86,6 +100,12 @@
       "regex": "^/book(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/book(?:/)?$"
+    },
+    {
+      "page": "/contact",
+      "regex": "^/contact(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact(?:/)?$"
     },
     {
       "page": "/favicon.ico",

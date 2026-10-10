@@ -6,7 +6,7 @@ import { Calendar, Clock, ArrowUpRight } from "lucide-react";
 import { BlogPost, CATEGORY_META } from "@/lib/blog-data";
 
 export default function BlogCard({ post }: { post: BlogPost }) {
-  const cat = CATEGORY_META[post.category];
+  const cat = CATEGORY_META[post.category] ?? { label: post.category, emoji: "☀️" };
 
   return (
     <Link
@@ -58,7 +58,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-3.5 h-3.5" />
-              {post.readTime} min read
+              {post.readTime.includes("read") ? post.readTime : `${post.readTime} min read`}
             </span>
           </div>
           <ArrowUpRight className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />

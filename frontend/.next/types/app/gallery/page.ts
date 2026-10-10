@@ -1,4 +1,4 @@
-// File: /__modal/volumes/vo-dpW9J4iY6Htzkoa5hjRkyD/repos/wt-utility-hero/frontend/src/app/gallery/page.tsx
+// File: /workspace/frontend/src/app/gallery/page.tsx
 import * as entry from '../../../../src/app/gallery/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
