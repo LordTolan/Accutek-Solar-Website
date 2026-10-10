@@ -197,11 +197,11 @@ export const FAQS = [
   },
   {
     q: "How much does a solar or backup power system cost?",
-    a: "Every project is custom to your property, energy usage, and electrical panel setup. Please request a quote online or give us a call at (812) 878-7343, and an Accutek team member will follow up directly with detailed pricing for your site.",
+    a: "Every project is custom to your property, energy usage, and electrical panel setup. We do not provide one-size-fits-all prices online because real systems require individual site engineering. Please request a quote online or Chat with Seth at (812) 878-7343, and an Accutek team member will follow up directly with custom pricing for your site.",
   },
   {
     q: "Do you offer free estimates?",
-    a: "Yes. Every solar, battery storage, and generator consultation is 100% free with no obligation. Reach out through our quote form or call our office to schedule a free on-site property evaluation.",
+    a: "Yes. Every solar, battery storage, and generator consultation is 100% free with no obligation. Reach out through our quote form, contact our office, or Chat with Seth to schedule a free on-site property evaluation.",
   },
   {
     q: "What areas do you serve?",

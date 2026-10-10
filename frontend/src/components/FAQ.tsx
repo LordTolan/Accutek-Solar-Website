@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, Phone, MessageSquare, ArrowRight } from "lucide-react";
 
 export interface FAQItem {
   q: string;
@@ -23,11 +24,11 @@ const DEFAULT_FAQS: FAQItem[] = [
   },
   {
     q: "How much does a solar or backup power system cost?",
-    a: "Every project is custom to your property, energy usage, and electrical panel setup. Please request a quote online or give us a call at (812) 878-7343, and an Accutek team member will follow up directly with detailed pricing for your site.",
+    a: "Every project is custom to your property, energy usage, and electrical panel setup. We do not provide one-size-fits-all prices online because real systems require individual site engineering. Please request a quote online or Chat with Seth at (812) 878-7343, and an Accutek team member will follow up directly with custom pricing for your site.",
   },
   {
     q: "Do you offer free estimates?",
-    a: "Yes. Every solar, battery storage, and generator consultation is 100% free with no obligation. Reach out through our quote form or call our office to schedule a free on-site property evaluation.",
+    a: "Yes. Every solar, battery storage, and generator consultation is 100% free with no obligation. Reach out through our quote form, contact our office, or Chat with Seth to schedule a free on-site property evaluation.",
   },
   {
     q: "What areas do you serve?",
@@ -117,6 +118,37 @@ export default function FAQ() {
               </button>
             );
           })}
+        </div>
+
+        {/* Chat with Seth & Get a Quote Fallback Box */}
+        <div className="mt-12 p-8 rounded-2xl bg-card border border-border shadow-ambient" data-testid="faq-seth-fallback">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div className="space-y-1.5 max-w-lg">
+              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-primary">
+                <MessageSquare className="w-4 h-4" /> Have a specific question or custom site requirement?
+              </div>
+              <h3 className="text-xl font-heading font-bold">Have an off-limits or custom question?</h3>
+              <p className="text-sm text-foreground/70 leading-relaxed">
+                Whether you need specific equipment advice, site feasibility checks, or pricing details, talk directly with Seth and the Accutek team.
+              </p>
+            </div>
+            <div className="flex flex-wrap sm:flex-nowrap gap-3 shrink-0 w-full sm:w-auto">
+              <a
+                href="tel:+18128787343"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-5 py-3 text-xs font-bold uppercase tracking-wider hover:shadow-green-glow transition focus-ring w-full sm:w-auto"
+                data-testid="faq-chat-with-seth"
+              >
+                <Phone className="w-3.5 h-3.5" /> Chat with Seth
+              </a>
+              <Link
+                href="/quote"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-card text-foreground px-5 py-3 text-xs font-bold uppercase tracking-wider hover:border-primary transition focus-ring w-full sm:w-auto"
+                data-testid="faq-get-quote"
+              >
+                Get a Quote <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>
