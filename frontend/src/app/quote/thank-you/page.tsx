@@ -39,7 +39,7 @@ export default function ThankYouPage() {
                   You can use our online booking tool to put a site visit directly on our calendar right now.
                 </p>
                 <a href="#" className="mt-3 inline-flex items-center gap-2 text-sm font-bold text-primary hover:underline">
-                  Go to Online Booking ->
+                  Go to Online Booking &rarr;
                 </a>
               </div>
             </div>

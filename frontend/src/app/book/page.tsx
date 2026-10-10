@@ -43,7 +43,7 @@ export default function BookPage() {
               <Phone className="w-3.5 h-3.5" /> (812) 878-7343
             </a>
             <Link href="/quote" className="inline-flex items-center gap-2 text-foreground/70 hover:text-primary transition" data-testid="book-quote-fallback">
-              Send a quote request instead ->
+              Send a quote request instead &rarr;
             </Link>
           </div>
         </div>

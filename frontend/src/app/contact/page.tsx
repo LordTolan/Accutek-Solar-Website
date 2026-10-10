@@ -59,7 +59,7 @@ export default function ContactPage() {
                       rel="noopener noreferrer"
                       className="mt-3 inline-block text-sm font-bold text-primary hover:underline"
                     >
-                      Get Directions ->
+                      Get Directions &rarr;
                     </a>
                   </div>
                 </div>

@@ -19,6 +19,14 @@ export function getPenName(isoDate: string): string {
 
 export const AI_DISCLAIMER = "This article has been editorially enhanced with AI assistance. Information is believed to be accurate but readers should perform their own due diligence before making any energy-related decisions.";
 
+export const CATEGORY_META: Record<string, { label: string; emoji: string }> = {
+  "Big Utility Wars": { label: "Big Utility Wars", emoji: "⚡" },
+  "Agricultural Solar": { label: "Agricultural Solar", emoji: "🌾" },
+  "Industry News": { label: "Industry News", emoji: "📰" },
+  "Solar": { label: "Solar", emoji: "☀️" },
+  "Incentives": { label: "Incentives", emoji: "💰" },
+};
+
 export interface BlogPost {
   slug: string; title: string; subtitle: string; excerpt: string; author: string; date: string; readTime: string; category: string; tags: string[]; heroImage: string; heroAlt: string; content: string; sources?: string[];
 }
