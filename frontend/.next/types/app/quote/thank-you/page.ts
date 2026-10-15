@@ -1,4 +1,4 @@
-// File: /workspace/accutek-site-push/repo/frontend/src/app/quote/thank-you/page.tsx
+// File: /workspace/frontend/src/app/quote/thank-you/page.tsx
 import * as entry from '../../../../../src/app/quote/thank-you/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

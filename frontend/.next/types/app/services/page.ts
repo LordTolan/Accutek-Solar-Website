@@ -1,4 +1,4 @@
-// File: /workspace/accutek-site-push/repo/frontend/src/app/services/page.tsx
+// File: /workspace/frontend/src/app/services/page.tsx
 import * as entry from '../../../../src/app/services/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

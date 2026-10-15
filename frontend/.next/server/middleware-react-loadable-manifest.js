@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"components/sunny/SunnyCompanion.tsx -> ./SunnyChatPanel":{"id":2107,"files":["static/chunks/107.18cdf17d6b403313.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{}";
