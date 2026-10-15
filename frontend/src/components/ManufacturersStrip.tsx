@@ -15,6 +15,8 @@ type Manufacturer = {
   color: string;
   url: string;
   logoSrc?: string;
+  /** badge text; defaults to "Installed & Serviced" */
+  badge?: string;
 };
 
 const MANUFACTURERS: Manufacturer[] = [
@@ -129,6 +131,7 @@ const MANUFACTURERS: Manufacturer[] = [
     category: "Backup Generators",
     color: "#D0021B",
     url: "https://www.cummins.com/generators",
+    badge: "Serviced",
   },
 ];
 
@@ -206,7 +209,7 @@ export default function ManufacturersStrip() {
               <div className="px-6 pb-5">
                 <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-mono text-primary">
                   <ShieldCheck className="w-3 h-3" />
-                  Installed &amp; Serviced
+                  {m.badge ?? "Installed & Serviced"}
                 </div>
               </div>
             </a>

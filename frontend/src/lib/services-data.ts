@@ -196,18 +196,18 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "standby-generators",
     title: "Standby Generators",
-    shortDesc: "Authorized Kohler installer — turn-key automatic backup power for Kohler, Generac, and Cummins.",
+    shortDesc: "Authorized Kohler installer. We service Generac and Cummins standby systems.",
     tagline: "Automatic power restoration in seconds when extreme weather knocks out the grid.",
     iconName: "BatteryCharging",
     badge: "Authorized Installer",
     equipmentBrands: ["Kohler", "Generac", "Cummins"],
     rundown: [
       "Accutek Solar is an authorized Kohler generator installer, bringing over 30 years of electrical contractor expertise to automatic standby power. We install, commission, service, and maintain standby generators across residential, agricultural, and commercial properties.",
-      "While Kohler is our flagship brand, our certified electricians also install and service Generac and Cummins standby systems. Every generator installation includes a precision-matched Automatic Transfer Switch (ATS), fuel line coordination (natural gas or liquid propane), full load-bank testing, and scheduled annual maintenance programs."
+      "While Kohler is our flagship install brand, we also service Generac and Cummins standby systems. Accutek Solar has also installed Cummins for another dealer. Every Kohler installation includes a precision-matched Automatic Transfer Switch (ATS), fuel line coordination (natural gas or liquid propane), full load-bank testing, and scheduled annual maintenance programs."
     ],
     keyPoints: [
       "Authorized Kohler generator sales, installation, warranty, and maintenance",
-      "Turnkey Generac and Cummins standby installation and service",
+      "Generac and Cummins standby service and repair",
       "Whole-house and critical-circuit Automatic Transfer Switches (ATS)",
       "Natural Gas (NG) and Liquid Propane (LP) fuel integration",
       "Weekly automated self-diagnostic exercise cycles with quiet mode",
