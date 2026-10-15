@@ -114,7 +114,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/workspace/frontend",
+    "outputFileTracingRoot": "/workspace/accutek-site-push/repo/frontend",
     "experimental": {
       "nodeMiddleware": false,
       "cacheLife": {
@@ -172,7 +172,7 @@
       "middlewarePrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 3,
+      "cpus": 7,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -297,10 +297,10 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
     "turbopack": {
-      "root": "/workspace/frontend"
+      "root": "/workspace/accutek-site-push/repo/frontend"
     }
   },
-  "appDir": "/workspace/frontend",
+  "appDir": "/workspace/accutek-site-push/repo/frontend",
   "relativeAppDir": "",
   "files": [
     ".next/routes-manifest.json",
