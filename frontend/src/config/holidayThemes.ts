@@ -50,7 +50,7 @@ export const holidayThemes: HolidayTheme[] = [
     start: "2026-10-01",
     end: "2026-11-01",
 
-    enabled: true,
+    enabled: false,
 
     assets: {
       heroBanner: "/holidays/halloween/hero-banner.webp",
