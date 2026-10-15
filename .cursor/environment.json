@@ -12,5 +12,5 @@
       "command": "cd frontend && npm run start"
     }
   ],
-  "ports": [3000, 8001]
+  "ports": [{"port":3000},{"port":8001}]
 }
