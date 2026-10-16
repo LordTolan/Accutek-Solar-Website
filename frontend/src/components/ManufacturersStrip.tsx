@@ -5,7 +5,7 @@
  */
 
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, Wrench } from "lucide-react";
 
 type Manufacturer = {
   name: string;
@@ -14,6 +14,8 @@ type Manufacturer = {
   /** brand hex for the colored accent bar */
   color: string;
   url: string;
+  badgeText?: string;
+  badgeType?: "installed" | "service_only" | "tesla_certified" | "service_repair";
   logoSrc?: string;
 };
 
@@ -66,6 +68,65 @@ const MANUFACTURERS: Manufacturer[] = [
     category: "Battery Storage",
     color: "#F7941D",
     url: "https://www.generac.com",
+  },
+  {
+    name: "Generac",
+    tagline: "Standby generators — diagnostic troubleshooting, maintenance & repair (service only)",
+    category: "Backup Generators",
+    color: "#E58310",
+    url: "https://www.generac.com/all-products/generators/home-backup-generators",
+    badgeText: "Service Only",
+    badgeType: "service_only",
+  },
+  {
+    name: "Cummins",
+    tagline: "Standby generators — service, maintenance & transfer switch diagnostics (service only)",
+    category: "Backup Generators",
+    color: "#D0021B",
+    url: "https://www.cummins.com/generators",
+    badgeText: "Service Only",
+    badgeType: "service_only",
+  },
+  {
+    name: "Fujitsu",
+    tagline: "High-efficiency ductless mini-split heat pumps & multi-zone HVAC",
+    category: "Mini-Split HVAC",
+    color: "#ED1B24",
+    url: "https://www.fujitsugeneral.com",
+  },
+  {
+    name: "Fortress Power",
+    tagline: "Lithium iron phosphate (LFP) energy storage & battery management",
+    category: "Battery Storage",
+    color: "#1E3D59",
+    url: "https://www.fortresspower.com",
+  },
+  {
+    name: "HomeGrid",
+    tagline: "Stackable residential & commercial LFP battery storage",
+    category: "Battery Storage",
+    color: "#00A859",
+    url: "https://www.homegridenergy.com",
+  },
+  {
+    name: "Tesla Powerwall",
+    // NOTE: Accutek Solar holds a Tesla tech ID. Do not invent an ID number here.
+    // TODO: Add official Tesla Tech ID # once confirmed by owner.
+    tagline: "Whole-home battery backup & solar storage — Tesla-certified technicians (TODO: add Tesla Tech ID #)",
+    category: "Battery Storage",
+    color: "#E82127",
+    url: "https://www.tesla.com/powerwall",
+    badgeText: "Tesla-Certified Tech",
+    badgeType: "tesla_certified",
+  },
+  {
+    name: "Solar Panel Service",
+    tagline: "Panel swaps, warranty replacements, removal and reinstall (R&R), and repair diagnostics",
+    category: "Solar Service & Repair",
+    color: "#FBBF24",
+    url: "/services/solar-service-repair/",
+    badgeText: "Service & Repair",
+    badgeType: "service_repair",
   },
   {
     name: "Schneider Electric",
@@ -123,13 +184,6 @@ const MANUFACTURERS: Manufacturer[] = [
     color: "#F9BA00",
     url: "https://www.sma-america.com",
   },
-  {
-    name: "Cummins",
-    tagline: "Standby generators & backup power systems",
-    category: "Backup Generators",
-    color: "#D0021B",
-    url: "https://www.cummins.com/generators",
-  },
 ];
 
 export default function ManufacturersStrip() {
@@ -151,7 +205,7 @@ export default function ManufacturersStrip() {
             </h2>
             <p className="mt-4 text-foreground/65 text-base md:text-lg max-w-xl leading-relaxed">
               Every system we design is built around the right equipment for your
-              site, load, and goals — not whatever's cheapest or easiest to
+              site, load, and goals — not whatever&apos;s cheapest or easiest to
               source.
             </p>
           </div>
@@ -165,52 +219,90 @@ export default function ManufacturersStrip() {
 
         {/* Manufacturer cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {MANUFACTURERS.map((m) => (
-            <a
-              key={m.name}
-              href={m.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${m.name} — ${m.category}`}
-              className="group relative bg-card rounded-xl border border-border hover:border-primary hover:shadow-green-glow transition-all duration-200 overflow-hidden flex flex-col justify-between focus-ring"
-              data-testid={`manufacturer-${m.name.toLowerCase().replace(/\s+/g, "-")}`}
-            >
-              <div>
-                {/* Brand color accent bar */}
-                <div
-                  className="h-1 w-full"
-                  style={{ backgroundColor: m.color }}
-                />
+          {MANUFACTURERS.map((m) => {
+            const isInternal = m.url.startsWith("/");
+            const badgeText = m.badgeText || "Installed & Serviced";
+            const isServiceOnly = m.badgeType === "service_only";
+            const isRepair = m.badgeType === "service_repair";
 
-                <div className="p-6">
-                  {/* Category pill */}
-                  <div className="inline-flex items-center text-[9px] uppercase tracking-[0.22em] font-mono text-muted-foreground bg-muted/60 border border-border px-2 py-1 rounded mb-4">
-                    {m.category}
-                  </div>
-
-                  {/* Manufacturer name — large logotype-style treatment */}
+            const cardContent = (
+              <>
+                <div>
+                  {/* Brand color accent bar */}
                   <div
-                    className="font-heading text-2xl font-black leading-none mb-3 group-hover:text-primary transition-colors"
-                    style={{ letterSpacing: "-0.03em" }}
-                  >
-                    {m.name}
+                    className="h-1 w-full"
+                    style={{ backgroundColor: m.color }}
+                  />
+
+                  <div className="p-6">
+                    {/* Category pill */}
+                    <div className="inline-flex items-center text-[9px] uppercase tracking-[0.22em] font-mono text-muted-foreground bg-muted/60 border border-border px-2 py-1 rounded mb-4">
+                      {m.category}
+                    </div>
+
+                    {/* Manufacturer name — large logotype-style treatment */}
+                    <div
+                      className="font-heading text-2xl font-black leading-none mb-3 group-hover:text-primary transition-colors"
+                      style={{ letterSpacing: "-0.03em" }}
+                    >
+                      {m.name}
+                    </div>
+
+                    <p className="text-xs text-foreground/60 leading-relaxed">
+                      {m.tagline}
+                    </p>
                   </div>
-
-                  <p className="text-xs text-foreground/60 leading-relaxed">
-                    {m.tagline}
-                  </p>
                 </div>
-              </div>
 
-              {/* Verified installer badge */}
-              <div className="px-6 pb-5">
-                <div className="flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-mono text-primary">
-                  <ShieldCheck className="w-3 h-3" />
-                  Installed &amp; Serviced
+                {/* Status badge */}
+                <div className="px-6 pb-5">
+                  <div
+                    className={`flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-mono ${
+                      isServiceOnly ? "text-amber-400" : "text-primary"
+                    }`}
+                  >
+                    {isServiceOnly || isRepair ? (
+                      <Wrench className="w-3 h-3" />
+                    ) : (
+                      <ShieldCheck className="w-3 h-3" />
+                    )}
+                    {badgeText}
+                  </div>
                 </div>
-              </div>
-            </a>
-          ))}
+              </>
+            );
+
+            const cardClasses =
+              "group relative bg-card rounded-xl border border-border hover:border-primary hover:shadow-green-glow transition-all duration-200 overflow-hidden flex flex-col justify-between focus-ring";
+
+            if (isInternal) {
+              return (
+                <Link
+                  key={m.name}
+                  href={m.url}
+                  aria-label={`${m.name} — ${m.category}`}
+                  className={cardClasses}
+                  data-testid={`manufacturer-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+                >
+                  {cardContent}
+                </Link>
+              );
+            }
+
+            return (
+              <a
+                key={m.name}
+                href={m.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${m.name} — ${m.category}`}
+                className={cardClasses}
+                data-testid={`manufacturer-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
+              >
+                {cardContent}
+              </a>
+            );
+          })}
         </div>
 
         {/* Supporting footnote */}

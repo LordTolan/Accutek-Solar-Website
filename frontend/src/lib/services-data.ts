@@ -196,18 +196,19 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "standby-generators",
     title: "Standby Generators",
-    shortDesc: "Authorized Kohler installer — turn-key automatic backup power for Kohler, Generac, and Cummins.",
+    shortDesc: "Authorized Kohler generator installer — turn-key automatic backup power for Kohler, plus dedicated service and maintenance for Generac and Cummins.",
     tagline: "Automatic power restoration in seconds when extreme weather knocks out the grid.",
     iconName: "BatteryCharging",
     badge: "Authorized Installer",
-    equipmentBrands: ["Kohler", "Generac", "Cummins"],
+    equipmentBrands: ["Kohler", "Generac (Service)", "Cummins (Service)"],
     rundown: [
-      "Accutek Solar is an authorized Kohler generator installer, bringing over 30 years of electrical contractor expertise to automatic standby power. We install, commission, service, and maintain standby generators across residential, agricultural, and commercial properties.",
-      "While Kohler is our flagship brand, our certified electricians also install and service Generac and Cummins standby systems. Every generator installation includes a precision-matched Automatic Transfer Switch (ATS), fuel line coordination (natural gas or liquid propane), full load-bank testing, and scheduled annual maintenance programs."
+      "Accutek Solar is an authorized Kohler generator installer, bringing over 30 years of electrical contractor expertise to automatic standby power. We sell, install, commission, and maintain Kohler standby generators across residential, agricultural, and commercial properties.",
+      "While Kohler is our primary installation brand for new generator systems, our certified electricians provide dedicated service, troubleshooting, and scheduled maintenance for existing Generac and Cummins standby units. Accutek Solar has also performed Cummins installations on behalf of other authorized dealers. Every generator installation or service visit includes precision Automatic Transfer Switch (ATS) integration, fuel line coordination (natural gas or liquid propane), full load testing, and scheduled annual maintenance programs."
     ],
     keyPoints: [
-      "Authorized Kohler generator sales, installation, warranty, and maintenance",
-      "Turnkey Generac and Cummins standby installation and service",
+      "Authorized Kohler generator sales, turnkey installation, warranty, and maintenance",
+      "Expert diagnostic service, repairs, and annual maintenance for Generac and Cummins generators",
+      "Cummins installation support performed on behalf of partner dealers",
       "Whole-house and critical-circuit Automatic Transfer Switches (ATS)",
       "Natural Gas (NG) and Liquid Propane (LP) fuel integration",
       "Weekly automated self-diagnostic exercise cycles with quiet mode",

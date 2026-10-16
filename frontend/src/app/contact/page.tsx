@@ -3,7 +3,7 @@ import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
-  title: "Contact Accutek Solar - Local Solar & Electrical Contractor",
+  title: "Contact Us - Local Solar & Electrical Contractor",
   description: "Get in touch with Accutek Solar. Located in Clinton, IN, we serve 17 counties across West Central Indiana and East Central Illinois. Call (812) 878-7343 for a free site assessment.",
 };
 
