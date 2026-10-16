@@ -13,13 +13,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!service) {
     return {
-      title: "Service Not Found | Accutek Solar",
+      title: "Service Not Found",
       description: "Service details not found.",
     };
   }
 
   return {
-    title: `${service.title} | Accutek Solar`,
+    title: service.title,
     description: `${service.shortDesc} Expert design, installation, and repair across Indiana and Illinois by Accutek Solar.`,
     openGraph: {
       title: `${service.title} | Accutek Solar`,

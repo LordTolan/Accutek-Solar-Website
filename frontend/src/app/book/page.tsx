@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Phone, ExternalLink } from "lucide-react";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
-export const metadata = { title: "Book Online | Accutek Solar" };
+export const metadata = { title: "Book Online" };
 
 /**
  * Branded landing page that embeds Accutek's Housecall Pro booking calendar.

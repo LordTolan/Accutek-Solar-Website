@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { BLOG_POSTS, type BlogPost, getBlogPost } from "@/lib/blog-data";
 import BlogPostClient from "./BlogPostClient";
 
@@ -106,6 +107,11 @@ function cleanCategory(raw?: string) {
     .replace(/^./, (s) => s.toUpperCase());
 }
 
-export default function BlogPostPage() {
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
+  if (!post) {
+    notFound();
+  }
   return <BlogPostClient />;
 }

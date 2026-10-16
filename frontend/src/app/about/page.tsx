@@ -26,7 +26,6 @@ const TEAM = [
     slug: "seth-davis",
     bio: "Carries the 30+ years of Davis-family solar know-how. Designs every system from monthly bill to mounting plan.",
   },
-
   {
     name: "Clint Lenover",
     role: "Solar Technician",
@@ -49,13 +48,13 @@ const TEAM = [
 
 const VALUES = [
   { icon: Heart, title: "Family-owned", body: "Founded by Keith Davis in 1994. Same name on the truck, same hands on the wrench, three decades later." },
-  { icon: ShieldCheck, title: "Lifetime support", body: "Every install gets lifetime support from the team that built it. Not a 1-800 number, not a chatbot." },
-  { icon: Wrench, title: "Built local", body: "Roof, ground or pole - we engineer for your specific site, your climate, your budget. No cookie-cutter kits." },
+  { icon: ShieldCheck, title: "Multi-brand & independent", body: "Not locked into any proprietary battery or inverter ecosystem. We don't push solar installs — we install what we install and service what we service." },
+  { icon: Wrench, title: "Built local", body: "Roof, ground, pole, and generators — engineered for your specific site, your climate, and your real energy needs. No cookie-cutter kits." },
   { icon: MapPin, title: "Real coverage", body: "17 counties across West Central Indiana and East Central Illinois. Headquartered in Clinton, IN. Trucks rolling daily." },
 ];
 
 export const metadata = {
-  title: "About Accutek Solar - Family-Owned Since 1994",
+  title: "About Us - Family-Owned Since 1994",
   description: "Meet the Accutek Solar team. Family-owned solar and electrical contractor serving West Central Indiana and East Central Illinois for over 32 years.",
 };
 
@@ -73,9 +72,9 @@ export default function AboutPage() {
               32 years of pulling wire - and tilting it <span className="text-primary">toward the sun.</span>
             </h1>
             <div className="mt-6 space-y-5 text-foreground/80 text-lg leading-relaxed">
-              <p>Accutek Solar was founded in 1994 by Keith Davis in Clinton, Indiana. What started as a small electrical-installation shop is today a full-service solar, ground-mount, generator and electrical contractor serving 17 counties across West Central Indiana and East Central Illinois.</p>
-              <p>As a local, family-owned business, we understand the specific needs and preferences of our local customers and provide personalized service that larger, national companies can&#39;t match.</p>
-              <p>We pride ourselves on our ability to design and build solar systems that are customized to meet the specific needs and goals of our customers. Whether it&#39;s maximizing energy efficiency, reducing costs, providing backup power, or achieving sustainability goals, we have the expertise to deliver the right solution.</p>
+              <p>Accutek Solar was founded in 1994 by Keith Davis in Clinton, Indiana. What started as a small electrical shop is today a full-service solar, ground-mount array, generator, and master electrical contractor serving 17 counties across West Central Indiana and East Central Illinois.</p>
+              <p>We are proudly multi-brand and independent — never locked into any single proprietary battery ecosystem or inverter manufacturer. We don&apos;t push solar panel installs on people who don&apos;t need them; we install what we install and service what we service, matching the right equipment to your property, your electrical load, and your backup goals.</p>
+              <p>As a local, family-owned business with master electrician roots, every system is engineered for long-term Midwestern reliability and backed by direct, lifetime local support from the crew that built it.</p>
             </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-6 py-3 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="about-uuote-cta">
@@ -95,6 +94,38 @@ export default function AboutPage() {
                 <div className="mt-1 font-heading text-2xl font-extrabold">A family business with a family of customers.</div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values & Principles */}
+      <section className="py-16 md:py-24 border-b border-border bg-card/20" data-testid="about-values">
+        <div className="container mx-auto container-px max-w-6xl">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// HOW WE OPERATE</div>
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-balance">
+              Independent, multi-brand, and built to last.
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {VALUES.map((v, i) => {
+              const IconComp = v.icon;
+              return (
+                <div
+                  key={i}
+                  className="bg-card rounded-xl p-6 border border-border flex flex-col justify-between shadow-ambient"
+                  data-testid={`value-card-${i}`}
+                >
+                  <div>
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary grid place-items-center mb-4">
+                      <IconComp className="w-5 h-5" />
+                    </div>
+                    <div className="font-heading text-lg font-bold mb-2">{v.title}</div>
+                    <p className="text-xs text-foreground/70 leading-relaxed">{v.body}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -142,7 +173,7 @@ export default function AboutPage() {
                     </div>
                     <div>
                       <p className="text-lg font-medium text-foreground/90 italic">
-                        \"The idea that you can produce your own energy and use it to drive your car, all from the comfort of your home, speaks to a new era of energy independence and sustainability.\"
+                        &ldquo;The idea that you can produce your own energy and use it to drive your car, all from the comfort of your home, speaks to a new era of energy independence and sustainability.&rdquo;
                       </p>
                       <div className="mt-4 flex items-center gap-3">
                         <div className="w-6 h-6 rounded-full bg-muted grid place-items-center"><User className="w-3.5 h-3.5 text-muted-foreground" /></div>
@@ -184,7 +215,6 @@ export default function AboutPage() {
 
           <p className="mt-10 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground text-center">
             // THE CREW THAT SHOWS UP TO YOUR JOB SITE
-
           </p>
         </div>
       </section>

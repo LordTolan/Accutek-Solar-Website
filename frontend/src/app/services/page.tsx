@@ -21,7 +21,7 @@ import { SERVICES_DATA } from "@/lib/services-data";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Solar & Electrical Services | Accutek Solar",
+  title: "Solar & Electrical Services",
   description:
     "Explore Accutek Solar's full range of services: Residential Solar PV, Ground-Mount Arrays, Commercial & Ag Solar, Battery Storage, Standby Generators, Mini-Split HVAC, EV Chargers, Solar Repair, and Master Electrical Contracting.",
   robots: { index: true, follow: true },
@@ -58,7 +58,7 @@ export default function ServicesPage() {
               From a single panel to a fully off-grid farm.
             </h1>
             <p className="mt-5 text-foreground/75 text-lg md:text-xl leading-relaxed font-medium">
-              Rooftop solar, heavy-duty ground mounts, lithium battery storage, standby generators, mini-splits, and master-level electrical craftsmanship — custom designed and backed by 32 years of family-owned field experience.
+              Rooftop solar, heavy-duty ground mounts, lithium battery storage, standby generators, mini-splits, and master-level electrical craftsmanship. Accutek Solar is multi-brand and independent — not locked into any proprietary battery or inverter ecosystem, and we don&apos;t push solar panel installs when another solution fits best. We install what we install and service what we service.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
@@ -144,8 +144,8 @@ export default function ServicesPage() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-heading font-bold text-base">Master Electrician Owned</div>
-                <p className="mt-1 text-xs text-foreground/65 leading-relaxed">32 years of electrical and solar contracting across 17 counties in IN &amp; IL.</p>
+                <div className="font-heading font-bold text-base">Multi-Brand &amp; Independent</div>
+                <p className="mt-1 text-xs text-foreground/65 leading-relaxed">Not locked into proprietary hardware. We don&apos;t push solar installs — we install what we install and service what we service.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -162,8 +162,8 @@ export default function ServicesPage() {
                 <Wrench className="w-5 h-5" />
               </div>
               <div>
-                <div className="font-heading font-bold text-base">Multi-Brand Service &amp; Repair</div>
-                <p className="mt-1 text-xs text-foreground/65 leading-relaxed">We service systems originally built by other contractors who are no longer around.</p>
+                <div className="font-heading font-bold text-base">Master Electrician Service &amp; Repair</div>
+                <p className="mt-1 text-xs text-foreground/65 leading-relaxed">32 years of hands-on troubleshooting, generator service, panel upgrades, and orphan system restoration.</p>
               </div>
             </div>
           </div>

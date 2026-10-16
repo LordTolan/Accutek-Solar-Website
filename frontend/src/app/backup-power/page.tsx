@@ -17,7 +17,7 @@ import { HCP_BOOK_URL } from "@/lib/utils";
 import { SERVICES_DATA } from "@/lib/services-data";
 
 export const metadata: Metadata = {
-  title: "Solar + Backup Power Campaign Preview | Accutek Solar",
+  title: "Solar + Backup Power Campaign Preview",
   description:
     "Preview page for Accutek Solar's Darkness to Light campaign featuring 32 years of energy independence and backup power systems.",
   robots: {
