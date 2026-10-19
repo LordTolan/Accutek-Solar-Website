@@ -37,7 +37,7 @@ $env:DB_NAME='sunny_test'
 python -m pytest backend/tests -q
 ```
 
-Focused tests: `python -m pytest backend/tests/test_sunny_zero_spend.py -q` (16 passed locally). Tests use dummy credentials and forbid sockets; the handler must complete without yielding to asynchronous I/O. Concurrent calls run in eight threads, with unique IPs so the local burst limiter does not hide unknown-message handling. Module reloads simulate process-state reset. No live provider calls, site requests, HCP submissions, or bookings were made.
+Full backend suite: **29 passed** locally (two existing FastAPI `on_event` deprecation warnings). Windows TestClient required an unsandboxed run for its local event-loop socketpair. Focused tests: `python -m pytest backend/tests/test_sunny_zero_spend.py -q` (**16 passed** locally). Tests use dummy credentials and forbid sockets; the handler must complete without yielding to asynchronous I/O. Concurrent calls run in eight threads, with unique IPs so the local burst limiter does not hide unknown-message handling. Module reloads simulate process-state reset. No live provider calls, site requests, HCP submissions, or bookings were made.
 
 ## Release requirement
 
