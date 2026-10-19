@@ -18,8 +18,6 @@ services:
         sync: false
       - key: DB_NAME
         value: accutek_solar
-      - key: JWT_SECRET
-        generateValue: true
       - key: CORS_ORIGINS
         value: "*"
       - key: PYTHON_VERSION

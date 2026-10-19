@@ -1,16 +1,14 @@
 # Accutek Solar — Project README
 
-Family-owned solar / backup power / facility automation contractor website + lead management system. Replaces the legacy `accuteksolar.com`.
+Family-owned solar / backup power / facility automation contractor website with Housecall Pro intake. Replaces the legacy `accuteksolar.com`.
 
 ## Stack
 
 - **Frontend**: Next.js 15 (App Router, TypeScript) + Tailwind + Framer Motion + Embla Carousel (Cabinet Grotesk / Satoshi / JetBrains Mono)
 - **Backend**: FastAPI (async) + Motor (async MongoDB driver)
 - **Storage**: MongoDB
-- **Auth**: bcrypt + PyJWT (HTTPBearer, access + refresh tokens, brute-force lockout)
 - **Integrations**: Housecall Pro (lead form · reviews widget · chat bubble · online booking)
 - **Blog**: Weekly automated blog with rotating pen names + AI-assist disclaimer
-- **Email notifications**: SendGrid (configured via `.env`)
 
 ## Pages
 
@@ -18,7 +16,6 @@ Family-owned solar / backup power / facility automation contractor website + lea
 | ---------------------------- | -------------------------------------------------------------------- |
 | `/`                          | Marketing home (hero video, tagline slider, services preview, reviews, CTA) |
 | `/services`                  | Solar & Storage · Backup Power · Facility Automation · Diagnostics   |
-| `/commercial`                | Commercial intake form (file upload + TCPA consent)                  |
 | `/tools`                     | 5 calculators (solar size, battery, mount, generator, ROI)           |
 | `/service-area`              | 17-county IN/IL service map with individual county pages             |
 | `/reviews`                   | Embedded Housecall Pro reviews widget                                |
@@ -26,8 +23,6 @@ Family-owned solar / backup power / facility automation contractor website + lea
 | `/blog`                      | Weekly blog posts — auto-generated, rotating pen names               |
 | `/book`                      | HCP online booking widget                                            |
 | `/quote`                     | HCP lead form (HCP-only, no QuoteWizard)                             |
-| `/admin`                     | Admin login                                                          |
-| `/admin/leads`               | Protected dashboard (residential + commercial leads)                 |
 
 ## Team
 
@@ -46,7 +41,7 @@ Family-owned solar / backup power / facility automation contractor website + lea
 ```bash
 # Backend
 cd backend
-cp .env.example .env       # fill in MONGO_URL, JWT_SECRET, ADMIN_*, SENDGRID_API_KEY, HCP_API_KEY
+cp .env.example .env       # fill in MONGO_URL, DB_NAME, CORS_ORIGINS
 pip install -r requirements.txt
 uvicorn server:app --host 0.0.0.0 --port 8001 --reload
 
@@ -63,12 +58,6 @@ yarn dev
 - `MONGO_URL` — MongoDB connection string
 - `DB_NAME` — database name (e.g. `accutek_solar`)
 - `CORS_ORIGINS` — comma-separated origins (`*` for dev)
-- `JWT_SECRET` — random 64-char hex (`python -c "import secrets; print(secrets.token_hex(32))"`)
-- `ADMIN_EMAIL` — admin account email (seeded on startup)
-- `ADMIN_PASSWORD` — admin account password (re-hashed on startup if changed)
-- `SENDGRID_API_KEY` — for hot-lead email notifications
-- `HCP_API_KEY` — Housecall Pro API key (lead sync)
-- `HCP_COMPANY_ID` — Housecall Pro company UUID
 - `OPENAI_API_KEY` — (Optional) OpenAI API key for Sunny AI chatbot fallback (e.g. `gpt-4o-mini`)
 - `ANTHROPIC_API_KEY` — (Optional) Anthropic API key for Sunny AI chatbot fallback (e.g. `claude-3-haiku-20240307`)
 - `SUNNY_DAILY_AI_LIMIT` — (Optional, default 500) Daily AI call cap for ~$25/mo spend ceiling
@@ -80,23 +69,38 @@ yarn dev
 
 ### Public
 - `GET /api/` — health
-- `GET /api/company` — company facts (founder, owners, service areas, contact)
-- `POST /api/leads` — residential lead (TCPA consent required)
-- `POST /api/commercial-leads` — commercial intake (multipart, optional file ≤ 10 MB)
-- `POST /api/chat/sunny` — Sunny mascot chatbot (FAQ matching, price safety guardrails, AI fallback)
-- `GET /api/chat/sunny/faqs` — Quick FAQ suggestions for Sunny companion
-- `GET /api/status` / `POST /api/status` — status checks
+- `GET /api/public/company-info` — company facts
+- `GET /api/public/service-area` and `/{slug}` — counties
+- `GET /api/public/testimonials` and `/api/public/faq` — public content
+- `GET /api/public/holiday-theme` — read existing stored holiday override
+- `POST /api/chat/sunny` (alias `/api/chat`) and `GET /api/chat/sunny/faqs` — Sunny
 
-### Auth (public)
-- `POST /api/auth/login` — `{email, password}` → `{access_token, user}`
-- `GET /api/auth/me` — current admin (Bearer)
-- `POST /api/auth/logout` — stateless logout
+## Retired local admin and lead management
 
-### Admin (Bearer required)
-- `GET /api/admin/leads` — residential lead list
-- `GET /api/admin/commercial-leads` — commercial lead list
-- `PATCH /api/admin/leads/{id}` — update lead status / notes
-- `POST /api/admin/leads/{id}/sync-hcp` — sync lead to Housecall Pro
+The local dashboard, login, lead intake/scoring/storage endpoints, mock HCP sync,
+admin holiday setter, and user seeding have been removed. Quotes continue through
+the external HCP form; the Header Login link still opens the HCP customer portal.
+No stored leads, users, settings, or indexes are deleted or migrated. The checked-in
+`.next` and `out` build artifacts are removed so stale admin pages and bundles
+are not retained; deployments continue to generate a fresh static export.
+
+Holiday assets and date-based display remain. Existing stored forced themes are
+still read by the public endpoint, so retiring the dashboard does not silently
+change the current theme. Future holiday edits are handled through code/assistant
+changes in `frontend/src/config/holidayThemes.ts`; the dashboard toggle is gone.
+An existing forced override continues to take precedence over the date config.
+
+Removed legacy tests contained an exposed admin credential. Source removal does
+not revoke it or remove Git history: the owner must rotate that credential and
+any reused password separately. No credentials were exercised or rotated here.
+
+### Local verification
+
+From `backend`, use non-production settings and no external AI keys:
+`MONGO_URL=mongodb://127.0.0.1:27017 DB_NAME=accutek_test python -m pytest tests/test_retired_admin.py tests/test_sunny_chat.py -q`.
+The route/holiday tests mock database reads and never connect to production.
+From `frontend`: `npm ci`, `npx tsc --noEmit`, and `npm run build`.
+The Next config skips build-time type checking, so run TypeScript separately.
 
 ## Manufacturers Supported
 

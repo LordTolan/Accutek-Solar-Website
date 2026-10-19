@@ -56,26 +56,11 @@ browser blocks autoplay or the file is missing.
 
 ---
 
-## 🔗 3. Housecall Pro Lead Sync (API) — drop-in
+## Lead intake and holiday controls
 
-**Backend `.env`:**
-
-```bash
-HCP_API_KEY="hcp_live_xxx..."
-HCP_COMPANY_ID="xxxxxxxx-xxxx-..."
-```
-
-Then in `/backend/server.py` find `hcp_sync_lead(...)` and replace the
-mock body with the real `httpx.post(...)` call to HCP's Customers endpoint.
-Currently returns `{ "mocked": true, "hcp_id": "mock_xxx" }` until the env var
-is populated.
-
----
-
-## 📧 4. Hot-lead email notification — drop-in
-
-Add `SENDGRID_API_KEY` to `backend/.env`. The backend's `submit_lead` function
-sends a hot-lead notification via SendGrid whenever lead score ≥ 70.
+HCP forms are the intended intake. The obsolete local dashboard, auth, lead API,
+mock sync, and notification service have been removed. See README for scope,
+credential rotation follow-up, and holiday override precedence. Stored data is retained.
 
 ---
 
@@ -86,14 +71,6 @@ sends a hot-lead notification via SendGrid whenever lead score ≥ 70.
 - AI disclaimer added to all posts automatically
 - **Shelved content**: "Summer Solar Paradox" blog (heat concerns — Seth does not want heat messaging toward customers)
 - To manually trigger: ping Viktor in #new-web-psge
-
----
-
-## 🔐 Admin
-
-- **URL:** `/admin/login`
-- **Email:** `admin@accuteksolar.com`
-- **Password:** set in `backend/.env` as `ADMIN_PASSWORD` (change from default)
 
 ---
 
