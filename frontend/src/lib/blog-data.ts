@@ -442,8 +442,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/blog/solar-loan.webp",
+    "heroAlt": "AI-generated illustration of a calculator, repayment worksheet and model solar-powered home",
     "content": "<h2>How to Pay Off Your Solar Loan in Under 10 Years</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-07-06, our focus is on how to pay off your solar loan in under 10 years...</p>",
     "sources": [
       "Accutek Internal Data"
@@ -463,8 +463,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/gallery/clinton-in/ground-mount-array.jpg",
+    "heroAlt": "Ground-mounted solar arrays on metal supports beside a farm outbuilding in Clinton, Indiana",
     "content": "<h2>Why Large Properties Prefer Field Arrays</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-29, our focus is on why large properties prefer field arrays...</p>",
     "sources": [
       "Accutek Internal Data"
@@ -484,8 +484,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/blog/panel-temperature.webp",
+    "heroAlt": "AI-generated illustration of raised solar panels with an open ventilation gap in summer sunshine",
     "content": "<h2>Managing System Temperature During Peak Sun</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-22, our focus is on managing system temperature during peak sun...</p>",
     "sources": [
       "Accutek Internal Data"
@@ -505,8 +505,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/blog/net-metering.webp",
+    "heroAlt": "AI-generated illustration of a home electricity meter with arrows showing two-way energy flow",
     "content": "<h2>Understanding the Net Metering Shift</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-15, our focus is on understanding the net metering shift...</p>",
     "sources": [
       "Accutek Internal Data"
@@ -526,8 +526,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/gallery/clinton-in/lithium-battery-closeup.jpg",
+    "heroAlt": "Close-up of a solar battery bank and inverter equipment in Clinton, Indiana",
     "content": "<h2>The Future of LFP Batteries in Indiana</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-08, our focus is on the future of lfp batteries in indiana...</p>",
     "sources": [
       "Accutek Internal Data"
@@ -547,8 +547,8 @@ export const BLOG_POSTS: BlogPost[] = [
       "ROI",
       "Accutek"
     ],
-    "heroImage": "https://images.unsplash.com/photo-1509391366360-2e959784a276",
-    "heroAlt": "Accutek Solar Site",
+    "heroImage": "/blog/panel-cleaning.webp",
+    "heroAlt": "AI-generated illustration of ground-level solar panels being washed with a soft extension brush",
     "content": "<h2>Spring Cleaning for Solar Panels</h2><p>Accutek Solar is leading the way in professional installations across Indiana and Illinois. For 2026-06-01, our focus is on spring cleaning for solar panels...</p>",
     "sources": [
       "Accutek Internal Data"
