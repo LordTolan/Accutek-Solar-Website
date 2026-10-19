@@ -175,7 +175,7 @@ export default function SunnyChatPanel({
           </div>
           <div>
             <div className="font-heading font-extrabold text-base flex items-center gap-1.5">
-              Sunny <span className="text-[10px] uppercase font-mono tracking-wider bg-white/20 px-1.5 py-0.5 rounded text-white/90">Accutek AI</span>
+              Sunny <span className="text-[10px] uppercase font-mono tracking-wider bg-white/20 px-1.5 py-0.5 rounded text-white/90">FAQ Helper</span>
             </div>
             <div className="text-xs text-white/80 flex items-center gap-1 font-medium">
               <span>Fast solar &amp; backup answers</span>
@@ -197,7 +197,7 @@ export default function SunnyChatPanel({
       <div className="bg-muted/80 px-4 py-2 text-[11px] text-muted-foreground border-b border-border flex items-center justify-between gap-2 shrink-0">
         <div className="flex items-center gap-1.5">
           <ShieldCheck className="w-3.5 h-3.5 text-primary shrink-0" />
-          <span>Accutek Solar · 32 yrs · 17 IN/IL Counties</span>
+          <span>Accutek Solar · Local team since 1994</span>
         </div>
         <button
           onClick={() => {

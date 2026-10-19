@@ -1,27 +1,10 @@
-"""
-Sunny Chatbot Backend Service for Accutek Solar.
-
-Features:
-1. Fast FAQ Matching (BM25 / token matching + semantic scoring across existing FAQ & Accutek knowledge)
-2. Safety Guardrails:
-   - Fixed reply + /quote link for price questions ("How much does solar cost?", "$/watt", etc.)
-   - Price sanitizer to strip/discard AI replies containing '$' or fabricated dollar amounts
-   - Strict link allowlist (only approved internal routes or verified booking links)
-3. Hard Spend Cap ($25/mo cap simulation / daily request cutoff):
-   - In-memory & DB-backed daily spend/request tracker + per-IP rate limiter
-   - When daily AI budget is exceeded, seamlessly drops back to FAQ-only mode
-4. AI Fallback (OpenAI / Anthropic):
-   - Grounded Accutek context (32 years, family-owned, Keith & Seth Davis, 17 counties IN/IL, Kohler backup, Sol-Ark, etc.)
-   - If no API key is provided, safely stubs AI and operates in robust FAQ-only mode.
-"""
+"""Preset-only Sunny. No model clients, credentials, paid calls, or budget allowance."""
 
 from __future__ import annotations
 
 import re
-import os
 import time
 import logging
-from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel, Field
 
@@ -35,7 +18,7 @@ ALLOWED_LINKS = {
     "/book": "Book Site Visit",
     "/services": "Our Services",
     "/tools/calculator": "Solar Savings Calculator",
-    "/service-area": "Service Area (17 Counties)",
+    "/service-area": "Service Area",
     "/blog": "Solar Energy Blog",
     "/contact": "Contact Us",
     "/about": "About Accutek Team",
@@ -119,7 +102,7 @@ SUNNY_FAQS = [
     {
         "id": "company_history",
         "keywords": [
-            "who are you", "who is accutek", "about", "keith davis", "seth davis", 
+            "who are you", "who is accutek", "about accutek", "keith davis", "seth davis",
             "family owned", "experience", "how long", "clinton", "history"
         ],
         "question": "How long has Accutek Solar been in business?",
@@ -167,8 +150,9 @@ SUNNY_FAQS = [
         ],
         "question": "Where does Accutek Solar work?",
         "answer": (
-            "We serve 17 counties across West Central Indiana (Vermillion, Parke, Fountain, Montgomery, Putnam, Clay, "
-            "Sullivan, Vigo, Hendricks, Warren) and East Central Illinois (Edgar, Vermilion, Clark, Crawford, Coles, Douglas, Champaign)."
+            "Accutek Solar is based in Clinton, Indiana. Please share your ZIP code or property location with "
+            "our team to confirm service availability. I cannot "
+            "confirm coverage for a specific address in chat."
         ),
         "suggested_links": [
             {"label": "View Service Area Map", "url": "/service-area"},
@@ -190,7 +174,7 @@ SUNNY_FAQS = [
     },
     {
         "id": "contact_phone",
-        "keywords": ["phone", "call", "phone number", "speak to someone", "email", "address", "office", "hours"],
+        "keywords": ["contact", "phone", "call", "phone number", "speak to someone", "email", "address", "office", "hours"],
         "question": "How can I contact Accutek Solar?",
         "answer": (
             "You can call or text Seth and the team directly at (812) 878-7343, email solarseth7@yahoo.com, "
@@ -204,19 +188,11 @@ SUNNY_FAQS = [
 ]
 
 # ---------------------------------------------------------------------------
-# Rate Limiting & Spend Cap Configuration
-# Target: ~$25/month hard cap for AI calls
+# Local abuse throttling only; this is not a spending control.
+# Paid AI is absent, so workers and restarts cannot reset a spend allowance.
 # ---------------------------------------------------------------------------
-# Assumptions:
-# - FAQ matching has $0 AI cost
-# - AI fallback calls (gpt-4o-mini / claude-3-haiku) ~ $0.001 per turn
-# - $25/mo ≈ $0.80/day budget ≈ 800 AI calls/day maximum.
-DAILY_AI_CALL_LIMIT = int(os.environ.get("SUNNY_DAILY_AI_LIMIT", "500"))
 IP_BURST_LIMIT_PER_MINUTE = 20
-
-# In-memory rate limiting and budget tracking
 _ip_request_timestamps: Dict[str, List[float]] = {}
-_daily_ai_call_counter = {"date": "", "count": 0}
 
 
 def check_rate_limit(ip: str) -> bool:
@@ -232,29 +208,11 @@ def check_rate_limit(ip: str) -> bool:
     return True
 
 
-def check_and_increment_daily_ai_budget() -> bool:
-    """Returns True if AI call is permitted within daily spend cap."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-    if _daily_ai_call_counter["date"] != today:
-        _daily_ai_call_counter["date"] = today
-        _daily_ai_call_counter["count"] = 0
-
-    if _daily_ai_call_counter["count"] >= DAILY_AI_CALL_LIMIT:
-        logger.warning(
-            "Sunny daily AI spend cap reached (%d calls). Falling back to FAQ-only mode.",
-            _daily_ai_call_counter["count"]
-        )
-        return False
-
-    _daily_ai_call_counter["count"] += 1
-    return True
-
-
 # ---------------------------------------------------------------------------
 # FAQ Matching Logic
 # ---------------------------------------------------------------------------
 def _tokenize(text: str) -> List[str]:
-    return [w for w in re.sub(r"[^\w\s]", " ", text.lower()).split() if len(w) > 1]
+    return [w for w in re.sub(r"[^\w\s]", " ", text.lower()).split() if len(w) > 1 and w not in {"what", "is", "the", "do", "you", "can", "we", "our", "for", "in", "to", "a", "an", "of", "and", "are", "how", "does", "it", "my", "your", "with", "about"}]
 
 
 def is_price_query(query: str) -> bool:
@@ -306,7 +264,7 @@ def match_faq(query: str) -> Optional[Dict[str, Any]]:
         # Check full keyword phrase matches
         lower_q = query.lower()
         for kw in faq["keywords"]:
-            if kw in lower_q:
+            if re.search(r"\b" + re.escape(kw) + r"\b", lower_q):
                 score += 3.0
 
         # Keyword token overlap
@@ -373,150 +331,21 @@ def filter_links(links: List[Dict[str, str]]) -> List[Dict[str, str]]:
 
 
 # ---------------------------------------------------------------------------
-# AI Model Fallback (OpenAI / Anthropic or Stub)
+# Preset fallback: intentionally no provider implementation or environment switch.
 # ---------------------------------------------------------------------------
-SYSTEM_PROMPT = """You are Sunny, the cheerful, warm, and knowledgeable solar mascot for Accutek Solar (accuteksolar.com).
-Company Facts:
-- Accutek Solar was founded in 1994 by Keith Davis (32 years in business).
-- Family-owned, located at 9797 S Rangeline Rd., Clinton, IN 47842.
-- Keith Davis is Founder/President. His son Seth Davis is Owner/Operator and designs systems. Clint, Colt, and AJ ("Scruff") are technicians/installers.
-- Service Area: 17 counties across West Central Indiana & East Central Illinois.
-- Core specialties: Residential solar PV (roof and ground-mounts ~50% of installs), Kohler backup generators, lithium battery storage, ag/commercial solar, electrical contracting.
-- Phone: (812) 878-7343, Email: solarseth7@yahoo.com.
-
-STRICT SAFETY RULES:
-1. NEVER invent, guess, or state dollar prices, costs, or quotes (no '$' signs or dollar amounts).
-2. For any pricing, cost, or financing question, kindly explain that every site is custom-engineered and direct them to get a free quote at /quote or check the calculator at /tools/calculator.
-3. NEVER promise or confirm bookings directly inside the chat — always direct the customer to the online booking page at /book or quote page at /quote.
-4. Be friendly, warm, cheerful, concise (2-4 sentences max), polite, and professional.
-5. Only suggest approved site sections: /quote, /book, /services, /tools/calculator, /service-area, /blog, /contact, /about.
-"""
-
-
-async def generate_ai_reply(messages: List[Dict[str, str]]) -> Dict[str, Any]:
-    """
-    Calls OpenAI or Anthropic API if key exists and daily spend cap allows.
-    Otherwise returns grounded fallback.
-    """
-    openai_key = os.environ.get("OPENAI_API_KEY", "").strip()
-    anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-
-    # Check spend cap
-    if not check_and_increment_daily_ai_budget():
-        return {
-            "reply": (
-                "Hi there! I'm Sunny from Accutek Solar. For detailed questions or custom system sizing, "
-                "our local team in Clinton is happy to help you with a free quote or site visit!"
-            ),
-            "source": "spend_cap_fallback",
-            "suggested_links": [
-                {"label": "Get a Free Quote", "url": "/quote"},
-                {"label": "Book Online", "url": "/book"},
-            ],
-        }
-
-    # 1. Try OpenAI if available
-    if openai_key:
-        try:
-            import httpx
-            headers = {
-                "Authorization": f"Bearer {openai_key}",
-                "Content-Type": "application/json",
-            }
-            # Keep prompt compact to minimize token costs
-            formatted_msgs = [{"role": "system", "content": SYSTEM_PROMPT}]
-            for m in messages[-4:]:  # last 4 turns
-                role = "assistant" if m.get("sender") == "sunny" or m.get("role") == "assistant" else "user"
-                formatted_msgs.append({"role": role, "content": m.get("text") or m.get("content", "")})
-
-            payload = {
-                "model": os.environ.get("SUNNY_OPENAI_MODEL", "gpt-4o-mini"),
-                "messages": formatted_msgs,
-                "temperature": 0.4,
-                "max_tokens": 200,
-            }
-            async with httpx.AsyncClient(timeout=10.0) as client:
-                res = await client.post("https://api.openai.com/v1/chat/completions", json=payload, headers=headers)
-                if res.status_code == 200:
-                    data = res.json()
-                    raw_reply = data["choices"][0]["message"]["content"].strip()
-                    sanitized = sanitize_ai_reply(raw_reply)
-                    if sanitized["was_sanitized"]:
-                        return {
-                            "reply": sanitized["text"],
-                            "source": "ai_sanitized",
-                            "suggested_links": sanitized["suggested_links"],
-                        }
-                    return {
-                        "reply": raw_reply,
-                        "source": "openai",
-                        "suggested_links": [
-                            {"label": "Get a Free Quote", "url": "/quote"},
-                            {"label": "Explore Services", "url": "/services"},
-                        ],
-                    }
-                else:
-                    logger.warning("OpenAI API returned %s: %s", res.status_code, res.text)
-        except Exception as e:
-            logger.error("OpenAI call error: %s", str(e))
-
-    # 2. Try Anthropic if available
-    if anthropic_key:
-        try:
-            import httpx
-            headers = {
-                "x-api-key": anthropic_key,
-                "anthropic-version": "2023-06-01",
-                "Content-Type": "application/json",
-            }
-            formatted_msgs = []
-            for m in messages[-4:]:
-                role = "assistant" if m.get("sender") == "sunny" or m.get("role") == "assistant" else "user"
-                formatted_msgs.append({"role": role, "content": m.get("text") or m.get("content", "")})
-
-            payload = {
-                "model": os.environ.get("SUNNY_ANTHROPIC_MODEL", "claude-3-haiku-20240307"),
-                "system": SYSTEM_PROMPT,
-                "messages": formatted_msgs,
-                "max_tokens": 200,
-            }
-            async with httpx.AsyncClient(timeout=10.0) as client:
-                res = await client.post("https://api.anthropic.com/v1/messages", json=payload, headers=headers)
-                if res.status_code == 200:
-                    data = res.json()
-                    raw_reply = data["content"][0]["text"].strip()
-                    sanitized = sanitize_ai_reply(raw_reply)
-                    if sanitized["was_sanitized"]:
-                        return {
-                            "reply": sanitized["text"],
-                            "source": "ai_sanitized",
-                            "suggested_links": sanitized["suggested_links"],
-                        }
-                    return {
-                        "reply": raw_reply,
-                        "source": "anthropic",
-                        "suggested_links": [
-                            {"label": "Get a Free Quote", "url": "/quote"},
-                            {"label": "Explore Services", "url": "/services"},
-                        ],
-                    }
-                else:
-                    logger.warning("Anthropic API returned %s: %s", res.status_code, res.text)
-        except Exception as e:
-            logger.error("Anthropic call error: %s", str(e))
-
-    # 3. Default Grounded Fallback (when no AI keys provided or API error)
+def preset_fallback() -> Dict[str, Any]:
     return {
         "reply": (
-            "Hi! I'm Sunny, Accutek Solar's mascot. I'm here to help with questions about solar PV, "
-            "ground mounts, battery storage, and standby generators across West Central Indiana and East Central Illinois. "
-            "How can I help power your home or business today?"
+            "I'm Sunny, Accutek Solar's FAQ helper. I can help with solar system types, "
+            "roof and ground mounts, generators, free estimates, and contacting the team. "
+            "I don't have a verified answer to that question. For property-specific advice, "
+            "please contact Accutek or request a free quote. Booking is completed on our booking page, not in chat."
         ),
         "source": "faq_grounded_fallback",
         "suggested_links": [
             {"label": "Get a Free Quote", "url": "/quote"},
-            {"label": "Solar Calculator", "url": "/tools/calculator"},
-            {"label": "Our Services", "url": "/services"},
+            {"label": "Book with Housecall Pro", "url": "/book"},
+            {"label": "Contact Us", "url": "/contact"},
         ],
     }
 
@@ -542,14 +371,14 @@ class SunnyLink(BaseModel):
 
 class SunnyChatResponse(BaseModel):
     reply: str
-    source: str  # "faq" | "pricing_fixed" | "openai" | "anthropic" | "faq_grounded_fallback" | "rate_limited"
+    source: str  # faq | pricing_fixed | faq_grounded_fallback | rate_limited
     suggested_links: List[SunnyLink]
     faq_match: Optional[str] = None
 
 
 async def handle_sunny_chat(req: SunnyChatRequest, client_ip: str) -> SunnyChatResponse:
     """
-    Process incoming chat query with rate limiting, FAQ-first matching, price guardrails, and AI fallback.
+    Process incoming chat query with rate limiting, FAQ matching, price guardrails, and local presets.
     """
     # 1. Rate Limiter
     if not check_rate_limit(client_ip):
@@ -561,6 +390,14 @@ async def handle_sunny_chat(req: SunnyChatRequest, client_ip: str) -> SunnyChatR
         )
 
     user_query = req.message.strip()
+
+    # Location intent wins over product matches; no inferred coverage or exclusion.
+    if re.search(r"\b(serve|service area|coverage|zip|county|counties|located|location)\b|\b(do you|can you) (install|work|travel).*\b(in|at|near)\b", user_query, re.I):
+        faq = next(f for f in SUNNY_FAQS if f["id"] == "service_area")
+        return SunnyChatResponse(
+            reply=faq["answer"], source="faq", faq_match=faq["id"],
+            suggested_links=[SunnyLink(**l) for l in filter_links(faq["suggested_links"])],
+        )
 
     # 2. Price Question Guardrail: Immediate safe response + Quote link
     if is_price_query(user_query):
@@ -583,19 +420,13 @@ async def handle_sunny_chat(req: SunnyChatRequest, client_ip: str) -> SunnyChatR
             faq_match=matched["id"],
         )
 
-    # 4. Fallback to Cheap AI Model with Accutek Grounding
-    history_dicts = []
-    if req.history:
-        for h in req.history:
-            history_dicts.append({"role": h.role or "user", "text": h.text, "sender": h.sender})
-    history_dicts.append({"role": "user", "text": user_query, "sender": "user"})
-
-    ai_result = await generate_ai_reply(history_dicts)
-    clean_links = filter_links(ai_result.get("suggested_links", []))
+    # 4. Unknown questions always stay local, including with provider keys present.
+    preset = preset_fallback()
+    clean_links = filter_links(preset.get("suggested_links", []))
 
     return SunnyChatResponse(
-        reply=ai_result["reply"],
-        source=ai_result["source"],
+        reply=preset["reply"],
+        source=preset["source"],
         suggested_links=[SunnyLink(**l) for l in clean_links],
         faq_match=None,
     )
