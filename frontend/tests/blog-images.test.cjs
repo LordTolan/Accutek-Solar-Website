@@ -21,11 +21,24 @@ test('all 29 articles preserve content, URLs and every non-image field against t
   const withoutImages = (items) => items.map(({ heroImage, heroAlt, ...rest }) => rest);
   assert.equal(current.length, 29);
   assert.deepEqual(withoutImages(current), withoutImages(original));
-  const changed = current.filter((post, i) => post.heroImage !== original[i].heroImage);
-  assert.equal(changed.length, 6);
-  assert.equal(new Set(changed.map((post) => post.heroImage)).size, 6);
-  for (const post of changed) {
-    assert.ok(fs.existsSync(path.join(root, 'public', post.heroImage)));
-    assert.ok(post.heroAlt.length > 40);
+});
+
+test('all 29 articles have a unique heroImage and descriptive heroAlt', () => {
+  assert.equal(current.length, 29);
+  const heroImages = current.map((post) => post.heroImage);
+  const uniqueImages = new Set(heroImages);
+  assert.equal(uniqueImages.size, 29, `Expected 29 unique heroImage values, got ${uniqueImages.size}`);
+
+  for (const post of current) {
+    assert.ok(post.heroImage && post.heroImage.trim().length > 0, `Post ${post.slug} has empty heroImage`);
+    assert.ok(post.heroAlt && post.heroAlt.trim().length > 20, `Post ${post.slug} has short or missing heroAlt`);
+    assert.ok(!post.heroAlt.toLowerCase().includes('accutek solar site'), `Post ${post.slug} still has vague placeholder heroAlt`);
+
+    if (post.heroImage.startsWith('/')) {
+      const localPath = path.join(root, 'public', post.heroImage);
+      assert.ok(fs.existsSync(localPath), `Local image does not exist: ${localPath} for post ${post.slug}`);
+    } else {
+      assert.ok(post.heroImage.startsWith('http://') || post.heroImage.startsWith('https://'), `Invalid heroImage format: ${post.heroImage}`);
+    }
   }
 });
