@@ -65,7 +65,7 @@ SUNNY_FAQS = [
         "question": "What is the difference between roof-mount and ground-mount solar?",
         "answer": (
             "Roof-mount arrays use your existing roof structure for a fast install and zero extra yard footprint. "
-            "Ground-mount arrays sit on heavy-duty steel racks in your yard or field â€” allowing optimal tilt, "
+            "Ground-mount arrays sit on heavy-duty steel racks in your yard or field - allowing optimal tilt, "
             "true-south orientation, zero roof penetrations, and easier maintenance. Roughly half of Accutek Solar installs are ground mounts!"
         ),
         "suggested_links": [
@@ -318,7 +318,7 @@ def match_faq(query: str) -> Optional[Dict[str, Any]]:
 # ---------------------------------------------------------------------------
 PRICE_DISCLAIMER_REPLY = (
     "Solar and battery system pricing depends on your property layout, electrical service panel, "
-    "and kilowatt-hour usage. At Accutek Solar, we never invent ballpark numbers â€” we provide "
+    "and kilowatt-hour usage. At Accutek Solar, we never invent ballpark numbers - we provide "
     "completely free, customized estimates tailored to your real site."
 )
 
