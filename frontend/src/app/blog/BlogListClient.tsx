@@ -13,7 +13,12 @@ export default function BlogListClient() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
+  const featured = allPosts[0]; // newest post is featured
+  const showFeatured = !activeCategory && !searchQuery;
+
   const filteredPosts = allPosts.filter((post) => {
+    // Filter all posts during search/category browsing so the newest stays discoverable.
+    if (showFeatured && post.slug === featured?.slug) return false;
     const matchesCategory = !activeCategory || post.category === activeCategory;
     const matchesSearch =
       !searchQuery ||
@@ -22,8 +27,6 @@ export default function BlogListClient() {
       post.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
-
-  const featured = allPosts[0]; // newest post is featured
 
   return (
     <>
@@ -55,7 +58,7 @@ export default function BlogListClient() {
       </section>
 
       {/* Featured Post */}
-      {featured && (
+      {showFeatured && featured && (
         <section className="container mx-auto container-px py-12 max-w-6xl">
           <Link
             href={`/blog/${featured.slug}`}
