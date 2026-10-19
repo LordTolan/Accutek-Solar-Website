@@ -65,7 +65,7 @@ SUNNY_FAQS = [
         "question": "What is the difference between roof-mount and ground-mount solar?",
         "answer": (
             "Roof-mount arrays use your existing roof structure for a fast install and zero extra yard footprint. "
-            "Ground-mount arrays sit on heavy-duty steel racks in your yard or field — allowing optimal tilt, "
+            "Ground-mount arrays sit on heavy-duty steel racks in your yard or field â€” allowing optimal tilt, "
             "true-south orientation, zero roof penetrations, and easier maintenance. Roughly half of Accutek Solar installs are ground mounts!"
         ),
         "suggested_links": [
@@ -238,6 +238,33 @@ def is_price_query(query: str) -> bool:
     return False
 
 
+def is_location_query(query: str) -> bool:
+    """Detect coverage intent without assuming a place is inside our territory.
+
+    Match location and installation intent independently so word order, articles,
+    product names, and auxiliary verbs cannot turn a coverage question into a yes.
+    No city/state allowlist is used: an unknown place also needs confirmation.
+    """
+    if re.search(
+        r"\b(serve|service area|coverage|zip|county|counties|located|location)\b",
+        query, re.I,
+    ):
+        return True
+    has_service_intent = re.search(
+        r"\b(install|installation|installations|work|travel|service|available|availability|come)\b",
+        query, re.I,
+    )
+    # Avoid interpreting product setup, weather, and indoor/outdoor questions as
+    # geographic coverage; all other destinations are referred to the team.
+    has_destination = re.search(
+        r"\b(in|at|near|around|throughout|outside|across|to)\s+"
+        r"(?!(?:a |an |the |my |your |our )?(?:roof|ground|yard|field|home|house|barn|building|"
+        r"winter|summer|spring|fall|cold|hot|parallel|series)\b)\w+",
+        query, re.I,
+    )
+    return bool(has_service_intent and has_destination)
+
+
 def match_faq(query: str) -> Optional[Dict[str, Any]]:
     """
     Score FAQs against user query using token overlap, keyword matching, and question similarity.
@@ -291,7 +318,7 @@ def match_faq(query: str) -> Optional[Dict[str, Any]]:
 # ---------------------------------------------------------------------------
 PRICE_DISCLAIMER_REPLY = (
     "Solar and battery system pricing depends on your property layout, electrical service panel, "
-    "and kilowatt-hour usage. At Accutek Solar, we never invent ballpark numbers — we provide "
+    "and kilowatt-hour usage. At Accutek Solar, we never invent ballpark numbers â€” we provide "
     "completely free, customized estimates tailored to your real site."
 )
 
@@ -392,7 +419,7 @@ async def handle_sunny_chat(req: SunnyChatRequest, client_ip: str) -> SunnyChatR
     user_query = req.message.strip()
 
     # Location intent wins over product matches; no inferred coverage or exclusion.
-    if re.search(r"\b(serve|service area|coverage|zip|county|counties|located|location)\b|\b(do you|can you) (install|work|travel).*\b(in|at|near)\b", user_query, re.I):
+    if is_location_query(user_query):
         faq = next(f for f in SUNNY_FAQS if f["id"] == "service_area")
         return SunnyChatResponse(
             reply=faq["answer"], source="faq", faq_match=faq["id"],

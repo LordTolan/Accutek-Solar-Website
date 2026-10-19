@@ -21,7 +21,7 @@ No lead submission or booking is performed by chat. Unknown questions acknowledg
 | Generator installation | Kohler preset retained | Check displayed answer and services link |
 | Price/quote | Free custom estimate; quote link; no invented dollar amount | Open quote page without submitting |
 | Unknown/out-of-scope | Explicit unknown reply plus useful handoffs | Ask unrelated question |
-| Territory mismatch | Indianapolis, Ohio, ZIP 90210 and county question all require team confirmation | Confirm territory with business separately; no new geography assumed |
+| Territory mismatch | City/state destinations (including Will you install a Kohler generator in Ohio?), reversed word order, ZIP 90210 and county questions require team confirmation; generic product/setup questions retain product FAQs | Confirm territory with business separately; no new geography assumed |
 | Contact / HCP | Verified existing phone and internal quote/book/contact links | Open contact and HCP booking page without submitting |
 | Budget exhausted ($0 from first turn) | Dummy keys present, 160 concurrent/repeated requests, no network access allowed | Verify all deployed workers use new revision |
 | Restarts/defaults/invalid legacy setting | Three module reloads; keys absent; invalid daily-limit setting ignored | Restart backend; repeat unknown question |
@@ -37,7 +37,7 @@ $env:DB_NAME='sunny_test'
 python -m pytest backend/tests -q
 ```
 
-Full backend suite: **29 passed** locally (two existing FastAPI `on_event` deprecation warnings). Windows TestClient required an unsandboxed run for its local event-loop socketpair. Focused tests: `python -m pytest backend/tests/test_sunny_zero_spend.py -q` (**16 passed** locally). Tests use dummy credentials and forbid sockets; the handler must complete without yielding to asynchronous I/O. Concurrent calls run in eight threads, with unique IPs so the local burst limiter does not hide unknown-message handling. Module reloads simulate process-state reset. No live provider calls, site requests, HCP submissions, or bookings were made.
+Full backend suite: **39 passed** locally (two existing FastAPI `on_event` deprecation warnings). Windows TestClient required an unsandboxed run for its local event-loop socketpair. Focused tests: `python -m pytest backend/tests/test_sunny_zero_spend.py -q` (**26 passed** locally). Tests use dummy credentials and forbid sockets; the handler must complete without yielding to asynchronous I/O. Concurrent calls run in eight threads, with unique IPs so the local burst limiter does not hide unknown-message handling. Module reloads simulate process-state reset. No live provider calls, site requests, HCP submissions, or bookings were made.
 
 ## Release requirement
 

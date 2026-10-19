@@ -38,6 +38,9 @@ def ask(message, ip="test"):
     ("Roof vs Ground Mount solar?", "roof_vs_ground", "steel racks"),
     ("What are the different types of solar PV systems?", "pv_types", "Hybrid"),
     ("Do you install Kohler generators?", "generators", "Kohler"),
+    ("Will you install a Kohler generator?", "generators", "Kohler"),
+    ("Can you install a standby generator at my home?", "generators", "Kohler"),
+    ("Do you install ground mounts in a field?", "roof_vs_ground", "steel racks"),
     ("How much does solar cost?", "pricing_general", "free"),
     ("How can I contact you?", "contact_phone", "(812) 878-7343"),
 ])
@@ -48,7 +51,19 @@ def test_factual_presets(message, match, text):
     assert all(link.url in sunny.ALLOWED_LINKS for link in result.suggested_links)
 
 
-@pytest.mark.parametrize("message", ["Do you serve Indianapolis?", "Do you install generators in Ohio?", "My ZIP is 90210", "What counties do you serve?"])
+@pytest.mark.parametrize("message", [
+    "Do you serve Indianapolis?",
+    "Do you install generators in Ohio?",
+    "Will you install a Kohler generator in Ohio?",
+    "Would you install solar in Indiana?",
+    "Does Accutek install generators near Indianapolis?",
+    "Is generator installation available in Terre Haute?",
+    "I am in Illinois. Can you install a Kohler generator?",
+    "Will you travel to Columbus for a generator installation?",
+    "Can you service generators outside Indiana?",
+    "My ZIP is 90210",
+    "What counties do you serve?",
+])
 def test_territory_requires_team_confirmation(message):
     result = ask(message)
     assert result.faq_match == "service_area"
