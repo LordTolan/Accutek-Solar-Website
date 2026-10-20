@@ -218,7 +218,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className={`grid sm:grid-cols-2 ${service.photos.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"} gap-6`}>
             {service.photos.map((photo, i) => (
               <div
                 key={i}
@@ -231,7 +231,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
                     alt={photo.alt}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes={service.photos.length === 2 ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
                   />
                 </div>
                 <div className="p-4">

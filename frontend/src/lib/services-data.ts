@@ -61,12 +61,6 @@ export const SERVICES_DATA: ServiceItem[] = [
         alt: "Exterior AC disconnect and solar utility metering",
         caption: "Exterior AC Disconnects & Utility Metering",
         location: "Clinton, IN"
-      },
-      {
-        src: "/gallery/clinton-in/exterior-panels.jpg",
-        alt: "Exterior utility paneling and conduit runs",
-        caption: "Exterior Electrical Disconnects & Metering",
-        location: "Clinton, IN"
       }
     ]
   },
