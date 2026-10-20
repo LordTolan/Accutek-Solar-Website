@@ -2,7 +2,7 @@
  * Centralized Services Data for Accutek Solar
  * 
  * Brand: Accutek Solar
- * Terms 9 Compliance:
+ * Terms §9 Compliance:
  * - Only photos that do NOT identify the property (no house exteriors with facades/addresses, no street signs, no customer faces, no nameplates).
  * - Curated equipment close-ups, BOS inverters, battery banks, generators, disconnects, transfer switches, and array hardware.
  * - Captions: city + work type only, NEVER customer names.
@@ -67,17 +67,17 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "ground-mount-solar",
     title: "Ground-Mount Arrays",
-    shortDesc: "Field & yard installs sized for higher-output sites - ideal for ag, rural, and larger lots.",
+    shortDesc: "Field & yard installs sized for higher-output sites — ideal for ag, rural, and larger lots.",
     tagline: "Maximized solar harvest with optimal tilt, zero roof penetrations, and easy maintenance.",
     iconName: "Mountain",
     badge: "Specialty",
     equipmentBrands: ["IronRidge", "Unirac", "Sol-Ark", "Solis", "Fronius"],
     rundown: [
       "Approximately half of Accutek Solar's installations are ground-mounted arrays. For rural homeowners, homesteads, and agricultural properties with open acreage, ground mounts provide clear advantages: optimal south-facing orientation, ideal winter and summer tilt angles, and zero physical wear on your roof shingles.",
-      "Our field crews build ag-grade structural foundations with heavy-wall steel posts driven deep below the local frost line. Ground mounts run cooler than rooftop systems, resulting in up to 10-15% greater annual energy harvest, and provide simple ground-level access for visual inspection and seasonal cleaning."
+      "Our field crews build ag-grade structural foundations with heavy-wall steel posts driven deep below the local frost line. Ground mounts run cooler than rooftop systems, resulting in up to 10–15% greater annual energy harvest, and provide simple ground-level access for visual inspection and seasonal cleaning."
     ],
     keyPoints: [
-      "Zero roof penetrations - preserve shingle and metal roof warranties",
+      "Zero roof penetrations — preserve shingle and metal roof warranties",
       "Optimized tilt and true-south azimuth for maximum Midwestern solar harvest",
       "Sub-surface trenching below frost lines for clean, protected wire runs",
       "Engineered ground posts built to handle 100+ mph wind and snow loads",
@@ -108,7 +108,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "commercial-ag-solar",
     title: "Commercial & Ag Solar",
-    shortDesc: "Custom systems for businesses, farms, grain facilities, and shops - USDA REAP eligible.",
+    shortDesc: "Custom systems for businesses, farms, grain facilities, and shops — USDA REAP eligible.",
     tagline: "Turn fixed operational overhead into long-term profit and tax equity.",
     iconName: "Building2",
     badge: "Commercial",
@@ -156,7 +156,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     equipmentBrands: ["Sol-Ark", "Victron Energy", "Generac PWRcell", "Fortress Power", "HomeGrid"],
     rundown: [
       "Solar panels alone turn off during a grid blackout unless paired with a hybrid battery storage system. Accutek Solar designs and commissions premium Lithium Iron Phosphate (LiFePO4 / LFP) battery banks that switch over in milliseconds when utility power drops.",
-      "Unlike legacy lead-acid batteries, our modern LFP storage systems offer 6,000+ deep-discharge cycles, 10-15 year warranties, and zero toxic off-gassing. Whether you want to back up essential household circuits (well pump, refrigeration, furnace blower, lights) or disconnect completely off-grid, we size battery capacity to match your real-world reserve requirements."
+      "Unlike legacy lead-acid batteries, our modern LFP storage systems offer 6,000+ deep-discharge cycles, 10–15 year warranties, and zero toxic off-gassing. Whether you want to back up essential household circuits (well pump, refrigeration, furnace blower, lights) or disconnect completely off-grid, we size battery capacity to match your real-world reserve requirements."
     ],
     keyPoints: [
       "Safe, non-flammable Lithium Iron Phosphate (LiFePO4) battery chemistry",
@@ -190,7 +190,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "standby-generators",
     title: "Standby Generators",
-    shortDesc: "Authorized Kohler generator installer - turn-key automatic backup power for Kohler, plus dedicated service and maintenance for Generac and Cummins.",
+    shortDesc: "Authorized Kohler generator installer — turn-key automatic backup power for Kohler, plus dedicated service and maintenance for Generac and Cummins.",
     tagline: "Automatic power restoration in seconds when extreme weather knocks out the grid.",
     iconName: "BatteryCharging",
     badge: "Authorized Installer",
@@ -232,7 +232,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     slug: "mini-split-hvac",
     title: "Mini-Split HVAC Systems",
-    shortDesc: "High-efficiency ductless heating & cooling - Fujitsu heat pumps paired with solar.",
+    shortDesc: "High-efficiency ductless heating & cooling — Fujitsu heat pumps paired with solar.",
     tagline: "Zone-controlled year-round comfort designed for maximum seasonal energy efficiency.",
     iconName: "Flame",
     badge: "HVAC & Heat Pumps",
@@ -273,11 +273,11 @@ export const SERVICES_DATA: ServiceItem[] = [
     badge: "Smart Mobility",
     equipmentBrands: ["Emporia Energy", "Tesla", "ChargePoint", "Enphase"],
     rundown: [
-      "Powering your vehicle with homegrown solar energy is one of the fastest ways to maximize return on your clean energy investment. Level 2 EV charging stations deliver 240V high-speed charging - replenishing 25-40+ miles of driving range per hour compared to just 3-4 miles from a standard wall outlet.",
+      "Powering your vehicle with homegrown solar energy is one of the fastest ways to maximize return on your clean energy investment. Level 2 EV charging stations deliver 240V high-speed charging — replenishing 25–40+ miles of driving range per hour compared to just 3–4 miles from a standard wall outlet.",
       "Accutek Solar installs dedicated residential EV chargers, commercial fleet charging points, and smart energy monitors. We manage panel capacity assessments, 240V dedicated circuit runs, NEMA outlets or hardwired wall connectors, and load-balancing controllers that prioritize excess solar production directly into your vehicle."
     ],
     keyPoints: [
-      "High-speed Level 2 (240V, 32A-50A) residential and commercial charging",
+      "High-speed Level 2 (240V, 32A–50A) residential and commercial charging",
       "Dedicated 240V circuit breakers, heavy-gauge copper wiring, and surge protection",
       "Smart chargers with Wi-Fi scheduling to charge during peak solar or off-peak utility hours",
       "Fleet and commercial workplace dual-port charging configurations",
@@ -303,7 +303,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     slug: "solar-service-repair",
     title: "Solar / Inverter Service & Repair",
     shortDesc: "Multi-brand troubleshooting, inverter replacements, string faults, and orphan system restoration.",
-    tagline: "We service, troubleshoot, and restore systems - even if we didn't originally install them.",
+    tagline: "We service, troubleshoot, and restore systems — even if we didn't originally install them.",
     iconName: "Wrench",
     badge: "Service & Diagnostics",
     equipmentBrands: ["Enphase", "SolarEdge", "SMA", "Outback", "Sol-Ark", "Fronius", "Solis"],
@@ -391,7 +391,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     equipmentBrands: ["Emporia Energy", "Victron Energy", "Schneider Electric"],
     rundown: [
       "The cleanest, cheapest kilowatt-hour is the one you never have to generate. Accutek Solar installs advanced circuit-level energy monitoring systems that break down your real-time consumption appliance by appliance, sub-panel by sub-panel.",
-      "Combined with high-efficiency commercial and residential LED lighting retrofits, our energy monitoring solutions pinpoint phantom loads, faulty compressors, and excessive baseline usage - helping you optimize your solar sizing and reduce total energy expenses."
+      "Combined with high-efficiency commercial and residential LED lighting retrofits, our energy monitoring solutions pinpoint phantom loads, faulty compressors, and excessive baseline usage — helping you optimize your solar sizing and reduce total energy expenses."
     ],
     keyPoints: [
       "Circuit-level real-time wattage tracking via smartphone and desktop dashboards",
