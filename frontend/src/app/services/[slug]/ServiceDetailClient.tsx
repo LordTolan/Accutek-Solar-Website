@@ -201,7 +201,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
         </div>
       </section>
 
-      {/* Equipment & Job Photos (Compliant with Terms 9) */}
+      {/* Equipment & Job Photos (Compliant with Terms §9) */}
       <section className="py-16 md:py-24 bg-card/40 border-b border-border" data-testid="service-photos">
         <div className="container mx-auto container-px max-w-6xl">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
@@ -322,7 +322,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
             Ready to get started with <span className="text-primary">{service.title}?</span>
           </h2>
           <p className="mt-4 text-foreground/70 text-lg">
-            Tell us about your property and goals - we&apos;ll build a custom engineering estimate with no pressure.
+            Tell us about your property and goals — we&apos;ll build a custom engineering estimate with no pressure.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link
