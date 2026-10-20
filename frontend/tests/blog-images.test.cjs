@@ -5,6 +5,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const ts = require('typescript');
 const { execFileSync } = require('node:child_process');
+const { createHash } = require('node:crypto');
 
 function posts(source) {
   const module = { exports: {} };
@@ -40,5 +41,30 @@ test('all 29 articles have a unique heroImage and descriptive heroAlt', () => {
     } else {
       assert.ok(post.heroImage.startsWith('http://') || post.heroImage.startsWith('https://'), `Invalid heroImage format: ${post.heroImage}`);
     }
+  }
+});
+
+test('referenced local hero images have distinct contents, including different filenames', () => {
+  const seen = new Map();
+  for (const post of current.filter((post) => post.heroImage.startsWith('/'))) {
+    const bytes = fs.readFileSync(path.join(root, 'public', post.heroImage));
+    const digest = createHash('sha256').update(bytes).digest('hex');
+    assert.ok(!seen.has(digest), `Identical hero image contents: ${seen.get(digest)} and ${post.slug}`);
+    seen.set(digest, post.slug);
+  }
+});
+
+test('correction changes image fields only for the three reviewed articles', () => {
+  const original = posts(execFileSync('git', ['show', '085536947b8c7ed7f8b996ba06c86a7c366f0c9e:frontend/src/lib/blog-data.ts'], { cwd: root, encoding: 'utf8' }));
+  const allowed = new Set([
+    'from-quote-to-power-on-how-a-solar-project-gets-approved-in-indiana-2026-09-07',
+    'homegrown-watts-inside-americas-solar-manufacturing-boom',
+    'solar-panel-myths-busted-5-things-your-neighbor-got-wrong',
+  ]);
+  const changed = current.filter((post, i) => post.heroImage !== original[i].heroImage || post.heroAlt !== original[i].heroAlt);
+  assert.deepEqual(new Set(changed.map((post) => post.slug)), allowed);
+  for (const post of current) {
+    const before = original.find((item) => item.slug === post.slug);
+    if (!allowed.has(post.slug)) assert.deepEqual(post, before);
   }
 });
