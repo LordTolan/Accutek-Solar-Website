@@ -161,7 +161,7 @@ export default function BlogPostClient() {
               {post.sources.map((src, i) => (
                 <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
                   <BookOpen className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-                  {src}
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{src}</span>
                 </li>
               ))}
             </ul>
