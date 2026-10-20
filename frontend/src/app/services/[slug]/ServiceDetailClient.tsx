@@ -201,7 +201,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
         </div>
       </section>
 
-      {/* Equipment & Job Photos (Compliant with Terms §9) */}
+      {/* Equipment & Job Photos (Compliant with Terms 9) */}
       <section className="py-16 md:py-24 bg-card/40 border-b border-border" data-testid="service-photos">
         <div className="container mx-auto container-px max-w-6xl">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
@@ -218,7 +218,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className={`grid sm:grid-cols-2 ${service.photos.length === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3"} gap-6`}>
             {service.photos.map((photo, i) => (
               <div
                 key={i}
@@ -231,7 +231,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
                     alt={photo.alt}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes={service.photos.length === 2 ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
                   />
                 </div>
                 <div className="p-4">
@@ -322,7 +322,7 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
             Ready to get started with <span className="text-primary">{service.title}?</span>
           </h2>
           <p className="mt-4 text-foreground/70 text-lg">
-            Tell us about your property and goals — we&apos;ll build a custom engineering estimate with no pressure.
+            Tell us about your property and goals - we&apos;ll build a custom engineering estimate with no pressure.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link
