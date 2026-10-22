@@ -462,7 +462,7 @@ export default function UtilityCostProjection() {
             </div>
 
             {/* Chart */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 md:p-6">
+            <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 md:p-6" data-sunny-avoid>
               <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35 mb-3">
                 Annual Utility Cost Escalation
               </div>
@@ -481,11 +481,15 @@ export default function UtilityCostProjection() {
                   border border-white/15 bg-white/[0.04] text-white/70
                   px-7 py-4 text-sm font-bold uppercase tracking-wider
                   hover:border-white/30 hover:text-white transition-all duration-200 focus-ring
+                  scroll-mt-28 scroll-mb-32
                 "
                 data-testid="projection-cta-secondary"
+                data-sunny-step="calculator"
               >
                 See What Solar Would Cost
               </Link>
+              {/* Phone-only gap so Sunny can stand under this button without covering the one below. */}
+              <div data-sunny-room="cta" className="h-0 sm:hidden" aria-hidden="true" />
               <Link
                 href={`/quote?bill=${monthlyBill}`}
                 className="
@@ -493,7 +497,7 @@ export default function UtilityCostProjection() {
                   bg-gradient-to-r from-emerald-600 to-emerald-500
                   text-white px-7 py-4 text-sm font-bold uppercase tracking-wider
                   hover:shadow-[0_0_30px_-8px_rgba(16,185,129,0.5)] hover:-translate-y-0.5
-                  transition-all duration-200 focus-ring
+                  transition-all duration-200 focus-ring scroll-mt-28 scroll-mb-32
                 "
                 data-testid="projection-cta-primary"
                 data-sunny-step="quote"
@@ -502,6 +506,7 @@ export default function UtilityCostProjection() {
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
               </Link>
             </div>
+            <div data-sunny-room="cta" className="h-0" aria-hidden="true" />
           </div>
         </motion.div>
 
