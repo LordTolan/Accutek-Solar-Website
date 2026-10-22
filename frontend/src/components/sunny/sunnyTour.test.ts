@@ -9,8 +9,10 @@ import {
   clearTourMemory,
   labelForResolvedStep,
   readTourSeen,
+  arrowCue,
+  overlapArea,
+  placeSunny,
   stepAnnouncement,
-  sunnyOffset,
   tourForceMode,
   unionRect,
   writeTourSeen,
@@ -78,35 +80,120 @@ test("mobile Free Quote wins when it is visible; desktop falls back to the in-pa
   );
 });
 
-test("Sunny parks above a wide target, beside a slider, and outside a short number", () => {
-  const home = { left: 300, top: 700, width: 70, height: 70 };
-  const wide = { left: 20, top: 400, width: 300, height: 48 };
-  const above = sunnyOffset(home, wide, { width: 390, height: 844 }, 72, "above");
-  const aboveLeft = home.left + above.x;
-  const aboveTop = home.top + above.y;
-  assert.ok(aboveTop >= 72);
-  assert.ok(aboveLeft > wide.left && aboveLeft + home.width < wide.left + wide.width);
-  assert.ok(aboveTop + home.height < wide.top + 24);
-
-  const start = sunnyOffset(home, wide, { width: 390, height: 844 }, 72, "start");
-  assert.ok(home.left + start.x < wide.left + 40);
-
-  const narrow = { left: 40, top: 300, width: 120, height: 48 };
-  const corner = sunnyOffset(home, narrow, { width: 390, height: 844 }, 72, "corner");
-  const cornerLeft = home.left + corner.x;
-  const cornerTop = home.top + corner.y;
-  assert.ok(cornerLeft + home.width > narrow.left + narrow.width - 8);
-  assert.ok(cornerTop + home.height <= narrow.top + 20);
-
-  const clamped = sunnyOffset(
+test("Sunny parks beside a target in the gap that does not cover text", () => {
+  const home = { left: 310, top: 760, width: 70, height: 70 };
+  const viewport = { width: 400, height: 844 };
+  const slider = { left: 40, top: 220, width: 320, height: 64 };
+  const paragraph = { left: 40, top: 140, width: 320, height: 48 };
+  const placed = placeSunny({
     home,
-    { left: 360, top: 4, width: 40, height: 20 },
-    { width: 390, height: 844 },
-    72,
-    "above"
-  );
-  assert.equal(home.left + clamped.x, 390 - 70 - 8);
-  assert.equal(home.top + clamped.y, 72);
+    target: slider,
+    viewport,
+    obstacles: [paragraph],
+    blocked: [],
+    minTop: 64,
+    maxBottom: 760,
+    prefer: "below",
+  });
+  assert.ok(placed);
+  assert.equal(placed.side, "below");
+  assert.ok(placed.box.top >= slider.top + slider.height - 1);
+  assert.equal(overlapArea(placed.box, slider), 0);
+  assert.equal(overlapArea(placed.box, paragraph), 0);
+  assert.ok(placed.box.left >= 8);
+  assert.ok(placed.box.left + placed.box.width <= 392);
+
+  const number = { left: 48, top: 320, width: 180, height: 56 };
+  const heading = { left: 48, top: 270, width: 300, height: 28 };
+  const boxes = { left: 48, top: 400, width: 300, height: 72 };
+  const beside = placeSunny({
+    home,
+    target: number,
+    viewport,
+    obstacles: [heading, number, boxes],
+    blocked: [],
+    minTop: 64,
+    maxBottom: 760,
+    prefer: "right",
+  });
+  assert.ok(beside);
+  assert.equal(beside.side, "right");
+  assert.equal(overlapArea(beside.box, number), 0);
+  assert.equal(overlapArea(beside.box, heading), 0);
+  assert.equal(overlapArea(beside.box, boxes), 0);
+
+  const blockedBelow = { left: 48, top: 300, width: 200, height: 40 };
+  const openRight = placeSunny({
+    home,
+    target: blockedBelow,
+    viewport,
+    obstacles: [{ left: 48, top: 348, width: 240, height: 80 }],
+    blocked: [],
+    minTop: 64,
+    prefer: "below",
+  });
+  assert.ok(openRight);
+  assert.equal(overlapArea(openRight.box, blockedBelow), 0);
+  assert.equal(overlapArea(openRight.box, { left: 48, top: 348, width: 240, height: 80 }), 0);
+  assert.ok(["left", "right", "above"].includes(openRight.side));
+});
+
+test("the quote button keeps Sunny fully on screen and off the label", () => {
+  const home = { left: 310, top: 700, width: 70, height: 70 };
+  const button = { left: 206, top: 792, width: 178, height: 44 };
+  const call = { left: 16, top: 792, width: 178, height: 44 };
+  const controls = { left: 12, top: 728, width: 230, height: 44 };
+  const yearLabel = { left: 330, top: 690, width: 58, height: 16 };
+  const placed = placeSunny({
+    home,
+    target: button,
+    viewport: { width: 400, height: 844 },
+    obstacles: [yearLabel],
+    blocked: [button, call, controls],
+    minTop: 64,
+    maxBottom: 728,
+    prefer: "above",
+  });
+  assert.ok(placed);
+  assert.equal(overlapArea(placed.box, button), 0);
+  assert.equal(overlapArea(placed.box, call), 0);
+  assert.equal(overlapArea(placed.box, controls), 0);
+  assert.equal(overlapArea(placed.box, yearLabel), 0);
+  assert.ok(placed.box.top >= 64);
+  assert.ok(placed.box.top + placed.box.height <= 728);
+  assert.ok(placed.box.left >= 8);
+  assert.ok(placed.box.left + placed.box.width <= 392);
+  const center = placed.box.left + placed.box.width / 2;
+  assert.ok(center > button.left - 8 && center < button.left + button.width + 8);
+
+  const arrow = arrowCue(placed.box, button, [yearLabel, controls, call, button]);
+  if (arrow) {
+    const glyph = { left: arrow.x - 9, top: arrow.y - 9, width: 18, height: 18 };
+    assert.equal(overlapArea(glyph, yearLabel), 0);
+    assert.equal(overlapArea(glyph, button), 0);
+  }
+});
+
+test("a full-width target keeps Sunny in the gap above it", () => {
+  const home = { left: 300, top: 740, width: 72, height: 72 };
+  const boxes = { left: 49, top: 617, width: 302, height: 98 };
+  const number = { left: 49, top: 452, width: 206, height: 65 };
+  const figure = { left: 246, top: 670, width: 51, height: 27 };
+  const placed = placeSunny({
+    home,
+    target: boxes,
+    viewport: { width: 400, height: 844 },
+    obstacles: [number, figure],
+    blocked: [],
+    minTop: 80,
+    maxBottom: 716,
+    prefer: "above",
+  });
+  assert.ok(placed);
+  assert.equal(overlapArea(placed.box, boxes), 0);
+  assert.equal(overlapArea(placed.box, number), 0);
+  assert.equal(overlapArea(placed.box, figure), 0);
+  assert.ok(placed.box.top + placed.box.height <= boxes.top);
 });
 
 test("two boxes share one highlight area", () => {

@@ -8,16 +8,19 @@ import {
   OFFER_TEXT,
   SKIP_TEXT,
   TOURS,
+  type ArrowCue,
   type Box,
-  type SunnyAnchor,
+  type SunnySide,
   type TourId,
+  arrowCue,
   assertTourCopy,
   chooseStepElements,
+  clearVia,
   isTourId,
   labelForResolvedStep,
+  placeSunny,
   readTourSeen,
   stepAnnouncement,
-  sunnyOffset,
   tourForceMode,
   unionRect,
   writeTourSeen,
@@ -31,6 +34,12 @@ interface UseSunnyBounceTourOptions {
 }
 
 export type TourPhase = "idle" | "offer" | "step";
+
+export interface TourCue {
+  target: Box;
+  radius: string;
+  arrow: ArrowCue | null;
+}
 
 function isElementVisible(el: HTMLElement): boolean {
   const style = window.getComputedStyle(el);
@@ -48,14 +57,96 @@ function isFixedPosition(el: HTMLElement): boolean {
   return false;
 }
 
-function anchorFor(el: HTMLElement): SunnyAnchor {
-  const value = el.getAttribute("data-sunny-anchor");
-  if (value === "corner" || value === "start" || value === "above") return value;
-  return "above";
+function clearBand(): { top: number; bottom: number } {
+  const header = document.querySelector("header");
+  const top = (header ? header.getBoundingClientRect().bottom : 0) + 8;
+  let bottom = window.innerHeight - 8;
+  const sticky = document.querySelector<HTMLElement>("[data-testid='sticky-mobile-cta']");
+  if (sticky && isElementVisible(sticky)) bottom = Math.min(bottom, sticky.getBoundingClientRect().top - 12);
+  const controls = document.querySelector<HTMLElement>("[data-testid='sunny-tour-controls']");
+  if (controls && isElementVisible(controls)) bottom = Math.min(bottom, controls.getBoundingClientRect().top - 12);
+  if (bottom < top + 48) bottom = top + 48;
+  return { top, bottom };
+}
+
+/** Text inside a closed menu or other overflow clip still has a layout box. It is not on screen. */
+function isClippedAway(el: Element, rect: DOMRect): boolean {
+  let node = el.parentElement;
+  while (node && node !== document.documentElement) {
+    const style = window.getComputedStyle(node);
+    if (style.display === "none" || style.visibility === "hidden") return true;
+    const clip = node.getBoundingClientRect();
+    if (style.overflowY !== "visible" && (rect.bottom <= clip.top + 0.5 || rect.top >= clip.bottom - 0.5)) return true;
+    if (style.overflowX !== "visible" && (rect.right <= clip.left + 0.5 || rect.left >= clip.right - 0.5)) return true;
+    node = node.parentElement;
+  }
+  return false;
+}
+
+function skipSunnyUi(el: Element | null): boolean {
+  return !!el?.closest(
+    "[data-testid='sunny-companion-container'], [data-testid='sunny-tour-controls'], #sunny-tour-status, [data-testid='sunny-tour-ring'], [data-testid='sunny-tour-arrow']"
+  );
+}
+
+function collectScene(): { text: Box[]; blocked: Box[] } {
+  const text: Box[] = [];
+  const blocked: Box[] = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  let node: Node | null = walker.nextNode();
+  while (node) {
+    const current = node;
+    node = walker.nextNode();
+    const value = current.textContent?.replace(/\s+/g, " ").trim();
+    const parent = current.parentElement;
+    if (!value || !parent || skipSunnyUi(parent)) continue;
+    const tag = parent.tagName;
+    if (tag === "SCRIPT" || tag === "STYLE" || tag === "NOSCRIPT") continue;
+    if (parent.closest(".sr-only")) continue;
+    const range = document.createRange();
+    range.selectNodeContents(current);
+    for (const rect of Array.from(range.getClientRects())) {
+      if (rect.width < 2 || rect.height < 2) continue;
+      if (rect.bottom < -40 || rect.top > window.innerHeight + 40) continue;
+      if (isClippedAway(parent, rect)) continue;
+      text.push(toBox(rect));
+    }
+  }
+
+  document.querySelectorAll<HTMLElement>("input, button, a, select, textarea").forEach((el) => {
+    if (skipSunnyUi(el) || !isElementVisible(el)) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.bottom < -20 || rect.top > window.innerHeight + 20) return;
+    if (isClippedAway(el, rect)) return;
+    // Range thumbs paint outside the input box. Keep Sunny and the arrow off the thumb.
+    if (el.matches('input[type="range"]')) {
+      blocked.push({ left: rect.left - 6, top: rect.top - 18, width: rect.width + 12, height: rect.height + 36 });
+    } else {
+      blocked.push(toBox(rect));
+    }
+  });
+
+  document.querySelectorAll<SVGTextElement>("svg text").forEach((el) => {
+    if (!isElementVisible(el)) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return;
+    if (rect.bottom < -40 || rect.top > window.innerHeight + 40) return;
+    text.push(toBox(rect));
+  });
+
+  const header = document.querySelector("header");
+  if (header) blocked.push(toBox(header.getBoundingClientRect()));
+  const controls = document.querySelector<HTMLElement>("[data-testid='sunny-tour-controls']");
+  if (controls) blocked.push(toBox(controls.getBoundingClientRect()));
+  return { text, blocked };
 }
 
 function toBox(rect: Pick<DOMRect, "left" | "top" | "width" | "height">): Box {
   return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+}
+
+function inflateBox(box: Box, pad: number): Box {
+  return { left: box.left - pad, top: box.top - pad, width: box.width + pad * 2, height: box.height + pad * 2 };
 }
 
 function collectStepElements(root: Element, stepKey: string, preferFallback: boolean, fallbacks: string[]): HTMLElement[] {
@@ -75,25 +166,51 @@ function findTourRoot(id?: TourId | null): HTMLElement | null {
   return visible ?? nodes[0] ?? null;
 }
 
-function scrollTargetIntoView(el: HTMLElement, reduced: boolean) {
-  const rect = el.getBoundingClientRect();
-  const sticky = document.querySelector<HTMLElement>("[data-testid='sticky-mobile-cta']");
-  const stickyH = sticky && isElementVisible(sticky) ? sticky.getBoundingClientRect().height : 0;
-  const header = document.querySelector("header");
-  const topInset = (header ? header.getBoundingClientRect().bottom : 0) + 64;
-  const bottomInset = stickyH + 20;
-  const viewTop = topInset;
-  const viewBottom = window.innerHeight - bottomInset;
-  let delta = 0;
-  if (rect.height > viewBottom - viewTop - 16) {
-    delta = rect.top - viewTop;
-  } else {
-    const targetCenter = rect.top + rect.height / 2;
-    const viewCenter = viewTop + (viewBottom - viewTop) / 2;
-    delta = targetCenter - viewCenter;
+function scrollTargetIntoView(el: HTMLElement, reduced: boolean, side: SunnySide | undefined, root: Element) {
+  const behavior: ScrollBehavior = reduced ? "auto" : "smooth";
+  const band = clearBand();
+  if (isFixedPosition(el)) {
+    const pocket = root.querySelector<HTMLElement>("[data-sunny-room='end']");
+    const anchor = (pocket ?? root).getBoundingClientRect();
+    // Sit the empty end pocket in the clear band so Sunny is not on the next section.
+    const delta = (pocket ? anchor.top : anchor.bottom) - (band.bottom - 96);
+    if (Math.abs(delta) > 12) window.scrollBy({ top: delta, behavior });
+    return;
   }
-  if (Math.abs(delta) < 12) return;
-  window.scrollBy({ top: delta, behavior: reduced ? "auto" : "smooth" });
+  const rect = el.getBoundingClientRect();
+  let { top, bottom } = band;
+  const room = 96;
+  if (side === "below" && bottom - top > rect.height + room + 24) bottom -= room;
+  if (side === "above" && bottom - top > rect.height + room + 24) top += room;
+  let delta = 0;
+  if (rect.top < top) delta = rect.top - top;
+  else if (rect.bottom > bottom) delta = rect.bottom - bottom;
+  // Pull the section title back out from under the header when the target still fits.
+  const rootTop = root.getBoundingClientRect().top + delta;
+  if (rootTop < top) {
+    const spare = bottom - (rect.bottom + delta) - 12;
+    const need = top - rootTop;
+    if (spare > 0) delta -= Math.min(need, spare);
+  }
+  if (Math.abs(delta) > 12) window.scrollBy({ top: delta, behavior });
+}
+
+function nudgeOffChrome(target: HTMLElement, reduced: boolean) {
+  const controls = document.querySelector<HTMLElement>("[data-testid='sunny-tour-controls']");
+  const sunny = document.querySelector<HTMLElement>("[data-testid='sunny-mascot-button']");
+  if (!controls || !sunny || isFixedPosition(target)) return;
+  const bar = controls.getBoundingClientRect();
+  let overlap = 0;
+  for (const el of [target, sunny]) {
+    const rect = el.getBoundingClientRect();
+    const hits =
+      rect.left < bar.right - 2 && rect.right > bar.left + 2 && rect.top < bar.bottom - 2 && rect.bottom > bar.top + 4;
+    if (hits) overlap = Math.max(overlap, rect.bottom - bar.top + 14);
+  }
+  if (overlap < 8) return;
+  const band = clearBand();
+  if (target.getBoundingClientRect().top - overlap < band.top) return;
+  window.scrollBy({ top: overlap, behavior: reduced ? "auto" : "smooth" });
 }
 
 function rootInReach(node: HTMLElement): boolean {
@@ -110,6 +227,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [live, setLive] = useState("");
   const [replayAvailable, setReplayAvailable] = useState(false);
+  const [cue, setCue] = useState<TourCue | null>(null);
 
   const phaseRef = useRef<TourPhase>("idle");
   const activeIdRef = useRef<TourId | null>(null);
@@ -118,6 +236,12 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
   const reducedRef = useRef(reducedMotion);
   const offerTimer = useRef<number | undefined>(undefined);
   const pendingOffer = useRef<TourId | null>(null);
+  const offsetRef = useRef(offset);
+  const travelRef = useRef("");
+  const hoppingRef = useRef(false);
+  const hopTimer = useRef<number | undefined>(undefined);
+  const destRef = useRef({ x: 0, y: 0 });
+  offsetRef.current = offset;
 
   phaseRef.current = phase;
   activeIdRef.current = activeId;
@@ -142,6 +266,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
       setPhase("idle");
       setStepIndex(0);
       setOffset({ x: 0, y: 0 });
+      setCue(null);
     },
     [publish]
   );
@@ -291,29 +416,93 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
       return;
     }
 
-    const scrollTarget = elements.find((el) => !isFixedPosition(el));
-    if (scrollTarget) scrollTargetIntoView(scrollTarget, reducedRef.current);
+    const scrollTarget = elements.find((el) => !isFixedPosition(el)) ?? elements[0];
+    scrollTargetIntoView(scrollTarget, reducedRef.current, step.side, root);
 
     let frame = 0;
+    const applyOffset = (next: { x: number; y: number }) => {
+      if (!Number.isFinite(next.x) || !Number.isFinite(next.y)) return;
+      setOffset((prev) => {
+        if (Math.abs(prev.x - next.x) < 0.5 && Math.abs(prev.y - next.y) < 0.5) return prev;
+        return next;
+      });
+    };
     const measure = () => {
       const home = homeRef.current?.getBoundingClientRect();
       if (!home) return;
       const boxes = elements.map((el) => toBox(el.getBoundingClientRect())).filter((box) => box.width >= 2 && box.height >= 2);
       if (!boxes.length) return;
       const target = unionRect(boxes);
-      const header = document.querySelector("header");
-      const minTop = header ? header.getBoundingClientRect().bottom + 8 : 72;
-      const nextOffset = sunnyOffset(
-        toBox(home),
+      const homeBox = toBox(home);
+      const { text, blocked } = collectScene();
+      const band = clearBand();
+      const viewport = { width: window.innerWidth, height: window.innerHeight };
+      const placed = placeSunny({
+        home: homeBox,
         target,
-        { width: window.innerWidth, height: window.innerHeight },
-        minTop,
-        anchorFor(elements[0])
-      );
-      setOffset((prev) => {
-        if (!Number.isFinite(nextOffset.x) || !Number.isFinite(nextOffset.y)) return prev;
-        if (Math.abs(prev.x - nextOffset.x) < 0.5 && Math.abs(prev.y - nextOffset.y) < 0.5) return prev;
-        return nextOffset;
+        viewport,
+        obstacles: text,
+        blocked,
+        minTop: band.top,
+        maxBottom: band.bottom,
+        prefer: step.side,
+      });
+      if (!placed) return;
+      const final = { x: placed.x, y: placed.y };
+      destRef.current = final;
+      const token = `${activeId}:${stepIndex}`;
+      const fromBox = {
+        left: homeBox.left + offsetRef.current.x,
+        top: homeBox.top + offsetRef.current.y,
+        width: homeBox.width,
+        height: homeBox.height,
+      };
+      const hop = (via: { x: number; y: number }) => {
+        hoppingRef.current = true;
+        applyOffset(via);
+        window.clearTimeout(hopTimer.current);
+        hopTimer.current = window.setTimeout(() => {
+          hoppingRef.current = false;
+          applyOffset(destRef.current);
+        }, 380);
+      };
+      if (travelRef.current !== token) {
+        travelRef.current = token;
+        const via = reducedRef.current ? null : clearVia(fromBox, placed.box, homeBox, [...text, ...blocked], viewport, band.top, band.bottom);
+        if (via) hop(via);
+        else {
+          hoppingRef.current = false;
+          applyOffset(final);
+        }
+      } else if (!hoppingRef.current) {
+        const delta = Math.hypot(final.x - offsetRef.current.x, final.y - offsetRef.current.y);
+        const via =
+          reducedRef.current || delta < 48
+            ? null
+            : clearVia(fromBox, placed.box, homeBox, [...text, ...blocked], viewport, band.top, band.bottom);
+        if (via) hop(via);
+        else applyOffset(final);
+      }
+      const radius = elements.length === 1 ? window.getComputedStyle(elements[0]).borderRadius || "16px" : "16px";
+      const range = elements.find((el) => el.matches('input[type="range"]'));
+      const arrowTarget = range
+        ? inflateBox(toBox(range.getBoundingClientRect()), 16)
+        : target;
+      const arrow = hoppingRef.current ? null : arrowCue(placed.box, arrowTarget, [...text, ...blocked]);
+      setCue((prev) => {
+        if (
+          prev &&
+          Math.abs(prev.target.left - target.left) < 0.5 &&
+          Math.abs(prev.target.top - target.top) < 0.5 &&
+          Math.abs(prev.target.width - target.width) < 0.5 &&
+          Math.abs(prev.target.height - target.height) < 0.5 &&
+          prev.radius === radius &&
+          (prev.arrow?.x ?? -1) === (arrow?.x ?? -1) &&
+          (prev.arrow?.y ?? -1) === (arrow?.y ?? -1)
+        ) {
+          return prev;
+        }
+        return { target, radius, arrow };
       });
       publish(
         stepAnnouncement(
@@ -330,13 +519,21 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
     };
     measure();
     const settle = window.setTimeout(measure, reducedRef.current ? 40 : 700);
-    const settleLate = window.setTimeout(measure, reducedRef.current ? 80 : 1300);
+    let afterLift = 0;
+    const settleLate = window.setTimeout(() => {
+      measure();
+      nudgeOffChrome(scrollTarget, reducedRef.current);
+      afterLift = window.setTimeout(measure, reducedRef.current ? 40 : 550);
+    }, reducedRef.current ? 80 : 900);
     window.addEventListener("scroll", onMove, true);
     window.addEventListener("resize", onMove);
     return () => {
       cancelAnimationFrame(frame);
       window.clearTimeout(settle);
       window.clearTimeout(settleLate);
+      window.clearTimeout(afterLift);
+      window.clearTimeout(hopTimer.current);
+      hoppingRef.current = false;
       window.removeEventListener("scroll", onMove, true);
       window.removeEventListener("resize", onMove);
     };
@@ -363,6 +560,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
     stepCount,
     stepKey,
     offset,
+    cue: phase === "step" ? cue : null,
     live,
     bouncing: !reducedMotion && phase !== "idle",
     replayAvailable,
