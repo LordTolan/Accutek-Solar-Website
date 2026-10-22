@@ -252,7 +252,7 @@ function StyledSlider({
   const pct = ((value - min) / (max - min)) * 100;
 
   return (
-    <div>
+    <div data-sunny-step="slider" data-sunny-anchor="start" className="scroll-mt-28 scroll-mb-24">
       <div className="flex items-baseline justify-between mb-2">
         <label
           htmlFor={id}
@@ -309,7 +309,7 @@ export default function UtilityCostProjection() {
       ref={sectionRef}
       className="relative overflow-hidden"
       data-testid="utility-cost-hero"
-
+      data-sunny-tour="utility"
     >
       {/* Dark background */}
       <div className="absolute inset-0 bg-[#0a0f1a]" />
@@ -403,8 +403,10 @@ export default function UtilityCostProjection() {
                   Total paid to your utility company over {years} years
                 </div>
                 <div
-                  className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500"
+                  className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500 w-fit scroll-mt-28 scroll-mb-24"
                   data-testid="total-projection"
+                  data-sunny-step="total"
+                  data-sunny-anchor="corner"
                 >
                   <AnimatedCounter
                     value={Math.round(projection.totalPaid)}
@@ -415,7 +417,7 @@ export default function UtilityCostProjection() {
 
                 {/* Sub-stats row */}
                 <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <div className="rounded-xl bg-white/[0.04] border border-white/8 p-4">
+                  <div data-sunny-step="boxes" className="rounded-xl bg-white/[0.04] border border-white/8 p-4 scroll-mt-28 scroll-mb-24">
                     <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
                       Current Annual
                     </div>
@@ -427,7 +429,7 @@ export default function UtilityCostProjection() {
                       />
                     </div>
                   </div>
-                  <div className="rounded-xl bg-white/[0.04] border border-white/8 p-4">
+                  <div data-sunny-step="boxes" className="rounded-xl bg-white/[0.04] border border-white/8 p-4 scroll-mt-28 scroll-mb-24">
                     <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
                       Year {years} Monthly
                     </div>
@@ -494,6 +496,8 @@ export default function UtilityCostProjection() {
                   transition-all duration-200 focus-ring
                 "
                 data-testid="projection-cta-primary"
+                data-sunny-step="quote"
+                data-sunny-anchor="corner"
               >
                 Get My Solar Savings Plan
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
