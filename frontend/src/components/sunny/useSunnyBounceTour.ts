@@ -273,19 +273,19 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
   const finish = useCallback(
     (message: string) => {
       const id = activeIdRef.current;
-      if (id) writeTourSeen(id);
+      if (id) writeTourSeen(id, undefined, pathname);
       publish(message);
       setPhase("idle");
       setStepIndex(0);
       setOffset({ x: 0, y: 0 });
       setCue(null);
     },
-    [publish]
+    [pathname, publish]
   );
 
   const begin = useCallback(
     (id: TourId, mode: "offer" | "step") => {
-      writeTourSeen(id);
+      writeTourSeen(id, undefined, pathname);
       setActiveId(id);
       setStepIndex(0);
       setOffset({ x: 0, y: 0 });
@@ -296,7 +296,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
         setPhase("step");
       }
     },
-    [publish]
+    [pathname, publish]
   );
 
   const replay = useCallback(() => {
@@ -361,7 +361,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     const queueOffer = (id: TourId) => {
       if (phaseRef.current !== "idle" || suspendedRef.current) return;
       const forced = tourForceMode(window.location.search);
-      if (readTourSeen(id) && !forced) return;
+      if (readTourSeen(id, undefined, pathname) && !forced) return;
       if (pendingOffer.current === id) return;
       pendingOffer.current = id;
       window.clearTimeout(offerTimer.current);
@@ -369,7 +369,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
         pendingOffer.current = null;
         if (phaseRef.current !== "idle" || suspendedRef.current) return;
         const mode = tourForceMode(window.location.search);
-        if (readTourSeen(id) && !mode) return;
+        if (readTourSeen(id, undefined, pathname) && !mode) return;
         if (!document.querySelector(TOURS[id].root)) return;
         begin(id, mode === "replay" ? "step" : "offer");
       }, 600);

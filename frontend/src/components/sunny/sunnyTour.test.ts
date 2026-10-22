@@ -14,6 +14,7 @@ import {
   placeSunny,
   stepAnnouncement,
   tourForceMode,
+  tourStorageKey,
   unionRect,
   writeTourSeen,
 } from "./sunnyTour";
@@ -39,8 +40,12 @@ test("tour copy never states a price or a dollar figure", () => {
   }
 });
 
-test("each calculator has its own once-per-visitor flag", () => {
+test("each calculator page has its own once-per-visitor flag", () => {
   assert.notEqual(TOURS.utility.storageKey, TOURS.savings.storageKey);
+  assert.equal(tourStorageKey("utility", "/"), "accutek.sunnyTour.utility:/");
+  assert.equal(tourStorageKey("utility", "/backup-power/"), "accutek.sunnyTour.utility:/backup-power");
+  assert.notEqual(tourStorageKey("utility", "/"), tourStorageKey("utility", "/backup-power/"));
+  assert.equal(tourStorageKey("savings", "/tools/calculator/"), TOURS.savings.storageKey);
   const memory = new Map<string, string>();
   const storage = {
     getItem: (key: string) => memory.get(key) ?? null,
@@ -49,11 +54,14 @@ test("each calculator has its own once-per-visitor flag", () => {
     },
   };
   clearTourMemory();
-  assert.equal(readTourSeen("utility", storage), false);
-  writeTourSeen("utility", storage);
-  assert.equal(readTourSeen("utility", storage), true);
-  assert.equal(readTourSeen("savings", storage), false);
-  assert.equal(memory.get(TOURS.savings.storageKey), undefined);
+  assert.equal(readTourSeen("utility", storage, "/"), false);
+  writeTourSeen("utility", storage, "/");
+  assert.equal(readTourSeen("utility", storage, "/"), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator"), false);
+  writeTourSeen("savings", storage, "/tools/calculator/");
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator/"), true);
+  assert.equal(memory.get(TOURS.utility.storageKey), undefined);
 });
 
 test("quote step keeps the Free Quote wording only for that button", () => {
