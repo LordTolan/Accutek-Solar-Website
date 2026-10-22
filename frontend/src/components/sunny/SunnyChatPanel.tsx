@@ -19,6 +19,7 @@ interface SunnyChatPanelProps {
   isOpen: boolean;
   onClose: () => void;
   reducedMotion?: boolean;
+  onReplayTour?: () => void;
 }
 
 const DEFAULT_SUGGESTIONS = [
@@ -32,6 +33,7 @@ export default function SunnyChatPanel({
   isOpen,
   onClose,
   reducedMotion = false,
+  onReplayTour,
 }: SunnyChatPanelProps) {
   const [messages, setMessages] = useState<SunnyMessage[]>([
     {
@@ -199,26 +201,39 @@ export default function SunnyChatPanel({
           <ShieldCheck className="w-3.5 h-3.5 text-primary shrink-0" />
           <span>Accutek Solar · 32 yrs · 17 IN/IL Counties</span>
         </div>
-        <button
-          onClick={() => {
-            setMessages([
-              {
-                id: "welcome-reset",
-                sender: "sunny",
-                text: "Chat cleared! How can I help you with solar or backup power today?",
-                suggested_links: [
-                  { label: "Get a Free Quote", url: "/quote" },
-                  { label: "Solar Savings Calculator", url: "/tools/calculator" },
-                ],
-                time: "Just now",
-              },
-            ]);
-          }}
-          className="hover:text-foreground inline-flex items-center gap-1 text-[10px] font-mono uppercase"
-          title="Clear chat"
-        >
-          <RefreshCcw className="w-3 h-3" /> Reset
-        </button>
+        <div className="flex items-center gap-2 shrink-0">
+          {onReplayTour && (
+            <button
+              type="button"
+              onClick={onReplayTour}
+              className="hover:text-foreground inline-flex items-center gap-1 text-[10px] font-mono uppercase"
+              data-testid="sunny-replay-tour"
+            >
+              <Sun className="w-3 h-3" /> Replay tour
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => {
+              setMessages([
+                {
+                  id: "welcome-reset",
+                  sender: "sunny",
+                  text: "Chat cleared! How can I help you with solar or backup power today?",
+                  suggested_links: [
+                    { label: "Get a Free Quote", url: "/quote" },
+                    { label: "Solar Savings Calculator", url: "/tools/calculator" },
+                  ],
+                  time: "Just now",
+                },
+              ]);
+            }}
+            className="hover:text-foreground inline-flex items-center gap-1 text-[10px] font-mono uppercase"
+            title="Clear chat"
+          >
+            <RefreshCcw className="w-3 h-3" /> Reset
+          </button>
+        </div>
       </div>
 
       {/* Messages Scroll Area */}
