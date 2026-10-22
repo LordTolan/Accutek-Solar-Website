@@ -41,6 +41,7 @@ export const FALLBACK_TEXT = "Here is the next part of the calculator.";
 export const TOURS: Record<TourId, TourDefinition> = {
   utility: {
     id: "utility",
+    // Prefix only. `/` and `/backup-power` each append their path so one visit cannot hide the other.
     storageKey: "accutek.sunnyTour.utility",
     root: '[data-sunny-tour="utility"]',
     steps: [
@@ -503,8 +504,30 @@ export function chooseStepElements<T>(
 
 const memorySeen = new Set<string>();
 
-export function readTourSeen(id: TourId, storage?: Pick<Storage, "getItem">): boolean {
-  const key = TOURS[id].storageKey;
+/** Drop a trailing slash so `/backup-power` and `/backup-power/` share one flag. Root stays `/`. */
+export function normalizeTourPath(pathname?: string | null): string {
+  const raw = (pathname || "/").split("?")[0].split("#")[0] || "/";
+  if (raw.length > 1 && raw.endsWith("/")) return raw.slice(0, -1);
+  return raw || "/";
+}
+
+/**
+ * Once-per-visitor key. The utility calculator is mounted on `/` and `/backup-power`,
+ * so those routes must not share a flag or the second page never starts the tour.
+ * The savings calculator lives on one route and keeps a single key.
+ */
+export function tourStorageKey(id: TourId, pathname?: string | null): string {
+  const base = TOURS[id].storageKey;
+  if (id !== "utility") return base;
+  return `${base}:${normalizeTourPath(pathname)}`;
+}
+
+export function readTourSeen(
+  id: TourId,
+  storage?: Pick<Storage, "getItem">,
+  pathname?: string | null
+): boolean {
+  const key = tourStorageKey(id, pathname);
   if (storage) {
     try {
       return storage.getItem(key) === "1";
@@ -520,8 +543,12 @@ export function readTourSeen(id: TourId, storage?: Pick<Storage, "getItem">): bo
   return memorySeen.has(key);
 }
 
-export function writeTourSeen(id: TourId, storage?: Pick<Storage, "setItem">): void {
-  const key = TOURS[id].storageKey;
+export function writeTourSeen(
+  id: TourId,
+  storage?: Pick<Storage, "setItem">,
+  pathname?: string | null
+): void {
+  const key = tourStorageKey(id, pathname);
   if (storage) {
     try {
       storage.setItem(key, "1");
