@@ -24,6 +24,8 @@ export interface TourStep {
   fallbacks?: string[];
   /** Soft preference. A clear spot on another side wins over a preference that would cover text. */
   side?: SunnySide;
+  /** Extra clear space to keep on the preferred side, in pixels. */
+  room?: number;
 }
 
 export interface TourDefinition {
@@ -64,14 +66,18 @@ export const TOURS: Record<TourId, TourDefinition> = {
         side: "above",
       },
       {
+        key: "calculator",
+        label: "Want to see what solar could save you? Tap here to try our solar savings calculator.",
+        bubble: "Want to see what solar could save you? Tap here to try our solar savings calculator.",
+        side: "below",
+        room: 270,
+      },
+      {
         key: "quote",
-        label: "Tap Free Quote for your real numbers.",
-        bubble: "Want your real numbers? Tap Free Quote for a site visit.",
-        alternateBubble: "Want your real numbers? Tap here for a free quote and a site visit.",
-        alternateLabel: "Tap the quote button for your real numbers.",
-        preferFallback: true,
-        fallbacks: ['[data-testid="sticky-quote"]'],
-        side: "above",
+        label: "Want your real numbers? Tap here for a free quote and a site visit.",
+        bubble: "Want your real numbers? Tap here for a free quote and a site visit.",
+        side: "below",
+        room: 180,
       },
     ],
   },
@@ -117,7 +123,8 @@ const BANNED: RegExp[] = [
   /\bsystem costs?\b/i,
   /\bsolar costs?\b/i,
   /\byou(?:'ll| will) save\b/i,
-  /\bsave you\b/i,
+  // "could save you?" is the calculator invitation. A figure after it is still banned.
+  /\bsave you\s+(?:\$|\d)/i,
   /\bguarantee/i,
   /\b\d{1,3},\d{3}\b/,
 ];

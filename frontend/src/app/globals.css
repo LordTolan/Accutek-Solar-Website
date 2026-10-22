@@ -44,6 +44,7 @@
   html[data-sunny-tour="open"] [data-sunny-room="below"] { margin-bottom: 8.5rem; }
   html[data-sunny-tour="open"] [data-sunny-room="above"] { margin-top: 10rem; }
   html[data-sunny-tour="open"] [data-sunny-room="end"] { height: 10rem; }
+  html[data-sunny-tour="open"] [data-sunny-room="cta"] { height: 11rem; }
   .text-balance { text-wrap: balance; }
   .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background; }
   .font-mono { font-family: var(--font-mono); }

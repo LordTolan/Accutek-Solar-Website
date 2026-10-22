@@ -128,6 +128,14 @@ function collectScene(): { text: Box[]; blocked: Box[] } {
     }
   });
 
+  document.querySelectorAll<HTMLElement>("[data-sunny-avoid]").forEach((el) => {
+    if (!isElementVisible(el)) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.width < 2 || rect.height < 2) return;
+    if (rect.bottom < -40 || rect.top > window.innerHeight + 40) return;
+    text.push(toBox(rect));
+  });
+
   document.querySelectorAll<SVGTextElement>("svg text").forEach((el) => {
     if (!isElementVisible(el)) return;
     const rect = el.getBoundingClientRect();
@@ -168,7 +176,13 @@ function findTourRoot(id?: TourId | null): HTMLElement | null {
   return visible ?? nodes[0] ?? null;
 }
 
-function scrollTargetIntoView(el: HTMLElement, reduced: boolean, side: SunnySide | undefined, root: Element) {
+function scrollTargetIntoView(
+  el: HTMLElement,
+  reduced: boolean,
+  side: SunnySide | undefined,
+  root: Element,
+  room = 96
+) {
   const behavior: ScrollBehavior = reduced ? "auto" : "smooth";
   const band = clearBand();
   if (isFixedPosition(el)) {
@@ -181,7 +195,6 @@ function scrollTargetIntoView(el: HTMLElement, reduced: boolean, side: SunnySide
   }
   const rect = el.getBoundingClientRect();
   let { top, bottom } = band;
-  const room = 96;
   if (side === "below" && bottom - top > rect.height + room + 24) bottom -= room;
   if (side === "above" && bottom - top > rect.height + room + 24) top += room;
   let delta = 0;
@@ -429,7 +442,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     }
 
     const scrollTarget = elements.find((el) => !isFixedPosition(el)) ?? elements[0];
-    scrollTargetIntoView(scrollTarget, reducedRef.current, step.side, root);
+    scrollTargetIntoView(scrollTarget, reducedRef.current, step.side, root, step.room ?? 96);
 
     let frame = 0;
     const applyOffset = (next: { x: number; y: number }) => {

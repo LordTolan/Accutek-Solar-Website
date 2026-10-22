@@ -7,7 +7,6 @@ import {
   assertTourCopy,
   chooseStepElements,
   clearTourMemory,
-  labelForResolvedStep,
   readTourSeen,
   arrowCue,
   overlapArea,
@@ -64,14 +63,22 @@ test("each calculator page has its own once-per-visitor flag", () => {
   assert.equal(memory.get(TOURS.utility.storageKey), undefined);
 });
 
-test("quote step keeps the Free Quote wording only for that button", () => {
-  const step = TOURS.utility.steps[3];
-  assert.equal(labelForResolvedStep(step, "sticky-quote"), "Tap Free Quote for your real numbers.");
+test("utility tour ends on the in-page buttons, not the sticky bar", () => {
+  assert.equal(TOURS.utility.steps.length, 5);
+  const calculator = TOURS.utility.steps[3];
+  const quote = TOURS.utility.steps[4];
+  assert.equal(calculator.key, "calculator");
   assert.equal(
-    labelForResolvedStep(step, "projection-cta-primary"),
-    "Tap the quote button for your real numbers."
+    calculator.bubble,
+    "Want to see what solar could save you? Tap here to try our solar savings calculator."
   );
-  assert.match(stepAnnouncement(3, 4, step.label), /^Step 4 of 4\./);
+  assert.equal(quote.key, "quote");
+  assert.equal(quote.bubble, "Want your real numbers? Tap here for a free quote and a site visit.");
+  assert.equal(quote.preferFallback, undefined);
+  assert.equal(quote.fallbacks, undefined);
+  assert.equal(calculator.preferFallback, undefined);
+  assert.match(stepAnnouncement(4, 5, quote.bubble), /^Step 5 of 5\./);
+  assert.throws(() => assertTourCopy("Solar could save you $18,000"));
 });
 
 test("mobile Free Quote wins when it is visible; desktop falls back to the in-page button", () => {
