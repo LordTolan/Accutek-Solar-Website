@@ -4,7 +4,8 @@ import { ArrowRight, CalendarDays, Clock, Newspaper } from "lucide-react";
 import { getAllBlogPosts } from "@/lib/blog-data";
 
 export default function BlogTeaser() {
-  const posts = getAllBlogPosts().slice(0, 3);
+  const allPosts = getAllBlogPosts();
+  const posts = allPosts.slice(0, 3);
   if (posts.length === 0) return null;
 
   return (
@@ -16,17 +17,20 @@ export default function BlogTeaser() {
               // THE SOLAR DISPATCH
             </div>
             <h2 className="text-3xl md:text-4xl font-heading font-black">
-              From the Blog
+              <Link href="/blog/" className="hover:text-primary transition-colors">
+                The Solar Dispatch
+              </Link>
             </h2>
             <p className="mt-2 text-foreground/70 max-w-lg">
               Solar tips, energy policy updates, and honest advice — new articles weekly.
             </p>
           </div>
           <Link
-            href="/blog"
+            href="/blog/"
             className="hidden md:inline-flex items-center gap-2 text-sm font-bold text-primary hover:gap-3 transition-all"
+            data-testid="blog-teaser-view-all-top"
           >
-            All articles <ArrowRight className="w-4 h-4" />
+            View all articles <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
@@ -73,12 +77,13 @@ export default function BlogTeaser() {
           ))}
         </div>
 
-        <div className="mt-8 text-center md:hidden">
+        <div className="mt-10 text-center">
           <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 text-sm font-bold text-primary"
+            href="/blog/"
+            className="inline-flex items-center gap-2 rounded-md border border-primary/60 px-6 py-3 text-sm font-bold text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+            data-testid="blog-teaser-view-all"
           >
-            View all articles <ArrowRight className="w-4 h-4" />
+            View all {allPosts.length} articles <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
