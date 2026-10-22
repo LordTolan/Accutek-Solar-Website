@@ -17,8 +17,9 @@ import {
   chooseStepElements,
   clearVia,
   isTourId,
-  labelForResolvedStep,
+  bubbleForResolvedStep,
   placeSunny,
+  type BubblePlacement,
   readTourSeen,
   stepAnnouncement,
   tourForceMode,
@@ -31,6 +32,7 @@ interface UseSunnyBounceTourOptions {
   /** Chat is open. Don't auto-offer over it. Replay still works. */
   suspended: boolean;
   homeRef: React.RefObject<HTMLElement | null>;
+  bubbleRef: React.RefObject<HTMLElement | null>;
 }
 
 export type TourPhase = "idle" | "offer" | "step";
@@ -85,7 +87,7 @@ function isClippedAway(el: Element, rect: DOMRect): boolean {
 
 function skipSunnyUi(el: Element | null): boolean {
   return !!el?.closest(
-    "[data-testid='sunny-companion-container'], [data-testid='sunny-tour-controls'], #sunny-tour-status, [data-testid='sunny-tour-ring'], [data-testid='sunny-tour-arrow']"
+    "[data-testid='sunny-companion-container'], [data-testid='sunny-tour-controls'], #sunny-tour-status, [data-testid='sunny-tour-ring'], [data-testid='sunny-tour-arrow'], [data-testid='sunny-tour-bubble']"
   );
 }
 
@@ -219,7 +221,7 @@ function rootInReach(node: HTMLElement): boolean {
   return rect.bottom > viewH * 0.12 && rect.top < viewH * 0.78 && rect.height > 0;
 }
 
-export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSunnyBounceTourOptions) {
+export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRef }: UseSunnyBounceTourOptions) {
   const pathname = usePathname();
   const [phase, setPhase] = useState<TourPhase>("idle");
   const [activeId, setActiveId] = useState<TourId | null>(null);
@@ -228,6 +230,16 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
   const [live, setLive] = useState("");
   const [replayAvailable, setReplayAvailable] = useState(false);
   const [cue, setCue] = useState<TourCue | null>(null);
+  const [bubbleWidth, setBubbleWidth] = useState(220);
+  const [bubble, setBubble] = useState<BubblePlacement | null>(null);
+  const [resolvedBubble, setResolvedBubble] = useState<string | null>(null);
+  const bubbleStep = `${activeId ?? ""}:${stepIndex}`;
+  const bubbleStepRef = useRef(bubbleStep);
+  if (bubbleStepRef.current !== bubbleStep) {
+    bubbleStepRef.current = bubbleStep;
+    if (bubbleWidth !== 220) setBubbleWidth(220);
+    if (resolvedBubble !== null) setResolvedBubble(null);
+  }
 
   const phaseRef = useRef<TourPhase>("idle");
   const activeIdRef = useRef<TourId | null>(null);
@@ -437,6 +449,11 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
       const { text, blocked } = collectScene();
       const band = clearBand();
       const viewport = { width: window.innerWidth, height: window.innerHeight };
+      const bubbleNode = bubbleRef.current;
+      const bubbleSize =
+        bubbleNode && bubbleNode.offsetWidth > 40 && bubbleNode.offsetHeight > 16
+          ? { width: bubbleNode.offsetWidth, height: bubbleNode.offsetHeight }
+          : undefined;
       const placed = placeSunny({
         home: homeBox,
         target,
@@ -446,8 +463,11 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
         minTop: band.top,
         maxBottom: band.bottom,
         prefer: step.side,
+        bubbleSize,
       });
       if (!placed) return;
+      setBubble(placed.bubble);
+      if (!placed.bubble && bubbleSize && bubbleWidth > 190) setBubbleWidth(176);
       const final = { x: placed.x, y: placed.y };
       destRef.current = final;
       const token = `${activeId}:${stepIndex}`;
@@ -488,7 +508,8 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
       const arrowTarget = range
         ? inflateBox(toBox(range.getBoundingClientRect()), 16)
         : target;
-      const arrow = hoppingRef.current ? null : arrowCue(placed.box, arrowTarget, [...text, ...blocked]);
+      const arrowBlocked = placed.bubble ? [...text, ...blocked, placed.bubble.box] : [...text, ...blocked];
+      const arrow = hoppingRef.current ? null : arrowCue(placed.box, arrowTarget, arrowBlocked);
       setCue((prev) => {
         if (
           prev &&
@@ -504,13 +525,9 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
         }
         return { target, radius, arrow };
       });
-      publish(
-        stepAnnouncement(
-          stepIndex,
-          tour.steps.length,
-          labelForResolvedStep(step, elements[0].getAttribute("data-testid"))
-        )
-      );
+      const spoken = bubbleForResolvedStep(step, elements[0].getAttribute("data-testid"));
+      setResolvedBubble((prev) => (prev === spoken ? prev : spoken));
+      publish(stepAnnouncement(stepIndex, tour.steps.length, spoken));
     };
 
     const onMove = () => {
@@ -537,7 +554,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
       window.removeEventListener("scroll", onMove, true);
       window.removeEventListener("resize", onMove);
     };
-  }, [phase, stepIndex, activeId, finish, publish, homeRef]);
+  }, [phase, stepIndex, activeId, finish, publish, homeRef, bubbleRef, bubbleWidth]);
 
   useEffect(() => {
     if (phase === "idle") return;
@@ -553,6 +570,8 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
 
   const stepCount = activeId ? TOURS[activeId].steps.length : 0;
   const stepKey = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex]?.key ?? "" : "";
+  const stepDef = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex] : undefined;
+  const bubbleText = resolvedBubble ?? stepDef?.bubble ?? "";
 
   return {
     phase,
@@ -560,6 +579,9 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef }: UseSun
     stepCount,
     stepKey,
     offset,
+    bubbleText,
+    bubbleWidth,
+    bubble: phase === "step" ? bubble : null,
     cue: phase === "step" ? cue : null,
     live,
     bouncing: !reducedMotion && phase !== "idle",

@@ -13,6 +13,10 @@ export interface TourStep {
   key: string;
   /** Screen-reader instruction. Never a dollar amount. */
   label: string;
+  /** Visible speech-bubble copy. Same words are announced. Never a dollar amount or a payback figure. */
+  bubble: string;
+  /** Bubble used when the resolved target is not the mobile Free Quote button. */
+  alternateBubble?: string;
   /** Used when the resolved target is not the mobile Free Quote button. */
   alternateLabel?: string;
   /** Prefer a visible global fallback (the sticky Free Quote bar) before in-section targets. */
@@ -43,21 +47,26 @@ export const TOURS: Record<TourId, TourDefinition> = {
       {
         key: "slider",
         label: "Drag the slider to your usual monthly bill.",
+        bubble: "Slide this to match your usual monthly electric bill.",
         side: "below",
       },
       {
         key: "total",
         label: "This big number is what you would pay the utility over 30 years at that bill.",
+        bubble: "This is roughly what you'd pay your utility over 30 years if rates keep rising.",
         side: "right",
       },
       {
         key: "boxes",
         label: "These two boxes show what you pay per year now and an estimated monthly bill in year 30.",
+        bubble: "One box is a year of bills at today's rate. The other is a monthly estimate for year 30.",
         side: "above",
       },
       {
         key: "quote",
         label: "Tap Free Quote for your real numbers.",
+        bubble: "Want your real numbers? Tap Free Quote for a site visit.",
+        alternateBubble: "Want your real numbers? Tap here for a free quote and a site visit.",
         alternateLabel: "Tap the quote button for your real numbers.",
         preferFallback: true,
         fallbacks: ['[data-testid="sticky-quote"]'],
@@ -73,21 +82,26 @@ export const TOURS: Record<TourId, TourDefinition> = {
       {
         key: "slider",
         label: "Drag the slider to your average monthly electric bill.",
+        bubble: "Slide this to match your average monthly electric bill.",
         side: "below",
       },
       {
         key: "total",
         label: "This is the 25-year savings total for the bill you set.",
+        bubble: "This is a 25-year savings estimate for the bill you set.",
         side: "right",
       },
       {
         key: "boxes",
         label: "These boxes show the annual estimate, the system size, and the payback time.",
+        bubble:
+          "Annual is a yearly estimate. System size is how big the array looks. Payback is how long that estimate takes to earn its keep.",
         side: "above",
       },
       {
         key: "quote",
         label: "Tap here to ask the Accutek Solar team for your real numbers.",
+        bubble: "Want your real numbers? Tap here for a free quote and a site visit.",
         side: "below",
       },
     ],
@@ -124,6 +138,11 @@ export function labelForResolvedStep(step: TourStep, testId: string | null): str
   return step.label;
 }
 
+export function bubbleForResolvedStep(step: TourStep, testId: string | null): string {
+  if (step.alternateBubble && testId !== "sticky-quote") return step.alternateBubble;
+  return step.bubble;
+}
+
 export function isTourId(value: string | null | undefined): value is TourId {
   return value === "utility" || value === "savings";
 }
@@ -149,6 +168,19 @@ export interface Placement {
   y: number;
   box: Box;
   side: SunnySide;
+  /** Speech bubble beside Sunny. Null when no clear spot exists at this size. */
+  bubble: BubblePlacement | null;
+}
+
+export interface BubblePlacement {
+  box: Box;
+  /** Edge of the bubble that faces Sunny. The tail sits on this edge. */
+  tail: SunnySide;
+  /** 0–1 along that edge, aimed at Sunny's center. */
+  tailAt: number;
+  /** Bubble origin minus Sunny's origin, so the bubble can ride her spring. */
+  relLeft: number;
+  relTop: number;
 }
 
 export interface ArrowCue {
@@ -217,6 +249,8 @@ export function placeSunny(args: {
   minTop?: number;
   maxBottom?: number;
   prefer?: SunnySide;
+  /** When set, prefer a Sunny spot that also fits this bubble in clear space. */
+  bubbleSize?: { width: number; height: number };
 }): Placement | null {
   const { home, target, viewport, obstacles, blocked, prefer } = args;
   const minTop = args.minTop ?? 0;
@@ -283,8 +317,113 @@ export function placeSunny(args: {
   const pool = clear.length ? clear : offTarget;
   if (!pool.length) return null;
   pool.sort((a, b) => a.score - b.score);
+
+  if (args.bubbleSize && args.bubbleSize.width > 8 && args.bubbleSize.height > 8) {
+    let winner: { box: Box; score: number; bubble: BubblePlacement } | null = null;
+    for (const spot of clear) {
+      const bubble = placeBubble({
+        sunny: spot.box,
+        target,
+        size: args.bubbleSize,
+        viewport,
+        obstacles,
+        blocked,
+        minTop,
+        maxBottom,
+      });
+      if (!bubble) continue;
+      const score = spot.score + bubble.rank;
+      if (!winner || score < winner.score) winner = { box: spot.box, score, bubble: bubble.placement };
+    }
+    if (winner) {
+      const box = winner.box;
+      return { x: box.left - home.left, y: box.top - home.top, box, side: sideOf(box, target), bubble: winner.bubble };
+    }
+  }
+
   const box = pool[0].box;
-  return { x: box.left - home.left, y: box.top - home.top, box, side: sideOf(box, target) };
+  return { x: box.left - home.left, y: box.top - home.top, box, side: sideOf(box, target), bubble: null };
+}
+
+function oppositeSide(side: SunnySide): SunnySide {
+  if (side === "left") return "right";
+  if (side === "right") return "left";
+  if (side === "above") return "below";
+  return "above";
+}
+
+function tailAt(box: Box, tail: SunnySide, sunny: Box): number {
+  const along =
+    tail === "left" || tail === "right"
+      ? (sunny.top + sunny.height / 2 - box.top) / box.height
+      : (sunny.left + sunny.width / 2 - box.left) / box.width;
+  return Math.min(0.82, Math.max(0.18, along));
+}
+
+/**
+ * Park the speech bubble against Sunny, tail toward her, off the target and off text.
+ * `rank` is a tie-break used by placeSunny (lower is better).
+ */
+export function placeBubble(args: {
+  sunny: Box;
+  target: Box;
+  size: { width: number; height: number };
+  viewport: { width: number; height: number };
+  obstacles: Box[];
+  blocked: Box[];
+  minTop?: number;
+  maxBottom?: number;
+}): { placement: BubblePlacement; rank: number } | null {
+  const { sunny, target, size, viewport, obstacles, blocked } = args;
+  const minTop = args.minTop ?? 0;
+  const maxBottom = args.maxBottom ?? viewport.height;
+  const width = size.width;
+  const height = size.height;
+  const edge = 8;
+  const gap = 12;
+  const maxLeft = viewport.width - width - edge;
+  const maxTop = maxBottom - height;
+  if (maxLeft < edge || maxTop < minTop) return null;
+
+  const away = oppositeSide(sideOf(sunny, target));
+  const alongY = [sunny.top, sunny.top + (sunny.height - height) / 2, sunny.top + sunny.height - height];
+  const alongX = [sunny.left, sunny.left + (sunny.width - width) / 2, sunny.left + sunny.width - width];
+  const spots: { box: Box; tail: SunnySide }[] = [];
+  for (const top of alongY) {
+    spots.push({ box: { left: sunny.left + sunny.width + gap, top, width, height }, tail: "left" });
+    spots.push({ box: { left: sunny.left - width - gap, top, width, height }, tail: "right" });
+  }
+  for (const left of alongX) {
+    spots.push({ box: { left, top: sunny.top + sunny.height + gap, width, height }, tail: "above" });
+    spots.push({ box: { left, top: sunny.top - height - gap, width, height }, tail: "below" });
+  }
+
+  let winner: { placement: BubblePlacement; rank: number } | null = null;
+  for (const spot of spots) {
+    const left = Math.min(Math.max(spot.box.left, edge), maxLeft);
+    const top = Math.min(Math.max(spot.box.top, minTop), maxTop);
+    if (Math.abs(left - spot.box.left) > 36 || Math.abs(top - spot.box.top) > 36) continue;
+    const box = { left, top, width, height };
+    if (overlapArea(box, sunny) > 1) continue;
+    if (gapDistance(box, sunny) > 40) continue;
+    if (overlapArea(box, inflate(target, 8)) > 1) continue;
+    const textOverlap = obstacles.reduce((sum, obstacle) => sum + overlapArea(box, inflate(obstacle, 6)), 0);
+    const blockOverlap = blocked.reduce((sum, obstacle) => sum + overlapArea(box, inflate(obstacle, 6)), 0);
+    if (textOverlap > 1 || blockOverlap > 1) continue;
+    const rank = gapDistance(box, sunny) + (spot.tail === away ? 0 : 48);
+    if (winner && rank >= winner.rank) continue;
+    winner = {
+      rank,
+      placement: {
+        box,
+        tail: spot.tail,
+        tailAt: tailAt(box, spot.tail, sunny),
+        relLeft: box.left - sunny.left,
+        relTop: box.top - sunny.top,
+      },
+    };
+  }
+  return winner;
 }
 
 /** Short arrow in the gap between Sunny and the target. Null when that gap is not clear. */
@@ -424,10 +563,15 @@ export function assertAllTourCopy(): void {
   for (const tour of Object.values(TOURS)) {
     tour.steps.forEach((step, index) => {
       assertTourCopy(step.label);
-      assertTourCopy(stepAnnouncement(index, tour.steps.length, step.label));
+      assertTourCopy(step.bubble);
+      assertTourCopy(stepAnnouncement(index, tour.steps.length, step.bubble));
       if (step.alternateLabel) {
         assertTourCopy(step.alternateLabel);
         assertTourCopy(stepAnnouncement(index, tour.steps.length, step.alternateLabel));
+      }
+      if (step.alternateBubble) {
+        assertTourCopy(step.alternateBubble);
+        assertTourCopy(stepAnnouncement(index, tour.steps.length, step.alternateBubble));
       }
     });
   }
