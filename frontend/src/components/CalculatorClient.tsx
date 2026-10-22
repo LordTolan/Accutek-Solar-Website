@@ -76,8 +76,9 @@ function CalculatorClientInner() {
       <div className="lg:col-span-2 bg-secondary text-secondary-foreground rounded-3xl p-7 md:p-10 shadow-ambient-lg relative overflow-hidden" data-testid="calc-result">
         <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-primary/30 blur-3xl" />
         <div className="relative">
-          <div className="text-xs uppercase tracking-[0.18em] text-primary mb-3 flex items-center gap-2"><Sun className="w-3.5 h-3.5" /> Your estimate</div>
-          <div className="font-heading text-5xl md:text-6xl font-black text-primary leading-none w-fit scroll-mt-28 scroll-mb-24" data-sunny-step="total">{formatCurrency(r.tw)}</div>
+          <div className="text-xs uppercase tracking-[0.18em] text-secondary-foreground/90 mb-3 flex items-center gap-2"><Sun className="w-3.5 h-3.5" /> Your estimate</div>
+          {/* Primary green is for light surfaces. On this forest card it sits near 1.8:1, so the figure uses the card foreground. */}
+          <div className="font-heading text-5xl md:text-6xl font-black text-secondary-foreground leading-none w-fit scroll-mt-28 scroll-mb-24" data-sunny-step="total">{formatCurrency(r.tw)}</div>
           <div className="mt-2 text-secondary-foreground/70 text-sm">25-year estimated savings</div>
 
           <div className="mt-8 grid grid-cols-3 gap-3 text-sm scroll-mt-28 scroll-mb-24" data-sunny-step="boxes" data-sunny-room="above">
