@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import SunnySun from "./SunnySun";
 import SunnyTourControls from "./SunnyTourControls";
+import SunnyTourCue from "./SunnyTourCue";
 import { useSunnyBounceTour } from "./useSunnyBounceTour";
 
 // Lazy-load chat panel so initial bundle load remains featherlight
@@ -51,6 +52,15 @@ export default function SunnyCompanion() {
   }, [tour.phase]);
 
   useEffect(() => {
+    const root = document.documentElement;
+    if (tour.phase === "idle") delete root.dataset.sunnyTour;
+    else root.dataset.sunnyTour = "open";
+    return () => {
+      delete root.dataset.sunnyTour;
+    };
+  }, [tour.phase]);
+
+  useEffect(() => {
     const touring = tour.phase !== "idle";
     if (wasTouring.current && !touring) {
       buttonRef.current?.focus({ preventScroll: true });
@@ -93,6 +103,8 @@ export default function SunnyCompanion() {
         onBack={tour.back}
         onSkip={tour.skip}
       />
+
+      {tour.cue ? <SunnyTourCue target={tour.cue.target} radius={tour.cue.radius} arrow={tour.cue.arrow} /> : null}
 
       {/* Parked sun. During a tour this translate moves Sunny onto each target. */}
       <div
@@ -147,14 +159,6 @@ export default function SunnyCompanion() {
                   : { duration: 0 }
               }
             >
-              <motion.div
-                animate={tour.bouncing ? { y: [0, -12, 0] } : { y: 0 }}
-                transition={
-                  tour.bouncing
-                    ? { duration: 0.75, repeat: Infinity, ease: "easeInOut" }
-                    : { duration: shouldReduceMotion ? 0 : 0.15 }
-                }
-              >
                 <button
                   ref={buttonRef}
                   onClick={() => {
@@ -171,7 +175,7 @@ export default function SunnyCompanion() {
                     group relative flex items-center justify-center rounded-full p-2
                     bg-gradient-to-tr from-amber-500/20 via-primary/10 to-amber-300/30
                     backdrop-blur-md border border-amber-400/40 shadow-lg hover:shadow-green-glow
-                    hover:border-primary transition-all duration-300 focus-ring cursor-pointer
+                    hover:border-primary transition-all duration-300 focus-ring cursor-pointer touch-manipulation
                     ${tour.phase !== "idle" ? "ring-2 ring-amber-300" : ""}
                   `}
                   data-testid="sunny-mascot-button"
@@ -185,15 +189,23 @@ export default function SunnyCompanion() {
                     </div>
                   )}
 
-                  {/* Little Sun Graphic */}
-                  <SunnySun
-                    size={54}
-                    reducedMotion={shouldReduceMotion}
-                    isHovered={isHovered}
-                    isOpen={isOpen}
-                  />
+                  {/* Bob stays inside the button so the tap target does not move. */}
+                  <motion.div
+                    animate={tour.bouncing ? { y: [0, -7, 0] } : { y: 0 }}
+                    transition={
+                      tour.bouncing
+                        ? { duration: 0.75, repeat: Infinity, ease: "easeInOut" }
+                        : { duration: shouldReduceMotion ? 0 : 0.15 }
+                    }
+                  >
+                    <SunnySun
+                      size={54}
+                      reducedMotion={shouldReduceMotion}
+                      isHovered={isHovered}
+                      isOpen={isOpen}
+                    />
+                  </motion.div>
                 </button>
-              </motion.div>
             </motion.div>
           </motion.div>
         </motion.div>

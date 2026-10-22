@@ -252,7 +252,7 @@ function StyledSlider({
   const pct = ((value - min) / (max - min)) * 100;
 
   return (
-    <div data-sunny-step="slider" data-sunny-anchor="start" className="scroll-mt-28 scroll-mb-24">
+    <div className="scroll-mt-28 scroll-mb-24" data-sunny-room="below">
       <div className="flex items-baseline justify-between mb-2">
         <label
           htmlFor={id}
@@ -274,6 +274,7 @@ function StyledSlider({
           value={value}
           onChange={(e) => onChange(parseFloat(e.target.value))}
           className="utility-slider w-full"
+          data-sunny-step="slider"
           aria-valuemin={min}
           aria-valuemax={max}
           aria-valuenow={value}
@@ -406,7 +407,6 @@ export default function UtilityCostProjection() {
                   className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500 w-fit scroll-mt-28 scroll-mb-24"
                   data-testid="total-projection"
                   data-sunny-step="total"
-                  data-sunny-anchor="corner"
                 >
                   <AnimatedCounter
                     value={Math.round(projection.totalPaid)}
@@ -416,7 +416,7 @@ export default function UtilityCostProjection() {
                 </div>
 
                 {/* Sub-stats row */}
-                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3" data-sunny-room="above">
                   <div data-sunny-step="boxes" className="rounded-xl bg-white/[0.04] border border-white/8 p-4 scroll-mt-28 scroll-mb-24">
                     <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
                       Current Annual
@@ -497,7 +497,6 @@ export default function UtilityCostProjection() {
                 "
                 data-testid="projection-cta-primary"
                 data-sunny-step="quote"
-                data-sunny-anchor="corner"
               >
                 Get My Solar Savings Plan
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition" />
@@ -517,6 +516,7 @@ export default function UtilityCostProjection() {
           are provided for illustrative purposes only. Actual utility costs may
           vary.
         </motion.p>
+        <div data-sunny-room="end" className="h-0" aria-hidden="true" />
       </div>
     </section>
   );

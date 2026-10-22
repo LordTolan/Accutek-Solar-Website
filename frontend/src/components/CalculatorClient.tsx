@@ -55,7 +55,7 @@ function CalculatorClientInner() {
           ))}
         </div>
 
-        <div data-sunny-step="slider" data-sunny-anchor="start" className="scroll-mt-28 scroll-mb-24">
+        <div className="scroll-mt-28 scroll-mb-24" data-sunny-room="below">
           <div className="flex items-baseline justify-between mb-3">
             <label className="text-sm font-bold">Average monthly electric bill</label>
             <span className="font-heading text-3xl font-black text-primary" data-testid="calc-bill-display">{formatCurrency(bill)}</span>
@@ -63,7 +63,8 @@ function CalculatorClientInner() {
           <input type="range" min={30} max={1500} step={25} value={bill}
             onChange={(e) => setBill(parseInt(e.target.value))}
             className="w-full accent-primary h-2"
-            data-testid="calc-bill-slider" />
+            data-testid="calc-bill-slider"
+            data-sunny-step="slider" />
           <div className="flex justify-between text-xs text-muted-foreground mt-2"><span>$30</span><span>$1500</span></div>
         </div>
 
@@ -76,16 +77,16 @@ function CalculatorClientInner() {
         <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full bg-primary/30 blur-3xl" />
         <div className="relative">
           <div className="text-xs uppercase tracking-[0.18em] text-primary mb-3 flex items-center gap-2"><Sun className="w-3.5 h-3.5" /> Your estimate</div>
-          <div className="font-heading text-5xl md:text-6xl font-black text-primary leading-none w-fit scroll-mt-28 scroll-mb-24" data-sunny-step="total" data-sunny-anchor="corner">{formatCurrency(r.tw)}</div>
+          <div className="font-heading text-5xl md:text-6xl font-black text-primary leading-none w-fit scroll-mt-28 scroll-mb-24" data-sunny-step="total">{formatCurrency(r.tw)}</div>
           <div className="mt-2 text-secondary-foreground/70 text-sm">25-year estimated savings</div>
 
-          <div className="mt-8 grid grid-cols-3 gap-3 text-sm scroll-mt-28 scroll-mb-24" data-sunny-step="boxes">
+          <div className="mt-8 grid grid-cols-3 gap-3 text-sm scroll-mt-28 scroll-mb-24" data-sunny-step="boxes" data-sunny-room="above">
             <Mini label="Annual" value={formatCurrency(r.annual)} />
             <Mini label="System" value={`${r.kw} kW`} />
             <Mini label="Payback" value={`${r.payback} yr`} />
           </div>
 
-          <Link href="/quote" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-bold w-full justify-center focus-ring scroll-mt-28 scroll-mb-32" data-testid="calc-cta" data-sunny-step="quote" data-sunny-anchor="corner">
+          <Link href="/quote" className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 font-bold w-full justify-center focus-ring scroll-mt-28 scroll-mb-32" data-testid="calc-cta" data-sunny-step="quote">
             Get my real estimate <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

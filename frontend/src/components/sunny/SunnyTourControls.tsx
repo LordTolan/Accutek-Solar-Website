@@ -49,7 +49,7 @@ export default function SunnyTourControls({
       role="group"
       aria-label="Calculator tour"
       data-testid="sunny-tour-controls"
-      className="fixed z-[45] left-1/2 top-[4.5rem] md:top-24 flex max-w-[calc(100vw-1.5rem)] -translate-x-1/2 flex-wrap items-center justify-center gap-1.5 rounded-lg border border-border bg-background/95 px-2 py-1.5 shadow-ambient"
+      className="fixed z-[45] left-3 md:left-6 bottom-[4.75rem] md:bottom-6 flex max-w-[calc(100vw-6.5rem)] flex-wrap items-center justify-center gap-1.5 rounded-lg border border-border bg-background/95 px-2 py-1.5 shadow-ambient"
     >
       {phase === "offer" ? (
         <>
