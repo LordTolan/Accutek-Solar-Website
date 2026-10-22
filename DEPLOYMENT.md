@@ -94,11 +94,16 @@ Every time code is pushed to `main`, Render automatically rebuilds and deploys b
 | `MONGO_URL` | ✅ | MongoDB Atlas connection string |
 | `DB_NAME` | ✅ | Database name (default: `accutek_solar`) |
 | `CORS_ORIGINS` | ✅ | Allowed origins (`*` for dev, your frontend URL for prod) |
-| `OPENAI_API_KEY` | Optional | OpenAI API key for Sunny AI chatbot fallback |
-| `ANTHROPIC_API_KEY` | Optional | Anthropic API key for Sunny AI chatbot fallback |
-| `SUNNY_DAILY_AI_LIMIT` | Optional | Daily AI call cap for ~$25/mo spend ceiling (default: 500) |
 
 ### Frontend
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `REACT_APP_BACKEND_URL` | ✅ | Your backend's public URL |
+
+
+### Sunny: zero paid-model spending
+
+Sunny is preset/FAQ-only. No environment setting or API key enables a model call.
+Deploy the updated backend image and restart/replace **all** backend workers; old workers can still call providers until replaced. Deploy the frontend for the FAQ Helper label. No new credentials, database migration, budget service, or paid service is needed. Existing secrets are ignored by Sunny; do not remove shared credentials needed by other workloads. See [verification matrix](SUNNY_VERIFICATION.md).
+
+The retired 500-attempt/day process counter was not a monthly dollar cap. No monthly allowance or billed-total accounting is claimed. A future paid mode requires separately authorized budget and persistent reservation accounting before provider code is reintroduced.

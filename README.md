@@ -58,9 +58,7 @@ yarn dev
 - `MONGO_URL` — MongoDB connection string
 - `DB_NAME` — database name (e.g. `accutek_solar`)
 - `CORS_ORIGINS` — comma-separated origins (`*` for dev)
-- `OPENAI_API_KEY` — (Optional) OpenAI API key for Sunny AI chatbot fallback (e.g. `gpt-4o-mini`)
-- `ANTHROPIC_API_KEY` — (Optional) Anthropic API key for Sunny AI chatbot fallback (e.g. `claude-3-haiku-20240307`)
-- `SUNNY_DAILY_AI_LIMIT` — (Optional, default 500) Daily AI call cap for ~$25/mo spend ceiling
+- Sunny is preset/FAQ-only with a $0 paid-model allowance. Provider keys and legacy `SUNNY_*` model/limit settings cannot enable paid calls. See [Sunny verification](SUNNY_VERIFICATION.md).
 
 ### Frontend (`frontend/.env`)
 - `NEXT_PUBLIC_BACKEND_URL` — backend public URL
