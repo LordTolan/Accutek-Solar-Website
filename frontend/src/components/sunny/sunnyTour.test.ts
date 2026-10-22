@@ -27,7 +27,14 @@ test("tour copy never states a price or a dollar figure", () => {
   for (const tour of Object.values(TOURS)) {
     for (const step of tour.steps) {
       assert.doesNotThrow(() => assertTourCopy(step.label));
+      assert.doesNotThrow(() => assertTourCopy(step.bubble));
       assert.equal(step.label.includes("$"), false);
+      assert.equal(step.bubble.includes("$"), false);
+      assert.equal(/\b\d+\s*(yr|yrs|kW)\b/i.test(step.bubble), false);
+      if (step.alternateBubble) {
+        assert.doesNotThrow(() => assertTourCopy(step.alternateBubble));
+        assert.equal(step.alternateBubble.includes("$"), false);
+      }
     }
   }
 });
@@ -194,6 +201,37 @@ test("a full-width target keeps Sunny in the gap above it", () => {
   assert.equal(overlapArea(placed.box, number), 0);
   assert.equal(overlapArea(placed.box, figure), 0);
   assert.ok(placed.box.top + placed.box.height <= boxes.top);
+});
+
+test("the speech bubble sits beside Sunny and off the target", () => {
+  const home = { left: 320, top: 760, width: 72, height: 72 };
+  const target = { left: 40, top: 220, width: 180, height: 48 };
+  const placed = placeSunny({
+    home,
+    target,
+    viewport: { width: 400, height: 844 },
+    obstacles: [{ left: 40, top: 160, width: 200, height: 28 }],
+    blocked: [],
+    minTop: 64,
+    maxBottom: 760,
+    prefer: "right",
+    bubbleSize: { width: 180, height: 64 },
+  });
+  assert.ok(placed?.bubble);
+  assert.equal(overlapArea(placed.bubble.box, target), 0);
+  assert.equal(overlapArea(placed.bubble.box, placed.box), 0);
+  assert.equal(overlapArea(placed.bubble.box, { left: 40, top: 160, width: 200, height: 28 }), 0);
+  assert.ok(placed.bubble.box.left >= 8);
+  assert.ok(placed.bubble.box.left + placed.bubble.box.width <= 392);
+  const gapX = Math.max(
+    0,
+    Math.max(placed.box.left - (placed.bubble.box.left + placed.bubble.box.width), placed.bubble.box.left - (placed.box.left + placed.box.width))
+  );
+  const gapY = Math.max(
+    0,
+    Math.max(placed.box.top - (placed.bubble.box.top + placed.bubble.box.height), placed.bubble.box.top - (placed.box.top + placed.box.height))
+  );
+  assert.ok(Math.hypot(gapX, gapY) < 40);
 });
 
 test("two boxes share one highlight area", () => {

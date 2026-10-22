@@ -41,9 +41,9 @@
 @layer utilities {
   .container-px { @apply px-6 md:px-10 lg:px-16; }
   /* Empty pocket so Sunny can sit beside a control without covering the next line. */
-  html[data-sunny-tour="open"] [data-sunny-room="below"] { margin-bottom: 6.75rem; }
+  html[data-sunny-tour="open"] [data-sunny-room="below"] { margin-bottom: 8.5rem; }
   html[data-sunny-tour="open"] [data-sunny-room="above"] { margin-top: 10rem; }
-  html[data-sunny-tour="open"] [data-sunny-room="end"] { height: 8rem; }
+  html[data-sunny-tour="open"] [data-sunny-room="end"] { height: 10rem; }
   .text-balance { text-wrap: balance; }
   .focus-ring { @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background; }
   .font-mono { font-family: var(--font-mono); }

@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import SunnySun from "./SunnySun";
 import SunnyTourControls from "./SunnyTourControls";
+import SunnyTourBubble from "./SunnyTourBubble";
 import SunnyTourCue from "./SunnyTourCue";
 import { useSunnyBounceTour } from "./useSunnyBounceTour";
 
@@ -21,6 +22,7 @@ export default function SunnyCompanion() {
   const [navHopKey, setNavHopKey] = useState(0);
   const homeRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const bubbleRef = useRef<HTMLDivElement>(null);
   const wasTouring = useRef(false);
 
   const pathname = usePathname();
@@ -40,6 +42,7 @@ export default function SunnyCompanion() {
     reducedMotion: shouldReduceMotion,
     suspended: isOpen,
     homeRef,
+    bubbleRef,
   });
 
   // Hop animation on navigation
@@ -130,8 +133,16 @@ export default function SunnyCompanion() {
               ? { duration: 0 }
               : { type: "spring", stiffness: 320, damping: 28, mass: 0.8 }
           }
-          className="pointer-events-auto"
+          className="pointer-events-auto relative"
         >
+          {tour.phase === "step" && tour.bubbleText ? (
+            <SunnyTourBubble
+              text={tour.bubbleText}
+              width={tour.bubbleWidth}
+              placement={tour.bubble}
+              measureRef={bubbleRef}
+            />
+          ) : null}
           <motion.div
             key={navHopKey}
             initial={false}
