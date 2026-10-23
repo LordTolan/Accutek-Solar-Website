@@ -100,7 +100,7 @@ export default function ManufacturerLogos() {
 
         {/* Footer note */}
         <p className="mt-8 text-center text-xs text-muted-foreground font-mono">
-          We also service existing systems built on SMA, Schneider Electric, Enphase, SolarEdge and other brands.{" "}
+          We also install and service SMA, Schneider Electric, Enphase, SolarEdge, and other brands.{" "}
           <Link href="/contact" className="text-primary hover:underline focus-ring">
             Ask about your system →
           </Link>

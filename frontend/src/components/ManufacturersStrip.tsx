@@ -329,8 +329,7 @@ export default function ManufacturersStrip() {
 
         {/* Supporting footnote */}
         <p className="mt-8 text-xs text-muted-foreground text-center">
-          We also service and troubleshoot systems built on Enphase, SolarEdge,
-          SMA, Schneider Electric, and other platforms.{" "}
+          We also service and troubleshoot systems built on other platforms.{" "}
           <Link
             href="/quote"
             className="text-primary underline underline-offset-4 hover:no-underline"
