@@ -117,6 +117,7 @@ export default function SunnyTourControls({
               ref={acceptRef}
               className={`${primary} normal-case tracking-normal`}
               onClick={onAccept}
+              aria-label={OFFER_ACCEPT}
               data-testid="sunny-tour-accept"
             >
               {OFFER_ACCEPT}
@@ -152,6 +153,7 @@ export default function SunnyTourControls({
               ref={acceptRef}
               className={`${primary} normal-case tracking-normal`}
               onClick={onAccept}
+              aria-label={OFFER_ACCEPT}
               data-testid="sunny-tour-accept"
             >
               {OFFER_ACCEPT}
