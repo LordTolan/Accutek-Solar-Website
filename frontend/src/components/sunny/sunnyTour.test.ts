@@ -12,6 +12,7 @@ import {
   overlapArea,
   placeSunny,
   stepAnnouncement,
+  isTourRootInReach,
   tourForceMode,
   tourStorageKey,
   unionRect,
@@ -39,12 +40,12 @@ test("tour copy never states a price or a dollar figure", () => {
   }
 });
 
-test("each calculator page has its own once-per-visitor flag", () => {
+test("each calculator page remembers a real dismissal, not an old automatic offer stamp", () => {
   assert.notEqual(TOURS.utility.storageKey, TOURS.savings.storageKey);
-  assert.equal(tourStorageKey("utility", "/"), "accutek.sunnyTour.utility:/");
-  assert.equal(tourStorageKey("utility", "/backup-power/"), "accutek.sunnyTour.utility:/backup-power");
+  assert.equal(tourStorageKey("utility", "/"), "accutek.sunnyTour.utility.choice:/");
+  assert.equal(tourStorageKey("utility", "/backup-power/"), "accutek.sunnyTour.utility.choice:/backup-power");
   assert.notEqual(tourStorageKey("utility", "/"), tourStorageKey("utility", "/backup-power/"));
-  assert.equal(tourStorageKey("savings", "/tools/calculator/"), TOURS.savings.storageKey);
+  assert.equal(tourStorageKey("savings", "/tools/calculator/"), "accutek.sunnyTour.savings.choice");
   const memory = new Map<string, string>();
   const storage = {
     getItem: (key: string) => memory.get(key) ?? null,
@@ -53,7 +54,12 @@ test("each calculator page has its own once-per-visitor flag", () => {
     },
   };
   clearTourMemory();
+  memory.set("accutek.sunnyTour.savings", "1");
+  memory.set("accutek.sunnyTour.utility:/", "1");
+  memory.set("accutek.sunnyTour.utility:/backup-power", "1");
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator"), false);
   assert.equal(readTourSeen("utility", storage, "/"), false);
+  assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
   writeTourSeen("utility", storage, "/");
   assert.equal(readTourSeen("utility", storage, "/"), true);
   assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
@@ -61,6 +67,12 @@ test("each calculator page has its own once-per-visitor flag", () => {
   writeTourSeen("savings", storage, "/tools/calculator/");
   assert.equal(readTourSeen("savings", storage, "/tools/calculator/"), true);
   assert.equal(memory.get(TOURS.utility.storageKey), undefined);
+});
+
+test("a tall calculator section is in reach once its top is on screen", () => {
+  assert.equal(isTourRootInReach({ top: 180, bottom: 2100, height: 1920 }, 800), true);
+  assert.equal(isTourRootInReach({ top: 1045, bottom: 2900, height: 1855 }, 900), false);
+  assert.equal(isTourRootInReach({ top: -40, bottom: 20, height: 1800 }, 800), false);
 });
 
 test("utility tour ends on the in-page buttons, not the sticky bar", () => {

@@ -519,14 +519,30 @@ export function normalizeTourPath(pathname?: string | null): string {
 }
 
 /**
- * Once-per-visitor key. The utility calculator is mounted on `/` and `/backup-power`,
- * so those routes must not share a flag or the second page never starts the tour.
- * The savings calculator lives on one route and keeps a single key.
+ * Dismissal key. Written only after Skip or the tour finishes, not when the
+ * prompt first appears. An earlier build stored "1" as soon as the offer
+ * started (`accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>`),
+ * which removed the bottom bar on every later visit. Those keys are not read.
+ * The utility calculator is mounted on `/` and `/backup-power`, so those routes
+ * keep separate keys. The savings calculator lives on one route.
  */
 export function tourStorageKey(id: TourId, pathname?: string | null): string {
-  const base = TOURS[id].storageKey;
+  const base = `${TOURS[id].storageKey}.choice`;
   if (id !== "utility") return base;
   return `${base}:${normalizeTourPath(pathname)}`;
+}
+
+/**
+ * True when a readable slice of a calculator section is on screen.
+ * Callers must recheck on scroll. A tall section can cross an
+ * IntersectionObserver threshold once while this is still false, and the
+ * observer will not fire again until a much higher ratio.
+ */
+export function isTourRootInReach(
+  rect: { top: number; bottom: number; height: number },
+  viewHeight: number
+): boolean {
+  return rect.bottom > viewHeight * 0.12 && rect.top < viewHeight * 0.78 && rect.height > 0;
 }
 
 export function readTourSeen(
