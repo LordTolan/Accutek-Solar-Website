@@ -1,189 +1,32 @@
-/**
- * ManufacturersStrip — Brand-partner logos row
- * Displays the equipment manufacturers Accutek Solar installs and services.
- * Drop into any page with: <ManufacturersStrip />
- */
-
 import Link from "next/link";
-import { ShieldCheck, Wrench } from "lucide-react";
+import BrandCard, { type BrandCardData } from "@/components/BrandCard";
 
-type Manufacturer = {
-  name: string;
-  tagline: string;
-  category: string;
-  /** brand hex for the colored accent bar */
-  color: string;
-  url: string;
-  badgeText?: string;
-  badgeType?: "installed" | "service_only" | "tesla_certified" | "service_repair";
-  logoSrc?: string;
-};
+const INSTALL = "Install & service";
 
-const MANUFACTURERS: Manufacturer[] = [
-  {
-    name: "Sol-Ark",
-    tagline: "Hybrid inverters & all-in-one energy systems",
-    category: "Inverters / Storage",
-    color: "#E85A1B",
-    url: "https://www.sol-ark.com",
-  },
-  {
-    name: "Victron Energy",
-    tagline: "Off-grid & backup power electronics",
-    category: "Inverters / Chargers",
-    color: "#005B9A",
-    url: "https://www.victronenergy.com",
-  },
-  {
-    name: "OutBack Power",
-    tagline: "Proven off-grid & battery-based inverters",
-    category: "Inverters / Charge Controllers",
-    color: "#F26522",
-    url: "https://outbackpower.com",
-  },
-  {
-    name: "Solis",
-    tagline: "String & hybrid PV inverters",
-    category: "Solar Inverters",
-    color: "#1A6D37",
-    url: "https://www.solisinverters.com/us/",
-  },
-  {
-    name: "Fronius",
-    tagline: "Premium grid-tie inverters & monitoring",
-    category: "Solar Inverters",
-    color: "#EB0000",
-    url: "https://www.fronius.com/en-us/usa/solar-energy",
-  },
-  {
-    name: "Kohler",
-    tagline: "Automatic standby generators — authorized installer",
-    category: "Backup Generators",
-    color: "#005DAA",
-    url: "https://www.kohlerpower.com",
-  },
-  {
-    name: "Generac PWRcell",
-    tagline: "Whole-home battery storage & backup systems",
-    category: "Battery Storage",
-    color: "#F7941D",
-    url: "https://www.generac.com",
-  },
-  {
-    name: "Generac",
-    tagline: "Standby generators — diagnostic troubleshooting, maintenance & repair (service only)",
-    category: "Backup Generators",
-    color: "#E58310",
-    url: "https://www.generac.com/all-products/generators/home-backup-generators",
-    badgeText: "Service Only",
-    badgeType: "service_only",
-  },
-  {
-    name: "Cummins",
-    tagline: "Standby generators — service, maintenance & transfer switch diagnostics (service only)",
-    category: "Backup Generators",
-    color: "#D0021B",
-    url: "https://www.cummins.com/generators",
-    badgeText: "Service Only",
-    badgeType: "service_only",
-  },
-  {
-    name: "Fujitsu",
-    tagline: "High-efficiency ductless mini-split heat pumps & multi-zone HVAC",
-    category: "Mini-Split HVAC",
-    color: "#ED1B24",
-    url: "https://www.fujitsugeneral.com",
-  },
-  {
-    name: "Fortress Power",
-    tagline: "Lithium iron phosphate (LFP) energy storage & battery management",
-    category: "Battery Storage",
-    color: "#1E3D59",
-    url: "https://www.fortresspower.com",
-  },
-  {
-    name: "HomeGrid",
-    tagline: "Stackable residential & commercial LFP battery storage",
-    category: "Battery Storage",
-    color: "#00A859",
-    url: "https://www.homegridenergy.com",
-  },
-  {
-    name: "Tesla Powerwall",
-    // NOTE: Accutek Solar holds a Tesla tech ID. Do not invent an ID number here.
-    // TODO: Add official Tesla Tech ID # once confirmed by owner.
-    tagline: "Whole-home battery backup & solar storage — Tesla-certified technicians (TODO: add Tesla Tech ID #)",
-    category: "Battery Storage",
-    color: "#E82127",
-    url: "https://www.tesla.com/powerwall",
-    badgeText: "Tesla-Certified Tech",
-    badgeType: "tesla_certified",
-  },
-  {
-    name: "Solar Panel Service",
-    tagline: "Panel swaps, warranty replacements, removal and reinstall (R&R), and repair diagnostics",
-    category: "Solar Service & Repair",
-    color: "#FBBF24",
-    url: "/services/solar-service-repair/",
-    badgeText: "Service & Repair",
-    badgeType: "service_repair",
-  },
-  {
-    name: "Schneider Electric",
-    tagline: "Energy management, inverters & load centers",
-    category: "Energy Management",
-    color: "#3DCD58",
-    url: "https://www.se.com",
-  },
-  {
-    name: "Emporia Energy",
-    tagline: "Real-time energy monitoring & smart EV charging",
-    category: "Energy Monitoring",
-    color: "#6C3FC5",
-    url: "https://www.emporiaenergy.com",
-  },
-  {
-    name: "EG4",
-    tagline: "Hybrid inverters & rack batteries",
-    category: "Inverters / Storage",
-    color: "#E41E26",
-    url: "https://eg4electronics.com",
-  },
-  {
-    name: "Q CELLS",
-    tagline: "Residential & commercial solar panels",
-    category: "Solar Panels",
-    color: "#009FE3",
-    url: "https://www.qcells.com",
-  },
-  {
-    name: "MidNite Solar",
-    tagline: "Charge controllers & off-grid BOS",
-    category: "Charge Controllers / BOS",
-    color: "#B30000",
-    url: "https://www.midnitesolar.com",
-  },
-  {
-    name: "Enphase",
-    tagline: "Microinverters, IQ Battery & monitoring",
-    category: "Microinverters / Storage",
-    color: "#FF5E00",
-    url: "https://enphase.com",
-  },
-  {
-    name: "SolarEdge",
-    tagline: "Power optimizers, inverters & home backup",
-    category: "Optimizers / Inverters",
-    color: "#ED1C24",
-    url: "https://www.solaredge.com",
-  },
-  {
-    name: "SMA",
-    tagline: "String inverters (Sunny Boy / Sunny Island)",
-    category: "Solar Inverters",
-    color: "#F9BA00",
-    url: "https://www.sma-america.com",
-  },
+// Tesla: Accutek holds a tech ID. Do not invent that number, and do not print an unfinished note on the card.
+const MANUFACTURERS: BrandCardData[] = [
+  { slug: "sma", name: "SMA", category: "Solar Inverters", url: "https://www.sma-america.com", label: INSTALL },
+  { slug: "schneider-electric", name: "Schneider Electric", category: "Energy Management", url: "https://www.se.com", label: INSTALL },
+  { slug: "enphase", name: "Enphase", category: "Microinverters", url: "https://enphase.com", label: INSTALL },
+  { slug: "solaredge", name: "SolarEdge", category: "Optimizers / Inverters", url: "https://www.solaredge.com", label: INSTALL },
+  { slug: "boviet", name: "Boviet Solar", category: "Solar Panels", logo: "/manufacturers/boviet.png", url: "https://bovietsolar.com", label: INSTALL },
+  { slug: "q-cells", name: "Q CELLS", category: "Solar Panels", url: "https://www.qcells.com", label: INSTALL },
+  { slug: "sol-ark", name: "Sol-Ark", category: "Hybrid Inverters", logo: "/manufacturers/sol-ark.png", url: "https://www.sol-ark.com", label: INSTALL },
+  { slug: "victron", name: "Victron Energy", category: "Energy Systems", logo: "/manufacturers/victron.svg", url: "https://www.victronenergy.com", label: INSTALL },
+  { slug: "outback", name: "OutBack Power", category: "Off-Grid & Storage", logo: "/manufacturers/outback.png", url: "https://outbackpower.com", label: INSTALL },
+  { slug: "solis", name: "Solis", category: "String Inverters", logo: "/manufacturers/solis.png", url: "https://www.solisinverters.com/us/", label: INSTALL },
+  { slug: "fronius", name: "Fronius", category: "Grid-Tie Inverters", logo: "/manufacturers/fronius.webp", url: "https://www.fronius.com/en-us/usa/solar-energy", label: INSTALL },
+  { slug: "fujitsu", name: "Fujitsu", category: "Mini-Split HVAC", url: "https://www.fujitsugeneral.com", label: INSTALL },
+  { slug: "fortress-power", name: "Fortress Power", category: "Battery Storage", logo: "/manufacturers/fortress-power.png", url: "https://www.fortresspower.com", label: INSTALL },
+  { slug: "homegrid", name: "HomeGrid", category: "Battery Storage", logo: "/manufacturers/homegrid.png", url: "https://www.homegridenergy.com", label: INSTALL },
+  { slug: "emporia", name: "Emporia Energy", category: "Energy Monitoring", url: "https://www.emporiaenergy.com", label: INSTALL },
+  { slug: "eg4", name: "EG4", category: "Inverters / Storage", logo: "/manufacturers/eg4.png", url: "https://eg4electronics.com", label: INSTALL },
+  { slug: "midnite-solar", name: "MidNite Solar", category: "Charge Controllers", url: "https://www.midnitesolar.com", label: INSTALL },
+  { slug: "tesla-powerwall", name: "Tesla Powerwall", category: "Battery Storage", url: "https://www.tesla.com/powerwall", label: INSTALL },
+  { slug: "generac-pwrcell", name: "Generac PWRcell", category: "Battery Storage", logo: "/manufacturers/generac.png", url: "https://www.generac.com", label: INSTALL },
+  { slug: "kohler", name: "Kohler", category: "Backup Generators", url: "https://www.kohlerpower.com", label: "Authorized installer" },
+  { slug: "generac", name: "Generac", category: "Standby Generators", logo: "/manufacturers/generac.png", url: "https://www.generac.com/all-products/generators/home-backup-generators", label: "Service Only" },
+  { slug: "cummins", name: "Cummins", category: "Standby Generators", url: "https://www.cummins.com/generators", label: "Service Only" },
 ];
 
 export default function ManufacturersStrip() {
@@ -192,8 +35,7 @@ export default function ManufacturersStrip() {
       className="py-20 md:py-28 border-y border-border bg-card/30"
       data-testid="manufacturers-section"
     >
-      <div className="container mx-auto container-px">
-        {/* Header */}
+      <div className="container mx-auto container-px max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
             <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
@@ -217,105 +59,11 @@ export default function ManufacturersStrip() {
           </Link>
         </div>
 
-        {/* Manufacturer cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {MANUFACTURERS.map((m) => {
-            const isInternal = m.url.startsWith("/");
-            const badgeText = m.badgeText || "Installed & Serviced";
-            const isServiceOnly = m.badgeType === "service_only";
-            const isRepair = m.badgeType === "service_repair";
-
-            const cardContent = (
-              <>
-                <div>
-                  {/* Brand color accent bar */}
-                  <div
-                    className="h-1 w-full"
-                    style={{ backgroundColor: m.color }}
-                  />
-
-                  <div className="p-6">
-                    {/* Category pill */}
-                    <div className="inline-flex items-center text-[9px] uppercase tracking-[0.22em] font-mono text-muted-foreground bg-muted/60 border border-border px-2 py-1 rounded mb-4">
-                      {m.category}
-                    </div>
-
-                    {/* Manufacturer name — large logotype-style treatment */}
-                    <div
-                      className="font-heading text-2xl font-black leading-none mb-3 group-hover:text-primary transition-colors"
-                      style={{ letterSpacing: "-0.03em" }}
-                    >
-                      {m.name}
-                    </div>
-
-                    <p className="text-xs text-foreground/60 leading-relaxed">
-                      {m.tagline}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Status badge */}
-                <div className="px-6 pb-5">
-                  <div
-                    className={`flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-mono ${
-                      isServiceOnly ? "text-amber-400" : "text-primary"
-                    }`}
-                  >
-                    {isServiceOnly || isRepair ? (
-                      <Wrench className="w-3 h-3" />
-                    ) : (
-                      <ShieldCheck className="w-3 h-3" />
-                    )}
-                    {badgeText}
-                  </div>
-                </div>
-              </>
-            );
-
-            const cardClasses =
-              "group relative bg-card rounded-xl border border-border hover:border-primary hover:shadow-green-glow transition-all duration-200 overflow-hidden flex flex-col justify-between focus-ring";
-
-            if (isInternal) {
-              return (
-                <Link
-                  key={m.name}
-                  href={m.url}
-                  aria-label={`${m.name} — ${m.category}`}
-                  className={cardClasses}
-                  data-testid={`manufacturer-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                >
-                  {cardContent}
-                </Link>
-              );
-            }
-
-            return (
-              <a
-                key={m.name}
-                href={m.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${m.name} — ${m.category}`}
-                className={cardClasses}
-                data-testid={`manufacturer-${m.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-              >
-                {cardContent}
-              </a>
-            );
-          })}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          {MANUFACTURERS.map((brand) => (
+            <BrandCard key={brand.slug} brand={brand} testId={`manufacturer-${brand.slug}`} />
+          ))}
         </div>
-
-        {/* Supporting footnote */}
-        <p className="mt-8 text-xs text-muted-foreground text-center">
-          We also service and troubleshoot systems built on Enphase, SolarEdge,
-          SMA, Schneider Electric, and other platforms.{" "}
-          <Link
-            href="/quote"
-            className="text-primary underline underline-offset-4 hover:no-underline"
-          >
-            Ask us about your existing system.
-          </Link>
-        </p>
       </div>
     </section>
   );
