@@ -39,7 +39,7 @@ export async function generateMetadata({
     description: post.excerpt,
     keywords: [post.title, post.category, "Accutek Solar", "solar Indiana", "solar Illinois", ...tags],
     authors: [{ name: post.author }],
-    robots: { index: false, follow: false },
+    robots: { index: true, follow: true },
     openGraph: {
       title: `${post.title} | Accutek Solar`,
       description: post.excerpt,
