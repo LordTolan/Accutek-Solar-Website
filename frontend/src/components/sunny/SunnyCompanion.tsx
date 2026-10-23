@@ -56,12 +56,13 @@ export default function SunnyCompanion() {
 
   useEffect(() => {
     const root = document.documentElement;
-    if (tour.phase === "idle") delete root.dataset.sunnyTour;
-    else root.dataset.sunnyTour = "open";
+    if (tour.phase === "step") root.dataset.sunnyTour = "open";
+    else if (tour.phase === "offer") root.dataset.sunnyTour = tour.offerPlace;
+    else delete root.dataset.sunnyTour;
     return () => {
       delete root.dataset.sunnyTour;
     };
-  }, [tour.phase]);
+  }, [tour.phase, tour.offerPlace]);
 
   useEffect(() => {
     const touring = tour.phase !== "idle";
@@ -99,6 +100,7 @@ export default function SunnyCompanion() {
 
       <SunnyTourControls
         phase={tour.phase}
+        offerPlace={tour.offerPlace}
         offerText={tour.offerText}
         stepIndex={tour.stepIndex}
         stepCount={tour.stepCount}

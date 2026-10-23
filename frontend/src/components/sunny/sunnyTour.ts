@@ -530,8 +530,9 @@ export function normalizeTourPath(pathname?: string | null): string {
  * Max-Age is 365 days, Path=/, SameSite=Lax. Secure is added only on https.
  * localStorage keeps working as a fallback (`*.choice`, plus the older
  * `accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>` keys).
- * The prompt is not stored when it merely appears. `?sunnyTour=replay` and
- * `?sunnyTour=1` bypass both stores.
+ * The prompt is not stored when it merely appears. A remembered page skips
+ * the centered card and docks the same lines and buttons at the bottom.
+ * `?sunnyTour=replay` and `?sunnyTour=1` bypass both stores.
  */
 export const TOUR_DONE_COOKIE = "accutek_sunny_tour_done";
 export const TOUR_DONE_MAX_AGE = 60 * 60 * 24 * 365;
@@ -617,6 +618,21 @@ function storageMarksTourDone(
     }
   }
   return keys.some((key) => memorySeen.has(key));
+}
+
+export type OfferPlace = "center" | "dock";
+
+/**
+ * First visit centers the offer. A page already stored in the cookie or
+ * localStorage docks that same offer. An explicit replay starts the steps.
+ */
+export function offerPlaceForVisit(
+  seen: boolean,
+  force: TourForceMode | null
+): { phase: "offer" | "step"; place: OfferPlace } {
+  if (force === "replay") return { phase: "step", place: "center" };
+  if (force === "offer" || !seen) return { phase: "offer", place: "center" };
+  return { phase: "offer", place: "dock" };
 }
 
 export function readTourSeen(

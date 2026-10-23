@@ -14,6 +14,7 @@ import {
   stepAnnouncement,
   cookieMarksTourDone,
   formatTourDoneCookie,
+  offerPlaceForVisit,
   isTourRootInReach,
   TOUR_DONE_COOKIE,
   TOUR_DONE_MAX_AGE,
@@ -104,6 +105,14 @@ test("each calculator page remembers a dismissal in the cookie and in localStora
   memory.clear();
   assert.equal(readTourSeen("savings", storage, "/tools/calculator", saved), true);
   assert.equal(readTourSeen("utility", storage, "/backup-power", saved), false);
+});
+
+test("a remembered visit docks the same offer instead of centering it", () => {
+  assert.deepEqual(offerPlaceForVisit(false, null), { phase: "offer", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(true, null), { phase: "offer", place: "dock" });
+  assert.deepEqual(offerPlaceForVisit(true, "offer"), { phase: "offer", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(false, "replay"), { phase: "step", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(true, "replay"), { phase: "step", place: "center" });
 });
 
 test("a tall calculator section is in reach once its top is on screen", () => {
