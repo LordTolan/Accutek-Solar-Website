@@ -9,7 +9,6 @@ import HCPBookOnline from "@/components/HCPBookOnline";
 import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
-import ManufacturerLogos from "@/components/ManufacturerLogos";
 import ManufacturersStrip from "@/components/ManufacturersStrip";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import HalloweenPumpkinHuntSection, { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
@@ -63,8 +62,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <ManufacturerLogos />
 
       {/* Roof vs Ground feature strip */}
       <section className="py-20 md:py-28 relative" data-testid="roof-ground-section">
