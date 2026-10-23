@@ -519,17 +519,70 @@ export function normalizeTourPath(pathname?: string | null): string {
 }
 
 /**
- * Dismissal key. Written only after Skip or the tour finishes, not when the
- * prompt first appears. An earlier build stored "1" as soon as the offer
- * started (`accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>`),
- * which removed the bottom bar on every later visit. Those keys are not read.
- * The utility calculator is mounted on `/` and `/backup-power`, so those routes
- * keep separate keys. The savings calculator lives on one route.
+ * Dismissal is per calculator page. One first-party cookie holds every page
+ * the visitor finished or skipped:
+ * `accutek_sunny_tour_done=savings,utility:/,utility:/backup-power`
+ * Max-Age is 365 days, Path=/, SameSite=Lax. Secure is added only on https.
+ * localStorage keeps working as a fallback (`*.choice`, plus the older
+ * `accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>` keys).
+ * The prompt is not stored when it merely appears. `?sunnyTour=replay` and
+ * `?sunnyTour=1` bypass both stores.
  */
+export const TOUR_DONE_COOKIE = "accutek_sunny_tour_done";
+export const TOUR_DONE_MAX_AGE = 60 * 60 * 24 * 365;
+
 export function tourStorageKey(id: TourId, pathname?: string | null): string {
   const base = `${TOURS[id].storageKey}.choice`;
   if (id !== "utility") return base;
   return `${base}:${normalizeTourPath(pathname)}`;
+}
+
+/** Older localStorage key. Still honored if the cookie is missing. */
+export function legacyTourStorageKey(id: TourId, pathname?: string | null): string {
+  const base = TOURS[id].storageKey;
+  if (id !== "utility") return base;
+  return `${base}:${normalizeTourPath(pathname)}`;
+}
+
+/** Cookie token for one calculator page. Utility routes do not share a token. */
+export function tourDoneToken(id: TourId, pathname?: string | null): string {
+  if (id !== "utility") return "savings";
+  return `utility:${normalizeTourPath(pathname)}`;
+}
+
+function readCookieValue(header: string, name: string): string | null {
+  if (!header) return null;
+  for (const part of header.split(";")) {
+    const trimmed = part.trim();
+    const eq = trimmed.indexOf("=");
+    if (eq <= 0 || trimmed.slice(0, eq) !== name) continue;
+    const raw = trimmed.slice(eq + 1);
+    try {
+      return decodeURIComponent(raw);
+    } catch {
+      return raw;
+    }
+  }
+  return null;
+}
+
+export function cookieMarksTourDone(cookieHeader: string, id: TourId, pathname?: string | null): boolean {
+  const value = readCookieValue(cookieHeader, TOUR_DONE_COOKIE);
+  if (!value) return false;
+  return value.split(",").includes(tourDoneToken(id, pathname));
+}
+
+/** Set-Cookie style assignment. Merges with pages already stored in `cookieHeader`. */
+export function formatTourDoneCookie(cookieHeader: string, id: TourId, pathname?: string | null): string {
+  const tokens = new Set(
+    (readCookieValue(cookieHeader, TOUR_DONE_COOKIE) ?? "")
+      .split(",")
+      .map((token) => token.trim())
+      .filter(Boolean)
+  );
+  tokens.add(tourDoneToken(id, pathname));
+  const value = [...tokens].sort().join(",");
+  return `${TOUR_DONE_COOKIE}=${encodeURIComponent(value)}; Max-Age=${TOUR_DONE_MAX_AGE}; Path=/; SameSite=Lax`;
 }
 
 /**
@@ -545,50 +598,62 @@ export function isTourRootInReach(
   return rect.bottom > viewHeight * 0.12 && rect.top < viewHeight * 0.78 && rect.height > 0;
 }
 
+function storageMarksTourDone(
+  id: TourId,
+  storage: Pick<Storage, "getItem"> | null,
+  pathname?: string | null
+): boolean {
+  const keys = [tourStorageKey(id, pathname), legacyTourStorageKey(id, pathname)];
+  if (storage) {
+    try {
+      if (keys.some((key) => storage.getItem(key) === "1")) return true;
+    } catch {
+      /* private mode */
+    }
+  }
+  return keys.some((key) => memorySeen.has(key));
+}
+
 export function readTourSeen(
   id: TourId,
   storage?: Pick<Storage, "getItem">,
-  pathname?: string | null
+  pathname?: string | null,
+  cookieHeader?: string | null
 ): boolean {
-  const key = tourStorageKey(id, pathname);
-  if (storage) {
-    try {
-      return storage.getItem(key) === "1";
-    } catch {
-      return false;
-    }
-  }
-  try {
-    if (typeof localStorage !== "undefined") return localStorage.getItem(key) === "1";
-  } catch {
-    return memorySeen.has(key);
-  }
-  return memorySeen.has(key);
+  const header = cookieHeader ?? (typeof document !== "undefined" ? document.cookie : "");
+  if (cookieMarksTourDone(header, id, pathname)) return true;
+  const store =
+    storage ?? (typeof localStorage !== "undefined" ? localStorage : null);
+  return storageMarksTourDone(id, store, pathname);
 }
 
 export function writeTourSeen(
   id: TourId,
   storage?: Pick<Storage, "setItem">,
-  pathname?: string | null
+  pathname?: string | null,
+  setCookie?: (assignment: string) => void
 ): void {
   const key = tourStorageKey(id, pathname);
-  if (storage) {
+  const store = storage ?? (typeof localStorage !== "undefined" ? localStorage : null);
+  if (store) {
     try {
-      storage.setItem(key, "1");
+      store.setItem(key, "1");
     } catch {
-      /* ignore quota / private mode */
-    }
-    return;
-  }
-  try {
-    if (typeof localStorage === "undefined") {
       memorySeen.add(key);
-      return;
     }
-    localStorage.setItem(key, "1");
-  } catch {
+  } else {
     memorySeen.add(key);
   }
+  const header = typeof document !== "undefined" ? document.cookie : "";
+  const assignment = formatTourDoneCookie(header, id, pathname);
+  if (setCookie) {
+    setCookie(assignment);
+    return;
+  }
+  if (typeof document === "undefined") return;
+  const secure =
+    typeof location !== "undefined" && location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = assignment + secure;
 }
 
 /** Test helper. Production tours use localStorage plus the in-memory set. */

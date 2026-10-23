@@ -12,7 +12,12 @@ import {
   overlapArea,
   placeSunny,
   stepAnnouncement,
+  cookieMarksTourDone,
+  formatTourDoneCookie,
   isTourRootInReach,
+  TOUR_DONE_COOKIE,
+  TOUR_DONE_MAX_AGE,
+  tourDoneToken,
   tourForceMode,
   tourStorageKey,
   unionRect,
@@ -40,12 +45,14 @@ test("tour copy never states a price or a dollar figure", () => {
   }
 });
 
-test("each calculator page remembers a real dismissal, not an old automatic offer stamp", () => {
+test("each calculator page remembers a dismissal in the cookie and in localStorage", () => {
   assert.notEqual(TOURS.utility.storageKey, TOURS.savings.storageKey);
   assert.equal(tourStorageKey("utility", "/"), "accutek.sunnyTour.utility.choice:/");
   assert.equal(tourStorageKey("utility", "/backup-power/"), "accutek.sunnyTour.utility.choice:/backup-power");
   assert.notEqual(tourStorageKey("utility", "/"), tourStorageKey("utility", "/backup-power/"));
   assert.equal(tourStorageKey("savings", "/tools/calculator/"), "accutek.sunnyTour.savings.choice");
+  assert.equal(tourDoneToken("utility", "/backup-power/"), "utility:/backup-power");
+  assert.equal(tourDoneToken("savings", "/tools/calculator"), "savings");
   const memory = new Map<string, string>();
   const storage = {
     getItem: (key: string) => memory.get(key) ?? null,
@@ -54,19 +61,32 @@ test("each calculator page remembers a real dismissal, not an old automatic offe
     },
   };
   clearTourMemory();
-  memory.set("accutek.sunnyTour.savings", "1");
+  assert.equal(readTourSeen("utility", storage, "/", ""), false);
   memory.set("accutek.sunnyTour.utility:/", "1");
-  memory.set("accutek.sunnyTour.utility:/backup-power", "1");
-  assert.equal(readTourSeen("savings", storage, "/tools/calculator"), false);
-  assert.equal(readTourSeen("utility", storage, "/"), false);
-  assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
-  writeTourSeen("utility", storage, "/");
-  assert.equal(readTourSeen("utility", storage, "/"), true);
-  assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
-  assert.equal(readTourSeen("savings", storage, "/tools/calculator"), false);
-  writeTourSeen("savings", storage, "/tools/calculator/");
-  assert.equal(readTourSeen("savings", storage, "/tools/calculator/"), true);
-  assert.equal(memory.get(TOURS.utility.storageKey), undefined);
+  assert.equal(readTourSeen("utility", storage, "/", ""), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power", ""), false);
+  memory.delete("accutek.sunnyTour.utility:/");
+  let header = "";
+  writeTourSeen("utility", storage, "/", (assignment) => {
+    header = assignment.split(";")[0];
+  });
+  assert.equal(readTourSeen("utility", storage, "/", header), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power", header), false);
+  assert.equal(memory.get("accutek.sunnyTour.utility.choice:/"), "1");
+  const assignment = formatTourDoneCookie(header, "savings", "/tools/calculator/");
+  assert.match(assignment, new RegExp(`^${TOUR_DONE_COOKIE}=`));
+  assert.match(assignment, /Max-Age=31536000/);
+  assert.equal(TOUR_DONE_MAX_AGE, 60 * 60 * 24 * 365);
+  assert.match(assignment, /Path=\//);
+  assert.match(assignment, /SameSite=Lax/);
+  assert.equal(assignment.includes("$"), false);
+  const saved = assignment.split(";")[0];
+  assert.equal(cookieMarksTourDone(saved, "savings", "/tools/calculator"), true);
+  assert.equal(cookieMarksTourDone(saved, "utility", "/"), true);
+  assert.equal(cookieMarksTourDone(saved, "utility", "/backup-power"), false);
+  memory.clear();
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator", saved), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power", saved), false);
 });
 
 test("a tall calculator section is in reach once its top is on screen", () => {
