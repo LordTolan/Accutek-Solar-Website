@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   DONE_TEXT,
   FALLBACK_TEXT,
-  OFFER_TEXT,
+  OFFER_LEAD,
   SKIP_TEXT,
   TOURS,
   type ArrowCue,
@@ -21,8 +21,10 @@ import {
   bubbleForResolvedStep,
   placeSunny,
   type BubblePlacement,
+  offerPlaceForVisit,
   readTourSeen,
   stepAnnouncement,
+  type OfferPlace,
   tourForceMode,
   unionRect,
   writeTourSeen,
@@ -240,6 +242,7 @@ function rootInReach(node: HTMLElement): boolean {
 export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRef }: UseSunnyBounceTourOptions) {
   const pathname = usePathname();
   const [phase, setPhase] = useState<TourPhase>("idle");
+  const [offerPlace, setOfferPlace] = useState<OfferPlace>("center");
   const [activeId, setActiveId] = useState<TourId | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -249,7 +252,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
   const [bubbleWidth, setBubbleWidth] = useState(220);
   const [bubble, setBubble] = useState<BubblePlacement | null>(null);
   const [resolvedBubble, setResolvedBubble] = useState<string | null>(null);
-  const bubbleStep = `${activeId ?? ""}:${stepIndex}`;
+  const bubbleStep = `${activeId ?? ""}:${phase}:${stepIndex}`;
   const bubbleStepRef = useRef(bubbleStep);
   if (bubbleStepRef.current !== bubbleStep) {
     bubbleStepRef.current = bubbleStep;
@@ -264,6 +267,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
   const reducedRef = useRef(reducedMotion);
   const offerTimer = useRef<number | undefined>(undefined);
   const pendingOffer = useRef<TourId | null>(null);
+  const dismissedRef = useRef(false);
   const offsetRef = useRef(offset);
   const travelRef = useRef("");
   const hoppingRef = useRef(false);
@@ -290,6 +294,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     (message: string) => {
       const id = activeIdRef.current;
       if (id) writeTourSeen(id, undefined, pathname);
+      dismissedRef.current = true;
       phaseRef.current = "idle";
       publish(message);
       setPhase("idle");
@@ -300,16 +305,17 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     [pathname, publish]
   );
 
-  const begin = useCallback((id: TourId, mode: "offer" | "step") => {
-    // The prompt is not a dismissal. Skip and finish write the flag.
+  const begin = useCallback((id: TourId, mode: "offer" | "step", place: OfferPlace = "center") => {
+    // The prompt is not a dismissal. Skip and finish write the cookie.
     activeIdRef.current = id;
     phaseRef.current = mode === "offer" ? "offer" : "step";
     setActiveId(id);
     setStepIndex(0);
     setOffset({ x: 0, y: 0 });
+    setOfferPlace(place);
     if (mode === "offer") {
       setPhase("offer");
-      publish(OFFER_TEXT);
+      publish(`${OFFER_LEAD} ${TOURS[id].offer}`);
     } else {
       setPhase("step");
     }
@@ -366,29 +372,28 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
 
   useEffect(() => {
     setPhase("idle");
+    setOfferPlace("center");
     setOffset({ x: 0, y: 0 });
     setStepIndex(0);
     setActiveId(null);
     phaseRef.current = "idle";
+    dismissedRef.current = false;
     pendingOffer.current = null;
     window.clearTimeout(offerTimer.current);
   }, [pathname]);
 
   useEffect(() => {
     const queueOffer = (id: TourId) => {
-      if (phaseRef.current !== "idle" || suspendedRef.current) return;
-      const forced = tourForceMode(window.location.search);
-      if (readTourSeen(id, undefined, pathname) && !forced) return;
+      if (phaseRef.current !== "idle" || suspendedRef.current || dismissedRef.current) return;
       if (pendingOffer.current === id) return;
       pendingOffer.current = id;
       window.clearTimeout(offerTimer.current);
       offerTimer.current = window.setTimeout(() => {
         pendingOffer.current = null;
-        if (phaseRef.current !== "idle" || suspendedRef.current) return;
-        const mode = tourForceMode(window.location.search);
-        if (readTourSeen(id, undefined, pathname) && !mode) return;
+        if (phaseRef.current !== "idle" || suspendedRef.current || dismissedRef.current) return;
         if (!document.querySelector(TOURS[id].root)) return;
-        begin(id, mode === "replay" ? "step" : "offer");
+        const choice = offerPlaceForVisit(readTourSeen(id, undefined, pathname), tourForceMode(window.location.search));
+        begin(id, choice.phase, choice.place);
       }, 600);
     };
 
@@ -630,6 +635,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     return () => window.removeEventListener("keydown", onKey, true);
   }, [phase, skip]);
 
+  const offerText = activeId ? TOURS[activeId].offer : "";
   const stepCount = activeId ? TOURS[activeId].steps.length : 0;
   const stepKey = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex]?.key ?? "" : "";
   const stepDef = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex] : undefined;
@@ -637,6 +643,8 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
 
   return {
     phase,
+    offerPlace,
+    offerText,
     stepIndex,
     stepCount,
     stepKey,

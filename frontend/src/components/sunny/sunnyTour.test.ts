@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   DONE_TEXT,
+  OFFER_ACCEPT,
+  OFFER_LEAD,
   OFFER_TEXT,
   TOURS,
   assertTourCopy,
@@ -12,16 +14,45 @@ import {
   overlapArea,
   placeSunny,
   stepAnnouncement,
+  cookieMarksTourDone,
+  formatTourDoneCookie,
+  offerPlaceForVisit,
   isTourRootInReach,
+  TOUR_DONE_COOKIE,
+  TOUR_DONE_MAX_AGE,
+  tourDoneToken,
   tourForceMode,
   tourStorageKey,
   unionRect,
   writeTourSeen,
 } from "./sunnyTour";
 
+test("the offer keeps Sunny's line, the skip-and-show button, and one value sentence", () => {
+  assert.equal(OFFER_LEAD, "I'll walk you through using the calculator");
+  assert.equal(OFFER_TEXT, OFFER_LEAD);
+  assert.equal(OFFER_ACCEPT, "Skip and show me how this works");
+  assert.equal(
+    TOURS.utility.offer,
+    "You can see how your power bill adds up over time and what solar could change."
+  );
+  assert.equal(
+    TOURS.savings.offer,
+    "You can set your electric bill and see what a solar estimate includes."
+  );
+  assert.notEqual(TOURS.utility.offer, TOURS.savings.offer);
+  assert.doesNotThrow(() => assertTourCopy(OFFER_LEAD));
+  assert.doesNotThrow(() => assertTourCopy(OFFER_ACCEPT));
+  for (const tour of Object.values(TOURS)) {
+    assert.equal(tour.offer.includes("$"), false);
+    assert.doesNotThrow(() => assertTourCopy(tour.offer));
+    assert.equal(tour.offer.split(/(?<=[.!])\s+/).length, 1);
+  }
+});
+
 test("tour copy never states a price or a dollar figure", () => {
-  assert.equal(OFFER_TEXT.includes("$"), false);
-  assert.doesNotThrow(() => assertTourCopy(OFFER_TEXT));
+  assert.equal(OFFER_LEAD.includes("$"), false);
+  assert.equal(OFFER_ACCEPT.includes("$"), false);
+  assert.doesNotThrow(() => assertTourCopy(OFFER_LEAD));
   assert.throws(() => assertTourCopy("A system costs $18,000"));
   assert.throws(() => assertTourCopy("You will save 217,306 over time"));
   assert.throws(() => assertTourCopy("Here is how pricing works"));
@@ -65,8 +96,52 @@ test("each calculator page remembers a real dismissal, not an old automatic offe
   assert.equal(readTourSeen("utility", storage, "/backup-power"), false);
   assert.equal(readTourSeen("savings", storage, "/tools/calculator"), false);
   writeTourSeen("savings", storage, "/tools/calculator/");
-  assert.equal(readTourSeen("savings", storage, "/tools/calculator/"), true);
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator/", ""), true);
   assert.equal(memory.get(TOURS.utility.storageKey), undefined);
+});
+
+test("skip or finish stores a one-year cookie and a localStorage fallback", () => {
+  assert.equal(tourDoneToken("utility", "/"), "utility:/");
+  assert.equal(tourDoneToken("utility", "/backup-power/"), "utility:/backup-power");
+  assert.equal(tourDoneToken("savings", "/tools/calculator"), "savings");
+  const memory = new Map<string, string>();
+  const storage = {
+    getItem: (key: string) => memory.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      memory.set(key, value);
+    },
+  };
+  clearTourMemory();
+  assert.equal(readTourSeen("utility", storage, "/", ""), false);
+  let header = "";
+  writeTourSeen("utility", storage, "/", (assignment) => {
+    header = assignment.split(";")[0];
+  });
+  assert.equal(readTourSeen("utility", storage, "/", header), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power", header), false);
+  assert.equal(memory.get("accutek.sunnyTour.utility.choice:/"), "1");
+  const assignment = formatTourDoneCookie(header, "savings", "/tools/calculator/");
+  assert.match(assignment, new RegExp(`^${TOUR_DONE_COOKIE}=`));
+  assert.match(assignment, /Max-Age=31536000/);
+  assert.equal(TOUR_DONE_MAX_AGE, 60 * 60 * 24 * 365);
+  assert.match(assignment, /Path=\//);
+  assert.match(assignment, /SameSite=Lax/);
+  assert.equal(assignment.includes("Secure"), false);
+  const saved = assignment.split(";")[0];
+  assert.equal(cookieMarksTourDone(saved, "savings", "/tools/calculator"), true);
+  assert.equal(cookieMarksTourDone(saved, "utility", "/"), true);
+  assert.equal(cookieMarksTourDone(saved, "utility", "/backup-power"), false);
+  memory.clear();
+  assert.equal(readTourSeen("savings", storage, "/tools/calculator", saved), true);
+  assert.equal(readTourSeen("utility", storage, "/backup-power", saved), false);
+});
+
+test("a remembered visit docks the same offer instead of centering it", () => {
+  assert.deepEqual(offerPlaceForVisit(false, null), { phase: "offer", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(true, null), { phase: "offer", place: "dock" });
+  assert.deepEqual(offerPlaceForVisit(true, "offer"), { phase: "offer", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(false, "replay"), { phase: "step", place: "center" });
+  assert.deepEqual(offerPlaceForVisit(true, "replay"), { phase: "step", place: "center" });
 });
 
 test("a tall calculator section is in reach once its top is on screen", () => {
