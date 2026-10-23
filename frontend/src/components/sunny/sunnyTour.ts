@@ -37,6 +37,8 @@ export interface TourDefinition {
   steps: TourStep[];
 }
 
+/** Shipped offer line. Buttons stay Skip and Show me how this works. */
+export const OFFER_LEAD = "Want me to show you how this works?";
 export const DONE_TEXT = "Tour finished. You can replay it from Sunny.";
 export const SKIP_TEXT = "Tour closed. You can replay it from Sunny.";
 export const FALLBACK_TEXT = "Here is the next part of the calculator.";
@@ -47,15 +49,13 @@ export const TOURS: Record<TourId, TourDefinition> = {
     // Prefix only. `/` and `/backup-power` each append their path so one visit cannot hide the other.
     storageKey: "accutek.sunnyTour.utility",
     root: '[data-sunny-tour="utility"]',
-    offer:
-      "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can see how your power bill adds up over time and what solar could change.",
+    offer: "You can see how your power bill adds up over time and what solar could change.",
     steps: [
       {
         key: "slider",
         label: "Drag the slider to your usual monthly bill.",
         bubble: "Slide this to match your usual monthly electric bill.",
         side: "below",
-        room: 180,
       },
       {
         key: "total",
@@ -89,15 +89,13 @@ export const TOURS: Record<TourId, TourDefinition> = {
     id: "savings",
     storageKey: "accutek.sunnyTour.savings",
     root: '[data-sunny-tour="savings"]',
-    offer:
-      "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can set your electric bill and see what a solar estimate includes.",
+    offer: "You can set your electric bill and see what a solar estimate includes.",
     steps: [
       {
         key: "slider",
         label: "Drag the slider to your average monthly electric bill.",
         bubble: "Slide this to match your average monthly electric bill.",
         side: "below",
-        room: 180,
       },
       {
         key: "total",
@@ -678,6 +676,7 @@ export function tourForceMode(search = ""): TourForceMode | null {
 }
 
 export function assertAllTourCopy(): void {
+  assertTourCopy(OFFER_LEAD);
   assertTourCopy(DONE_TEXT);
   assertTourCopy(SKIP_TEXT);
   assertTourCopy(FALLBACK_TEXT);

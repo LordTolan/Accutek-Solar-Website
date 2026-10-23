@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   DONE_TEXT,
+  OFFER_LEAD,
   TOURS,
   assertTourCopy,
   chooseStepElements,
@@ -23,20 +24,22 @@ import {
   writeTourSeen,
 } from "./sunnyTour";
 
-test("the offer explains the tour in plain words before the visitor chooses", () => {
+test("the offer keeps its line and adds one value sentence", () => {
+  assert.equal(OFFER_LEAD, "Want me to show you how this works?");
   assert.equal(
     TOURS.utility.offer,
-    "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can see how your power bill adds up over time and what solar could change."
+    "You can see how your power bill adds up over time and what solar could change."
   );
   assert.equal(
     TOURS.savings.offer,
-    "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can set your electric bill and see what a solar estimate includes."
+    "You can set your electric bill and see what a solar estimate includes."
   );
   assert.notEqual(TOURS.utility.offer, TOURS.savings.offer);
+  assert.doesNotThrow(() => assertTourCopy(OFFER_LEAD));
   for (const tour of Object.values(TOURS)) {
     assert.equal(tour.offer.includes("$"), false);
     assert.doesNotThrow(() => assertTourCopy(tour.offer));
-    assert.ok(tour.offer.split(/(?<=[.!])\s+/).length <= 2);
+    assert.equal(tour.offer.split(/(?<=[.!])\s+/).length, 1);
   }
 });
 

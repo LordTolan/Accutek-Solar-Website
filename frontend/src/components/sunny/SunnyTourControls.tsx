@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type { TourPhase } from "./useSunnyBounceTour";
+import { OFFER_LEAD } from "./sunnyTour";
 
 interface SunnyTourControlsProps {
   phase: TourPhase;
@@ -46,54 +47,65 @@ export default function SunnyTourControls({
 
   if (phase === "idle") return null;
 
+  if (phase === "offer") {
+    return (
+      <div className="fixed inset-0 z-[45] flex items-center justify-center p-4 pointer-events-none">
+        <div
+          role="group"
+          aria-label="Calculator tour"
+          data-testid="sunny-tour-controls"
+          className="pointer-events-auto w-full max-w-md rounded-xl border border-border bg-background/95 px-4 py-4 text-center shadow-ambient"
+        >
+          <p data-testid="sunny-tour-offer" className="text-sm font-medium leading-snug text-foreground">
+            {OFFER_LEAD}
+          </p>
+          <p data-testid="sunny-tour-offer-value" className="mt-2 text-sm leading-snug text-foreground/80">
+            {offerText}
+          </p>
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-1.5">
+            <button type="button" className={ghost} onClick={onSkip} data-testid="sunny-tour-skip">
+              Skip
+            </button>
+            <button
+              type="button"
+              ref={acceptRef}
+              className={`${primary} normal-case tracking-normal`}
+              onClick={onAccept}
+              data-testid="sunny-tour-accept"
+            >
+              Show me how this works
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       role="group"
       aria-label="Calculator tour"
-      aria-describedby={phase === "offer" ? "sunny-tour-offer" : undefined}
       data-testid="sunny-tour-controls"
       className="fixed z-[45] left-3 md:left-6 bottom-[4.75rem] md:bottom-6 flex max-w-[calc(100vw-6.5rem)] flex-wrap items-center justify-center gap-1.5 rounded-lg border border-border bg-background/95 px-2 py-1.5 shadow-ambient"
     >
-      {phase === "offer" ? (
-        <>
-          <p id="sunny-tour-offer" className="sr-only">
-            {offerText}
-          </p>
-          <button type="button" className={ghost} onClick={onSkip} data-testid="sunny-tour-skip">
-            Skip
-          </button>
-          <button
-            type="button"
-            ref={acceptRef}
-            className={`${primary} normal-case tracking-normal`}
-            onClick={onAccept}
-            data-testid="sunny-tour-accept"
-          >
-            Show me how this works
-          </button>
-        </>
-      ) : (
-        <>
-          <span className="px-1 font-mono text-[10px] text-muted-foreground" aria-hidden="true">
-            {stepIndex + 1}/{stepCount}
-          </span>
-          <button type="button" className={ghost} onClick={onSkip} data-testid="sunny-tour-skip">
-            Skip
-          </button>
-          <button
-            type="button"
-            className={ghost}
-            onClick={onBack}
-            disabled={stepIndex === 0}
-            data-testid="sunny-tour-back"
-          >
-            Back
-          </button>
-          <button type="button" ref={nextRef} className={primary} onClick={onNext} data-testid="sunny-tour-next">
-            {last ? "Done" : "Next"}
-          </button>
-        </>
-      )}
+      <span className="px-1 font-mono text-[10px] text-muted-foreground" aria-hidden="true">
+        {stepIndex + 1}/{stepCount}
+      </span>
+      <button type="button" className={ghost} onClick={onSkip} data-testid="sunny-tour-skip">
+        Skip
+      </button>
+      <button
+        type="button"
+        className={ghost}
+        onClick={onBack}
+        disabled={stepIndex === 0}
+        data-testid="sunny-tour-back"
+      >
+        Back
+      </button>
+      <button type="button" ref={nextRef} className={primary} onClick={onNext} data-testid="sunny-tour-next">
+        {last ? "Done" : "Next"}
+      </button>
     </div>
   );
 }
