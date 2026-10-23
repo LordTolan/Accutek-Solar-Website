@@ -9,6 +9,7 @@ import ServiceAreaTeaser from "@/components/ServiceAreaTeaser";
 import HCPReviews from "@/components/HCPReviews";
 import FAQ from "@/components/FAQ";
 import ManufacturerLogos from "@/components/ManufacturerLogos";
+import ManufacturersStrip from "@/components/ManufacturersStrip";
 import UtilityCostProjection from "@/components/UtilityCostProjection";
 import HalloweenPumpkinHuntSection, { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
 import BlogTeaser from "@/components/BlogTeaser";
@@ -185,6 +186,7 @@ export default function BackupPowerPreviewPage() {
         </div>
       </section>
 
+      <ManufacturersStrip />
       <ServiceAreaTeaser />
       <HCPReviews />
       <FAQ />
