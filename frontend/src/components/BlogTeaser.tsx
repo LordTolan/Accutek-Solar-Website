@@ -13,15 +13,12 @@ export default function BlogTeaser() {
       <div className="container mx-auto container-px max-w-6xl">
         <div className="flex items-end justify-between mb-10">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
-              // THE SOLAR DISPATCH
-            </div>
-            <h2 className="text-3xl md:text-4xl font-heading font-black">
+            <h2 className="text-3xl md:text-4xl font-heading font-black text-balance">
               <Link href="/blog/" className="hover:text-primary transition-colors">
                 The Solar Dispatch
               </Link>
             </h2>
-            <p className="mt-2 text-foreground/70 max-w-lg">
+            <p className="mt-2 max-w-[65ch] text-pretty text-foreground/80">
               Solar tips, energy policy updates, and honest advice — new articles weekly.
             </p>
           </div>
@@ -51,7 +48,7 @@ export default function BlogTeaser() {
                 />
               </div>
               <div className="flex-1 p-5 flex flex-col">
-                <div className="flex items-center gap-2 text-[11px] text-muted-foreground mb-2">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                   <span className="inline-flex items-center gap-1">
                     <CalendarDays className="w-3 h-3" />
                     {new Date(post.date).toLocaleDateString("en-US", {
@@ -63,10 +60,10 @@ export default function BlogTeaser() {
                     <Clock className="w-3 h-3" /> {post.readTime}
                   </span>
                 </div>
-                <h3 className="text-base font-heading font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-balance text-base font-heading font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="mt-2 text-sm text-foreground/60 line-clamp-2 flex-1">
+                <p className="mt-2 text-pretty text-sm text-foreground/80 line-clamp-2 flex-1">
                   {post.excerpt}
                 </p>
                 <div className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-primary group-hover:gap-2 transition-all">

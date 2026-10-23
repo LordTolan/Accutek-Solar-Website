@@ -57,7 +57,7 @@ export default function HomePage() {
                 <div className="font-heading text-4xl md:text-6xl font-black text-primary leading-none">
                   <CountUp to={s.value} prefix={s.prefix || ""} suffix={s.suffix || ""} />
                 </div>
-                <div className="mt-3 text-[10px] md:text-xs uppercase tracking-[0.22em] font-mono text-muted-foreground">{s.label}</div>
+                <div className="mt-3 text-xs uppercase tracking-[0.14em] font-mono text-muted-foreground">{s.label}</div>
               </div>
             ))}
           </div>
@@ -71,14 +71,13 @@ export default function HomePage() {
         <div className="container mx-auto container-px">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-5">
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// MOUNTING OPTIONS</div>
+              <div className="mb-3 flex items-center justify-end empty:hidden">
                 <PumpkinCollectible pumpkinId="solar" size="sm" />
               </div>
               <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
                 Wherever the sun lands, <span className="text-primary">we build there.</span>
               </h2>
-              <p className="mt-5 text-foreground/70 text-lg leading-relaxed">
+              <p className="mt-5 max-w-[65ch] text-pretty text-foreground/80 text-lg leading-relaxed">
                 Plenty of customers come to us thinking solar = roof only. The truth is roughly half of our installs are <strong>ground mounts</strong> - better orientation, easier maintenance, no roof penetrations, and often higher annual output.
               </p>
               <ul className="mt-6 space-y-3 text-foreground/80">
@@ -102,11 +101,11 @@ export default function HomePage() {
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4" data-testid="roof-ground-gallery">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient">
                 <Image src={HERO_IMG} alt="Ground-mount solar array" fill className="object-cover" sizes="(max-width: 640px) 100vw, 35vw" />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/90 border border-border text-[10px] uppercase tracking-[0.22em] font-mono text-primary">GROUND MOUNT</div>
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">GROUND MOUNT</div>
               </div>
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient sm:mt-12">
                 <Image src={ROOF_IMG} alt="Rooftop solar install" fill className="object-cover" sizes="(max-width: 640px) 100vw, 35vw" />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/90 border border-border text-[10px] uppercase tracking-[0.22em] font-mono text-primary">ROOF MOUNT</div>
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">ROOF MOUNT</div>
               </div>
             </div>
           </div>
@@ -118,14 +117,13 @@ export default function HomePage() {
         <div className="container mx-auto container-px">
           <div className="grid md:grid-cols-12 gap-6 md:gap-8 items-end mb-12">
             <div className="md:col-span-7">
-              <div className="flex items-center justify-between mb-3">
-                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary">// WHAT WE INSTALL</div>
+              <div className="mb-3 flex items-center justify-end empty:hidden">
                 <PumpkinCollectible pumpkinId="frankenstein" size="sm" />
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-balance">From a single panel to a fully off-grid farm.</h2>
             </div>
             <div className="md:col-span-5 md:text-right">
-              <p className="text-foreground/70 text-lg leading-relaxed">Every install includes a free site assessment, custom design, and lifetime support from the team that built it.</p>
+              <p className="text-pretty text-foreground/80 text-lg leading-relaxed">Every install includes a free site assessment, custom design, and lifetime support from the team that built it.</p>
             </div>
           </div>
 
@@ -145,13 +143,13 @@ export default function HomePage() {
                         <IconComp className="w-6 h-6" strokeWidth={2} />
                       </div>
                       {s.badge && (
-                        <span className="text-[9px] uppercase tracking-wider font-mono px-2 py-0.5 rounded bg-muted text-muted-foreground border border-border group-hover:border-primary/40 group-hover:text-primary transition-colors">
+                        <span className="text-xs uppercase tracking-wide font-mono px-2 py-1 rounded bg-muted text-muted-foreground border border-border group-hover:border-primary/40 group-hover:text-primary transition-colors">
                           {s.badge}
                         </span>
                       )}
                     </div>
                     <div className="font-heading text-xl font-bold group-hover:text-primary transition-colors">{s.title}</div>
-                    <p className="mt-2 text-foreground/65 text-sm leading-relaxed">{s.shortDesc}</p>
+                    <p className="mt-2 text-pretty text-foreground/80 text-sm leading-relaxed">{s.shortDesc}</p>
                   </div>
                   <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-primary">
                     <span>Learn more &amp; photo gallery</span>
@@ -167,9 +165,9 @@ export default function HomePage() {
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/10" />
             <div className="absolute inset-0 grid md:grid-cols-2 items-center container-px">
               <div className="py-10">
-                <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// FREE | NO PRESSURE</div>
+                <div className="text-xs uppercase tracking-[0.16em] font-mono text-primary mb-3">// FREE | NO PRESSURE</div>
                 <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-balance">Tell us about your site - we'll tell you what's possible.</h3>
-                <p className="mt-3 text-foreground/75 max-w-md">Six quick questions, a real 25-year estimate, and a free site visit on the calendar.</p>
+                <p className="mt-3 max-w-[65ch] text-pretty text-foreground/80">Six quick questions, a real 25-year estimate, and a free site visit on the calendar.</p>
                 <div className="mt-6"><HCPBookOnline variant="primary" /></div>
               </div>
             </div>
@@ -192,11 +190,10 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-background" />
         <div className="absolute inset-0 grid-bg grid-bg-fade opacity-40" />
         <div className="relative container mx-auto container-px text-center max-w-3xl">
-          <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">// NO-PRESSURE CONSULTATION</div>
           <h2 className="text-4xl md:text-6xl font-heading font-black text-balance">
             Ready to make your meter <span className="text-primary">spin backwards?</span>
           </h2>
-          <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
+          <p className="mt-5 text-pretty text-foreground/80 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="final-cta-quote">
               Get free estimate <ArrowRight className="w-4 h-4" />

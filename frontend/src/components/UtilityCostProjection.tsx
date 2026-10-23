@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, TrendingUp, Zap } from "lucide-react";
+import { ArrowRight, TrendingUp } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 import { PumpkinCollectible } from "@/components/HalloweenPumpkinHunt";
 
@@ -193,8 +193,8 @@ function EscalationChart({
             x={x}
             y={H - 6}
             textAnchor="middle"
-            fill="rgba(255,255,255,0.4)"
-            fontSize="10"
+            fill="rgba(255,255,255,0.85)"
+            fontSize="12"
             fontFamily="var(--font-mono)"
           >
             Yr {yr}
@@ -207,8 +207,8 @@ function EscalationChart({
         x={W - PAD.right}
         y={points[points.length - 1]?.y - 10}
         textAnchor="end"
-        fill="#ef4444"
-        fontSize="11"
+        fill="#fca5a5"
+        fontSize="12"
         fontWeight="bold"
         fontFamily="var(--font-mono)"
       >
@@ -218,8 +218,8 @@ function EscalationChart({
         x={PAD.left + 4}
         y={points[0]?.y - 10}
         textAnchor="start"
-        fill="rgba(255,255,255,0.5)"
-        fontSize="11"
+        fill="rgba(255,255,255,0.85)"
+        fontSize="12"
         fontFamily="var(--font-mono)"
       >
         {formatCurrency(annualCosts[0])} / year
@@ -254,9 +254,9 @@ function StyledSlider({
   return (
     <div className="scroll-mt-28 scroll-mb-24" data-sunny-room="below">
       <div className="flex items-baseline justify-between mb-2">
-        <label
+          <label
           htmlFor={id}
-          className="text-xs uppercase tracking-[0.18em] text-white/50 font-mono"
+          className="text-sm uppercase tracking-[0.12em] text-white/80 font-mono"
         >
           {label}
         </label>
@@ -331,17 +331,7 @@ export default function UtilityCostProjection() {
       />
 
       <div className="relative container mx-auto container-px py-20 md:py-28 lg:py-32">
-        {/* Eyebrow */}
-        <div className="flex items-center justify-between mb-6">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] font-mono text-blue-400"
-          >
-            <Zap className="w-3.5 h-3.5" />
-            <span>30-Year Utility Cost Projection</span>
-          </motion.div>
+        <div className="mb-6 flex items-center justify-end empty:hidden">
           <PumpkinCollectible pumpkinId="mad-max" size="sm" />
         </div>
 
@@ -353,7 +343,7 @@ export default function UtilityCostProjection() {
           className="font-heading text-4xl md:text-5xl lg:text-6xl font-black text-white text-balance max-w-3xl"
         >
           Your Utility Bill Will{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
+          <span className="text-red-400">
             Never Stop Increasing.
           </span>
         </motion.h2>
@@ -362,7 +352,7 @@ export default function UtilityCostProjection() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-5 text-white/55 text-lg md:text-xl max-w-2xl leading-relaxed"
+          className="mt-5 text-white/80 text-lg md:text-xl max-w-[68ch] leading-relaxed text-pretty"
         >
           Based on historical utility inflation rates, the average homeowner
           could spend hundreds of thousands on electricity over the next 30
@@ -399,12 +389,12 @@ export default function UtilityCostProjection() {
               <div className="absolute top-0 right-0 w-64 h-64 rounded-full bg-red-500/8 blur-[80px] pointer-events-none" />
 
               <div className="relative">
-                <div className="text-xs uppercase tracking-[0.18em] font-mono text-red-400/70 mb-3 flex items-center gap-2">
+                <div className="text-sm uppercase tracking-[0.12em] font-mono text-red-300 mb-3 flex items-center gap-2">
                   <TrendingUp className="w-3.5 h-3.5" />
                   Total paid to your utility company over {years} years
                 </div>
                 <div
-                  className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-orange-400 to-red-500 w-fit scroll-mt-28 scroll-mb-24"
+                  className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none text-red-400 w-fit scroll-mt-28 scroll-mb-24"
                   data-testid="total-projection"
                   data-sunny-step="total"
                 >
@@ -418,7 +408,7 @@ export default function UtilityCostProjection() {
                 {/* Sub-stats row */}
                 <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3" data-sunny-room="above">
                   <div data-sunny-step="boxes" className="rounded-xl bg-white/[0.04] border border-white/8 p-4 scroll-mt-28 scroll-mb-24">
-                    <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
+                    <div className="text-xs uppercase tracking-[0.12em] font-mono text-white/80">
                       Current Annual
                     </div>
                     <div className="mt-1.5 font-heading text-xl md:text-2xl font-extrabold text-white">
@@ -430,7 +420,7 @@ export default function UtilityCostProjection() {
                     </div>
                   </div>
                   <div data-sunny-step="boxes" className="rounded-xl bg-white/[0.04] border border-white/8 p-4 scroll-mt-28 scroll-mb-24">
-                    <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
+                    <div className="text-xs uppercase tracking-[0.12em] font-mono text-white/80">
                       Year {years} Monthly
                     </div>
                     <div className="mt-1.5 font-heading text-xl md:text-2xl font-extrabold text-red-400">
@@ -442,7 +432,7 @@ export default function UtilityCostProjection() {
                     </div>
                   </div>
                   <div className="hidden sm:block rounded-xl bg-white/[0.04] border border-white/8 p-4">
-                    <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35">
+                    <div className="text-xs uppercase tracking-[0.12em] font-mono text-white/80">
                       Increase
                     </div>
                     <div className="mt-1.5 font-heading text-xl md:text-2xl font-extrabold text-orange-400">
@@ -463,7 +453,7 @@ export default function UtilityCostProjection() {
 
             {/* Chart */}
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm p-4 md:p-6" data-sunny-avoid>
-              <div className="text-[10px] uppercase tracking-[0.18em] font-mono text-white/35 mb-3">
+              <div className="text-xs uppercase tracking-[0.12em] font-mono text-white/80 mb-3">
                 Annual Utility Cost Escalation
               </div>
               <EscalationChart
@@ -494,9 +484,9 @@ export default function UtilityCostProjection() {
                 href={`/quote?bill=${monthlyBill}`}
                 className="
                   group flex-1 inline-flex items-center justify-center gap-2.5 rounded-xl
-                  bg-gradient-to-r from-emerald-600 to-emerald-500
-                  text-white px-7 py-4 text-sm font-bold uppercase tracking-wider
-                  hover:shadow-[0_0_30px_-8px_rgba(16,185,129,0.5)] hover:-translate-y-0.5
+                  bg-primary text-primary-foreground
+                  px-7 py-4 text-sm font-bold uppercase tracking-wider
+                  hover:-translate-y-0.5
                   transition-all duration-200 focus-ring scroll-mt-28 scroll-mb-32
                 "
                 data-testid="projection-cta-primary"
@@ -515,7 +505,7 @@ export default function UtilityCostProjection() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.8 }}
-          className="mt-8 text-[11px] text-white/25 max-w-2xl font-mono leading-relaxed"
+          className="mt-8 text-sm text-white/75 max-w-[68ch] leading-relaxed"
         >
           Utility escalation estimates are based on historical market trends and
           are provided for illustrative purposes only. Actual utility costs may
