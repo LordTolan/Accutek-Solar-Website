@@ -55,6 +55,7 @@ export const TOURS: Record<TourId, TourDefinition> = {
         label: "Drag the slider to your usual monthly bill.",
         bubble: "Slide this to match your usual monthly electric bill.",
         side: "below",
+        room: 180,
       },
       {
         key: "total",
@@ -96,6 +97,7 @@ export const TOURS: Record<TourId, TourDefinition> = {
         label: "Drag the slider to your average monthly electric bill.",
         bubble: "Slide this to match your average monthly electric bill.",
         side: "below",
+        room: 180,
       },
       {
         key: "total",

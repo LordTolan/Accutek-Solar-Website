@@ -41,7 +41,7 @@
 @layer utilities {
   .container-px { @apply px-6 md:px-10 lg:px-16; }
   /* Empty pocket so Sunny can sit beside a control without covering the next line. */
-  html[data-sunny-tour="open"] [data-sunny-room="below"] { margin-bottom: 8.5rem; }
+  html[data-sunny-tour="open"] [data-sunny-room="below"] { margin-bottom: 12rem; }
   html[data-sunny-tour="open"] [data-sunny-room="above"] { margin-top: 10rem; }
   html[data-sunny-tour="open"] [data-sunny-room="end"] { height: 10rem; }
   html[data-sunny-tour="open"] [data-sunny-room="cta"] { height: 11rem; }

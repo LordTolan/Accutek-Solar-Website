@@ -252,7 +252,7 @@ function StyledSlider({
   const pct = ((value - min) / (max - min)) * 100;
 
   return (
-    <div className="scroll-mt-28 scroll-mb-24" data-sunny-room="below">
+    <div className="scroll-mt-28 scroll-mb-24" data-sunny-room="below" data-sunny-step="slider">
       <div className="flex items-baseline justify-between mb-2">
         <label
           htmlFor={id}

@@ -136,7 +136,7 @@ export default function SunnyCompanion() {
           }
           className="pointer-events-auto relative"
         >
-          {tour.phase === "step" && tour.bubbleText ? (
+          {(tour.phase === "step" || tour.phase === "offer") && tour.bubbleText ? (
             <SunnyTourBubble
               text={tour.bubbleText}
               width={tour.bubbleWidth}
