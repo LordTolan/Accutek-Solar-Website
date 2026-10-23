@@ -50,13 +50,10 @@ export default function ManufacturerLogos() {
       <div className="container mx-auto container-px max-w-7xl">
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="text-[10px] uppercase tracking-[0.25em] font-mono text-primary mb-3">
-            // EQUIPMENT WE INSTALL &amp; SERVICE
-          </div>
           <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance">
             Industry-leading brands. Expert installation.
           </h2>
-          <p className="mt-3 text-foreground/65 text-base max-w-xl mx-auto leading-relaxed">
+          <p className="mt-3 text-pretty text-foreground/80 text-base max-w-[65ch] mx-auto leading-relaxed">
             We work with the manufacturers that field technicians trust — not whoever has the best dealer margin.
           </p>
         </div>
@@ -90,7 +87,7 @@ export default function ManufacturerLogos() {
                 <div className="font-heading text-base md:text-lg font-bold text-foreground group-hover:text-primary transition">
                   {mfr.name}
                 </div>
-                <div className="mt-1 text-[10px] md:text-[11px] uppercase tracking-[0.18em] font-mono text-muted-foreground">
+                <div className="mt-1 text-xs uppercase tracking-[0.12em] font-mono text-muted-foreground">
                   {mfr.category}
                 </div>
               </div>
@@ -99,7 +96,7 @@ export default function ManufacturerLogos() {
         </div>
 
         {/* Footer note */}
-        <p className="mt-8 text-center text-xs text-muted-foreground font-mono">
+        <p className="mt-8 text-center text-sm text-muted-foreground">
           We also service existing systems built on SMA, Schneider Electric, Enphase, SolarEdge and other brands.{" "}
           <Link href="/contact" className="text-primary hover:underline focus-ring">
             Ask about your system →

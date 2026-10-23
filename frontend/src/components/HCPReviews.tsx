@@ -7,7 +7,6 @@ export default function HCPReviews() {
       <div className="container mx-auto container-px">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">// VERIFIED HOMEOWNER REVIEWS</div>
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
               What our customers <span className="text-primary">are saying.</span>
             </h2>

@@ -196,9 +196,6 @@ export default function ManufacturersStrip() {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <div>
-            <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-3">
-              // TRUSTED EQUIPMENT
-            </div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-extrabold text-balance">
               We install and service{" "}
               <span className="text-primary">industry-leading brands.</span>
@@ -236,7 +233,7 @@ export default function ManufacturersStrip() {
 
                   <div className="p-6">
                     {/* Category pill */}
-                    <div className="inline-flex items-center text-[9px] uppercase tracking-[0.22em] font-mono text-muted-foreground bg-muted/60 border border-border px-2 py-1 rounded mb-4">
+                    <div className="inline-flex items-center text-xs uppercase tracking-[0.12em] font-mono text-muted-foreground bg-muted/60 border border-border px-2 py-1 rounded mb-4">
                       {m.category}
                     </div>
 
@@ -248,7 +245,7 @@ export default function ManufacturersStrip() {
                       {m.name}
                     </div>
 
-                    <p className="text-xs text-foreground/60 leading-relaxed">
+                    <p className="text-pretty text-sm text-foreground/80 leading-relaxed">
                       {m.tagline}
                     </p>
                   </div>
@@ -257,8 +254,8 @@ export default function ManufacturersStrip() {
                 {/* Status badge */}
                 <div className="px-6 pb-5">
                   <div
-                    className={`flex items-center gap-1.5 text-[9px] uppercase tracking-[0.18em] font-mono ${
-                      isServiceOnly ? "text-amber-400" : "text-primary"
+                    className={`flex items-center gap-1.5 text-xs uppercase tracking-[0.12em] font-mono ${
+                      isServiceOnly ? "text-amber-800" : "text-primary"
                     }`}
                   >
                     {isServiceOnly || isRepair ? (
@@ -306,7 +303,7 @@ export default function ManufacturersStrip() {
         </div>
 
         {/* Supporting footnote */}
-        <p className="mt-8 text-xs text-muted-foreground text-center">
+        <p className="mt-8 text-sm text-muted-foreground text-center max-w-[68ch] mx-auto">
           We also service and troubleshoot systems built on Enphase, SolarEdge,
           SMA, Schneider Electric, and other platforms.{" "}
           <Link

@@ -27,13 +27,13 @@ export default function Footer() {
           </p>
           <div className="mt-5 flex flex-wrap gap-1.5">
             {["NABCEP", "BBB A+", "Licensed", "32 YRS"].map((b) => (
-              <span key={b} className="text-[9px] uppercase tracking-[0.22em] font-mono px-2.5 py-1 rounded-sm bg-primary/10 text-primary border border-primary/30">{b}</span>
+              <span key={b} className="text-xs uppercase tracking-[0.12em] font-mono px-2.5 py-1 rounded-sm bg-primary/10 text-primary border border-primary/30">{b}</span>
             ))}
           </div>
         </div>
 
         <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-4">// EXPLORE</div>
+          <div className="text-xs uppercase tracking-[0.14em] font-mono text-primary mb-4">// EXPLORE</div>
           <ul className="space-y-2.5 text-sm">
             <li><Link href="/services" className="text-foreground/80 hover:text-primary transition">Services</Link></li>
             <li><Link href="/service-area" className="text-foreground/80 hover:text-primary transition">Service Area</Link></li>
@@ -47,7 +47,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-4">// CONTACT</div>
+          <div className="text-xs uppercase tracking-[0.14em] font-mono text-primary mb-4">// CONTACT</div>
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2"><Phone className="w-4 h-4 mt-0.5 text-primary" /><a href="tel:+18128787343" className="text-foreground/85 hover:text-primary transition" data-testid="footer-phone">(812) 878-7343</a></li>
             <li className="flex items-start gap-2"><Mail className="w-4 h-4 mt-0.5 text-primary" /><a href="mailto:solarseth7@yahoo.com" className="text-foreground/85 hover:text-primary transition">solarseth7@yahoo.com</a></li>
@@ -56,7 +56,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <div className="text-[10px] uppercase tracking-[0.22em] font-mono text-primary mb-4">// GET STARTED</div>
+          <div className="text-xs uppercase tracking-[0.14em] font-mono text-primary mb-4">// GET STARTED</div>
           <p className="text-sm text-foreground/70">Tell us about your home or business and we'll size the right system - at no cost.</p>
           <Link href="/quote" className="mt-5 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground px-5 py-3 text-xs font-bold uppercase tracking-wider hover:shadow-green-glow transition" data-testid="footer-cta">
             Start My Quote
@@ -67,7 +67,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="border-t border-border bg-muted/40">
-        <div className="container mx-auto container-px py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-[10px] uppercase tracking-[0.22em] font-mono text-muted-foreground">
+        <div className="container mx-auto container-px py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs uppercase tracking-[0.12em] font-mono text-muted-foreground">
           <div>(c) {new Date().getFullYear()} ACCUTEK SOLAR | WWW.ACCUTEKSOLAR.COM</div>
           <div>// THE FUTURE OF ENERGY</div>
         </div>
