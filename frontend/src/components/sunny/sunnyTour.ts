@@ -32,10 +32,16 @@ export interface TourDefinition {
   id: TourId;
   storageKey: string;
   root: string;
+  /** One short sentence under the lead. No prices. */
+  offer: string;
   steps: TourStep[];
 }
 
-export const OFFER_TEXT = "Want me to show you how this works?";
+/** Lead line on the centered card and the return-visit bar. */
+export const OFFER_LEAD = "I'll walk you through using the calculator";
+/** Starts the steps. Does not remember the visit. */
+export const OFFER_ACCEPT = "Skip and show me how this works";
+export const OFFER_TEXT = OFFER_LEAD;
 export const DONE_TEXT = "Tour finished. You can replay it from Sunny.";
 export const SKIP_TEXT = "Tour closed. You can replay it from Sunny.";
 export const FALLBACK_TEXT = "Here is the next part of the calculator.";
@@ -46,6 +52,7 @@ export const TOURS: Record<TourId, TourDefinition> = {
     // Prefix only. `/` and `/backup-power` each append their path so one visit cannot hide the other.
     storageKey: "accutek.sunnyTour.utility",
     root: '[data-sunny-tour="utility"]',
+    offer: "You can see how your power bill adds up over time and what solar could change.",
     steps: [
       {
         key: "slider",
@@ -85,6 +92,7 @@ export const TOURS: Record<TourId, TourDefinition> = {
     id: "savings",
     storageKey: "accutek.sunnyTour.savings",
     root: '[data-sunny-tour="savings"]',
+    offer: "You can set your electric bill and see what a solar estimate includes.",
     steps: [
       {
         key: "slider",
@@ -519,17 +527,65 @@ export function normalizeTourPath(pathname?: string | null): string {
 }
 
 /**
- * Dismissal key. Written only after Skip or the tour finishes, not when the
- * prompt first appears. An earlier build stored "1" as soon as the offer
- * started (`accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>`),
- * which removed the bottom bar on every later visit. Those keys are not read.
- * The utility calculator is mounted on `/` and `/backup-power`, so those routes
- * keep separate keys. The savings calculator lives on one route.
+ * Remember a page only after Skip or the tour finishes, never when the card
+ * first appears. One first-party cookie holds every finished page:
+ * `accutek_sunny_tour_done=savings,utility:/,utility:/backup-power`
+ * Max-Age is 365 days, Path=/, SameSite=Lax. Secure is added only on https.
+ * localStorage (`*.choice`) is the fallback when the cookie cannot be stored.
+ * An earlier build stored "1" as soon as the offer started
+ * (`accutek.sunnyTour.savings` and `accutek.sunnyTour.utility:<path>`).
+ * Those keys are not read, so a first pop-up does not count as a skip.
+ * Home and `/backup-power` keep separate utility tokens.
+ * A remembered page docks the same lines. `?sunnyTour=replay` starts the steps.
  */
+export const TOUR_DONE_COOKIE = "accutek_sunny_tour_done";
+export const TOUR_DONE_MAX_AGE = 60 * 60 * 24 * 365;
+
 export function tourStorageKey(id: TourId, pathname?: string | null): string {
   const base = `${TOURS[id].storageKey}.choice`;
   if (id !== "utility") return base;
   return `${base}:${normalizeTourPath(pathname)}`;
+}
+
+/** Cookie token for one calculator page. Utility routes do not share a token. */
+export function tourDoneToken(id: TourId, pathname?: string | null): string {
+  if (id !== "utility") return "savings";
+  return `utility:${normalizeTourPath(pathname)}`;
+}
+
+function readCookieValue(header: string, name: string): string | null {
+  if (!header) return null;
+  for (const part of header.split(";")) {
+    const trimmed = part.trim();
+    const eq = trimmed.indexOf("=");
+    if (eq <= 0 || trimmed.slice(0, eq) !== name) continue;
+    const raw = trimmed.slice(eq + 1);
+    try {
+      return decodeURIComponent(raw);
+    } catch {
+      return raw;
+    }
+  }
+  return null;
+}
+
+export function cookieMarksTourDone(cookieHeader: string, id: TourId, pathname?: string | null): boolean {
+  const value = readCookieValue(cookieHeader, TOUR_DONE_COOKIE);
+  if (!value) return false;
+  return value.split(",").includes(tourDoneToken(id, pathname));
+}
+
+/** Set-Cookie assignment. Merges with pages already stored in `cookieHeader`. */
+export function formatTourDoneCookie(cookieHeader: string, id: TourId, pathname?: string | null): string {
+  const tokens = new Set(
+    (readCookieValue(cookieHeader, TOUR_DONE_COOKIE) ?? "")
+      .split(",")
+      .map((token) => token.trim())
+      .filter(Boolean)
+  );
+  tokens.add(tourDoneToken(id, pathname));
+  const value = [...tokens].sort().join(",");
+  return `${TOUR_DONE_COOKIE}=${encodeURIComponent(value)}; Max-Age=${TOUR_DONE_MAX_AGE}; Path=/; SameSite=Lax`;
 }
 
 /**
@@ -545,50 +601,72 @@ export function isTourRootInReach(
   return rect.bottom > viewHeight * 0.12 && rect.top < viewHeight * 0.78 && rect.height > 0;
 }
 
-export function readTourSeen(
-  id: TourId,
-  storage?: Pick<Storage, "getItem">,
-  pathname?: string | null
-): boolean {
+function storageMarksTourDone(id: TourId, storage: Pick<Storage, "getItem"> | null, pathname?: string | null): boolean {
   const key = tourStorageKey(id, pathname);
   if (storage) {
     try {
-      return storage.getItem(key) === "1";
+      if (storage.getItem(key) === "1") return true;
     } catch {
-      return false;
+      /* private mode */
     }
   }
-  try {
-    if (typeof localStorage !== "undefined") return localStorage.getItem(key) === "1";
-  } catch {
-    return memorySeen.has(key);
-  }
   return memorySeen.has(key);
+}
+
+export type OfferPlace = "center" | "dock";
+
+/**
+ * First visit centers the offer. A page already stored in the cookie or
+ * localStorage docks that same offer. An explicit replay starts the steps.
+ * `?sunnyTour=1` forces the centered card even after a dismissal.
+ */
+export function offerPlaceForVisit(
+  seen: boolean,
+  force: TourForceMode | null
+): { phase: "offer" | "step"; place: OfferPlace } {
+  if (force === "replay") return { phase: "step", place: "center" };
+  if (force === "offer" || !seen) return { phase: "offer", place: "center" };
+  return { phase: "offer", place: "dock" };
+}
+
+export function readTourSeen(
+  id: TourId,
+  storage?: Pick<Storage, "getItem">,
+  pathname?: string | null,
+  cookieHeader?: string | null
+): boolean {
+  const header = cookieHeader ?? (typeof document !== "undefined" ? document.cookie : "");
+  if (cookieMarksTourDone(header, id, pathname)) return true;
+  const store = storage ?? (typeof localStorage !== "undefined" ? localStorage : null);
+  return storageMarksTourDone(id, store, pathname);
 }
 
 export function writeTourSeen(
   id: TourId,
   storage?: Pick<Storage, "setItem">,
-  pathname?: string | null
+  pathname?: string | null,
+  setCookie?: (assignment: string) => void
 ): void {
   const key = tourStorageKey(id, pathname);
-  if (storage) {
+  const store = storage ?? (typeof localStorage !== "undefined" ? localStorage : null);
+  if (store) {
     try {
-      storage.setItem(key, "1");
+      store.setItem(key, "1");
     } catch {
-      /* ignore quota / private mode */
-    }
-    return;
-  }
-  try {
-    if (typeof localStorage === "undefined") {
       memorySeen.add(key);
-      return;
     }
-    localStorage.setItem(key, "1");
-  } catch {
+  } else {
     memorySeen.add(key);
   }
+  const header = typeof document !== "undefined" ? document.cookie : "";
+  const assignment = formatTourDoneCookie(header, id, pathname);
+  if (setCookie) {
+    setCookie(assignment);
+    return;
+  }
+  if (typeof document === "undefined") return;
+  const secure = typeof location !== "undefined" && location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = assignment + secure;
 }
 
 /** Test helper. Production tours use localStorage plus the in-memory set. */
@@ -606,11 +684,13 @@ export function tourForceMode(search = ""): TourForceMode | null {
 }
 
 export function assertAllTourCopy(): void {
-  assertTourCopy(OFFER_TEXT);
+  assertTourCopy(OFFER_LEAD);
+  assertTourCopy(OFFER_ACCEPT);
   assertTourCopy(DONE_TEXT);
   assertTourCopy(SKIP_TEXT);
   assertTourCopy(FALLBACK_TEXT);
   for (const tour of Object.values(TOURS)) {
+    assertTourCopy(tour.offer);
     tour.steps.forEach((step, index) => {
       assertTourCopy(step.label);
       assertTourCopy(step.bubble);
