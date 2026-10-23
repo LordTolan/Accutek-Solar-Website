@@ -17,6 +17,7 @@ import {
   chooseStepElements,
   clearVia,
   isTourId,
+  isTourRootInReach,
   bubbleForResolvedStep,
   placeSunny,
   type BubblePlacement,
@@ -230,8 +231,10 @@ function nudgeOffChrome(target: HTMLElement, reduced: boolean) {
 
 function rootInReach(node: HTMLElement): boolean {
   const rect = node.getBoundingClientRect();
-  const viewH = window.innerHeight;
-  return rect.bottom > viewH * 0.12 && rect.top < viewH * 0.78 && rect.height > 0;
+  return isTourRootInReach(
+    { top: rect.top, bottom: rect.bottom, height: rect.height },
+    window.innerHeight
+  );
 }
 
 export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRef }: UseSunnyBounceTourOptions) {
@@ -287,6 +290,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     (message: string) => {
       const id = activeIdRef.current;
       if (id) writeTourSeen(id, undefined, pathname);
+      phaseRef.current = "idle";
       publish(message);
       setPhase("idle");
       setStepIndex(0);
@@ -296,21 +300,20 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     [pathname, publish]
   );
 
-  const begin = useCallback(
-    (id: TourId, mode: "offer" | "step") => {
-      writeTourSeen(id, undefined, pathname);
-      setActiveId(id);
-      setStepIndex(0);
-      setOffset({ x: 0, y: 0 });
-      if (mode === "offer") {
-        setPhase("offer");
-        publish(OFFER_TEXT);
-      } else {
-        setPhase("step");
-      }
-    },
-    [pathname, publish]
-  );
+  const begin = useCallback((id: TourId, mode: "offer" | "step") => {
+    // The prompt is not a dismissal. Skip and finish write the flag.
+    activeIdRef.current = id;
+    phaseRef.current = mode === "offer" ? "offer" : "step";
+    setActiveId(id);
+    setStepIndex(0);
+    setOffset({ x: 0, y: 0 });
+    if (mode === "offer") {
+      setPhase("offer");
+      publish(OFFER_TEXT);
+    } else {
+      setPhase("step");
+    }
+  }, [publish]);
 
   const replay = useCallback(() => {
     const root = findTourRoot(activeIdRef.current);
@@ -321,6 +324,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
 
   const accept = useCallback(() => {
     if (phaseRef.current !== "offer" || !activeIdRef.current) return;
+    phaseRef.current = "step";
     setStepIndex(0);
     setPhase("step");
   }, []);
@@ -398,6 +402,20 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
       }
     };
 
+    const observeRoots = () => {
+      document.querySelectorAll<HTMLElement>("[data-sunny-tour]").forEach((node) => observer.observe(node));
+    };
+
+    const releaseIfOutOfReach = () => {
+      const pending = pendingOffer.current;
+      if (!pending) return;
+      const node = document.querySelector<HTMLElement>(TOURS[pending].root);
+      if (!node || !rootInReach(node)) {
+        pendingOffer.current = null;
+        window.clearTimeout(offerTimer.current);
+      }
+    };
+
     scan();
     const observer = new IntersectionObserver(
       (entries) => {
@@ -413,11 +431,42 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
       },
       { rootMargin: "-8% 0px -18% 0px", threshold: [0, 0.15, 0.4] }
     );
-    document.querySelectorAll<HTMLElement>("[data-sunny-tour]").forEach((node) => observer.observe(node));
-    const retry = window.setTimeout(scan, 400);
+    observeRoots();
+
+    // The observer above does not fire again after its first threshold when a
+    // tall section was not yet in reach. Scroll, resize, and late mounts
+    // (client navigations, the calculator Suspense boundary) recheck.
+    let frame = 0;
+    const recheck = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        releaseIfOutOfReach();
+        observeRoots();
+        scan();
+      });
+    };
+    const watch = new MutationObserver((records) => {
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (!(node instanceof Element)) continue;
+          if (node.matches("[data-sunny-tour]") || node.querySelector("[data-sunny-tour]")) {
+            recheck();
+            return;
+          }
+        }
+      }
+    });
+    watch.observe(document.body, { childList: true, subtree: true });
+    window.addEventListener("scroll", recheck, { passive: true });
+    window.addEventListener("resize", recheck);
+    const retry = window.setTimeout(recheck, 400);
 
     return () => {
       observer.disconnect();
+      watch.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", recheck);
+      window.removeEventListener("resize", recheck);
       window.clearTimeout(retry);
       window.clearTimeout(offerTimer.current);
       pendingOffer.current = null;
