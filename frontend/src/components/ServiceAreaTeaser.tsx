@@ -13,7 +13,6 @@ export default function ServiceAreaTeaser() {
       <div className="container mx-auto container-px">
         <div className="grid lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-5">
-            <div className="text-xs uppercase tracking-[0.2em] text-secondary/70 mb-3">Where we serve</div>
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
               17 counties across <span className="text-primary">West Central Indiana & East Central Illinois.</span>
             </h2>

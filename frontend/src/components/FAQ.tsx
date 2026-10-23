@@ -99,8 +99,7 @@ export default function FAQ() {
   return (
     <section className="py-20 md:py-28 bg-muted/40 relative" data-testid="faq-section">
       <div className="container mx-auto container-px max-w-4xl">
-        <div className="flex items-center justify-between mb-3">
-          <div className="text-xs uppercase tracking-[0.2em] text-secondary/70">Common questions</div>
+        <div className="mb-3 flex items-center justify-end empty:hidden">
           <PumpkinCollectible pumpkinId="gandalf" size="sm" />
         </div>
         <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">Everything you wanted to ask.</h2>
@@ -114,11 +113,9 @@ export default function FAQ() {
                   <div className="font-heading text-lg md:text-xl font-bold pr-4">{it.q}</div>
                   <ChevronDown className={`shrink-0 w-5 h-5 mt-1 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </div>
-                <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr] opacity-100 mt-3" : "grid-rows-[0fr] opacity-0"}`}>
-                  <div className="overflow-hidden">
-                    <p className="text-foreground/75 leading-relaxed text-base">{it.a}</p>
-                  </div>
-                </div>
+                {isOpen && (
+                  <p className="mt-3 max-w-[68ch] text-pretty text-base leading-relaxed text-foreground/80">{it.a}</p>
+                )}
               </button>
             );
           })}

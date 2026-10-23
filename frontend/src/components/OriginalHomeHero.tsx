@@ -18,7 +18,7 @@ export default function OriginalHomeHero() {
       <div className="relative container mx-auto grid items-center gap-10 py-16 sm:py-20 container-px md:py-28 lg:grid-cols-12 lg:gap-14 lg:py-32">
         <div className="max-w-2xl lg:col-span-7">
           <HalloweenHeroPromo />
-          <div className="mb-5 sm:mb-7 inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/8 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.25em] text-primary animate-fade-up" data-testid="hero-eyebrow">
+          <div className="mb-5 sm:mb-7 inline-flex items-center gap-2 rounded-md border border-primary/30 bg-primary/8 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.14em] text-primary animate-fade-up" data-testid="hero-eyebrow">
             <Cpu className="h-3 w-3" /> FAMILY-OWNED | SINCE 1994
           </div>
           <RotatingHeadline />
@@ -43,12 +43,12 @@ export default function OriginalHomeHero() {
               { label: "Pole Mount", detail: "Sun-tracking | remote" },
             ].map((capability) => (
               <div key={capability.label} className="rounded-md border border-border bg-card/60 p-3 backdrop-blur">
-                <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-primary">{capability.label}</div>
+                <div className="font-mono text-xs uppercase tracking-[0.08em] text-primary">{capability.label}</div>
                 <div className="mt-1 text-xs text-muted-foreground">{capability.detail}</div>
               </div>
             ))}
           </div>
-          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
+          <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-xs uppercase tracking-[0.12em] text-muted-foreground">
             {["NABCEP", "BBB A+", "Google 5*", "Indiana Solar Coalition", "Licensed & Insured"].map((badge) => (
               <span key={badge} className="flex items-center gap-2"><span className="h-1 w-1 rounded-full bg-primary" /> {badge}</span>
             ))}
@@ -62,7 +62,7 @@ export default function OriginalHomeHero() {
             <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-md border border-border bg-background/85 px-4 py-3 backdrop-blur">
               <Mountain className="h-5 w-5 shrink-0 text-primary" />
               <div className="min-w-0 flex-1">
-                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-primary">// GROUND MOUNT</div>
+                <div className="font-mono text-xs uppercase tracking-[0.12em] text-primary">// GROUND MOUNT</div>
                 <div className="truncate text-xs text-foreground/80">Rural Indiana ag site | 12.8 kW</div>
               </div>
             </div>

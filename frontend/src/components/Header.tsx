@@ -171,7 +171,7 @@ export default function Header() {
               {item.label}
             </Link>
           ))}
-          <p className="mt-3 mb-1 text-[10px] uppercase tracking-[0.18em] font-mono text-muted-foreground">More</p>
+          <p className="mt-3 mb-1 text-xs uppercase tracking-[0.14em] font-mono text-muted-foreground">More</p>
           {MORE.map((item) => (
             <Link
               key={item.href}
