@@ -245,7 +245,7 @@ export default function ManufacturersStrip() {
                       {m.name}
                     </div>
 
-                    <p className="text-sm text-foreground/80 leading-relaxed">
+                    <p className="text-pretty text-sm text-foreground/80 leading-relaxed">
                       {m.tagline}
                     </p>
                   </div>

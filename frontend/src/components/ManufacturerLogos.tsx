@@ -53,7 +53,7 @@ export default function ManufacturerLogos() {
           <h2 className="text-3xl md:text-4xl font-heading font-extrabold text-balance">
             Industry-leading brands. Expert installation.
           </h2>
-          <p className="mt-3 text-foreground/65 text-base max-w-xl mx-auto leading-relaxed">
+          <p className="mt-3 text-pretty text-foreground/80 text-base max-w-[65ch] mx-auto leading-relaxed">
             We work with the manufacturers that field technicians trust — not whoever has the best dealer margin.
           </p>
         </div>

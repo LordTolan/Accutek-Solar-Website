@@ -114,7 +114,7 @@ export default function FAQ() {
                   <ChevronDown className={`shrink-0 w-5 h-5 mt-1 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </div>
                 {isOpen && (
-                  <p className="mt-3 max-w-[68ch] text-pretty text-base leading-relaxed text-foreground/80">{it.a}</p>
+                  <p className="mt-3 max-w-[50ch] text-pretty text-base leading-relaxed text-foreground/80">{it.a}</p>
                 )}
               </button>
             );

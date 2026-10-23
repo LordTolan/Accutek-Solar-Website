@@ -16,7 +16,7 @@ export default function ServiceAreaTeaser() {
             <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
               17 counties across <span className="text-primary">West Central Indiana & East Central Illinois.</span>
             </h2>
-            <p className="mt-5 text-foreground/70 leading-relaxed text-lg">
+            <p className="mt-5 max-w-[65ch] text-pretty text-foreground/80 leading-relaxed text-lg">
               Headquartered in Clinton, Indiana, we install solar PV, Kohler generators and full electrical
               for homes, farms and businesses across West Central Indiana and East Central Illinois.
             </p>

@@ -22,7 +22,7 @@ export default function OriginalHomeHero() {
             <Cpu className="h-3 w-3" /> FAMILY-OWNED | SINCE 1994
           </div>
           <RotatingHeadline />
-          <p className="mt-6 max-w-xl text-base sm:text-lg leading-relaxed text-foreground/70 animate-fade-up md:mt-8 md:text-xl" style={{ animationDelay: "0.1s" }}>
+          <p className="mt-6 max-w-[65ch] text-pretty text-base sm:text-lg leading-relaxed text-foreground/80 animate-fade-up md:mt-8 md:text-xl" style={{ animationDelay: "0.1s" }}>
             32 years of solar PV, ground-mount arrays, Kohler generators and electrical installations across West Central Indiana and East Central Illinois — engineered for your site, your bill, your budget.
           </p>
           <div className="mt-10 flex flex-wrap gap-3 animate-fade-up" style={{ animationDelay: "0.2s" }}>
@@ -59,7 +59,7 @@ export default function OriginalHomeHero() {
           <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-border bg-card shadow-ambient-lg">
             <Image src={HERO_IMG} alt="Ground-mounted solar array in a rural Indiana field" fill priority className="object-cover" sizes="(max-width: 1024px) 100vw, 40vw" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-md border border-border bg-background/85 px-4 py-3 backdrop-blur">
+            <div className="absolute bottom-4 left-4 right-4 flex items-center gap-3 rounded-md border border-border bg-background px-4 py-3">
               <Mountain className="h-5 w-5 shrink-0 text-primary" />
               <div className="min-w-0 flex-1">
                 <div className="font-mono text-xs uppercase tracking-[0.12em] text-primary">// GROUND MOUNT</div>

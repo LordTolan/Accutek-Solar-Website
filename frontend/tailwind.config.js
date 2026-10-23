@@ -27,7 +27,7 @@ module.exports = {
       boxShadow: {
         ambient: "0 8px 32px -8px rgba(15,23,42,0.10)",
         "ambient-lg": "0 24px 60px -12px rgba(15,23,42,0.18)",
-        "green-glow": "0 0 30px -8px hsl(142 71% 32% / 0.45)",
+        "green-glow": "0 0 30px -8px hsl(142 71% 27% / 0.45)",
       },
       keyframes: {
         "fade-up": { "0%": { opacity: 0, transform: "translateY(14px)" }, "100%": { opacity: 1, transform: "translateY(0)" } },

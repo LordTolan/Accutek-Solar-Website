@@ -77,7 +77,7 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl font-heading font-extrabold text-balance">
                 Wherever the sun lands, <span className="text-primary">we build there.</span>
               </h2>
-              <p className="mt-5 text-foreground/70 text-lg leading-relaxed">
+              <p className="mt-5 max-w-[65ch] text-pretty text-foreground/80 text-lg leading-relaxed">
                 Plenty of customers come to us thinking solar = roof only. The truth is roughly half of our installs are <strong>ground mounts</strong> - better orientation, easier maintenance, no roof penetrations, and often higher annual output.
               </p>
               <ul className="mt-6 space-y-3 text-foreground/80">
@@ -101,11 +101,11 @@ export default function HomePage() {
             <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4" data-testid="roof-ground-gallery">
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient">
                 <Image src={HERO_IMG} alt="Ground-mount solar array" fill className="object-cover" sizes="(max-width: 640px) 100vw, 35vw" />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/90 border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">GROUND MOUNT</div>
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">GROUND MOUNT</div>
               </div>
               <div className="relative aspect-[4/5] rounded-xl overflow-hidden border border-border shadow-ambient sm:mt-12">
                 <Image src={ROOF_IMG} alt="Rooftop solar install" fill className="object-cover" sizes="(max-width: 640px) 100vw, 35vw" />
-                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background/90 border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">ROOF MOUNT</div>
+                <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-background border border-border text-xs uppercase tracking-[0.12em] font-mono text-primary">ROOF MOUNT</div>
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-heading font-extrabold text-balance">From a single panel to a fully off-grid farm.</h2>
             </div>
             <div className="md:col-span-5 md:text-right">
-              <p className="text-foreground/70 text-lg leading-relaxed">Every install includes a free site assessment, custom design, and lifetime support from the team that built it.</p>
+              <p className="text-pretty text-foreground/80 text-lg leading-relaxed">Every install includes a free site assessment, custom design, and lifetime support from the team that built it.</p>
             </div>
           </div>
 
@@ -149,7 +149,7 @@ export default function HomePage() {
                       )}
                     </div>
                     <div className="font-heading text-xl font-bold group-hover:text-primary transition-colors">{s.title}</div>
-                    <p className="mt-2 text-foreground/65 text-sm leading-relaxed">{s.shortDesc}</p>
+                    <p className="mt-2 text-pretty text-foreground/80 text-sm leading-relaxed">{s.shortDesc}</p>
                   </div>
                   <div className="mt-6 pt-4 border-t border-border/60 flex items-center justify-between text-xs font-bold text-primary">
                     <span>Learn more &amp; photo gallery</span>
@@ -167,7 +167,7 @@ export default function HomePage() {
               <div className="py-10">
                 <div className="text-xs uppercase tracking-[0.16em] font-mono text-primary mb-3">// FREE | NO PRESSURE</div>
                 <h3 className="font-heading text-3xl md:text-4xl font-extrabold text-balance">Tell us about your site - we'll tell you what's possible.</h3>
-                <p className="mt-3 text-foreground/75 max-w-md">Six quick questions, a real 25-year estimate, and a free site visit on the calendar.</p>
+                <p className="mt-3 max-w-[65ch] text-pretty text-foreground/80">Six quick questions, a real 25-year estimate, and a free site visit on the calendar.</p>
                 <div className="mt-6"><HCPBookOnline variant="primary" /></div>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function HomePage() {
           <h2 className="text-4xl md:text-6xl font-heading font-black text-balance">
             Ready to make your meter <span className="text-primary">spin backwards?</span>
           </h2>
-          <p className="mt-5 text-foreground/70 text-lg">Free estimate, custom design, roof or ground - your call.</p>
+          <p className="mt-5 text-pretty text-foreground/80 text-lg">Free estimate, custom design, roof or ground - your call.</p>
           <div className="mt-8 flex flex-wrap gap-3 justify-center">
             <Link href="/quote" className="inline-flex items-center gap-2 rounded-md bg-primary text-primary-foreground px-7 py-4 font-bold uppercase tracking-wider text-sm hover:shadow-green-glow transition focus-ring" data-testid="final-cta-quote">
               Get free estimate <ArrowRight className="w-4 h-4" />
