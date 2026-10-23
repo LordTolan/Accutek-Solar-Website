@@ -23,9 +23,9 @@ const MANUFACTURERS: BrandCardData[] = [
   { slug: "eg4", name: "EG4", category: "Inverters / Storage", logo: "/manufacturers/eg4.png", url: "https://eg4electronics.com", label: INSTALL },
   { slug: "midnite-solar", name: "MidNite Solar", category: "Charge Controllers", url: "https://www.midnitesolar.com", label: INSTALL },
   { slug: "tesla-powerwall", name: "Tesla Powerwall", category: "Battery Storage", url: "https://www.tesla.com/powerwall", label: INSTALL },
-  { slug: "generac-pwrcell", name: "Generac PWRcell", category: "Battery Storage", logo: "/manufacturers/generac.svg", url: "https://www.generac.com", label: INSTALL },
+  { slug: "generac-pwrcell", name: "Generac PWRcell", category: "Battery Storage", logo: "/manufacturers/generac.png", url: "https://www.generac.com", label: INSTALL },
   { slug: "kohler", name: "Kohler", category: "Backup Generators", url: "https://www.kohlerpower.com", label: "Authorized installer" },
-  { slug: "generac", name: "Generac", category: "Standby Generators", logo: "/manufacturers/generac.svg", url: "https://www.generac.com/all-products/generators/home-backup-generators", label: "Service Only" },
+  { slug: "generac", name: "Generac", category: "Standby Generators", logo: "/manufacturers/generac.png", url: "https://www.generac.com/all-products/generators/home-backup-generators", label: "Service Only" },
   { slug: "cummins", name: "Cummins", category: "Standby Generators", url: "https://www.cummins.com/generators", label: "Service Only" },
 ];
 
