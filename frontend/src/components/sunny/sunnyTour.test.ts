@@ -2,7 +2,6 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   DONE_TEXT,
-  OFFER_TEXT,
   TOURS,
   assertTourCopy,
   chooseStepElements,
@@ -24,9 +23,24 @@ import {
   writeTourSeen,
 } from "./sunnyTour";
 
+test("the offer explains the tour in plain words before the visitor chooses", () => {
+  assert.equal(
+    TOURS.utility.offer,
+    "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can see how your power bill adds up over time and what solar could change."
+  );
+  assert.equal(
+    TOURS.savings.offer,
+    "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can set your electric bill and see what a solar estimate includes."
+  );
+  assert.notEqual(TOURS.utility.offer, TOURS.savings.offer);
+  for (const tour of Object.values(TOURS)) {
+    assert.equal(tour.offer.includes("$"), false);
+    assert.doesNotThrow(() => assertTourCopy(tour.offer));
+    assert.ok(tour.offer.split(/(?<=[.!])\s+/).length <= 2);
+  }
+});
+
 test("tour copy never states a price or a dollar figure", () => {
-  assert.equal(OFFER_TEXT.includes("$"), false);
-  assert.doesNotThrow(() => assertTourCopy(OFFER_TEXT));
   assert.throws(() => assertTourCopy("A system costs $18,000"));
   assert.throws(() => assertTourCopy("You will save 217,306 over time"));
   assert.throws(() => assertTourCopy("Here is how pricing works"));

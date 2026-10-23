@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   DONE_TEXT,
   FALLBACK_TEXT,
-  OFFER_TEXT,
   SKIP_TEXT,
   TOURS,
   type ArrowCue,
@@ -309,7 +308,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     setOffset({ x: 0, y: 0 });
     if (mode === "offer") {
       setPhase("offer");
-      publish(OFFER_TEXT);
+      publish(TOURS[id].offer);
     } else {
       setPhase("step");
     }
@@ -630,6 +629,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
     return () => window.removeEventListener("keydown", onKey, true);
   }, [phase, skip]);
 
+  const offerText = activeId ? TOURS[activeId].offer : "";
   const stepCount = activeId ? TOURS[activeId].steps.length : 0;
   const stepKey = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex]?.key ?? "" : "";
   const stepDef = phase === "step" && activeId ? TOURS[activeId].steps[stepIndex] : undefined;
@@ -637,6 +637,7 @@ export function useSunnyBounceTour({ reducedMotion, suspended, homeRef, bubbleRe
 
   return {
     phase,
+    offerText,
     stepIndex,
     stepCount,
     stepKey,

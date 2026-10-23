@@ -99,6 +99,7 @@ export default function SunnyCompanion() {
 
       <SunnyTourControls
         phase={tour.phase}
+        offerText={tour.offerText}
         stepIndex={tour.stepIndex}
         stepCount={tour.stepCount}
         onAccept={tour.accept}

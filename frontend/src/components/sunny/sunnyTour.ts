@@ -32,10 +32,11 @@ export interface TourDefinition {
   id: TourId;
   storageKey: string;
   root: string;
+  /** Shown in the centered offer, before Skip or accept. No prices. */
+  offer: string;
   steps: TourStep[];
 }
 
-export const OFFER_TEXT = "Want me to show you how this works?";
 export const DONE_TEXT = "Tour finished. You can replay it from Sunny.";
 export const SKIP_TEXT = "Tour closed. You can replay it from Sunny.";
 export const FALLBACK_TEXT = "Here is the next part of the calculator.";
@@ -46,6 +47,8 @@ export const TOURS: Record<TourId, TourDefinition> = {
     // Prefix only. `/` and `/backup-power` each append their path so one visit cannot hide the other.
     storageKey: "accutek.sunnyTour.utility",
     root: '[data-sunny-tour="utility"]',
+    offer:
+      "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can see how your power bill adds up over time and what solar could change.",
     steps: [
       {
         key: "slider",
@@ -85,6 +88,8 @@ export const TOURS: Record<TourId, TourDefinition> = {
     id: "savings",
     storageKey: "accutek.sunnyTour.savings",
     root: '[data-sunny-tour="savings"]',
+    offer:
+      "Hi, I'm Sunny! I'll walk you through this calculator step by step so you can set your electric bill and see what a solar estimate includes.",
     steps: [
       {
         key: "slider",
@@ -671,11 +676,11 @@ export function tourForceMode(search = ""): TourForceMode | null {
 }
 
 export function assertAllTourCopy(): void {
-  assertTourCopy(OFFER_TEXT);
   assertTourCopy(DONE_TEXT);
   assertTourCopy(SKIP_TEXT);
   assertTourCopy(FALLBACK_TEXT);
   for (const tour of Object.values(TOURS)) {
+    assertTourCopy(tour.offer);
     tour.steps.forEach((step, index) => {
       assertTourCopy(step.label);
       assertTourCopy(step.bubble);
