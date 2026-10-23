@@ -24,8 +24,6 @@ import {
 } from "lucide-react";
 import { ServiceItem } from "@/lib/services-data";
 import { HCP_BOOK_URL } from "@/lib/utils";
-import ManufacturersStrip from "@/components/ManufacturersStrip";
-
 interface Props {
   service: ServiceItem;
   allServices: ServiceItem[];
@@ -307,8 +305,6 @@ export default function ServiceDetailClient({ service, allServices }: Props) {
           </div>
         </div>
       </section>
-
-      <ManufacturersStrip />
 
       {/* Final Action CTA */}
       <section className="py-16 md:py-24 relative overflow-hidden" data-testid="service-final-cta">

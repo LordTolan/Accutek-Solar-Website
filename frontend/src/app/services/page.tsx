@@ -16,7 +16,6 @@ import {
   CalendarClock,
   Phone
 } from "lucide-react";
-import ManufacturersStrip from "@/components/ManufacturersStrip";
 import { SERVICES_DATA } from "@/lib/services-data";
 import { HCP_BOOK_URL } from "@/lib/utils";
 
@@ -169,8 +168,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      <ManufacturersStrip />
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 relative overflow-hidden border-t border-border" data-testid="services-cta-section">
