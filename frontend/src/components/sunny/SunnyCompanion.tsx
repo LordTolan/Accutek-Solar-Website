@@ -9,6 +9,7 @@ import SunnyTourControls from "./SunnyTourControls";
 import SunnyTourBubble from "./SunnyTourBubble";
 import SunnyTourCue from "./SunnyTourCue";
 import { useSunnyBounceTour } from "./useSunnyBounceTour";
+import { OFFER_ACCEPT } from "./sunnyTour";
 
 // Lazy-load chat panel so initial bundle load remains featherlight
 const SunnyChatPanel = dynamic(() => import("./SunnyChatPanel"), {
@@ -77,7 +78,7 @@ export default function SunnyCompanion() {
 
   const sunnyLabel =
     tour.phase === "offer"
-      ? "Show me how this calculator works"
+      ? OFFER_ACCEPT
       : tour.phase === "step"
         ? tour.stepIndex >= tour.stepCount - 1
           ? "Finish calculator tour"

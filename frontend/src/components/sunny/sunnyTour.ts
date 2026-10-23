@@ -40,7 +40,7 @@ export interface TourDefinition {
 /** Lead line on the centered card and the return-visit bar. */
 export const OFFER_LEAD = "I'll walk you through using the calculator";
 /** Starts the steps. Does not remember the visit. */
-export const OFFER_ACCEPT = "Skip and show me how this works";
+export const OFFER_ACCEPT = "I'll show you how this works";
 export const OFFER_TEXT = OFFER_LEAD;
 export const DONE_TEXT = "Tour finished. You can replay it from Sunny.";
 export const SKIP_TEXT = "Tour closed. You can replay it from Sunny.";

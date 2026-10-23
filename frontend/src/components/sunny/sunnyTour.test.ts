@@ -27,10 +27,11 @@ import {
   writeTourSeen,
 } from "./sunnyTour";
 
-test("the offer keeps Sunny's line, the skip-and-show button, and one value sentence", () => {
+test("the offer keeps Sunny's line, the start button, and one value sentence", () => {
   assert.equal(OFFER_LEAD, "I'll walk you through using the calculator");
   assert.equal(OFFER_TEXT, OFFER_LEAD);
-  assert.equal(OFFER_ACCEPT, "Skip and show me how this works");
+  assert.equal(OFFER_ACCEPT, "I'll show you how this works");
+  assert.equal(OFFER_ACCEPT.startsWith("Skip"), false);
   assert.equal(
     TOURS.utility.offer,
     "You can see how your power bill adds up over time and what solar could change."
