@@ -4,6 +4,7 @@
  * Drop into any page with: <ManufacturersStrip />
  */
 
+import Image from "next/image";
 import Link from "next/link";
 import { ShieldCheck, Wrench } from "lucide-react";
 
@@ -157,6 +158,16 @@ const MANUFACTURERS: Manufacturer[] = [
     url: "https://www.qcells.com",
   },
   {
+    name: "Boviet Solar",
+    tagline: "Bifacial mono solar panels",
+    category: "Solar Panels",
+    // Orange sampled from the official wordmark, not a guessed brand color.
+    color: "#E86A25",
+    url: "https://bovietsolar.com",
+    // Official wordmark: https://inoxsolar.us/wp-content/uploads/Boviet_Solar_Logo_Color.png
+    logoSrc: "/manufacturers/boviet.png",
+  },
+  {
     name: "MidNite Solar",
     tagline: "Charge controllers & off-grid BOS",
     category: "Charge Controllers / BOS",
@@ -240,13 +251,24 @@ export default function ManufacturersStrip() {
                       {m.category}
                     </div>
 
-                    {/* Manufacturer name — large logotype-style treatment */}
-                    <div
-                      className="font-heading text-2xl font-black leading-none mb-3 group-hover:text-primary transition-colors"
-                      style={{ letterSpacing: "-0.03em" }}
-                    >
-                      {m.name}
-                    </div>
+                    {/* Official wordmark when we have one. Otherwise the name is the logotype. */}
+                    {m.logoSrc ? (
+                      <Image
+                        src={m.logoSrc}
+                        alt={m.name}
+                        width={183}
+                        height={80}
+                        unoptimized
+                        className="mb-3 h-14 w-auto max-w-full object-contain object-left"
+                      />
+                    ) : (
+                      <div
+                        className="font-heading text-2xl font-black leading-none mb-3 group-hover:text-primary transition-colors"
+                        style={{ letterSpacing: "-0.03em" }}
+                      >
+                        {m.name}
+                      </div>
+                    )}
 
                     <p className="text-xs text-foreground/60 leading-relaxed">
                       {m.tagline}
