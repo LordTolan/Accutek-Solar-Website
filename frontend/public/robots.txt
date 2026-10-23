@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.accuteksolar.com/sitemap.xml
+Sitemap: https://new.accuteksolar.com/sitemap.xml
