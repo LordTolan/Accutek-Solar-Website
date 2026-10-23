@@ -28,7 +28,7 @@ export default function BrandCard({
         {brand.logo ? (
           <Image
             src={brand.logo}
-            alt={`${brand.name} logo`}
+            alt={brand.name}
             width={240}
             height={96}
             className="object-contain max-h-14 md:max-h-16 max-w-full w-auto opacity-90 group-hover:opacity-100 transition"
